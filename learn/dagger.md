@@ -1,22 +1,22 @@
 ---
 description: >-
-  D.A.G.G.E.R.は、Directed acyclic gossiping graph enabling replicationの略です、
-  本項ではアーキテクチャをハイレベルに解説しています。
+  D.A.G.G.E.R.は、Directed Acyclic gossiping graph enabling replicationの略です、
+  本項ではアーキテクチャを高次元で解説しています。
 ---
 
 # D.A.G.G.E.R
 
 ## **Introduction**
 
-DAGGERは、グラフベースのコンセンサス機構を持つ分散システムです。プロトコル仕様を構成する4つのコンポーネントがあります。この記事では、これら4つのコンポーネントのそれぞれを高レベルで説明し、それらが受信したリクエストとどのように相互作用するのかを説明します。シンプルにするため、トランザクションのユースケースは、Shadow Driveにファイルを保存する要求と考えることができます。
+DAGGERは、グラフベースのコンセンサス機構を持つ分散システムです。プロトコル仕様を構成する4つのコンポーネントがあります。この記事では、これら4つのコンポーネントのそれぞれを高レベルで説明し、それらが受信したリクエストとどのように相互作用するのかを説明します。シンプルにするために、トランザクションのユースケースは、Shadow Driveにファイルを保存する要求と考えることができます。
 
-GenesysGoのD.A.G.G.E.R.は、多くの実装が可能であり、計画されていますが、フラッグシップ実装はShadow Drive v2（現在のShadow Drive v1.5 を近々リリース予定の拡張版）であることが予定されています。このため、「トランザクション」とは、ユーザーから提出された書き込み要求のことだと考えています。このセクションでは、スピード、安定性、スケーラビリティが、私たちが最先端の非循環グラフ型コンセンサス技術の構築を選択した理由であることを説明し、締めくくりとします。
+GenesysGoのD.A.G.G.E.R.は、多くの実装が可能であり、計画されていますが、フラッグシップ実装はShadow Drive v2（現在のShadow Drive v1.5をまもなくリリース予定の拡張版）です。このため、「トランザクション」とは、ユーザーから提出された書き込み要求のことだと考えています。このセクションでは、スピード、安定性、スケーラビリティが、私たちが最先端の非循環グラフ型コンセンサス技術の構築を選択した理由であることを説明し、締めくくりとします。
 
 _注意：このセクションでは、すべての読者に適したハイレベルな説明と一般的な概念に準拠しています。しかし、DAGGERが成熟していくにつれて、より技術的なドキュメントのリリースを計画しています。_
 
 ## **Overview**
 
-これらのコンポーネントは、トランザクション（ユーザーからの書き込み要求）のライフサイクルを通して見ることができる順番で、下図に示されています：
+これらのコンポーネントは、トランザクション（ユーザーの書き込み要求）のライフサイクルを通じて、受信したトランザクションが目にする順序で、下図に示されています：
 
 <figure><img src="../.gitbook/assets/Dagger_Lifecycle2.png" alt=""><figcaption></figcaption></figure>
 
@@ -45,18 +45,19 @@ DAGGERコンセンサスアルゴリズムは、ローカルグラフ内のイ�
 Communicationsモジュールは、[ピア](dagger.md#peer-to-peer-a-type-of-network-architecture-in-which-each-node-in-the-network-can-act-as-both-a-client-and-a-server-in-a-peer-to-peer-network-nodes-communicate-directly-with-each-other-rather-than-through-a-central-server)との発信[同期](dagger.md#synchronization-requests-in-peer-to-peer-network-requests-sent-between-nodes-in-a-peer-to-peer-network-to-ensure-that-the-nodes-have-the-same-data)要求を初期化し、ピアからの同期応答をProcesserに転送し、ピアからの受信同期要求を処理し、トランザクションをProcesserに転送し、RPC要求をControllerに転送し、ピアIPデータベースを維持します。
 
 * **Outgoing Sync Requests**
-  * 同期リクエストを初期化するために、最近同期していないアクティブなピアをランダムに選択することから始めます。
-  * 現在のグラフの状態の要約とともに最新のピアリストが必要なので、CommunicationsモジュールはGraphモジュールにリクエストを送り、現在のグラフの状態を要約してピア1を選択します。
+  * 同期要求を初期化するために、最近同期されたことのないアクティブなピアをランダムに選択することから始めます。
+  * 現在のグラフの状態の要約とともに最新のピアリストが必要なので、CommunicationsモジュールはGraphモジュールに現在のグラフの状態を要約し、ピア1を選択する要求を送信します。
   * Communicationsは状態の要約と選択されたピアを受信し、ピアに送信して同期応答を待ち、Graphモジュールに転送されて消化されます。
+  * Communicationsは状態の要約と選択されたピアを受信し、ピアに送信し、同期応答を待って、消化されるためにGraphモジュールに転送されます。
 * **Incoming Sync Requests**
   * 受信した同期リクエストは直ちにGraphモジュールに転送されます。私たちが持っていて相手が持っていないすべての[イベント](dagger.md#events-an-occurrence-that-is-detected-by-a-distributed-ledger) を含むパッケージされた同期応答を待ち、それが相手に送り返されます。
 * **Incoming Transactions**
-  * ユーザーがトランザクションを送信すると、トランザクションを受信したCommunicationsモジュールはそれをProcesserに転送します。検証後、トランザクションはForesterとGraphモジュールを通過し、ブロックに含まれると、トランザクションが含まれるブロックを含むイベントの署名を送り返します。Communicationsモジュールは、この署名をユーザーに送り返します。これはブロックが[finalized](dagger.md#finalized-block-a-block-that-has-been-accepted-by-the-consensus-protocol-and-will-not-be-changed)されたことを意味しないことに注意してください。
+  * ユーザーがトランザクションを送信すると、トランザクションを受信したCommunicationsモジュールは、それをProcesserに転送します。検証後、トランザクションはForesterとGraphモジュールを経由し、ブロックに含まれると、トランザクションが含まれたブロックを含むイベントの署名を送り返します。Communicationsモジュールは、この署名をユーザーに送り返します。これはブロックが[finalized](dagger.md#finalized-block-a-block-that-has-been-accepted-by-the-consensus-protocol-and-will-not-be-changed) したことを意味しないので注意しましょう。
 
 <figure><img src="../.gitbook/assets/Docs_MindMap_4.png" alt=""><figcaption></figcaption></figure>
 
 * **Incoming RPC Requests**
-  * ユーザが、ファイルの読み取り、ブロックやトランザクションの問い合わせなど、いくつかの[RPC](dagger.md#rpc-request)リクエストのいずれかを送信すると、そのリクエストはControllerへ転送されます。Controllerは元帳の問い合わせ結果をCommunicationsモジュールに送り返し、Communicationsモジュールはそれをユーザーに転送します。このRPC APIは、DAGGERのネイティブであり、JSON標準に準拠しています。
+  * ユーザが、ファイルの読み取り、ブロックやトランザクションの問い合わせなど、いくつかの[RPC](dagger.md#rpc-request)リクエストを送信すると、そのリクエストはControllerに転送されます。Controllerは、Communicationsモジュールに元帳問い合わせの結果を送り返し、Communicationsモジュールはそれをユーザーに転送します。このRPC APIはDAGGERのネイティブであり、JSON標準に準拠しています。
 
 <figure><img src="../.gitbook/assets/RPC_Request_Graphic_Docs_Transparent.png" alt=""><figcaption></figcaption></figure>
 
@@ -116,7 +117,7 @@ DAGGERコンセンサスネットワークの結論とまとめとして、ト�
 
 一方、D.A.G.G.E.R.は、[directed acyclic](dagger.md#directed-acyclic-graph)グラフベース（DAG）の合意メカニズムで、ノード同士が直接通信して取引を共有、取引のDAGを形成します。このDAGでは、各ノードが独自の取引履歴を持ち、グラフ全体を分析し、合意された単一の取引順序を特定することで合意形成が行われます。この処理により、高いスループットと高速なファイナリティを実現できるため、高速性と拡張性が求められるアプリケーション（Shadow Drive、DAGGER Mobile、AIモデル学習など）に魅力的な選択肢となっています。
 
-GenesysGo Shadow Driveのような分散型ストレージネットワークの場合、D.A.G.G.E.R.により、水平スケーラビリティ、つまりネットワークの速度やセキュリティを損なうことなく、ノードを増やし、ストレージ容量や処理能力を増やすことでネットワークを拡大することができます。これは、各ノードが独立してトランザクションを処理・検証し、DAG全体を分析することで最終的なコンセンサスを得ることができるためです。
+GenesysGo Shadow Driveのような分散型ストレージネットワークの場合、D.A.G.G.E.R.は水平スケーラビリティを可能にします。つまり、ネットワークの速度やセキュリティを損なうことなく、ノードを追加してストレージ容量や処理能力を増加させ、ネットワークを拡大することができます。これは、各ノードが独立してトランザクションを処理・検証し、DAG全体を分析することで最終的なコンセンサスを得ることができるためです。
 
 一方、[Filecoin](dagger.md#filecoin)や[IPFS](dagger.md#ipfs)などのストレージ証明（PoS）合意機構では、暗号通貨の報酬と引き換えにデータの保存と取得を参加者にインセンティブを与えて分散ストレージ化を実現します。PoSシステムは、データが複数のノードに分散されるため、単一のノードがネットワークを侵害することが困難であり、集中型ストレージソリューションよりも高いセキュリティを提供できる可能性がああります。しかし、PoSシステムは通常、参加するために相当量のストレージ容量と計算機資源を必要とするため、一般市民には利用しにくいものとなっています。
 

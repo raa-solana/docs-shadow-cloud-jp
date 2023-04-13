@@ -30,7 +30,7 @@ GitHub FAQ: https://github.com/GenesysGo/shadow-drive/issues?q=is%3Aissue+is%3Ac
 
 問題のトラブルシューティングを行うには、以下のことを試してみてください：
 
-- [Shadow Drive ネットワーク](https://status.genesysgo.net/) が稼働していることを確認します。https://status.genesysgo.net/
+- [Shadow Drive のネットワーク](https://status.genesysgo.net/) が稼働していることを確認します。https://status.genesysgo.net/
 - Shadow Drive [Change Log](../../reference/change-logs.md) を確認し、問題の原因となる既知の問題やバグがないかを確認してください。 https://docs.shadow.cloud/reference/change-logs
 - Shadow Drive [support](https://discord.gg/genesysgo)にお問い合わせください。https://discord.gg/genesysgo
 
@@ -50,7 +50,13 @@ CLIに記載されているように、1バケットあたり1GBの上限があ�
 
 <summary>ウォレットの導入方法に問題があると思われる場合、または取引がうまくいかない場合はどうすればよいですか？</summary>
 
-ウォレットの実装方法に問題があると思われる場合、またはトランザクションが機能しない場合は、ウォレットアダプターのアップグレードを試してみてください。アダプタをインポートするプロセスが変更されている可能性があるため、Solanaウォレットアダプタのリポジトリでその例を確認してください。さらに、ウォレットを適切に実装してトランザクションを実行する方法の詳細については、Shadow DriveのドキュメントとSDKを参照できます。それでも問題がある場合は、Shadow Drive のサポートにお問い合わせください。
+ウォレットの実装方法に問題があると思われる場合、またはトランザクションが機能しない場合は、ウォレットアダプターのアップグレードを試してみてください。アダプタをインポートするプロセスが変更されている可能性があるため、Solanaウォレットアダプタのリポジトリでその例を確認してください。
+
+さらに、ウォレットを適切に実装してトランザクションを実行する方法の詳細については、Shadow Drive のドキュメントと SDK を参照することができます。ここで例を確認することができます： https://docs.shadow.cloud/build/the-sdk/sdk-javascript#example-post-request-via-sdk-make-immutable
+
+もしあなたがreactを使って `const drive = await new ShdwDrive(connection, wallet).init();` を使ってウォレットを構築していて、「Cannot read properties of undefined (reading 'toBytes') 」というエラーが発生したら、ウォレット全体を必ず渡してdeconstruct されないようにすることを忘れないで下さい。
+
+まだ問題がある場合は、Shadow Driveのサポートにお問い合わせください。
 
 </details>
 
@@ -58,7 +64,7 @@ CLIに記載されているように、1バケットあたり1GBの上限があ�
 
 <summary>CLIからphantomウォレットを使用してストレージ アカウントを作成できますが、SDKからアプリで試したところ、残高不足で取引に失敗しました。これはなぜでしょうか？</summary>
 
-Shadow Driveの活用を目的とした場合、経験上、～0.1SOLで残高不足のエラーを回避できます。また、CLIを使用した場合とSDKの方法を使用した場合の消費額に違いがあるかどうか、TXを調べてみてください。
+Shadow Driveの活用のためには、経験上、〜0.1SOLで残高不足のエラーを回避できます。また、CLIを使用した場合とSDKの方法を使用した場合の消費額に違いがあるかどうか、TXを調べてみてください。
 
 </details>
 
@@ -66,7 +72,9 @@ Shadow Driveの活用を目的とした場合、経験上、～0.1SOLで残高�
 
 <summary>Shadow DriveはLedgerウォレットの署名に対応していますか？</summary>
 
-いいえ、Shadow Driveは現在、Ledgerウォレットの署名をサポートしていません。
+いいえ、Shadow Drive は現在、Ledger のウォレット署名をサポートしていません。Ledgerのサポートを提供できない理由は、Ledger用のSolanaアプリにメッセージ署名機能がないためで、私たちのシステムはこの機能に依存しているためです。
+
+Ledgerサポートの実装を早めるため、このGitHubの課題にコメントを残していただくことをご検討ください： https://github.com/solana-labs/wallet-adapter/pull/712
 
 </details>
 
@@ -177,6 +185,10 @@ https://shdw-drive.genesysgo.net に POST リクエストを行うことで、�
 
 </details>
 
+Can I use the rust SDK in anchor programs?
+
+No, the SDK requires internet access to send http requests. This is not allowed within Solana runtime because arbitrary http responses are not deterministic and may produce different Solana ledger state transitions
+
 <details>
 
 <summary>Shadowトランザクションと無関係な別のトランザクションに同時に署名することは可能ですか？</summary>
@@ -189,7 +201,7 @@ https://shdw-drive.genesysgo.net に POST リクエストを行うことで、�
 
 <summary>400エラーが出ます</summary>
 
-トランザクションの送信に400のタイムアウトが発生する場合、Solanaネットワークの混雑が原因である可能性が高いです。Solanaの混雑時にタイムアウトや再試行が発生するのは正常ですが、現在多くの方が優先料金を使用しているため、混雑に関連する問題の解決に役立つ可能性があります。RPCプロバイダーにお問い合わせください。
+トランザクションの送信に400のタイムアウトが発生する場合、Solanaネットワークの混雑が原因である可能性が高いです。Solanaの混雑時にタイムアウトや再試行が発生するのは正常ですが、現在では多くが優先料金を使用しており、混雑に関連する問題の解決に役立つ可能性があります。詳しくはRPCプロバイダーにお問い合わせください。
 
 400エラーが「Invalid transaction supplied」と表示されている場合、[Discord](https://discord.gg/genesysgo)のサポートチャンネルに参加し、特定の方法について詳細を説明する必要があるかもしれません。このエラーの典型的な原因を解決するには、次のことを行ってください：
 
@@ -208,13 +220,32 @@ Shadow Drive CLI を使用する際に ENOTFOUND エラーが発生した場合�
 </details>
 
 <details>
+
+<summary>エラーが出るときに確認すべきことは？</summary>
+
+エラーが出ているコマンドに --log-level debug を設定してみてください。 \~/.config/solana/id.json が存在することを確認してください。
+
+</details>
+
+<details>
+
+<summary>Shadow Drive APIを呼び出す際の「Internal Server Error」とはどのような意味ですか？</summary>
+
+このエラーの原因はいくつかありますが、最も一般的なのは、元のバージョン1形式のストレージアカウントから新しいバージョン2形式に移行されていないファイルです。レガシースタイルのShadow Driveアカウントを作成したユーザーについては、移行手順を終了してください。
+
+その他のヘルプについては、Discord (https://discord.gg/genesysgo) でお問い合わせください。
+
+</details>
+
+<details>
+
 <summary>バグやセキュリティ問題を提出するにはどうすればよいですか？</summary>
 
 **https://github.com/GenesysGo/shdw-drive-bug-reports**
 
  私たちは、セキュリティ関連の問題に対して、責任ある開示プロセスを遵守しています。セキュリティの脆弱性を責任を持って開示し、対処するために、以下のプロセスに従うことをお願いします。
 
-#### **Bug Reporting Process**
+**Bug Reporting Process**
 
 1. このリポジトリに[new issue](https://github.com/GenesysGo/shdw-drive-bug-reports/issues/new/choose)を作成し、新しいバグレポートを提出する。https://github.com/GenesysGo/shdw-drive-bug-reports/issues/new/choose。
 2. 問題の明確で簡潔な説明、それを再現する手順、関連するスクリーンショットやログを提供してください。
@@ -238,7 +269,7 @@ Shadow Drive CLI を使用する際に ENOTFOUND エラーが発生した場合�
 
 </details>
 
-## 一般的な質問
+### 一般的な質問
 
 <details>
 
@@ -300,17 +331,9 @@ Shadow Driveは、ベアメタルインフラのグローバルネットワー�
 
 <details>
 
-<summary>ノードオペレーターになるにはどうしたらいいですか？</summary>
-
-Shadow Operatorsは現在、クローズドプライベートアルファテスト中です。メインネットのローンチに向け、今後のアップデートも提供される予定です。
-
-</details>
-
-<details>
-
 <summary>GenesysGoとは？</summary>
 
-GenesysGo（GG）は、2021年4月にSolanaのバリデーターとして設立された会社です。それ以来、GGはRPCを提供し、Solanaのためのツールとインフラストラクチャの大規模なエコシステムを構築するために、サービスを拡大してきました。GGは、Solanaコミュニティのための革新的なソリューションの構築に専念する、才能ある開発者とコーダーのチームを擁しています。詳細については、同社のウェブサイト（http://shadow.cloud/）をご覧ください。
+GenesysGo（GG）は、2021年4月にSolanaのバリデーターとして設立された会社です。その後、GGはSolanaのためのツールやインフラの大規模なエコシステムに焦点を当て、提供範囲を拡大してきました。提供範囲の詳細については、「Learn」カテゴリーでご覧いただけます。GGには、Solanaコミュニティのために革新的なソリューションを構築することに専念する、才能ある開発者とコーダーのチームがあります。詳細については、当社のウェブサイト（http://shadow.cloud/）をご覧ください。
 
 </details>
 
