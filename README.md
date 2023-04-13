@@ -2,6 +2,7 @@
 description: >-
   この統合されたリソースは、その上に探索し、開発する人のためのものです。
   Shadow Cloudのプラットフォームです。
+  注意：有志による翻訳なので、オフィシャルではありません。最新の情報は必ず https://docs.shadow.cloud を確認してください。
 ---
 
 # GET STARTED
