@@ -1,62 +1,62 @@
 ---
-description: A resource for those exploring GenesysGo's Shadow Drive as a storage solution.
+description: GenesysGoのShadow Driveをストレージソリューションとして検討されている方向けの資料です。
 ---
 
 # Storage
 
-The Shadow Drive is a new approach to S3-compatible cloud storage with the enhancements of on-chain storage. We have completed full integration with the Solana blockchain, while retaining the ability to become a poly-chain service in the future. For this reason we define the combination of Shadow Drive and it's evolving [DAGGER ](../dagger.md)technology as cloud storage with additional Layer-1 specific integration. Other web3 storage providers have attempted to integrate with Solana in the past and have had only marginal success. Shadow Drive solves this by integrating directly with the Proof of History consensus mechanism, passing on-chain events for consensus approval by the Solana validator network which prove the continued existence and integrity of the stored data.
+シャドウドライブは、S3互換のクラウドストレージにオンチェーンストレージの機能を強化した新しいアプローチです。将来的にポリチェーンサービスになる可能性を残しつつ、ソラナブロックチェーンとの完全統合を完了しました。このため、私たちはShadow Driveとそれを進化させた[DAGGER](../dagger.md)技術の組み合わせを、Layer-1特有の統合を追加したクラウドストレージとして定義します。他のWeb3ストレージプロバイダーは、過去にSolanaとの統合を試みましたが、わずかな成功にとどまっています。Shadow Driveは、Proof of Historyコンセンサスメカニズムと直接統合することでこれを解決し、保存データの継続的な存在と完全性を証明するSolanaバリデーターネットワークによるコンセンサス承認のためのオンチェーンイベントを渡します。
 
-The idea for Shadow Drive was founded on the premise that the Solana network is largely misunderstood in terms of what it was built to achieve. By understanding what it truly means to be the world’s most performant state machine, you realize that Solana can be used to reach consensus and maintain state on nearly anything.
+Shadow Driveのアイデアは、Solanaネットワークが何を達成するために構築されたかという点で、大きく誤解されているという前提のもとに設立されました。世界で最もパフォーマンスの高いステートマシンであることの本当の意味を理解することで、Solanaはほとんど何にでも合意形成や状態維持のために使用できることに気づきます。
 
-Whereas other decentralized storage providers require multiple layers in order to make their solution viable (i.e. Arweave does storage, but to scale uploads faster you need to use Bundlr for example, and then in order to serve the data in any kind of a useful way you need to subscribe to a front-end UI for basic high-speed CDN functionality), Shadow Drive builds everything in to one platform.
+他の分散型ストレージプロバイダーが、そのソリューションを実現するために複数のレイヤーを必要とするのに対し（例えば、Arweaveはストレージを提供するが、アップロードを高速にスケールするためには、例えばBundlrを使う必要があり、さらにデータを何らかの方法で有用に提供するためには、高速CDNの基本機能を備えたフロントエンドUIに加入する必要がある）、Shadow Driveはすべてを一つのプラットフォームに組み込んでいます。
 
-When a user commits their $SHDW to Shadow Drive for storage they are not only provided with storage space, but also with incredibly fast batched uploads and a robust CDN. This ensures their content is stored quickly, efficiently, and delivered at speeds that makes Shadow Drive a truly viable solution for projects that need speed, stability, and efficiency.
+ユーザーが$SHDWをShadow Driveのストレージにコミットすると、ストレージスペースだけでなく、非常に高速なバッチアップロードと堅牢なCDNも提供されます。これにより、コンテンツは迅速かつ効率的に保存され、スピード、安定性、効率性を必要とするプロジェクトにとって、Shadow Driveが真に有効なソリューションとなることが保証されます。
 
-The following pages are intended to outline what Shadow Drive is, how it works, and why it works. These pages will do so by explaining things in practical terms as our goal is for a wide range of people to fully understand what is being built.
+このページでは、シャドウドライブとは何か、どのように機能するのか、なぜ機能するのか、について説明します。このページでは、幅広い層の方々に、シャドウ・ドライブを理解していただくために、実用的な用語で説明しています。
 
 <details>
 
 <summary>Please note</summary>
 
-_This resource assumes some basic knowledge of GenesysGo and the Solana architecture as a whole. If you aren’t familiar with Solana’s architecture, then it is highly recommended to spend some time learning about how Solana validators store “Account State”, what “AccountsDB” is, and what goes into the creation of “on-chain accounts.” Please see the Solana Discord (discord.gg/Solana) and check out the dev-resources channel to learn more._
+_この資料は、GenesysGoとSolanaのアーキテクチャ全体に関する基本的な知識を前提としています。Solanaのアーキテクチャに詳しくない場合は、Solanaバリデーターがどのように "Account State" を保存するか、 "AccountsDB" とは何か、そして "on-chain accounts" の作成には何が必要かについて時間をかけて学ぶことを強くお勧めします。SolanaのDiscord（discord.gg/Solana）を見て、dev-resourcesチャンネルをチェックして、もっと勉強してください。_
 
 </details>
 
 ## **Contents**
 
 * [**Design**](design.md)
-  * Learn how the Shadow Drive is built to support an entire ecosystem of new developers
-* [**On-Chain Events as Proof of Storage**](on-chain-proofs.md)
-  * Learn how the Shadow Drive utilizes the world’s most performant state machine to ensure the validity and integrity of the state of its storage network via on-chain change events.
+  * 新規開発者のエコシステム全体をサポートするシャドードライブの構築方法をご紹介します。
+* [**ストレージの証明としてのオンチェーンイベント**](on-chain-proofs.md)
+  * シャドードライブが世界で最もパフォーマンスの高いステートマシンを活用し、オンチェーンチェンジイベントによってストレージネットワークの状態の有効性と完全性を保証していることをご紹介します。
 * [**Smart-Contracts**](smart-contracts.md)
-  * Learn how smart-contracts securely interact and orchestrate client storage
+  * スマートコントラクトの安全な相互作用とクライアントストレージのオーケストレーションの方法を学ぶことができます。
 
 ## **Why use Shadow Drive?**
 
-If you're a developer and are wondering why you should use Shadow Drive, here's a comprehensive list of reasons and strengths that cater to a wide range of applications:
+開発者の方で、なぜShadow Driveを使うべきか悩んでいる方に、幅広い用途に対応する理由と強みを包括的にご紹介します：
 
 1. **User choice!**
-   * Shadow Drive is built to empower users to decide what should happen with their data. Immutable or mutable data, you choose. We don't take that choice away from you.
+   * Shadow Driveは、ユーザーが自分のデータをどうするか決めることができるように作られています。不変のデータか、変幻自在のデータか、それはあなたが決めることです。私たちは、その選択肢をあなたから奪うことはありません。
 2. **GDPR Compliance!**
-   * This is a big one... developers are given all the tools they need to comply with GDPR and can show records that prove that they have deleted a user's personal data. Legal grey areas and loopholes are a risk to your business, Shadow Drive helps you stay safe. For example, in the case of a project or business needing to produce records to prove GDPR compliance with a user's request to delete personal data... all the records to prove GDPR compliance live on-chain and have been trustlessly verified by the Solana validator network. Shadow Drive then encrypts and erasure codes the data and the fragments are algorithmically distributed in triplicate across the distributed network. Everything is handled trustlessly via smart contract and requires signed #Solana transactions ensuring a publicly verifiable on-chain log.
+   * これは大きいです...開発者はGDPRに準拠するために必要なすべてのツールを与えられ、ユーザーの個人データを削除したことを証明する記録を示すことができます。法的なグレーゾーンや抜け道はビジネスのリスクとなりますが、Shadow Driveは安全な状態を維持するのに役立ちます。例えば、プロジェクトやビジネスで、ユーザーからの個人データ削除依頼に対してGDPR遵守を証明する記録を作成する必要がある場合...GDPR遵守を証明する記録はすべてオンチェーンで生きており、ソラナバリデータネットワークによって信頼できる検証がなされています。その後、Shadow Driveはデータを暗号化・消去コード化し、その断片はアルゴリズムにより分散ネットワークに3重に分散されます。すべてはスマートコントラクトによって信頼できる形で処理され、公に検証可能なオンチェーンログを確保するために署名された#Solanaトランザクションを必要とします。
 3. **Deterministic Naming Structure!**
-   * Did you know that when you upload files to Shadow Drive you will know the URL for your file before the upload is complete? In combination with your wallet's pub key and the file name you choose your building doesn't have to stop to wait for a URL. A deterministic naming structure eliminates the need for a central index, which can become a bottleneck as more objects are added to the system. This structure also makes it easier to scale the system, since all objects are named in the same way. Finally, a deterministic naming structure can be used to speed up queries, since the exact location of an object is known and can be easily located.
+   * Shadow Driveにファイルをアップロードするとき、アップロードが完了する前にファイルのURLがわかることをご存知ですか？あなたのウォレットのパブキーとあなたが選んだファイル名との組み合わせで、あなたのビルはURLを待つために停止する必要はありません。決定論的な命名構造は、システムにオブジェクトが増えるにつれてボトルネックになる可能性のある中央インデックスの必要性を排除しています。また、この構造では、すべてのオブジェクトに同じ名前が付けられているため、システムの拡張が容易になります。最後に、決定論的な命名構造は、オブジェクトの正確な位置がわかっているため、クエリを高速化するために使用することができます。
 4. **Community designed UI's!**
-   * The Solana community is incredibly talented and have really shown this by designing multiple user interface's that make uploading files to Shadow Drive easy for non-developers. Web3 online storage should be accessible to everyone, not just developers.
+   * Solanaコミュニティは非常に優秀で、開発者でなくても簡単にShadow Driveにファイルをアップロードできるような複数のユーザーインターフェイスをデザインすることで、これを実際に示しています。Web3のオンラインストレージは、開発者だけでなく、すべての人がアクセスできるようにすべきです。
 5. **Great tools and easy to use!**
-   * Shadow Drive has a great CLI and comes with a robust SDK (JS, Rust and Python). This more easily enables applications to embed Storage directly into their Web App allow the end user to upload files. The CLI is great and all, but we want to bake this functionality to use the Shadow Drive directly into our app. We got you covered with SDKs in both [JavaScript/Typescript](../../build/shadow-drive/sdk-javascript.md) as well as [Rust](../../build/shadow-drive/sdk-rust.md) and [Python](../../build/shadow-drive/sdk-python.md). The SDK code is open source and so both the core team and community are constantly improving the developer experience and the Shadow Drive tool suite.
+   * Shadow Drive は優れた CLI を持ち、堅牢な SDK（JS、Rust、Python）が付属しています。これにより、アプリケーションは、エンドユーザーがファイルをアップロードできるように、ウェブアプリに直接ストレージを埋め込むことがより簡単になります。CLIは素晴らしいですが、Shadow Driveを使用する機能をアプリに直接組み込みたいのです。私たちは、[JavaScript/Typescript](../../build/shadow-drive/sdk-javascript.md)、[Rust](../../build/shadow-drive/sdk-rust.md) および [Python](../../build/shadow-drive/sdk-python.md) で SDK を提供することであなたをサポートしています。SDKのコードはオープンソースであるため、コアチームとコミュニティの両方が、開発者の体験とShadow Driveツールスイートを常に改善しています。
 6. **Performance & Scalability**
-   * Shadow Drive is just as fast if not faster than standard cloud storage providers and has been design for massive horizontal scalability in preparation for rapid mass adoption.
+   * Shadow Driveは、標準的なクラウドストレージプロバイダーと同程度の速度であり、急速な大量導入に備え、大規模な水平スケーラビリティを持つように設計されています。
 
 ### Pricing
 
-Shadow Drive storage costs are driven by wholesale network costs and can be estimated through various front end UIs that capture moment-in-time estimates. Here is one of many front-ends designed by ecosystem partners that provides detailed information on the network:\
+シャドードライブのストレージコストは、卸売ネットワークコストによって左右され、モーメントインタイムの見積もりを行う様々なフロントエンドUIによって見積もることができます。エコシステムパートナーによって設計された、ネットワークの詳細情報を提供する多くのフロントエンドのうちの1つを紹介します。:/
 
 
 {% embed url="https://sdrive.app/stats" %}
 
-For common questions check out the [General](../../build/shadow-drive/support-and-faq.md) section of our FAQ.
+よくある質問については、FAQの[General](../../build/shadow-drive/support-and-faq.md) セクションを確認してください。
 
-For a comprehensive look at the Shadow Platform's ecosystem check out the [Shadow Ecosystem](../../build/shadow-drive/community-mainted-uis.md) page.
+Shadow Platformのエコシステムについては、[Shadow Ecosystem](../../build/shadow-drive/community-mainted-uis.md) ページを参照してください。
 
-### [**Get started with Shadow Drive!**](../../build/shadow-drive/)
+### [**Shadow Drive でビルドを開始する!**](../../build/shadow-drive/)

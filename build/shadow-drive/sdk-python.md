@@ -1,18 +1,18 @@
 # **Contents**
-* **[Install Python SDK](#installing-shadow-drive)**
-* **[Examples](#example-end-to-end-script)**
+* **[Python SDK をインストールする](#installing-shadow-drive)**
+* **[例](#example-end-to-end-script)**
 * **[Github](#about-the-github-repo)**
-* **[Methods](#methods)**
+* **[メソッド](#methods)**
 
 ## **Installing Shadow Drive**
 
 `pip install shadow-drive`
 
-Also for running the examples:
+また、examples 用にも:
 
 `pip install solders`
 
-Check out the [`examples`](https://github.com/GenesysGo/shadow-drive-rust/tree/main/py) directory for a demonstration of the functionality.
+機能のデモンストレーションは、[`examples`](https://github.com/GenesysGo/shadow-drive-rust/tree/main/py)ディレクトリで確認してください。
 
 https://shdw-drive.genesysgo.net/[STORAGE_ACCOUNT_ADDRESS]
 
@@ -28,40 +28,40 @@ parser.add_argument('--keypair', metavar='keypair', type=str, required=True,
                     help='The keypair file to use (e.g. keypair.json, dev.json)')
 args = parser.parse_args()
 
-# Initialize client
+# クライアント初期化
 client = ShadowDriveClient(args.keypair)
 print("Initialized client")
 
-# Create account
+# アカウント作成
 size = 2 ** 20
 account, tx = client.create_account("full_test", size, use_account=True)
 print(f"Created storage account {account}")
 
-# Upload files
+# アップロードするファイルを定義
 files = ["./files/alpha.txt", "./files/not_alpha.txt"]
 urls = client.upload_files(files)
 print("Uploaded files")
 
-# Add and Reduce Storage
+# ストレージの追加と削減
 client.add_storage(2**20)
 client.reduce_storage(2**20)
 
-# Get file
+# ファイル取得
 current_files = client.list_files()
 file = client.get_file(current_files[0])
 print(f"got file {file}")
 
-# Delete files
+# ファイル削除
 client.delete_files(urls)
 print("Deleted files")
 
-# Delete account
+# アカウント削除
 client.delete_account(account)
 print("Closed account")
 ```
 
-#### **About the [Github Repo](https://github.com/GenesysGo/shadow-drive-rust/tree/main/py)**
-This package uses PyO3 to build a wrapper around the official Shadow Drive Rust SDK. For more information, see the [Rust SDK documentation](https://github.com/GenesysGo/shadow-drive-rust/tree/main/sdk).
+#### **[Github Repo](https://github.com/GenesysGo/shadow-drive-rust/tree/main/py)について**
+本パッケージは、PyO3を使って公式のShadow Drive Rust SDKのラッパーを構築します。詳しくは[Rust SDK documentation](https://github.com/GenesysGo/shadow-drive-rust/tree/main/sdk)を参照してください。
 
 
 #### **Methods** 

@@ -1,325 +1,327 @@
 # FAQ
 
-If you've got questions, we've got answers.
+質問があれば、私たちがお答えします。
 
-## Technical
+## 技術的質問
 
 <details>
 
-<summary>Where can I go to reach out for technical assistance?</summary>
+<summary>技術的な支援を受けるには、どこに相談すればよいのでしょうか？</summary>
 
-Our [Discord server](https://discord.gg/genesysgo) is the best place to get in touch with us.\
-We have a dedicated support section.
+私たちの[Discordサーバー](https://discord.gg/genesysgo)は、私たちと連絡を取るのに最適な場所です。
+私たちは、専用のサポートセクションを持っています。
 
-In addition to this FAQ, you might find the [Github Q\&A](https://github.com/GenesysGo/shadow-drive/issues?q=is%3Aissue+is%3Aclosed) useful as deeper technical issues are discussed.
+このFAQの他に、より深い技術的な問題が議論されているので、[Github Q&A](https://github.com/GenesysGo/shadow-drive/issues?q=is%3Aissue+is%3Aclosed) が役に立つかもしれません。
 
 Discord Server: https://discord.gg/genesysgo
 
 GitHub FAQ: https://github.com/GenesysGo/shadow-drive/issues?q=is%3Aissue+is%3Aclosed
 
+（訳注：英語情報です）
 </details>
 
 <details>
 
-<summary>What should I do if creating a storage account is failing?</summary>
+<summary>ストレージアカウントの作成が失敗する場合はどうすればよいですか？</summary>
 
-If creating a storage account is failing, make sure that you have appropriate amounts of both SOL and SHDW in your wallet. Creating a storage account requires a small amount of SOL to cover the transaction fee, as well as some SHDW to cover the initial storage allocation. Make sure that your wallet has enough funds to cover these requirements. Review the docs here: https://docs.shadow.cloud/build/the-cli#create-a-storage-account
+ストレージアカウントの作成に失敗した場合は、ウォレットに適切な量のSOLとSHDWの両方があることを確認してください。ストレージアカウントの作成には、取引手数料を賄うための少量のSOLと、最初のストレージ割り当てを賄うための若干のSHDWが必要です。ウォレットにこれらの要件を満たす十分な資金があることを確認してください。こちらのドキュメントをご覧ください： https://docs.shadow.cloud/build/the-cli#create-a-storage-account
 
-If you have the correct amount of SOL and SHDW in your wallet but creating a storage account is still failing, there may be other factors at play that are causing the issue. Some possible causes could be network connectivity issues, problems with the Shadow Drive node, or bugs/issues with the SDK.
+ウォレットに適切な量のSOLとSHDWがあるにもかかわらず、ストレージアカウントの作成が失敗する場合、問題を引き起こしている他の要因が存在する可能性があります。考えられる原因としては、ネットワーク接続の問題、Shadow Drive、ノードの問題、SDKのバグや問題などが考えられます。
 
-To troubleshoot the issue, you can try the following:
+問題のトラブルシューティングを行うには、以下のことを試してみてください：
 
--   Verify that the [Shadow Drive network](https://status.genesysgo.net/) is up and running. https://status.genesysgo.net/
--   Check the Shadow Drive [Change Log](../../reference/change-logs.md) for any known issues or bugs that may be causing the problem. https://docs.shadow.cloud/reference/change-logs
--   Contact Shadow Drive [support](https://discord.gg/genesysgo) for further assistance. https://discord.gg/genesysgo
-
-</details>
-
-<details>
-
-<summary>How much storage space can I reserve?</summary>
-
-There is an upper limit of 1GB per bucket as stated in the CLI: https://docs.shadow.cloud/build/the-cli#create-a-storage-account
-
-Development is currently underway which will greatly increase this cap.
+- [Shadow Drive ネットワーク](https://status.genesysgo.net/) が稼働していることを確認します。https://status.genesysgo.net/
+- Shadow Drive [Change Log](../../reference/change-logs.md) を確認し、問題の原因となる既知の問題やバグがないかを確認してください。 https://docs.shadow.cloud/reference/change-logs
+- Shadow Drive [support](https://discord.gg/genesysgo)にお問い合わせください。https://discord.gg/genesysgo
 
 </details>
 
 <details>
 
-<summary>What should I do if I think there is an issue with how I'm implementing the wallet, or my transactions are not working?</summary>
+<summary>予約できるストレージ容量はどのくらいですか？</summary>
 
-If you think there is an issue with how you're implementing the wallet, or your transactions are not working, you can try upgrading the wallet adapters. Check the Solana wallet adapter repositories for their examples, as the process for importing the adapters may have changed. Additionally, you can refer to the Shadow Drive documentation and SDK for more information on how to properly implement the wallet and perform transactions. If you're still having issues, contact Shadow Drive support for further assistance.
+CLIに記載されているように、1バケットあたり1GBの上限があります: https://docs.shadow.cloud/build/the-cli#create-a-storage-account
 
-</details>
-
-<details>
-
-<summary> I can create a storage account using the phantom wallet through CLI, but when I try from the SDK in my app the transactions fails saying insufficient balance. Why is this?</summary>
-
-For the purposes of utilizing the Shadow Drive, ~0.1 SOL in our experience will avoid insufficient balance errors. You can also examine the TXs to see if there's any differences in your spend when using the CLI versus the SDK methods.
+現在、この上限を大幅に増やす開発が進められています。
 
 </details>
 
 <details>
 
-<summary>Does Shadow Drive support Ledger wallet signing?</summary>
+<summary>ウォレットの導入方法に問題があると思われる場合、または取引がうまくいかない場合はどうすればよいですか？</summary>
 
-No, Shadow Drive does not currently support Ledger wallet signing.
-
-</details>
-
-<details>
-
-<summary>Are accounts returned in any specific order when calling the `getStorageAccounts` method?</summary>
-
-Yes, accounts are returned in the order they are created when calling the `getStorageAccounts` method in GenesysGo Shadow Drive. This is because the system was designed and built in such a way to ensure that the accounts are returned in the order they were created. https://docs.shadow.cloud/build/the-sdk/sdk-javascript#getstorageaccounts
+ウォレットの実装方法に問題があると思われる場合、またはトランザクションが機能しない場合は、ウォレットアダプターのアップグレードを試してみてください。アダプタをインポートするプロセスが変更されている可能性があるため、Solanaウォレットアダプタのリポジトリでその例を確認してください。さらに、ウォレットを適切に実装してトランザクションを実行する方法の詳細については、Shadow DriveのドキュメントとSDKを参照できます。それでも問題がある場合は、Shadow Drive のサポートにお問い合わせください。
 
 </details>
 
 <details>
 
-<summary>Is there a way to delete multiple files at the same time?</summary>
+<summary>CLIからphantomウォレットを使用してストレージ アカウントを作成できますが、SDKからアプリで試したところ、残高不足で取引に失敗しました。これはなぜでしょうか？</summary>
 
-Currently, it is not possible to delete multiple files at once. However, we have added this feature to our roadmap and will be working on it in the near future. Thank you for your suggestion!
-
-</details>
-
-<details>
-
-<summary>Is there a reason why `edit-file` works differently from `upload-file` when generating upload hashes server side?</summary>
-
-The `edit-file` functionality works differently from `upload-file` because it is a remnant of the first iteration of Shadow Drive where every file had an associated account on-chain with some metadata that was crucial for tracking. However, we've made some changes that aren't documented yet and aren't implemented in the SDKs. If you add `overwrite: true` to the request body of an upload request that you make manually instead of through the SDK, it will do the same thing as editing a file.
+Shadow Driveの活用を目的とした場合、経験上、～0.1SOLで残高不足のエラーを回避できます。また、CLIを使用した場合とSDKの方法を使用した場合の消費額に違いがあるかどうか、TXを調べてみてください。
 
 </details>
 
 <details>
 
-<summary>Is it possible to ask the user to sign a Shadow transaction and another transaction at the same time on the frontend?</summary>
+<summary>Shadow DriveはLedgerウォレットの署名に対応していますか？</summary>
 
-Currently, it is not possible to ask the user to sign a Shadow transaction and another transaction at the same time on the frontend. The Shadow network only allows shadow drive-specific transactions to have instructions related to the shadow drive on chain program. Any other instructions will cause the transaction to fail. This security feature is in place to prevent malicious transactions.
-
-</details>
-
-<details>
-
-<summary>I'm trying to create a File object on my React app to upload it to Shadow but I keep getting an error.</summary>
-
-The error you're getting may be due to the Shadow Drive instance being created before the wallet-provider is ready. In the latest example on the main branch, there is a slight change in the useEffect that creates the drive instance which may resolve your issue. Additionally, make sure that the file data buffer is converted to a Blob using `new Blob([Buffer.from("data")])`.
+いいえ、Shadow Driveは現在、Ledgerウォレットの署名をサポートしていません。
 
 </details>
 
 <details>
 
-<summary>I'm using `createStorageAccount` on a node script and it works fine, but when I try to use it in my React app, I get a 403 error.</summary>
+<summary>`getStorageAccounts`メソッドを呼び出すと、アカウントは特定の順序で返されますか？</summary>
 
-By default, the rpc used is the Solana mainnet rpc api.mainnet-beta.solana.com. If you're getting blocked by that, you'll have to sign up for a paid RPC as we cannot control how the Solana mainnet rpc endpoint is limited. It is possible that the endpoint is blocking requests from the browser due to security reasons.
-
-For additional help, consider joining our [Discord](https://discord.gg/genesysgo) and asking in support channels.
+はい、GenesysGo Shadow Drive の `getStorageAccounts` メソッドを呼び出すと、アカウントは作成された順番で返されます。これは、アカウントが作成された順に返されるようにシステムが設計され、構築されているためです。 https://docs.shadow.cloud/build/the-sdk/sdk-javascript#getstorageaccounts
 
 </details>
 
 <details>
 
-<summary>Why does my method fail with "Blockhash not found" error?</summary>
+<summary>複数のファイルを同時に削除する方法はありますか？</summary>
 
-This is an issue on the Solana RPC side and unfortunately, all you can do is retry the method. Consider implementing retry and/or error handling in your application.
-
-</details>
-
-<details>
-
-<summary>How would I use the SDK to get file contents from the account?</summary>
-
-You can send a normal GET request to https://shdw-drive.genesysgo.net// to get the file contents from the account. You can read more in API methods here: https://docs.shadow.cloud/build/the-api
+現在のところ、複数のファイルを一度に削除することはできません。しかし、この機能をロードマップに追加しましたので、近い将来、この機能に取り組む予定です。ご指摘ありがとうございました！
 
 </details>
 
 <details>
 
-<summary>Is there a way to get information about filetypes so I can then handle different types?</summary>
+<summary>アップロードハッシュをサーバーサイドで生成する際に、`edit-file`と`upload-file`の動作が異なるのは何か理由があるのでしょうか？</summary>
 
-You can make a HEAD request or a GET request to get information about file types. If you make a GET request, the response headers should include the content type. Review the API methods here: https://docs.shadow.cloud/build/the-api
-
-</details>
-
-<details>
-
-<summary>How can I get metadata for the file?</summary>
-
-You can get metadata for the file by making a POST request to https://shdw-drive.genesysgo.net//. The response will include metadata for the file. Review the API methods here: https://docs.shadow.cloud/build/the-api
+`edit-file`の機能は`upload-file`とは異なる動作をします。これは、シャドウドライブの最初のイテレーションで、すべてのファイルが追跡のために重要なメタデータを持つ関連アカウントをオンチェーンしていた名残りです。
+ しかし、私たちはまだ文書化されておらず、SDKにも実装されていないいくつかの変更を行っています。SDKを介さず手動で行うアップロードリクエストのリクエストボディに `overwrite: true` を追加すると、ファイルを編集するのと同じことが行われます。
 
 </details>
 
 <details>
 
-<summary>Is it possible to transfer ownership of a storage account to another wallet?</summary>
+<summary>フロントエンドで、シャドウ取引と別の取引を同時に署名するようユーザーに求めることは可能ですか？</summary>
 
-Currently, this is not an active feature in the CLI or SDK. However, it is a planned feature for future releases.
-
-</details>
-
-<details>
-
-<summary>Can only the owner of the storage edit files?</summary>
-
-Yes, currently only the owner of the storage account can edit the files.
+現在、フロントエンドでシャドウ取引と別の取引に同時に署名するようユーザーに求めることはできません。シャドウネットワークでは、Shadow Drive固有のトランザクションは、チェーンプログラム上のShadow Driveに関連する指示を持つことのみを許可します。それ以外の指示は、トランザクションを失敗させる原因となります。このセキュリティ機能は、悪意のあるトランザクションを防ぐために設置されています。
 
 </details>
 
 <details>
 
-<summary>Is it possible to resume an upload from where it left off if it fails?</summary>
+<summary>ReactアプリでFileオブジェクトを作成してShadow Driveにアップロードしようとしているのですが、エラーが出続けています。</summary>
 
-No, unfortunately it is not possible to resume an upload from where it left off if it fails. However, the CLI checks files before uploading and skips them if they already exist. You also receive an output JSON file for each file upload, which will indicate if a file already exists.
-
-</details>
-
-<details>
-
-<summary>Is it possible for a user to sign a Shadow transaction and another unrelated transaction at the same time?</summary>
-
-Currently, the Shadow network only allows Shadow Drive-specific transactions to include instructions related to the Shadow Drive on-chain program. Any other instructions will cause the transaction to fail as a security measure. This means that it is not possible for a user to sign a Shadow transaction and another unrelated transaction at the same time.
+このエラーは、ウォレットプロバイダーが準備される前にShadow Driveインスタンスが作成されたことが原因かもしれません。メインブランチの最新の例では、ドライブインスタンスを作成するuseEffectに若干の変更があり、この問題が解決される可能性があります。さらに、`new Blob([Buffer.from("data")])` を使用して、ファイルデータバッファが Blob に変換されることを確認してください。
 
 </details>
 
 <details>
 
-<summary>I'm getting a 400 error.</summary>
+<summary>nodeスクリプトで`createStorageAccount`を使っていて、問題なく動作しているのですが、Reactアプリで使おうとすると、403エラーが出ます。</summary>
 
-When getting 400 timeouts for transaction submissions, it is most likely due to congestion on the Solana network. While timing out and retrying is normal during Solana congestion, many are now using priority fees may help solve congestion-related issues. Contact your RPC provider for further help.
+デフォルトでは、使用されるRPCはSolana mainnet rpc api.mainnet-beta.solana.com です。Solana mainnet rpcのエンドポイントがどのように制限されているかは制御できないため、それでブロックされている場合は、有料のRPCにサインアップする必要があります。セキュリティ上の理由から、エンドポイントがブラウザからのリクエストをブロックしている可能性があります。
 
-If your 400 error is stating "Invalid transaction supplied" then you may need to join our support channel in [Discord](https://discord.gg/genesysgo) and provide more details on the specific method. To resolve the typical causes of this error do the following:
-
-1. Check announcements in Discord (https://discord.gg/genesysgo) or the network status (https://status.genesysgo.net/) to make sure there is no platform-wide problem.
-2. Check all of your versions and dependencies. You Solana wallet adapter dependencies and the version of the JavaScript SDK must be up to date.
-3. Double check the wallet you have chosen to work with is not having issues. You may need to reach out to them directly.
+追加のヘルプについては、私たちの[Discord](https://discord.gg/genesysgo)に参加し、サポートチャネルで尋ねることを検討してください。
 
 </details>
 
 <details>
 
-<summary>What should I do if I encounter an ENOTFOUND error when using the Shadow Drive CLI?</summary>
+<summary>"Blockhash not found" エラーでメソッドが失敗するのはなぜですか？</summary>
 
-If you encounter an ENOTFOUND error when using the Shadow Drive CLI, it is likely a local DNS issue on your side. ENOTFOUND is a DNS resolver problem, which means you will need to check with your Internet Service Provider (ISP) to resolve the issue. Alternatively, you can try using a Virtual Private Network (VPN) to see if that resolves the issue.
+これはSolana RPC側の問題で、残念ながらできることはメソッドを再試行することだけです。アプリケーションにリトライやエラー処理を実装することを検討してください。
 
 </details>
 
 <details>
-<summary> How do I submit a bug or a security issue?</summary>
+
+<summary>SDKを使って、アカウントからファイルの内容を取得するにはどうすればよいですか？</summary>
+
+https://shdw-drive.genesysgo.net に通常の GET リクエストを送信することで、アカウントからファイル内容を取得することができます。APIメソッドの詳細はこちらでご覧いただけます： https://docs.shadow.cloud/build/the-api
+
+</details>
+
+<details>
+
+<summary>ファイルタイプに関する情報を取得し、異なるタイプのファイルを扱えるようにする方法はありますか？</summary>
+
+ファイルタイプに関する情報を取得するには、HEADリクエストまたはGETリクエストを行うことができます。GETリクエストの場合、レスポンスヘッダにはコンテンツタイプが含まれているはずです。APIメソッドについては、こちらをご覧ください： https://docs.shadow.cloud/build/the-api
+
+</details>
+
+<details>
+
+<summary>ファイルのメタデータを取得するにはどうすればよいですか？</summary>
+
+https://shdw-drive.genesysgo.net に POST リクエストを行うことで、ファイルのメタデータを取得することができます。レスポンスには、そのファイルのメタデータが含まれます。APIメソッドについては、こちら（https://docs.shadow.cloud/build/the-api）をご参照ください。
+
+</details>
+
+<details>
+
+<summary>ストレージアカウントの所有権を他のウォレットに移すことは可能ですか？</summary>
+
+現在、この機能はCLIやSDKでアクティブな機能ではありません。しかし、将来のリリースのために計画された機能です。
+
+</details>
+
+<details>
+
+<summary>ストレージの所有者だけがファイルを編集できるんですか？</summary>
+
+はい、現在はストレージアカウントの所有者のみがファイルを編集することができます。
+
+</details>
+
+<details>
+
+<summary>アップロードに失敗した場合、中断したところから再開することは可能でしょうか？</summary>
+
+いいえ、残念ながらアップロードに失敗した場合、中断したところから再開することはできません。ただし、CLIはアップロード前にファイルをチェックし、すでに存在する場合はスキップします。また、各ファイルのアップロードに対して、ファイルがすでに存在するかどうかを示す出力JSONファイルを受け取ることができます。
+
+</details>
+
+<details>
+
+<summary>Shadowトランザクションと無関係な別のトランザクションに同時に署名することは可能ですか？</summary>
+
+現在、Shadowネットワークでは、Shadow Drive専用トランザクションにのみ、Shadow Driveオンチェーンプログラムに関連する指示を含めることができます。それ以外の指示は、セキュリティ対策としてトランザクションを失敗させることになります。つまり、ユーザーがShadowトランザクションと別の無関係なトランザクションに同時に署名することは不可能です。
+
+</details>
+
+<details>
+
+<summary>400エラーが出ます</summary>
+
+トランザクションの送信に400のタイムアウトが発生する場合、Solanaネットワークの混雑が原因である可能性が高いです。Solanaの混雑時にタイムアウトや再試行が発生するのは正常ですが、現在多くの方が優先料金を使用しているため、混雑に関連する問題の解決に役立つ可能性があります。RPCプロバイダーにお問い合わせください。
+
+400エラーが「Invalid transaction supplied」と表示されている場合、[Discord](https://discord.gg/genesysgo)のサポートチャンネルに参加し、特定の方法について詳細を説明する必要があるかもしれません。このエラーの典型的な原因を解決するには、次のことを行ってください：
+
+1. Discordのアナウンス(https://discord.gg/genesysgo)やネットワーク状況(https://status.genesysgo.net/)を確認し、プラットフォーム全体に問題がないことを確認します。
+2. すべてのバージョンと依存関係をチェックします。Solanaウォレットアダプターの依存関係やJavaScript SDKのバージョンが最新である必要があります。
+3. 選択したウォレットに問題がないことを再確認します。直接連絡を取る必要がある場合もあります。
+
+</details>
+
+<details>
+
+<summary>Shadow Drive CLIを使用する際にENOTFOUNDエラーが発生した場合、どうすればよいですか？</summary>
+
+Shadow Drive CLI を使用する際に ENOTFOUND エラーが発生した場合、お客様の側のローカル DNS の問題である可能性があります。ENOTFOUND は DNS リゾルバの問題であるため、インターネットサービスプロバイダー (ISP) に問題を解決するよう確認する必要があります。また、仮想プライベートネットワーク（VPN）を使用して問題が解決するかどうか試してみることもできます。
+
+</details>
+
+<details>
+<summary>バグやセキュリティ問題を提出するにはどうすればよいですか？</summary>
 
 **https://github.com/GenesysGo/shdw-drive-bug-reports**
 
-We adhere to a responsible disclosure process for security related issues. To ensure the responsible disclosure and handling of security vulnerabilities, we ask that you follow the process outlined below.
+ 私たちは、セキュリティ関連の問題に対して、責任ある開示プロセスを遵守しています。セキュリティの脆弱性を責任を持って開示し、対処するために、以下のプロセスに従うことをお願いします。
 
 #### **Bug Reporting Process**
 
-1. Submit a new bug report by creating a [new issue](https://github.com/GenesysGo/shdw-drive-bug-reports/issues/new/choose) in this repository. https://github.com/GenesysGo/shdw-drive-bug-reports/issues/new/choose
-2. Please provide a clear and concise description of the issue, steps to reproduce it, and any relevant screenshots or logs.
-3. Label your issue as a 'bug' or 'security' accordingly.
+1. このリポジトリに[new issue](https://github.com/GenesysGo/shdw-drive-bug-reports/issues/new/choose)を作成し、新しいバグレポートを提出する。https://github.com/GenesysGo/shdw-drive-bug-reports/issues/new/choose。
+2. 問題の明確で簡潔な説明、それを再現する手順、関連するスクリーンショットやログを提供してください。
+3. あなたの問題を「バグ」または「セキュリティ」として適宜ラベル付けしてください。
 
-**Important**: For security-related issues, do not include sensitive information in the issue description. Instead, submit a pull request to our repository, containing the necessary details, so that the information remains concealed until the issue is resolved.
+**重要**： セキュリティ関連の問題については、問題の説明文に機密情報を含めないでください。代わりに、必要な詳細を含むプルリクエストを私たちのリポジトリに提出し、問題が解決されるまで情報が隠されたままになるようにします。
 
-**Security related issues should only be reported through this repository.**
+**セキュリティ関連の問題は、このリポジトリを通じてのみ報告されるべきです**
 
-While we strongly encourage the use of this repository for bug reports and security issues, you may also reach out to us via our [**Discord**](https://discord.gg/genesysgo) server. Join the #shdw-drive-technical-support channel for assistance. However, please note that we will redirect you to submit the bug report through this GitHub repository for proper handling and tracking.
-
-</details>
-
-<details>
-
-<summary>Is there a way to monitor the network so I know if there are issues or downtime?</summary>
-
-Yes, you can subscribe to the Shadow Network status here: https://status.genesysgo.net/
-
-Also follow us on twitter https://twitter.com/GenesysGo or join our tech support Discord: https://discord.gg/genesysgo
-
-</details>
-
-## General
-
-<details>
-
-<summary>What makes Shadow Drive unique?</summary>
-
-Shadow Drive is a commodity cloud network that offers multiple service options, leveraging distributed ledger technology, and offering vertically integrated, L1-specific storage and compute. It is the only cloud network designed to democratize the earnings of traditional cloud platforms without sacrificing performance. Being S3-compatible, Shadow Drive maintains an open-source SDK and interoperability standards that make it easy to access through popular builder tools and SDKs. Its objective is to support popular tools that make building easier, regardless of the application you are building.
+バグレポートやセキュリティ問題については、このリポジトリの使用を強く推奨しますが、私たちの[**Discord**](https://discord.gg/genesysgo)サーバーを経由して連絡を取ることもできます。#shdw-drive-technical-support チャンネルに参加し、支援を求めてください。ただし、適切な処理と追跡のために、このGitHubリポジトリを通じてバグレポートを提出するようにリダイレクトすることに注意してください。
 
 </details>
 
 <details>
 
-<summary>How is GDPR handled?</summary>
+<summary>ネットワークを監視して、問題やダウンタイムがあるかどうかを知る方法はないでしょうか？</summary>
 
-Shadow Drive provides developers with tools to comply with GDPR and can provide records to prove the deletion of a user's personal data. All records for GDPR compliance are stored on-chain and have been verified by the Solana validator network. The data is then encrypted and algorithmically distributed across the network in triplicate. All transactions are signed and publicly verifiable on-chain.
+はい、シャドーネットワークの状況はこちらからご購読いただけます： https://status.genesysgo.net/
+
+また、Twitter https://twitter.com/GenesysGo でフォローしたり、技術サポートのDiscord: https://discord.gg/genesysgo に参加することもできます。
+
+</details>
+
+## 一般的な質問
+
+<details>
+
+<summary>Shadow Driveの特徴は？</summary>
+
+Shadow Driveは、複数のサービスオプションを提供するコモディティクラウドネットワークで、分散型台帳技術を活用し、垂直統合されたL1専用のストレージとコンピュートを提供しています。パフォーマンスを犠牲にすることなく、従来のクラウドプラットフォームの収益を民主化するために設計された唯一のクラウドネットワークです。S3互換であるShadow Driveは、オープンソースのSDKと相互運用性基準を維持し、一般的なビルダーツールやSDKから簡単にアクセスできるようになっています。その目的は、構築するアプリケーションに関係なく、構築を容易にする一般的なツールをサポートすることです。
 
 </details>
 
 <details>
 
-<summary>Is Shadow Drive supported on mobile?</summary>
+<summary>GDPRはどのように扱われるのですか？</summary>
 
-Yes, Shadow Drive is supported on mobile through our ecosystem partners who are actively building on mobile. Please check out our Shadow Ecosystem page for more details. https://docs.shadow.cloud/build/community-mainted-uis
-
-Additionally, in the future, our DAGGER distributed ledger technology will enable Solana Saga powered storage solutions for those seeking low cost decentralized mobile clouds. Please check out the Learn section for more information. You can read more here: https://docs.shadow.cloud/learn#compute
+Shadow Driveは、GDPRに準拠するためのツールを開発者に提供し、ユーザーの個人データの削除を証明するための記録を提供することができます。GDPR準拠のための記録はすべてオンチェーンで保存され、Solanaバリデーターネットワークによって検証されています。その後、データは暗号化され、アルゴリズムによってネットワーク上に三重に分散されます。すべての取引は署名され、オンチェーンで公に検証可能です。
 
 </details>
 
 <details>
 
-<summary>How much does it cost to store data on Shadow Drive?</summary>
+<summary>シャドウドライブはモバイルに対応していますか？</summary>
 
-Shadow Drive storage costs are driven by wholesale network costs, a fixed rate of 0.25 SHDW per 1 GB, and can be estimated through various front end UIs that capture moment-in-time estimates. One example is the front-end designed by an ecosystem partners, which provides detailed information on the network as well. Here is the link to the front-end: https://sdrive.app/stats
+はい、Shadow Drive は、モバイルでの開発を積極的に行っているエコシステム・パートナーを通じてモバイルでサポートされています。詳しくはシャドウエコシステムページをご覧ください。https://docs.shadow.cloud/build/community-mainted-uis
 
-</details>
-
-<details>
-
-<summary>Is Shadow Drive S3-compatible?</summary>
-
-Yes, Shadow Drive is S3-compatible. S3-compatibility is a widely adopted standard in the cloud storage industry, and many providers offer S3-compatible APIs and protocols, which gives builders greater flexibility in choosing a cloud storage provider. This means developers can easily move data between different services without worrying about compatibility issues. Additionally, S3-compatibility offers robust APIs that enable fast and reliable query, along with virtual mount capability, making it important for Web2, Web3, and the frontiers of distributed ledger tech and AI. Shadow Drive aims to empower developers to integrate it directly into their builds, and to support the talented community of designers who will create innovative platforms for Shadow Drive. You can read more here: https://docs.shadow.cloud/learn/design#s3-compatibility
+さらに将来的には、当社の分散型台帳技術「DAGGER」により、低コストの分散型モバイルクラウドを求める方々のために、Solana Sagaを搭載したストレージソリューションが実現する予定です。詳細については、「Learn」セクションをご覧ください。詳しくはこちらでご覧いただけます： https://docs.shadow.cloud/learn#compute
 
 </details>
 
 <details>
 
-<summary>What physical infrastructure powers Shadow Drive?</summary>
+<summary>Shadow Driveにデータを保存する場合、費用はどのくらいかかるのでしょうか？</summary>
 
-Shadow Drive runs on a global network of bare metal infrastructure, with all compute and storage existing on bare metal. There is no dependency on cloud providers for Shadow Drive operations. For more details on the design of Shadow Drive, please see the "Design" section under the "Learn" category: https://docs.shadow.cloud/learn/design
-
-</details>
-
-<details>
-
-<summary>How are storage costs determined?</summary>
-
-Prices vary depending on the front-end and the market value of storage costs per unit SHDW. There is a fixed 0.25 SHDW per 1 GB of storage across the network. You can visit front-end UIs such as https://sdrive.app/stats to determine costs.
+Shadow Driveのストレージコストは、1GBあたり0.25SHDWの固定レートである卸売ネットワークコストによって駆動され、モーメントインタイムの見積もりを取得する様々なフロントエンドUIを介して推定することができます。その一例が、エコシステムパートナーによって設計されたフロントエンドで、ネットワークに関する詳細な情報も提供されます。フロントエンドへのリンクはこちらです： https://sdrive.app/stats
 
 </details>
 
 <details>
 
-<summary>How do I become a node operator?</summary>
+<summary>Shadow driveはS3対応ですか？</summary>
 
-Shadow Operators is currently in closed private alpha testing. Future updates will be provided as we progress towards a mainnet launch.
-
-</details>
-
-<details>
-
-<summary>What is GenesysGo?</summary>
-
-GenesysGo (GG) is a company that was founded in April 2021 as a Solana validator. Since then, GG has expanded its offerings to provide RPCs and build out a large ecosystem of tools and infrastructure for Solana. GG has a team of talented developers and coders who are dedicated to building innovative solutions for the Solana community. For more information, you can visit their website at http://shadow.cloud/.
+はい、Shadow Drive は S3 互換です。S3互換はクラウドストレージ業界で広く採用されている標準であり、多くのプロバイダがS3互換のAPIとプロトコルを提供しているため、ビルダーはクラウドストレージプロバイダをより柔軟に選択できるようになりました。つまり、開発者は互換性の問題を心配することなく、異なるサービス間でデータを容易に移動させることができます。さらに、S3互換は、高速で信頼性の高いクエリを可能にする堅牢なAPIを提供し、仮想マウント機能とともに、Web2、Web3、分散型台帳技術やAIの最前線にとって重要です。Shadow Driveは、開発者が自分のビルドに直接統合できるようにすること、そしてShadow Driveのための革新的なプラットフォームを創造するデザイナーの才能あるコミュニティをサポートすることを目的としています。詳しくはこちらでご覧いただけます： https://docs.shadow.cloud/learn/design#s3-compatibility
 
 </details>
 
 <details>
 
-<summary>Can I advertise my project if I use DAGGER/Shadow Drive?</summary>
+<summary>Shadow Driveの動力源となる物理インフラは？</summary>
 
-Yes, the Shadow Drive team would love to hear about your project if you are building on top of the Drive or using DAGGER. The best way to gain visibility is to submit a PR directly to the docs-shadow-cloud repo adding your project/business, details, and image to the Shadow Ecosystem list: https://github.com/GenesysGo/docs-shadow-cloud
+Shadow Driveは、ベアメタルインフラのグローバルネットワーク上で動作し、すべてのコンピュートとストレージはベアメタル上に存在します。Shadow Driveの運用において、クラウドプロバイダーへの依存はありません。Shadow Driveの設計の詳細については、「Learn」カテゴリの「Design」セクションをご覧ください： https://docs.shadow.cloud/learn/design
 
-Submit a PR to edit the file located here: https://github.com/GenesysGo/docs-shadow-cloud/blob/main/build/shadow-drive/community-mainted-uis.md
+</details>
 
-You can also share your work in the [Shadow Drive Discord](https://discord.com/invite/genesysgo). We will soon release an automated process to be added to the Shadow Ecosystem page.
+<details>
+
+<summary>ストレージコストはどのように決定されるのですか？</summary>
+
+価格はフロントエンドによって異なり、単位SHDWあたりのストレージコストの市場価値も異なります。ネットワーク全体でストレージ1GBあたり0.25SHDWの固定があります。https://sdrive.app/stats などのフロントエンドのUIをご覧いただき、コストを判断してください。
+
+</details>
+
+<details>
+
+<summary>ノードオペレーターになるにはどうしたらいいですか？</summary>
+
+Shadow Operatorsは現在、クローズドプライベートアルファテスト中です。メインネットのローンチに向け、今後のアップデートも提供される予定です。
+
+</details>
+
+<details>
+
+<summary>GenesysGoとは？</summary>
+
+GenesysGo（GG）は、2021年4月にSolanaのバリデーターとして設立された会社です。それ以来、GGはRPCを提供し、Solanaのためのツールとインフラストラクチャの大規模なエコシステムを構築するために、サービスを拡大してきました。GGは、Solanaコミュニティのための革新的なソリューションの構築に専念する、才能ある開発者とコーダーのチームを擁しています。詳細については、同社のウェブサイト（http://shadow.cloud/）をご覧ください。
+
+</details>
+
+<details>
+
+<summary>DAGGER/Shadow Driveを利用した場合、プロジェクトの宣伝は可能ですか？</summary>
+
+はい、Shadow Driveチームは、Driveの上に構築している場合やDAGGERを使用している場合、あなたのプロジェクトについてぜひ聞きたいと思っています。可視性を得るための最良の方法は、docs-shadow-cloudレポに直接PRを提出し、あなたのプロジェクト/ビジネス、詳細、画像をシャドウエコシステムリストに追加することです： https://github.com/GenesysGo/docs-shadow-cloud
+
+ここにあるファイルを編集するためにPRを提出する: https://github.com/GenesysGo/docs-shadow-cloud/blob/main/build/shadow-drive/community-mainted-uis.md
+
+また、[Shadow Drive Discord](https://discord.com/invite/genesysgo)で共有することができます。シャドウエコシステムページに追加される自動化プロセスを近日中に公開する予定です。
 
 </details>

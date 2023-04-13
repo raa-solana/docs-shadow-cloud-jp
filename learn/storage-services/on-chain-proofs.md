@@ -1,40 +1,41 @@
 # On-Chain Proofs
 
-First, please allow me to set some context about Solana itself… At the most basic fundamental level, blockchains are nothing more than ledgers. Ledgers record the history of how things have changed over time and all of those changes combined give you the current “state”. Solana is all about its “accounts” and the “state” of those accounts.
+ブロックチェーンは、最も基本的なレベルでは、台帳以外の何ものでもありません。台帳は、物事が時間の経過とともにどのように変化してきたかという歴史を記録し、それらの変化のすべてを組み合わせることで現在の「状態」を得ることができます。Solanaは、「アカウント」とその「状態」がすべてです。
 
-What do I mean by “state”? Let’s use computers as an example… Everything in a computer is 0’s and 1’s. The bit stores just a 0 or 1: it’s the smallest building block of storage. **If a bit is a 1 then its current state is 1. If a bit is 0 then its current state is 0.** That bit is either a 0 or a 1, the history of that bit is not relevant to whether that bit’s state is currently a 0 or a 1.
+「状態」とはどういうことでしょうか？コンピュータを例にとると...コンピュータの中身はすべて0と1です。ビットは0か1かを記憶するもので、記憶装置の最小構成要素です。**ビットが1であれば、現在の状態は1であり、ビットが0であれば、現在の状態は0である** そのビットは0か1のいずれかであり、そのビットの歴史は、そのビットの状態が現在0か1であるかに関係しません。
 
-The next thing we need to know is that Solana is unique in the way it structures everything as an “account.” This is important terminology, so here’s the definition:
+次に、ソラナの特徴として、すべてを「アカウント」として構成していることが挙げられます。これは重要な用語なので、ここで定義を説明します：
 
 {% code overflow="wrap" %}
 ```
 Accounts
-Storing State between Transactions
-If the program needs to store state between transactions, it does so using accounts. Accounts are similar to files in operating systems such as Linux in that they may hold arbitrary data that persists beyond the lifetime of a program. Also like a file, an account includes metadata that tells the runtime who is allowed to access the data and how.
+トランザクション間の状態の保存
+プログラムがトランザクション間の状態を保存する必要がある場合、アカウントを使用して保存します。アカウントは、Linuxなどのオペレーティングシステムにおけるファイルに似ており、プログラムのライフタイムを超えて持続する任意のデータを保持することができます。また、ファイルのように、アカウントには、誰がどのようにデータにアクセスすることを許可されているかをランタイムに伝えるメタデータが含まれています。
 
-Unlike a file, the account includes metadata for the lifetime of the file. That lifetime is expressed by a number of fractional native tokens called lamports. Accounts are held in validator memory and pay "rent" to stay there. Each validator periodically scans all accounts and collects rent. Any account that drops to zero lamports is purged. Accounts can also be marked rent-exempt if they contain a sufficient number of lamports.
+ファイルとは異なり、アカウントにはファイルの寿命のためのメタデータが含まれています。その寿命は、lamportsと呼ばれる分数のネイティブトークンの数で表されます。アカウントはバリデータのメモリに保持され、そこに留まるために「家賃」を支払う。各バリデータは定期的に全アカウントをスキャンし、賃料を徴収する。lamportsがゼロになったアカウントはすべてパージされる。また、十分な数のlamportsがある場合、アカウントは家賃免除とすることもできる。
 
-In the same way that a Linux user uses a path to look up a file, a Solana client uses an address to look up an account. The address is a 256-bit public key.
+Linuxユーザーがファイルを調べるのにパスを使うのと同じように、Solanaクライアントはアカウントを調べるのにアドレスを使う。このアドレスは256ビットの公開鍵です。
 ```
 {% endcode %}
 
-Thinking back to state, the history of the accounts on Solana is completely irrelevant to their current state. Why? Because all the events that took place in order to arrive at the current state were reviewed by the Proof of History consensus mechanism (i.e. the Solana Validator network) and deemed to be valid.
+状態を思い返してみると、ソラナのアカウントの歴史は、現在の状態とは全く関係ない。なぜか？なぜなら、現在の状態に至るまでに起こったすべての出来事は、Proof of Historyのコンセンサスメカニズム（＝Solana Validatorネットワーク）によってレビューされ、有効であると判断されたからです。
 
-Tying everything together, what Solana is really built to achieve and maintain consensus on is the state of all accounts on the network. **It is a state machine.** In fact, **“the world’s most performant global state machine”** is exactly how Solana describes itself.
+すべてを結びつけると、Solanaが本当に達成し、コンセンサスを維持するために構築されているのは、ネットワーク上のすべての口座の状態です。**実は、「世界で最もパフォーマンスの高いグローバル・ステート・マシン」**は、まさにSolanaが自分自身を説明する方法です。
 
-The current state of Solana is already hashed, but then it is shredded and decentralized across all the validators of the network. Effectively what this means is that Solana can recreate the current state of every piece of data on the blockchain… every wallet address, every program that’s been deployed, the location of every single token… at a moment’s notice… **without** needing to know anything about the historical transactions that led up to the current state.
+Solanaの現在の状態はすでにハッシュ化されていますが、その後シュレッダーにかけられ、ネットワークのすべてのバリデーターで分散化されます。つまり、Solanaはブロックチェーン上のすべてのデータ...すべてのウォレットアドレス、デプロイされたすべてのプログラム、すべてのトークンの場所...の現在の状態を瞬時に再現することができるのです...現在の状態に至るまでの過去の取引について何も知る必要は**ありません**。
 
-Now, just because historical transactions are irrelevant to the current “in the moment” state of all accounts on Solana (because every event leading up to the present had to be passed through the Solana validator network and therefore was part of the consensus that led to the current state) doesn’t mean that historical transactions aren’t important to the **developers and users** performing actions on Solana.
+さて、過去の取引はソラナ上のすべてのアカウントの現在の「その瞬間」の状態とは無関係だからといって（現在に至るまでのすべてのイベントはソラナバリデーターネットワークを通過しなければならず、したがって現在の状態に至ったコンセンサスの一部であるから）、過去の取引がソラナ上で行動を行う**開発者やユーザー**にとって重要ではないというわけではありません。
 
-This is where we circle back to Shadow Drive. The Shadow Drive utilizes the world’s most performant state machine to ensure the validity and integrity of the state of its storage network via on-chain change events.
+ここで、一周してシャドードライブに話を戻します。シャドードライブは、世界で最もパフォーマンスの高いステートマシンを利用し、オンチェーンチェンジイベントによってストレージネットワークの状態の有効性と完全性を確保します。
 
-It’s easiest to explain in real terms, so here’s an example… Let’s say you upload NFT metadata to Shadow Drive and want that data to be stored permanently and want it to be immutable.
+実際の言葉で説明するのが一番わかりやすいので、例を挙げますと...。
+例えば、NFTのメタデータをShadow Driveにアップロードし、そのデータを永久に保存し、不変にしたいとします。
 
-1. An NFT project uploads their NFT metadata to Shadow Drive. The NFT project wishes for this metadata to be stored forever and wants it to be immutable.
-2. These instructions from the NFT project creators are passed to the Shadow Drive smart contract and the smart contract sends a transaction request to the Solana validators which has been signed by the NFT project’s wallet.
-3. An account hash is created on-chain that indicates which NFT project the metadata is associated with, that this metadata is immutable, and it is to be stored permanently.
-4. Then the hash plus the actual NFT metadata itself are hashed again, sharded, and uploaded to Shadow Drive by the smart contract in the appropriate storage format and location to ensure that the data can never be edited (not even by the NFT founders who uploaded it) and never deleted.
+1. NFTプロジェクトは、NFTメタデータをShadow Driveにアップロードします。NFTプロジェクトは、このメタデータを永久に保存し、不変であることを希望しています。
+2. NFTプロジェクトのクリエイターからのこれらの指示はShadow Driveのスマートコントラクトに渡され、スマートコントラクトはNFTプロジェクトのウォレットによって署名されたトランザクション要求をSolanaバリデーターに送信します。
+3. アカウントハッシュがチェーン上に作成され、メタデータがどのNFTプロジェクトに関連しているか、このメタデータが不変であること、永久に保存されることが示されます。
+4. このハッシュと実際のNFTメタデータそのものは再度ハッシュ化され、シャード化され、スマートコントラクトによって適切な保存形式と場所にあるシャドウドライブにアップロードされます。
 
-Under this design, the Shadow Drive smart contract only recognizes signatures from the wallet associated with the stored data. In this example, any transaction request to change the data listed as immutable in Shadow Drive would fail to be validated by the Solana validators. This is because the smart contract would not pass through any instructions to edit or delete this data, due to the fact that the data is immutable and therefore cannot be edited or deleted.
+この設計では、Shadow Driveスマートコントラクトは、保存されたデータに関連するウォレットからの署名のみを認識します。この例では、Shadow Driveで不変と記載されたデータを変更する取引要求は、Solanaバリデーターによる検証に失敗することになります。これは、データが不変であるため編集や削除ができないことを理由に、スマートコントラクトがこのデータの編集や削除の指示を一切通さないためです。
 
-In the [**Shadow Drive Smart Contract**](smart-contracts.md) section, we will go deeper into how the Shadow Drive smart contract interacts with the Solana validator network to ensure the current state (and thus the integrity of the data) remains intact.
+[**Shadow Drive Smart Contract**](smart-contracts.md)のセクションでは、シャドードライブ スマートコントラクトがソラナバリデータネットワークとどのようにやり取りし、現在の状態（つまりデータの完全性）を確実に維持するかを詳しく解説していきます。

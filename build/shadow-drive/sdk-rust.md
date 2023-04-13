@@ -1,7 +1,7 @@
 # **Contents**
-* **[Install](#install)**
-* **[Example](#example)**
-* **[Methods](#methods)**
+* **[インストール](#install)**
+* **[例](#example)**
+* **[メソッド](#methods)**
     * **[add_immutable_storage](#add_immutable_storage)**
     * **[add_storage](#add_storage)**
     * **[cancel_delete_storage_account](#cancel_delete_storage_account)**
@@ -26,15 +26,15 @@
 
 ## **Install**
 
-The Rust SDK is available on [crates.io](https://crates.io/crates/shadow-drive-sdk) and Rust SDK [Github](https://github.com/GenesysGo/shadow-drive-rust)
+Rust SDKは[crates.io](https://crates.io/crates/shadow-drive-sdk)、Rust SDK [Github](https://github.com/GenesysGo/shadow-drive-rust)で公開されています。
 
-Run the following Cargo command in your project directory:  
+プロジェクトディレクトリで以下のCargoコマンドを実行します：  
 `cargo add shadow-drive-sdk`
 
-Or add the following line to your Cargo.toml  
+または、Cargo.tomlに以下の行を追加します。 
 `shadow-drive-sdk = "0.6.1"`
 
-#### **You can find more examples on our [Github](https://github.com/GenesysGo/shadow-drive-rust/blob/main/sdk/examples/end_to_end.rs)**
+#### **私たちの[Github](https://github.com/GenesysGo/shadow-drive-rust/blob/main/sdk/examples/end_to_end.rs)には、より多くの例が掲載されています。**
 
 ## **Example**
 
@@ -44,23 +44,23 @@ Or add the following line to your Cargo.toml
         .with_env_filter("off,shadow_drive_rust=debug")
         .init();
 
-    //load keypair from file
+    // ファイルからキーペアを読み込む
     let keypair = read_keypair_file(KEYPAIR_PATH).expect("failed to load keypair at path");
 
-    //create shdw drive client
+    // Shadow Drive クライアント作成
     let shdw_drive_client = ShadowDriveClient::new(keypair, "https://ssc-dao.genesysgo.net");
 
-    //derive the storage account pubkey
+    // ストレージアカウントpubkeyを取得する
     let pubkey = keypair.pubkey();
     let (storage_account_key, _) =
         shadow_drive_rust::derived_addresses::storage_account(&pubkey, 0);
 
-    // read files in directory
+    // ディレクトリ内のファイルを読み込む
     let dir = tokio::fs::read_dir("multiple_uploads")
     .await
     .expect("failed to read multiple uploads dir");
 
-    // create Vec of ShadowFile structs for upload
+    // アップロード用のShadowFile構造体Vectorを作成する。
     let mut files = tokio_stream::wrappers::ReadDirStream::new(dir)
         .filter(Result::is_ok)
         .and_then(|entry| async move {
@@ -76,13 +76,13 @@ Or add the following line to your Cargo.toml
         .await
         .expect("failed to create shdw files for dir");
 
-    // Bytes are also supported
+    // Bytes もサポートしています
     files.push(ShadowFile::bytes(
         String::from("buf.txt"),
         &b"this is a buf test"[..],
     ));
 
-    // kick off upload
+    // アップロード開始
     let upload_results = shdw_drive_client
         .upload_multiple_files(&storage_account_key, files)
         .await
@@ -97,11 +97,11 @@ Or add the following line to your Cargo.toml
 ## **`add_immutable_storage`**
 
 ### **Definition**
-Adds storage capacity to the specified immutable` StorageAccount`. This will fail if the `StorageAccount` is not immutable.
+指定された不変の `StorageAccount` にストレージ容量を追加します。StorageAccount` が immutable でない場合は、失敗します。
 
 ### **Parameters**
-* `storage_account_key` - The public key of the immutable `StorageAccount`.
-* `size` - The additional amount of storage you want to add. E.g if you have an existing StorageAccount with 1MB of storage but you need 2MB total, size should equal 1MB. When specifying size, only KB, MB, and GB storage units are currently supported.
+* `storage_account_key` - 不変な `StorageAccount` の公開鍵です。
+* `size` - 追加したいストレージの量。例えば、既存の StorageAccount に 1MB のストレージがあり、合計 2MB が必要な場合、size は 1MB となります。サイズを指定する場合、現在サポートされているストレージ単位はKB、MB、GBのみです。
 
 ### **Example**
 ```rust
@@ -122,12 +122,12 @@ let add_immutable_storage_response = shdw_drive_client
 ## **`add_storage`**
 
 ### **Definition**
-Adds storage capacity to the specified StorageAccount.
+指定された StorageAccount にストレージ容量を追加します。
 
 ### **Parameters**
 
-* `storage_account_key` - The public key of the StorageAccount.
-* `size` - The additional amount of storage you want to add. E.g if you have an existing StorageAccount with 1MB of storage but you need 2MB total, size should equal 1MB. When specifying size, only KB, MB, and GB storage units are currently supported.
+* `storage_account_key` - StorageAccount の公開鍵です。
+* `size` - 追加したいストレージの量です。例：既存の StorageAccount に 1MB のストレージがあり、合計 2MB が必要な場合、size は 1MB となります。サイズを指定する場合、現在サポートされているストレージ単位はKB、MB、GBのみです。
 
 ### **Example**
 ```rust
@@ -149,10 +149,10 @@ let add_immutable_storage_response = shdw_drive_client
 
 ### **Definition**
 
-Unmarks a StorageAccount for deletion from the Shadow Drive. To prevent deletion, this method must be called before the end of the Solana epoch in which `delete_storage_account` is called.
+Shadow Driveから削除する StorageAccount のマークを解除します。削除を防ぐために、このメソッドは `delete_storage_account` が呼び出された Solana エポックの終了前に呼び出す必要があります。
 
 ### **Parameters**
-*   `storage_account_key` - The public key of the `StorageAccount` that you want to unmark for deletion.
+* `storage_account_key` - 削除のマークを解除したい `StorageAccount` の公開鍵です。
 
 ### **Example**
 
@@ -172,10 +172,10 @@ let cancel_delete_storage_account_response = shdw_drive_client
 ## **`claim_stake`**
 
 ### **Definition**
-Claims any available stake as a result of the `reduce_storage` command. After reducing storage amount, users must wait until the end of the epoch to successfully claim their stake.
+`reduce_storage`コマンド後、利用可能なステークを請求することができます。ストレージを削減した後、ユーザはエポックの終わりまで待たなければ、ステークを正常にクレームすることが出来ません。
 
 ### **Parameters**
-*   `storage_account_key` - The public key of the StorageAccount that you want to claim excess stake from.
+* `storage_account_key` - 超過分のステークをクレームしたい StorageAccount の公開鍵です。
 
 ### **Example**
 ```rust
@@ -196,19 +196,19 @@ let claim_stake_response = shdw_drive_client
 
 ### **Definition**
 
-Creates a `StorageAccount` on the Shadow Drive. `StorageAccount`s can hold multiple files and are paid for using the SHDW token.
+Shadow Drive上に `StorageAccount` を作成します。`StorageAccount`は複数のファイルを保持することができ、SHDWトークンを使用して料金を支払います。
 
 ### **Parameters**
-*   `name` - The name of the `StorageAccount`. Does not need to be unique.
-*   `size` - The amount of storage the `StorageAccount` should be initialized with. When specifying size, only KB, MB, and GB storage units are currently supported.
+* `name` - `StorageAccount` の名前。一意である必要はありません。
+* `size` - `StorageAccount` が初期化されるべきストレージの量。サイズを指定する場合、現在は KB、MB、GB のストレージ単位のみがサポートされています。
 
 ### **Example**
 
-An example use case for this method can be found in the same [github repository](https://github.com/phantom-labs/shadow_sdk/blob/master/examples/end_to_end.rs)
+この方法の使用例は、同じ[githubリポジトリ](https://github.com/phantom-labs/shadow_sdk/blob/master/examples/end_to_end.rs)にも掲載されています。
 
 ```rust
 async fn main() {
-    // Get keypair
+    // キーペア取得
     let keypair_file: String = std::env::args()
         .skip(1)
         .next()
@@ -216,11 +216,11 @@ async fn main() {
     let keypair: Keypair = read_keypair_file(keypair_file).expect("failed to read keypair file");
     println!("loaded keypair");
 
-    // Initialize client
+    // クライアント初期化
     let client = ShadowDriveClient::new(keypair, SOLANA_MAINNET_RPC);
     println!("initialized client");
 
-    // Create account
+    // アカウント作成
     let response = client
         .create_storage_account(
             "test",
@@ -246,12 +246,12 @@ async fn main() {
 
 ### **Definition**
 
-Marks a file for deletion from the Shadow Drive. Files marked for deletion are deleted at the end of each Solana epoch. Marking a file for deletion can be undone with cancel_delete_file, but this must be done before the end of the Solana epoch.
+Shadow Driveから削除するためにファイルをマークします。削除のためにマークされたファイルは、Solanaのエポックの終了時に削除されます。削除のためにマークされたファイルは、cancel_delete_fileで取り消すことができますが、これはSolanaエポックが終了する前に行う必要があります。
 
 ### **Parameters**
 
-*   `storage_account_key` - The public key of the `StorageAccount` that contains the file.
-*   `url` - The Shadow Drive url of the file you want to mark for deletion.
+* `storage_account_key` - ファイルが格納されている `StorageAccount` の公開キーです。
+* `url` - 削除マークを付けたいファイルの Shadow Drive の URL です。
 
 ### **Example**
 
@@ -261,11 +261,11 @@ let delete_file_response = shdw_drive_client
     .await?;
 ```
 
-An example use case for this method can be found in the same [github repository](https://github.com/phantom-labs/shadow_sdk/blob/master/examples/end_to_end.rs)
+この方法の使用例は、[githubリポジトリ](https://github.com/phantom-labs/shadow_sdk/blob/master/examples/end_to_end.rs)にも掲載されています。
 
 ```rust
 async fn main() {
-    // Get keypair
+    // キーペア取得
     let keypair_file: String = std::env::args()
         .skip(1)
         .next()
@@ -273,11 +273,11 @@ async fn main() {
     let keypair: Keypair = read_keypair_file(keypair_file).expect("failed to read keypair file");
     println!("loaded keypair");
 
-    // Initialize client
+    // クライアント初期化
     let client = ShadowDriveClient::new(keypair, SOLANA_MAINNET_RPC);
     println!("initialized client");
 
-    // Create account
+    // アカウント作成
     let response = client
         .create_storage_account(
             "test",
@@ -289,7 +289,7 @@ async fn main() {
     let account = Pubkey::from_str(&response.shdw_bucket.unwrap()).unwrap();
     println!("created storage account");
 
-    // Upload files
+    // アップロードするファイルを定義
     let files: Vec<ShadowFile> = vec![
         ShadowFile::file("alpha.txt".to_string(), "./examples/files/alpha.txt"),
         ShadowFile::file(
@@ -306,7 +306,7 @@ async fn main() {
         println!("    {url}")
     }
 
-    // Try editing
+    // 編集してみてください
     for file in files {
         let response = client
             .edit_file(&account, file)
@@ -316,7 +316,7 @@ async fn main() {
         println!("edited file: {}", response.finalized_location);
     }
 
-    // Delete files
+    // ファイル削除
     for url in response.finalized_locations {
         client
             .delete_file(&account, url)
@@ -330,14 +330,14 @@ async fn main() {
 
 ### **Definition**
 
-This function marks a StorageAccount for deletion from the Shadow Drive. If an account is marked for deletion, all files within the account will be deleted as well. Any stake remaining in the StorageAccount will be refunded to the creator. Accounts marked for deletion are deleted at the end of each Solana epoch.
+この関数は、シャドウドライブから削除するために StorageAccount をマークします。アカウントに削除マークが付けられると、アカウント内のすべてのファイルも削除されます。StorageAccountに残っているステークは、作成者に返金されます。削除のマークが付けられたアカウントは、solanaエポックの終了時に削除されます。
 
 ### **Parameters**
-*   `storage_account_key` - The public key of the StorageAccount that you want to mark for deletion.
+* `storage_account_key` - 削除したいStorageAccountの公開鍵です。
 
 ### **Response**
 
-*   This method returns success if it can successfully mark the account for deletion and refund any remaining stake in the account before the end of the current Solana epoch.
+* このメソッドは、現在のsolanaエポックが終了する前に、アカウントを削除するためのマークしたアカウントに残っているステークを払い戻すことに成功した場合、成功を返します。
 
 ### Example
 
@@ -346,20 +346,20 @@ let delete_storage_account_response = shdw_drive_client
     .delete_storage_account(&storage_account_key)
     .await?;
 ```
-An example use case for this method can be found in the same [github repository](https://github.com/phantom-labs/shadow_sdk/blob/master/examples/end_to_end.rs) on line 71.
+この方法の使用例は、[githubリポジトリ](https://github.com/phantom-labs/shadow_sdk/blob/master/examples/end_to_end.rs)の71行目にも掲載されています。
 
 
 ## **`edit_file`**
 
 ### **Definition**
 
-Replace an existing file on the Shadow Drive with the given updated file.
+シャドウドライブ上の既存のファイルを、指定された更新されたファイルに置き換えます。
 
 ### **Parameters**
 
-*   `storage_account_key` - The public key of the `StorageAccount` that contains the file.
-*   `url` - The Shadow Drive url of the file you want to replace.
-*   `data` - The updated `ShadowFile`.
+* `storage_account_key` - ファイルが格納されている `StorageAccount` の公開鍵です。
+* `url` - 置換したいファイルのあるShadow Driveの URL。
+* `data` - 更新された `ShadowFile` です。
 
 ### **Example**
 
@@ -378,9 +378,9 @@ let edit_file_response = shdw_drive_client
 }
 ```
 
-Examples found in [repository](https://github.com/GenesysGo/shadow-drive-rust/blob/main/sdk/examples/end_to_end.rs)
+[リポジトリ](https://github.com/GenesysGo/shadow-drive-rust/blob/main/sdk/examples/end_to_end.rs)にある例。
 
-File: examples/end_to_end.rs, Line 53
+ファイル：examples/end_to_end.rs, Line 53
 
 ```rust
 async fn main() {
@@ -435,17 +435,17 @@ async fn main() {
 ```
 ## **`get_object_data`**
 
-Retrieve object data
+オブジェクトのデータを取得します
 
 ## **`get_storage_account`**
 
 ### **Definition**
 
-Returns the `StorageAccount` associated with the pubkey provided by a user.
+ユーザーが提供したpubkeyに関連付けられた `StorageAccount` を返します。
 
 ### **Parameters**
 
-*   `key` - The public key of the `StorageAccount`.
+* `key` - `StorageAccount` の公開鍵です。
 
 ### **Example**
 
@@ -497,11 +497,11 @@ let storage_account = shdw_drive_client
 
 ### **Definition**
 
-Returns all `StorageAccounts` associated with the public key provided by a user.
+ユーザーが提供した公開鍵に関連する全ての `StorageAccounts` を返します。
 
 ### **Parameters**
 
-*   `owner` - The public key that is the owner of all the returned `StorageAccounts`.
+* `owner` - 返されたすべての `StorageAccounts` の所有者である公開鍵です。
 
 ### **Example**
 
@@ -553,11 +553,11 @@ let storage_accounts = shdw_drive_client
 ## **`list_objects`**
 
 ### **Definition**
-Gets a list of all files associated with a `StorageAccount`. The output contains all of the file names as strings.
+`StorageAccount`に関連付けられたすべてのファイルのリストを取得します。出力には、すべてのファイル名が文字列として含まれます。
 
 ### **Parameters**
 
-*   `storage_account_key` - The public key of the `StorageAccount` that owns the files.
+* `storage_account_key` - ファイルを所有する `StorageAccount` の公開鍵です。
 
 ### **Example**
 
@@ -568,17 +568,17 @@ let files = shdw_drive_client
 ```
 
 ### **Response**
-Note: The response is a vector containing all of the file names as strings.
+注：レスポンスは、すべてのファイル名を文字列として含むvectorです。
 
 ## **`make_storage_immutable`**
 
 ### **Definition**
 
-Permanently locks a `StorageAccount` and all contained files. After a `StorageAccount` has been locked, a user will no longer be able to delete/edit files, add/reduce storage amount, or delete the `StorageAccount`.
+`StorageAccount`とその中に含まれるすべてのファイルを永久にロックします。ロックされた `StorageAccount` は、ファイルの削除・編集、ストレージ容量の追加・削減、`StorageAccount` の削除ができなくなります。
 
 ### **Parameters**
 
-*   `storage_account_key` - The public key of the `StorageAccount` that will be made immutable.
+* `storage_account_key` - 不変にする `StorageAccount` の公開鍵です。
 
 ### **Example**
 
@@ -602,11 +602,11 @@ let make_immutable_response = shdw_drive_client
 
 ### **Definition**
 
-Migrates a v1 StorageAccount to v2. This requires two separate transactions to reuse the original pubkey. To minimize chance of failure, it is recommended to call this method with a commitment level of Finalized.
+これは、元のパブキーを再利用するために2つの別々のトランザクションを必要とします。失敗の可能性を最小限にするために、コミットメント・レベルを Finalized にしてこのメソッドを呼び出すことが推奨されます。
 
 ### **Parameters**
 
-*   `storage_account_key` - The public key of the StorageAccount to be migrated.
+* `storage_account_key` - 移行する StorageAccount の公開鍵です。
 
 ### **Example**
 
@@ -627,28 +627,27 @@ let migrate_response = shdw_drive_client
 
 ### **Definition**
 
-First transaction step that migrates a v1 `StorageAccount` to v2. Consists of copying the existing account’s data into an intermediate account, and deleting the v1 `StorageAccount`.
+v1 の `StorageAccount` を v2 に移行する最初のトランザクションステップ。既存のアカウントのデータを中間アカウントにコピーし、v1 の `StorageAccount` を削除することで構成されます。
 
 ## **`migrate_step_2`**
 
 ### **Definition**
 
-Second transaction step that migrates a v1 `StorageAccount` to v2. Consists of recreating the `StorageAccount` using the original pubkey, and deleting the intermediate account.
+v1 の `StorageAccount` を v2 に移行する 2 番目のトランザクションステップ。元の pubkey を使用して `StorageAccount` を再作成し、中間アカウントを削除することから構成されます。
 
 
 ## **`new`**
 
 ### **Definition**
 
-Creates a new ShadowDriveClient from the given `Signer` and URL.
+与えられた `Signer` と URL から新しい ShadowDriveClient を作成します。
 
 ### **Parameters**
 
-*   `wallet` - A `Signer` that for signs all transactions generated by the client. Typically this is a user’s keypair.
-*   `rpc_url` - An HTTP URL of a Solana RPC provider.  
-    The underlying Solana RPC client is configured with 120s timeout and a commitment level of confirmed.
+* `wallet` - クライアントが生成するすべてのトランザクションに署名するための `Signer` です。一般的に、これはユーザーのキーペアです。
+* `rpc_url` - Solana RPCプロバイダのHTTP URLです。
 
-To customize RpcClient settings see `new_with_rpc`.
+RpcClientの設定をカスタマイズするには、`new_with_rpc`を参照してください。
 
 ### **Example**
 
@@ -659,9 +658,9 @@ let wallet = Keypair::generate();
 let shdw_drive = ShadowDriveClient::new(wallet, "https://ssc-dao.genesysgo.net");
 ```
 
-Examples found in [repository](https://github.com/GenesysGo/shadow-drive-rust/blob/main/sdk/examples/end_to_end.rs)
+[リポジトリ](https://github.com/GenesysGo/shadow-drive-rust/blob/main/sdk/examples/end_to_end.rs)にある例。
 
-`examples/end_to_end.rs` (line 19)
+`examples/end_to_end.rs` Line 19
 
 ```rust
 async fn main() {
@@ -683,13 +682,13 @@ async fn main() {
 
 ### **Definition**
 
-Creates a new ShadowDriveClient from the given `Signer` and `RpcClient`.
+与えられた `Signer` と `RpcClient` から新しい ShadowDriveClient を作成します。
 
 ### **Parameters**
 
-*   `wallet` - A `Signer` that for signs all transactions generated by the client. Typically this is a user’s keypair.
-*   `rpc_client` - A Solana `RpcClient` that handles sending transactions and reading accounts from the blockchain.  
-    Providng the `RpcClient` allows customization of timeout and committment level.
+* `wallet` - クライアントが生成するすべてのトランザクションに署名するための `Signer` です。一般的に、これはユーザーのキーペアです。
+* トランザクションの送信とブロックチェーンからのアカウントの読み取りを処理する Solana `RpcClient` です。 
+    `RpcClient`を提供することで、タイムアウトとコミットメントレベルのカスタマイズが可能になります。
 
 ### **Example**
 
@@ -707,12 +706,12 @@ let shdw_drive = ShadowDriveClient::new_with_rpc(wallet, solana_rpc);
 
 ### **Definition**
 
-Reclaims the Solana rent from any on-chain file accounts. Older versions of the Shadow Drive used to create accounts for uploaded files.
+オンチェーンファイルのアカウントからsolanaレントをリクレームします。古いバージョンのShadow Driveは、アップロードされたファイルのアカウントを作成するために使用されました。
 
 ### **Parameters**
 
-*   `storage_account_key` - The public key of the StorageAccount that contained the deleted file.
-*   `file_account_key` - The public key of the File account to be closed.
+* `storage_account_key` - 削除されたファイルが格納されていた StorageAccount の公開鍵です。
+* `file_account_key` - 閉鎖されるファイルアカウントの公開鍵です。
 
 ### **Example**
 
@@ -735,12 +734,12 @@ let redeem_rent_response = shdw_drive_client
 
 ### **Definition**
 
-Reduces the amount of total storage available for the given `StorageAccount`.
+与えられた `StorageAccount` で利用可能な総ストレージ量を削減します。
 
 ### **Parameters**
 
-*   `storage_account_key` - The public key of the `StorageAccount` whose storage will be reduced.
-*   `size` - The amount of storage you want to remove. E.g if you have an existing `StorageAccount` with 3MB of storage but you want 2MB total, size should equal 1MB. When specifying size, only KB, MB, and GB storage units are currently supported.
+* `storage_account_key` - ストレージを削減する `StorageAccount` の公開鍵です。
+* `size` - 削除したいストレージの量。例えば、既存の `StorageAccount` に 3MB のストレージがあり、合計 2MB にしたい場合、size は 1MB となります。サイズを指定する場合、現在サポートされているストレージ単位はKB、MB、GBのみです。
 
 ### **Example**
 
@@ -764,12 +763,12 @@ let reduce_storage_response = shdw_drive_client
 
 ### **Definition**
 
-Stores files in the specified `StorageAccount`.
+指定された `StorageAccount` にファイルを保存します。
 
 ### **Parameters**
 
-*   `storage_account_key` - The public key of the `StorageAccount`.
-*   `data` - Vector of `ShadowFile` objects representing the files that will be stored.
+* `storage_account_key` - `StorageAccount` の公開鍵です。
+* `data` - 格納されるファイルを表す `ShadowFile` オブジェクトのベクトルです。
 
 ### **Example**
 

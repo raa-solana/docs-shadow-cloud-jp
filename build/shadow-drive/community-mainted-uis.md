@@ -1,76 +1,76 @@
 ---
-description: Seeing what others have built with Shadow Drive
+description: Shadow Driveで作ったものを見てみる
 ---
 
 # Shadow Ecosystem
 
 **SDRIVE**
 
-Easy to use, reliable, private, and secure cloud storage and publishing. Experience the best in secure, accessible file storage with SDrive's intuitive platform, designed with a robust toolset to support and promote content creators around the world.
+使いやすく、信頼性の高い、プライベートで安全なクラウドストレージおよびパブリッシングです。世界中のコンテンツクリエイターをサポートし、促進するために堅牢なツールセットで設計されたSDriveの直感的なプラットフォームで、安全でアクセスしやすい最高のファイルストレージを体験してください。
 
 [![](<../../.gitbook/assets/sdrive-feature (1).png>)](https://sdrive.app/landing)
 
 **SYNX**
 
-A nice mobile & desktop application for working with private cloud storage using Shadow Drive created by the Blxckout team! Synx brings amazing UI/UX to real world mobile and desktop data management and provides robust documentation making it easy to use.
+Blxckoutチームによって作成された、Shadow Driveを使用したプライベートクラウドストレージで作業するための素晴らしいモバイル＆デスクトップアプリケーションです！Synxは、現実世界のモバイルとデスクトップのデータ管理に素晴らしいUI/UXをもたらし、使いやすくするために堅牢なドキュメントを提供します。
 
 [![](../../.gitbook/assets/synx-feature.png)](https://twitter.com/synx\_xyz)
 
 **SPLING**
 
-Build a Web3 social app with ease. Developer-friendly, with no prior blockchain knowledge required. Unlock new crypto experiences that your users will love. A truly excellent approach at a platform of platform for social app builders.
+Web3ソーシャルアプリを簡単に構築できます。ブロックチェーンの予備知識は不要で、開発者に優しい。ユーザーが喜ぶ新しい暗号体験のロックを解除します。ソーシャルアプリビルダーのためのプラットフォーム・オブ・プラットフォームで本当に優れたアプローチです。
 
 [![](../../.gitbook/assets/spling-feature.png)](https://www.splinglabs.com/)
 
 **SHADOW STORAGE**
 
-File management, transfer & sharing, immutable storage. A unique user experience that let teams and individuals unlock the power of web3 through crypto and decentralization. One of the most widely used GUIs for interacting with Shadow Storage. Users can perform every action _and then some_, including uploading encrypted private files. Very cool!
+ファイル管理、転送と共有、不変のストレージ。暗号と分散化によって、チームや個人がWeb3のパワーを解き放つことができるユニークなユーザーエクスペリエンスです。シャドーストレージと対話するための最も広く使用されているGUIの1つです。暗号化されたプライベートファイルのアップロードを _含む_、あらゆるアクションを実行することができます。とてもクールです！
 
 [![](../../.gitbook/assets/shadowstorage.png)](https://www.shadow.storage/#features)
 
 #### **Blok.host Web Hosting**
 
-This is a full web-hosting service where the backend storage is built on shadow drive. Host static websites and even manage things like telemetry and deployments in upcoming versions!
+これは、バックエンドのストレージがShadow Drive上に構築されている完全なウェブホスティングサービスです。静的なウェブサイトをホストし、さらに次期バージョンでは遠隔測定やデプロイメントのようなものを管理することができます！
 
 [![](../../.gitbook/assets/blockhost.png)](https://blok.host/)
 
 #### **Shadow Portal**
 
-A new primitive on Solana. A novel way to summon off-chain data aka "runes" from Shadow Drive directly into your Solana smart contract.
+Solanaの新しいプリミティブです。Shadow Driveからオフチェーンデータ 別名「runes」を直接solanaのスマートコントラクトに召喚する斬新な方法です。
 
 [https://twitter.com/ShadowyPortal](https://twitter.com/ShadowyPortal)
 
 #### **AlphaBatem's Shadow UI**
 
-Another full suite of functionality for working with Shadow Storage. This tool is a very fast and snappy way to interact with your storage account, including handling the swap from SOL to SHDW for any fees!
+シャドーストレージを扱うための、もう一つの完全な機能スイートです。このツールは、SOLからSHDWへの手数料のスワップ処理など、ストレージアカウントとやり取りするための非常に高速でキビキビした方法です！
 
 {% embed url="https://drive.alphabatem.com/login#/" %}
 
 #### **ShadowTube**
 
-Like YouTube, but built on top of Shadow Drive storage. Uploads come directly from your Shadow Drive storage accounts!
+YouTubeのように、Shadow Driveストレージの上に構築されています。アップロードは、Shadow Driveのストレージアカウントから直接行われます！
 
 {% embed url="https://www.shadowtube.io/" %}
 
 #### **Crab.so Decentralized Social Network**
 
-Crab is a community-driven, open-source, decentralized network for thriving communities in Web3
+Crabは、Web3におけるコミュニティの繁栄を目的とした、コミュニティ主導のオープンソース・分散型ネットワークです。
 
 {% embed url="https://www.crab.so/" %}
 
-Another prime example of a comprehensive suite of NFT tools should include Shadow Drive storage, and this tool delivers on all fronts.
+NFTの包括的なツール群のもう一つの代表例として、Shadow Drive ストレージを挙げることができますが、このツールはあらゆる面でそれを実現しています。
 
 #### **You are Loved**
 
 {% embed url="https://shdw-drive.genesysgo.net/6P6WznKbJ2nEMCfrXZDQvipCgCSx45SXxjWMWvqfPtyJ/yal_website.html" %}
 
-A fascinating use case where an HTML doc can be served on Shadow Drive while the minting functionality and wallet connection can remain in tact. Check it out!
+HTMLドキュメントをShadow Driveで提供しながら、mintの機能とウォレットの接続をそのまま維持することができる魅力的なユースケースをご紹介します。ぜひご覧ください！
 
 #### **Grape Shadow UI**
 
 {% embed url="https://grapedrive.vercel.app/" %}
 
-Another Shadow UI tool for managing your storage from the browser, but this time, they also Open-Sourced the code!
+ブラウザからストレージを管理するためのもう一つのShadow UIツールですが、今回はコードもOpen-Sourcedされています！
 
 {% embed url="https://github.com/Grape-Labs/grape-drive" %}
 
@@ -78,12 +78,12 @@ Another Shadow UI tool for managing your storage from the browser, but this time
 
 {% embed url="https://github.com/ebrightfield/shadow-drive-rust-cli" %}
 
-Another great contribution from a community member! A Rust-based CLI for working with Shadow Drive!
+コミュニティメンバーからの素晴らしい貢献がまた一つ増えました！Shadow Driveを操作するためのRustベースのCLIです！
 
-#### **Not on this list?** [**Submit a PR**](https://github.com/GenesysGo/Gitbook-staging/blob/main/shadow-drive/community-mainted-uis.md) **or drop into our** [**Discord**](https://discord.gg/genesysgo) **to get added.**
+#### **このリストに載っていない？** [**PRを投稿しましょう**](https://github.com/GenesysGo/Gitbook-staging/blob/main/shadow-drive/community-mainted-uis.md) **または、私たちの** [**Discord**](https://discord.gg/genesysgo) **に追加してください。**。
 
 \
 \
 
 
-\[1] Disclaimer: Please be advised that the "Shadow Ecosystem" projects displayed on our website are developed and run by independent third-party entities. GenesysGo is not responsible for any content, products, or services provided by these Third-Party Projects. The order and arrangement of the Third-Party Projects in the Ecosystem do not imply any ranking, preference, or superiority. It is solely your responsibility to evaluate the quality, security, legality, and suitability of any Third-Party Project you decide to interact with.\\
+\[1]免責事項：私たちのウェブサイトに表示される「Shadow Ecosystem」プロジェクトは、独立した第三者機関によって開発・運営されていることをご承知おきください。GenesysGoは、これらのサードパーティプロジェクトが提供するいかなるコンテンツ、製品、サービスについても責任を負いません。エコシステム内のサードパーティプロジェクトの順序や配置は、いかなるランキング、優先順位、優劣を意味するものではありません。あなたが交流することを決めたサードパーティプロジェクトの品質、セキュリティ、合法性、適合性を評価するのは、あくまであなたの責任です。\\

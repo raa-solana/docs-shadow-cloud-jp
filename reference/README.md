@@ -1,5 +1,5 @@
 ---
-description: Shadow Cloud consolidated resources
+description: Shadow Cloud の統合リソース
 ---
 
 # Reference

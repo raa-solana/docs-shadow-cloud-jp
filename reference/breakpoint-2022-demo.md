@@ -1,5 +1,5 @@
 ---
-description: Take a look at how we use DAGGER to trustelessly deploy a VM through the Shadow Cloud portal.
+description: DAGGERを使用して、Shadow Cloudポータルを通じてトラストレスなVMをデプロイする方法をご覧ください。
 ---
 
 # Breakpoint 2022 Demo
@@ -8,61 +8,61 @@ description: Take a look at how we use DAGGER to trustelessly deploy a VM throug
 
 ### Get Setup on Devnet
 
-Before you get started trying to tackle this demo, I want to be perfectly clear - you need your wallet set to Devnet. By default, when you work with a wallet like Phantom or Solflare, it will be set to mainnet. You need to go into your wallet settings to select Network...
+このデモに挑戦し始める前に、完全に明確にしておきたいことがあります - ウォレットをDevnetに設定する必要があります。デフォルトでは、PhantomやSolflareのようなウォレットで作業する場合、それはメインネットに設定されています。ウォレットの設定で「ネットワーク」を選択する必要があります...
 
 <figure><img src="../.gitbook/assets/Screenshot 2022-11-01 at 1.07.38 PM.png" alt=""><figcaption></figcaption></figure>
 
-And flip it to be on Devnet (see, its set to Mainnet by default. You want Devnet to be checked).
+そして、Devnetになるように反転させます（ほら、デフォルトではMainnetに設定されています。 Devnetをチェックさせたいでしょ）
 
 <figure><img src="../.gitbook/assets/Screenshot 2022-11-01 at 1.07.52 PM.png" alt=""><figcaption></figcaption></figure>
 
-Now don't freak out if you don't have any SOL or USDC in your Devnet account. We got you covered there. Navigate to this site to kick off the demo 👇
+DevnetのアカウントにSOLやUSDCがなくても、心配しないでください。私たちがカバーします。このサイトに移動してデモを開始します👇。
 
 {% hint style="danger" %}
-Demo Deploying At BreakPoint
+BreakPoint でデプロイ中のDemo
 {% endhint %}
 
-After connecting your wallet, you'll land on the dashboard page of the Shadow Cloud. See these two buttons at the top right? Click these to airdrop some SOL and USDC into your Devnet wallet. Don't get too carried away now; save some for the rest of us. Only take what you need.
+ウォレットを接続すると、Shadow Cloudのダッシュボードページに着地します。右上にある2つのボタンが見えますか？これをクリックすると、DevnetウォレットにSOLとUSDCがエアドロップされます。今はあまり夢中にならず、私たちのために少し取っておいてください。必要な分だけを取ってください。
 
 <figure><img src="../.gitbook/assets/Screenshot 2022-11-01 at 1.13.12 PM.png" alt=""><figcaption></figcaption></figure>
 
 ### Create a VM
 
-Now that you're right with Devnet, let's see how easy it is to deploy a VM. It's so easy, a prehistoric anthropomorphic spokesperson for an auto insurance company could probably pull it off without violating copyright and trademark rules.
+さて、Devnetを正しく理解したところで、VMのデプロイがいかに簡単か見てみましょう。あまりに簡単なので、自動車保険会社の前時代的な擬人化された広報担当者なら、著作権や商標の規則に違反することなく実行できるかもしれませんね。
 
-In the center of your screen, you'll see the big button. Give it a tappy.&#x20;
+画面の中央に、大きなボタンがあります。これをタップしてください。
 
 <figure><img src="../.gitbook/assets/Screenshot 2022-11-01 at 1.15.23 PM.png" alt=""><figcaption></figcaption></figure>
 
-You are transported to the next screen, where you'll answer a few questions, starting with...
+次の画面に移動し、いくつかの質問に答えますが、まずは...。
 
 #### Where?
 
 <figure><img src="../.gitbook/assets/Screenshot 2022-11-01 at 1.23.09 PM.png" alt=""><figcaption></figcaption></figure>
 
-For this demo, Amsterdam is the only clickable option, but you can see where the plans for expansion lie. Select Amsterdam to see it highlighted in green and scroll down to the next decision. But before you do, make sure you notice some important text. All VMs deployed in that data center from the same wallet will communicate directly to each other over private IP space. So if you deploy multiple VMs, they will already be placed within the same private VLAN.
+このデモでは、クリックできる選択肢はアムステルダムだけですが、拡張計画がどこにあるのかがわかります。アムステルダムを選択すると、緑色にハイライトされ、次の決定までスクロールダウンします。しかし、その前に、いくつかの重要なテキストに気づくことを確認してください。同じウォレットからそのデータセンターにデプロイされたすべてのVMは、プライベートIPスペースを通じて互いに直接通信します。ですから、複数のVMをデプロイした場合、それらはすでに同じプライベートVLAN内に配置されることになります。
 
-Now for the next question...
+では、次の質問です...
 
 #### Which?
 
-Which OS do you want to use? Currently, Linux distros are supported. Note: there is a dropdown within the distro where multiple versions will be available.
+どのOSを使いたいですか？現在、Linuxディストロがサポートされています。注：ディストロの中にドロップダウンがあり、そこで複数のバージョンが利用可能になります。
 
 <figure><img src="../.gitbook/assets/Screenshot 2022-11-01 at 1.30.39 PM.png" alt=""><figcaption></figcaption></figure>
 
 #### How much?
 
-How much horsepower you need, boss? And do you want to take backups of your data, too? Note: The options displayed by default are pre-configured, cookie cutter VMs. You will have the ability to click Custom Configuration and create your own specs for the VM deployed.
+社長、馬力はどれくらい必要ですか？そして、データのバックアップを取りますか？注：デフォルトで表示されるオプションは、あらかじめ設定されたクッキーカッターのようなVMです。カスタム構成をクリックすると、デプロイされるVMのスペックを自分で作成することができます。
 
 <figure><img src="../.gitbook/assets/Screenshot 2022-11-01 at 1.33.17 PM.png" alt=""><figcaption></figcaption></figure>
 
 #### Who?
 
-And lastly is how you want authentication to be handled by the VM. We can generate a password for you, or drop some SSH keys to use inside the VM.
+そして最後に、VMでどのように認証を行うかです。パスワードを生成したり、VM内で使用するSSHキーを配布したりすることができます。
 
 <figure><img src="../.gitbook/assets/Screenshot 2022-11-01 at 1.40.43 PM.png" alt=""><figcaption></figcaption></figure>
 
-It's go time. Click the Pay with Solana Pay button and the provisioning begins. It will take a couple minutes to deploy, but after that, you'll have a full fledged VM running on decentralized infrastructure. After a few minutes, you will see a dialog box that says "ready fren?" and we know you are, in fact ready. You are directed back to the landing page where your Dashboard will now show you your VM details.&#x20;
+ゴータイムです。ソラナペイで支払うボタンをクリックすると、プロビジョニングが開始されます。デプロイに数分かかりますが、その後、分散型インフラ上で本格的なVMが稼働することになります。数分後、"ready fren? "というダイアログボックスが表示され、実際に準備が整ったことがわかります。ランディングページに戻ると、ダッシュボードにVMの詳細が表示されます。
 
 <figure><img src="../.gitbook/assets/vm.png" alt=""><figcaption></figcaption></figure>
 

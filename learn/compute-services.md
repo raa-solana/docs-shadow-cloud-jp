@@ -1,21 +1,21 @@
 ---
-description: Products are currently under development.
+description: 製品は現在開発中です。
 ---
 
 # Compute
 
 ### **The Shadow VM implementation of DAGGER**
 
-As we continue to push the boundaries of cloud computing, we have developed a revolutionary solution that utilizes DAGGER as a consensus-driven server orchestration protocol. With this technology, we are able to network together decentralized commodity clouds, specifically Shadow Operator virtual machines on micro-clouds, under a user-friendly front-end UI/UX experience. This effectively decentralizes virtual machine provisioning. These virtual machines are similar in concept to the popular cloud providers options like Amazon EC2 instances or Digital Ocean Droplets. However, the back-end resources and "network stack" are owned and operated trustlessly by individuals/entities who are Shadow Operators.
+私たちは、クラウドコンピューティングの境界を押し広げるために、コンセンサス駆動型のサーバーオーケストレーションプロトコルとしてDAGGERを利用した革新的なソリューションを開発しました。この技術により、分散型コモディティクラウド、特にマイクロクラウド上のShadow Operator仮想マシンを、ユーザーフレンドリーなフロントエンドUI/UX体験の下でネットワーク接続することができます。これにより、仮想マシンのプロビジョニングが効果的に分散化されます。これらの仮想マシンは、Amazon EC2インスタンスやDigital Ocean Dropletsといった一般的なクラウドプロバイダーのオプションとコンセプトが似ています。しかし、バックエンドリソースと「ネットワークスタック」は、シャドウオペレーターと呼ばれる個人/団体が所有し、信頼できる形で運用されます。
 
-With the ability to effectively decentralize virtual machine provisioning, Shadow Operators have the power to revolutionize the cloud computing industry by providing a more secure, transparent, and efficient solution for users. This technology has the potential to disrupt traditional cloud providers and empower individuals/entities to take control of their cloud resources. We are excited to continue pushing the boundaries of cloud computing with this groundbreaking technology.
+仮想マシンのプロビジョニングを効果的に分散化する能力を持つシャドーオペレーターは、ユーザーにより安全で透明性の高い効率的なソリューションを提供することで、クラウドコンピューティング業界に革命をもたらす力を秘めています。この技術は、従来のクラウドプロバイダーを破壊し、個人や団体がクラウドリソースをコントロールする力を与える可能性を秘めています。私たちは、この画期的な技術でクラウドコンピューティングの境界を押し広げることを楽しみにしています。
 
-This proof-of-concept technology is currently under development for future deployment, and we have yet to set a release date. Our recent unveiling of this technology at the Solana Breakpoint 2022 event has generated significant buzz and excitement within the industry.
+この概念実証技術は、将来の展開に向けて現在開発中であり、発売時期は未定です。最近、Solana Breakpoint 2022のイベントでこの技術を公開したところ、業界内で大きな話題と興奮を呼んでいます。
 
-[**Check out the Shadow VMs Demo from Breakpoint**](compute-services.md)
+[**BreakpointのShadow VMs Demoをチェック**](../reference/breakpoint-2022-demo.md)
 
 ### **The Mobile implementation of DAGGER + Shadow Drive**
 
-With our recent success in recompiling DAGGER on the Solana Saga mobile platform, our roadmap now includes the deployment of DAGGER to mobile devices, which will bring fast Layer-2 finality across mobile peers and deeper integration with Shadow Drive + Solana Mobile for our builders.
+最近、DAGGERをSolana Sagaモバイルプラットフォーム上で再コンパイルすることに成功したことで、私たちのロードマップにはDAGGERのモバイルデバイスへの展開が含まれるようになり、モバイルピア間での高速レイヤー2ファイナリティと、ビルダーのためのShadow Drive + Solana Mobileとの深い統合をもたらすことになります。
 
-By leveraging the power of mobile resources spread across the globe, the convergence of DAGGER technology with the Shadow Platform will position us well for emerging trends such as "data-as-code," AI-edge apps, and the monetization of idle latent resources by mobile users. This will enable us to stay ahead of the curve and provide our users with cutting-edge technology for their building needs. This project remains in very early stage development and a release date has yet to be determined.
+DAGGERのテクノロジーとShadow Platformの融合は、世界中に広がるモバイルリソースのパワーを活用することで、「data-as-code」「AI先端アプリ」「モバイルユーザーによる遊休潜在リソースの収益化」といった新たなトレンドに対応することができます。これにより、当社は常に時代の先端を行くことができ、ユーザーの建築ニーズに対して最先端の技術を提供することができます。このプロジェクトは、まだ非常に初期段階の開発であり、リリース時期は未定です。

@@ -1,118 +1,118 @@
 ---
-description: An introductions to the Shadow Cloud and it's implementations
+description: シャドウクラウドとその実装の紹介
 ---
 
 # Learn
 
-<table data-view="cards"><thead><tr><th></th><th align="center"></th><th align="center"></th><th data-hidden data-card-target data-type="content-ref"></th><th data-hidden data-card-cover data-type="files"></th></tr></thead><tbody><tr><td></td><td align="center"><strong>Design</strong></td><td align="center">v1.5</td><td><a href="storage-services/design.md#shadow-drive-v1.5-is-born-building-tools-and-listening-to-developer-feedback">#shadow-drive-v1.5-is-born-building-tools-and-listening-to-developer-feedback</a></td><td><a href="../.gitbook/assets/Design1.png">Design1.png</a></td></tr><tr><td></td><td align="center"><strong>D.A.G.G.E.R</strong></td><td align="center">Distributed Ledger Tech</td><td><a href="dagger.md#introduction">#introduction</a></td><td><a href="../.gitbook/assets/Dagger2.png">Dagger2.png</a></td></tr><tr><td></td><td align="center"><strong>Use Cases</strong></td><td align="center">Shadow Drive Capability</td><td><a href="./#shadow-cloud-use-cases">#shadow-cloud-use-cases</a></td><td><a href="../.gitbook/assets/Usecases.png">Usecases.png</a></td></tr></tbody></table>
+<table data-view="cards"><thead><tr><th></th><th align="center"></th><th align="center"></th><th data-hidden data-card-target data-type="content-ref"></th><th data-hidden data-card-cover data-type="files"></th></tr></thead><tbody><tr><td></td><td align="center"><strong>Design</strong></td><td align="center">v1.5</td><td><a href="storage-services/design.md#shadow-drive-v1.5-is-born-building-tools-and-listening-to-developer-feedback">#shadow-drive-v1.5-is-born-building-tools-and-listening-to-developer-feedback</a></td><td><a href="../.gitbook/assets/Design1.png">Design1.png</a></td></tr><tr><td></td><td align="center"><strong>D.A.G.G.E.R</strong></td><td align="center">分散型台帳技術</td><td><a href="dagger.md#introduction">#introduction</a></td><td><a href="../.gitbook/assets/Dagger2.png">Dagger2.png</a></td></tr><tr><td></td><td align="center"><strong>Use Cases</strong></td><td align="center">Shadow Drive の機能</td><td><a href="./#shadow-cloud-use-cases">#shadow-cloud-use-cases</a></td><td><a href="../.gitbook/assets/Usecases.png">Usecases.png</a></td></tr></tbody></table>
 
 ## **Mission**
 
-Our mission is to provide a high-performance and affordable cloud storage platform, enhanced with D.A.G.G.E.R. distributed ledger technology that empowers businesses and developers of all aspects to build secure, performant and scalable Web2/Web3 applications.
+D.A.G.G.E.R.分散型台帳技術で強化された高性能かつ低価格のクラウドストレージプラットフォームを提供し、企業やあらゆる分野の開発者が安全でパフォーマンスと拡張性の高いWeb2/Web3アプリケーションを構築できるようにすることが我々の使命です。
 
 ## **Objectives**
 
-Our objectives are to continually evolve a stable high-performance Shadow Cloud Storage Platform powered by a decentralized network of operators. Shadow is the only commodity cloud network designed to democratize the hundreds of billions earned each year by traditional cloud platforms without sacrificing performance. Through thoughtful design, the Shadow Cloud will offer multiple service options which leverage our distributed ledger technology. The result is vertically integrated, L1-specific storage and compute offering that greatly improves developer experience. This will also enable the offering of distributed ledger technology "as-a-service" giving builders and businesses more granular options to customize their desired degree of Web2 or Web3 exposures.
+私たちの目標は、オペレーターの分散型ネットワークを動力源とする安定した高性能のShadow Cloud Storage Platformを継続的に進化させることです。Shadowは、従来のクラウドプラットフォームが毎年得ている数千億の利益を、パフォーマンスを犠牲にすることなく民主化するために設計された唯一のコモディティクラウドネットワークです。Shadowクラウドは、分散型台帳技術を活用した複数のサービス・オプションを提供する予定です。その結果、垂直統合されたL1専用のストレージとコンピュートが提供され、開発者体験を大幅に向上させることができます。また、分散型台帳技術を "as-a-service "として提供することで、開発者や企業がWeb2やWeb3の露出度をカスタマイズするための、よりきめ細かいオプションを提供することが可能になります。
 
-We will focus on constantly improving the developer experience by identifying and implementing industry interoperability standards. We will maintain S3-compatibility and an open-source SDK. Being easy to use means building bridges across protocols and APIs that enable the Shadow Drive to be accessed directly and easily through popular builder tools and SDKs. Whether you are building a AI generative art program, or training your enterprise NLP model, or crafting a layer-1 Rust smart-contract in need of off-chain compression, our objective is to support the popular tools that make building easier.
+業界の相互運用性標準を特定し実装することで、開発者の体験を常に改善することに注力します。S3との互換性とオープンソースのSDKを維持します。使いやすいということは、一般的なビルダーツールやSDKを通じてShadow Driveに直接かつ簡単にアクセスできるように、プロトコルやAPI間の橋渡しをすることです。AI生成アートプログラムの構築、エンタープライズNLPモデルのトレーニング、オフチェーン圧縮を必要とするレイヤー1ラストスマートコントラクトの作成など、我々の目的は、構築を容易にする人気のツールをサポートすることです。
 
 ## **The Basics of Shadow Cloud**
 
-The Shadow Ecosystem is a series of trustless infrastructure layers focused on a path to decentralizing the traditional cloud stack. Using distributed ledger technology, Shadow Cloud will take advantage of high-powered mobile storage and compute and rapidly reducing costs of enterprise grade data center storage. We call this core technology D.A.G.G.E.R.
+シャドーエコシステムは、従来のクラウドスタックを分散化する道に焦点を当てた、一連のトラストレスインフラストラクチャー層です。分散型台帳技術を利用したシャドウクラウドは、高性能なモバイルストレージとコンピュート、そしてエンタープライズグレードのデータセンター用ストレージのコストを急速に削減するという利点を生かします。私たちはこのコア技術をD.A.G.G.E.R.と呼んでいます。
 
-Powered by Shadow Operators, the network provides builders and businesses with storage and compute solutions to optionally expand their web3 presence, or just simply use some of the most highly performant distributed ledger technology for it's low cost and resiliency in business.
+このネットワークは、シャドウオペレーターによって運営され、ビルダーや企業にストレージとコンピュートソリューションを提供し、Web3のプレゼンスを拡大するオプションとして、あるいは単に、低コストでビジネスに耐性のある、最もパフォーマンスの高い分散台帳技術の一部を使用することができます。
 
-Now cloud compute makes up $400,000,000,000 (that's billion with a B) per year business, and is expected to increase by another $1T by 2030.
+現在、クラウドコンピューティングは年間400,000,000,000ドルのビジネスを構成しており、2030年までにさらに1Tドル増加すると予想されています。
 
-The Shadow Platform is a stable high-performance cloud platform on a path to be fully powered by a decentralized network of operators. Unlike traditional cloud platforms, network-generated revenues are sent to Shadow Operators. The Shadow Platform is the only commodity cloud network designed to democratize the hundreds of billions earned each year by traditional cloud platforms without sacrificing performance.
+Shadow Platformは、オペレーターの分散型ネットワークによって完全に駆動される道を歩む、安定した高性能のクラウドプラットフォームです。従来のクラウドプラットフォームとは異なり、ネットワークから生み出された収益はシャドーオペレーターに送られます。Shadow Platformは、従来のクラウドプラットフォームが毎年得ていた数千億の収益を、パフォーマンスを犠牲にすることなく民主化するために設計された唯一のコモディティクラウドネットワークです。
 
-In order execute this trustless decentralized network we built our own highly performant consensus and orchestration protocol called D.A.G.G.E.R.
+この信頼性の高い分散型ネットワークを実行するために、私たちはD.A.G.G.E.Rという独自の高性能な合意形成とオーケストレーションプロトコルを構築しました。
 
 ## **D.A.G.G.E.R.**
 
-The foundation the Shadow Ecosystem is D.A.G.G.E.R., a trustless decentralized consensus protocol that expands the Shadow Cloud platform beyond standard data-center enterprise compute and storage offerings, enabling optional decentralized offerings of compute, mobile compute, and decentralized storage - all while pushing the limits of performance, quality, and security.
+Shadow Ecosystemの基盤であるD.A.G.G.E.R.は、トラストレス分散型コンセンサスプロトコルであり、標準的なデータセンター企業向けのコンピュートおよびストレージの提供を超え、分散型のコンピュート、モバイルコンピュート、および分散型ストレージのオプションを可能にすることで、パフォーマンス、品質、およびセキュリティの限界を押し上げています。
 
-D.A.G.G.E.R. stands for Directed Acyclic Gossip Graph Enabling Replication (of compute and storage).
+D.A.G.G.E.R.は、Directed Acyclic Gossip Graph Enabling Replication (of compute and storage)の略です。
 
 [**Learn about D.A.G.G.E.R**](dagger.md)
 
 ## **Storage**
 
-Shadow Drive takes open source software-defined object storage and integrates it with Solana’s Proof of History consensus mechanism, and then decentralizes it. This allows it to achieve extremely fast I/O speeds, massive scalability, and data integrity. At the same time it retains the benefits of the trustlessness, enhanced security, full transparency, and decentralization that blockchain technology brings to the table.
+Shadow Driveは、オープンソースのSoftware-Defined Object Storageを、SolanaのProof of Historyコンセンサスメカニズムと統合し、分散化したものです。これにより、極めて高速なI/O速度、大規模なスケーラビリティ、データインテグリティを実現することができます。同時に、ブロックチェーン技術がもたらす信頼性、強化されたセキュリティ、完全な透明性、分散化のメリットも保持しています。
 
-Ultimately, Shadow Drive’s implementation of D.A.G.G.E.R. will produce a permissionless, trustless, decentralized distributed storage network that exists in perpetuity without needing to rely on the direct efforts of a centralized team to grow and expand. It will take time, as the path for open sourcing hardware infrastructure is different from that for software, but Shadow Drive’s final form will be one in which the community of businesses and builders drive the direction, enhancements, and future of Shadow Drive.
+最終的に、Shadow DriveのD.A.G.G.E.R.の実装は、許可なし、トラストレス、分散型の分散ストレージネットワークを生み出し、成長・拡大するために中央のチームの直接努力に頼る必要なく永久に存在することになるでしょう。ハードウェア・インフラのオープンソース化はソフトウェアとは異なるため時間がかかりますが、Shadow Driveの最終形は、企業やビルダーのコミュニティがShadow Driveの方向性や拡張性、将来性を決定するものとなるでしょう。
 
-The current [design](storage-services/design.md#present-design-considerations) of Shadow Drive makes embedding storage into applications easy, robust, and natively interfaced into the Solana blockchain. The SDK support [Javascript](../build/shadow-drive/sdk-javascript.md), [Rust](../build/shadow-drive/sdk-rust.md), and [Python ](../build/shadow-drive/sdk-python.md)all on top of fast and reliable API. Use Shadow Drive to store your 800gb model weights, 10 TB training data and all the generated images your users generate via our [Python](../build/shadow-drive/sdk-python.md) SDK. Or maybe you just want to store your historical geyser plugin output and state, and any relevant program accounts and transactions. If your are building an application in need of back-end storage, secondary storage, or client-facing storage option then our robust [Javascript SDK](../build/shadow-drive/sdk-javascript.md) has you covered. For all use cases, we are focused on making fast and reliable storage incredibly easy to build with.
+Shadow Driveの現在の[design](storage-services/design.md#present-design-considerations)は、アプリケーションへのストレージの組み込みを簡単、堅牢、そしてSolanaブロックチェーンへのネイティブインターフェイスにしています。SDKは、高速で信頼性の高いAPIの上に、[Javascript](../build/shadow-drive/sdk-javascript.md), [Rust](../build/shadow-drive/sdk-rust.md), and [Python ](../build/shadow-drive/sdk-python.md) allをサポートしています。シャドードライブを使用して、800GBのモデル重み、10TBのトレーニングデータ、およびユーザーが生成したすべての生成画像を、[Python](../build/shadow-drive/sdk-python.md) SDK経由で保存してください。あるいは、過去の間欠泉プラグインの出力と状態、関連するプログラムのアカウントとトランザクションを保存したいだけかもしれません。バックエンドストレージ、セカンダリストレージ、またはクライアント向けストレージを必要とするアプリケーションを構築している場合、当社の堅牢な [Javascript SDK](../build/shadow-drive/sdk-javascript.md) があなたをカバーします。すべてのユースケースにおいて、私たちは高速で信頼性の高いストレージを非常に簡単に構築できるようにすることに注力しています。
 
-[**Start Building on Shadow Drive!**](../build/)
+[**Shadow Drive でビルドを開始する!**](../build/)
 
 ****[**Pricing**](storage-services/#pricing)****
 
 ## **Compute**
 
-Utilizing DAGGER as an orchestration / oracle protocol, we are capable of networking together decentralized commodity clouds (Shadow Operator virtual machines) under a frond end UI/UX experience that effectively decentralizes virtual machine provisioning. This is similar in concept as an Amazon EC2 instances, or Digital Ocean Droplets, except the back end resources and "network stack" are owned and operates trustlessly by individuals / entities who are Shadow Operators! This is currently in proof-of-concept and under development for the future. We revealed this technology as the Solana Breakpoint 2022 event. With over 2,000 attendees we opened showcased live demonstrations of trustless virtual machine provisioning powered by a decentralized group of micro-clouds. Developers were able to build on these virtual machines for the span of the conference, experiencing first hand the exciting direction our platform is headed.
+DAGGERをオーケストレーション/オラクルプロトコルとして利用することで、仮想マシンのプロビジョニングを効果的に分散化するフロントエンドUI/UX体験のもと、分散化されたコモディティクラウド（Shadow Operator仮想マシン）をネットワーク化することができます。これは、Amazon EC2インスタンスやDigital Ocean Dropletsと同様のコンセプトですが、バックエンドリソースと「ネットワークスタック」がShadow Operatorである個人/エンティティによって所有され、信頼性を持って運用されることが特徴です！これは現在、概念実証中であり、将来に向けて開発中です。私たちは、この技術を「Solana Breakpoint 2022」のイベントで公開しました。2,000人以上の参加者を集め、マイクロクラウドの分散型グループによるトラストレス仮想マシンのプロビジョニングのライブデモを公開しました。開発者は、カンファレンスの期間中、これらの仮想マシン上に構築することができ、私たちのプラットフォームが向かうエキサイティングな方向性を直接体験することができました。
 
-[**Check out the Shadow VMs Demo from Breakpoint**](../reference/breakpoint-2022-demo.md)
+[**BreakpointのShadow VMs Demoをチェック**](../reference/breakpoint-2022-demo.md)
 
-With the rapid rise of mobile compute power and 5G-6G data-speeds this technology brings forward a key implementation of DAGGER via a permissionless mobile compute and storage. A technology we are currently under early-stage development using the Solana Saga Mobile phone. This will further enable our already existing ecosystem of builders who have deployed Shadow Drive to their mobile applications. DAGGER mobile will deliver compute and storage distributed ledger technology to mobile phones during a rising trend in AI applications. The confluence of cheap, constantly connected resources and the need for such massive resources as AI applications ramp up have placed large interests in distributed GNN neural network models and edge-AI-empowered 6G neural networks. It's important to us that DAGGER and both it's Shadow Drive implementation, and it's mobile implementation, be a pragmatic choice for mobile and edge AI implementations. This brings us to our roadmap.
+モバイルコンピューティングパワーと5G-6Gデータスピードの急速な上昇に伴い、この技術は、パーミッションレスモバイルコンピューティングとストレージを介してDAGGERの重要な実装を前進させます。この技術は、現在、Solana Saga Mobile phoneを使用して初期段階の開発を進めています。これにより、Shadow Driveをモバイルアプリケーションに導入しているビルダーのエコシステムをさらに強化することができます。DAGGER mobileは、AIアプリケーションの上昇トレンドの中で、コンピュートとストレージの分散台帳技術を携帯電話に提供します。安価で常時接続されたリソースと、AIアプリケーションの急増に伴うそのような巨大なリソースの必要性の合流により、分散GNNニューラルネットワークモデルとエッジAIエンパワー6Gニューラルネットワークに大きな関心が集まっています。DAGGERとそのシャドウドライブ実装、およびモバイル実装の両方が、モバイルおよびエッジAI実装のための実用的な選択肢となることは、私たちにとって重要なことです。そこで、私たちのロードマップを紹介します。
 
 ## **Roadmap**
 
-There are three areas we focus our developments:
+私たちが開発に力を入れている分野は3つあります:
 
-* The Shadow Drive implementation of DAGGER
-* The Mobile implementation of DAGGER and Shadow Drive
-* The combination of the above two to support AI evolution
+* DAGGER の Shadow Drive 実装について
+* DAGGER と Shadow Drive のモバイル実装について
+* 上記2つの組み合わせでAIの進化を支える
 
-## **Putting it all together**
+## **まとめ**
 
-"On-chain" versus "off-chain" is a concept that needs to evolve in order for Web3 technology to meaningfully gain user adoption. Blockchain is type of decentralized ledger technology (DLT), but it's not the only DLT anymore. "On-DLT" versus "off-DLT", that's what matters. This is not to take away from the significance of blockchain or its impact on the world. Instead, it's merely to say that the subset of technologies falling under the DLT umbrella has expanded in the 14 years since blockchain first appeared. The right tool for the right job matters.
+"オンチェーン "と "オフチェーン "は、Web3技術がユーザーの支持を得るために進化しなければならない概念です。ブロックチェーンは分散型台帳技術（DLT）の一種ですが、もはやそれだけがDLTではありません。「On-DLT」と「Off-DLT」、それが重要なのです。これは、ブロックチェーンの意義や世界に与える影響を否定するものではありません。ブロックチェーンが登場してから14年、DLTの傘下に入る技術のサブセットは広がったというだけのことです。適材適所のツールは重要だ。
 
-Our hope is that Shadow Cloud and D.A.G.G.E.R represent a first step on the path to creating composability in Web3. Not just composability between one blockchain and another... instead, zoom out and think about composability between all the different systems underneath the DLT umbrella. By creating interoperability between Solana and DAGGER the result is a true Web3 cloud platform that doesn't sacrifice speed, stability, and/or security in order to gain trustlessness, decentralization, permissionlessness, and/or censorship resistance.
+Shadow Cloud と D.A.G.G.E.R は、Web3におけるコンポーザビリティを実現するための第一歩となることを願っています。 あるブロックチェーンと別のブロックチェーンの間のコンポーザビリティだけでなく、拡大して、DLT傘下のすべての異なるシステム間のコンポーザビリティについて考えてみて下さい。SolanaとDAGGERの相互運用性を実現することで、スピード、安定性、セキュリティを犠牲にすることなく、トラストレス、分散化、パーミッションレス、検閲への抵抗力を獲得する、真のWeb3クラウドプラットフォームを実現します。
 
-Decentralized Ledger Technology should be thought of as a superset of technologies that can be selected and assembled in various combinations to satisfy specific user requirements. So what are some of these user requirements? Here are some real world use cases to start:
+分散型台帳技術は、特定のユーザーの要求を満たすために様々な組み合わせで選択し、組み立てることができる技術のスーパーセットと考えるべきでしょう。では、そのようなユーザー要件にはどのようなものがあるのでしょうか。ここでは、まず現実のユースケースをいくつか紹介します：
 
 ## **Shadow Cloud Use Cases**
 
 * Storage
-  * Web hosting & content management
-    * Managing static content at high volumes that can elastically scale with your needs makes Shadow Drive a great solution for web content, media, images, and other unstructured data types.
-  * Social media
-    * Temporarily or permanently store message history and embedded media, stream video content from user uploads, and store and deliver vast amounts of images and avatars to enhance the Web3 efficacy of your app.
-  * Archival & back-up
-    * By 3x replicating and erasure coding encrypted records across a decentralized network, Shadow Drive can preserve valuable records from bad actors.
-  * Datasets
-    * Some information is too important for humanity to lose. From scientific research projects to historical documentation, cryptographic proofs guarantee a dataset’s integrity and availability forever. Imagine if the world’s most important libraries couldn’t be destroyed because the information has been distributed across thousands of unique locations worldwide.
-  * AI implementation
-    * From training models, to backing up data sets, to virtually mounting the storage accounts, Shadow Drive will offer fast, reliable, transparent methods to support many AI data-processing applications by lowering costs of housing huge amounts of data and offering extremely high read/write more cheaply than other decentralized competitors.
-  * Personal & editable storage space
-    * With optional mutability, you are free to create and delete files as you see fit. With low costs and many front-end user interfaces to choose from, Shadow Drive can be your personal expanded storage space.
-  * Specialized distributed ledger implementations
-    * The current [design](storage-services/design.md) of Shadow Drive makes embedding storage into applications easy, robust, and natively integrated into the Solana blockchain. Use Shadow Drive to store your 800gb model weights, 100 TB training data and all the generated images your users generate via our [Python](../build/shadow-drive/sdk-python.md) SDK. Or maybe you just want to store your historical geyser plugin output and state, and any relevant program accounts and transactions. If your are building an application in need of back-end storage, secondary storage, or client-facing storage option then our robust [Javascript SDK](../build/shadow-drive/sdk-javascript.md) has you covered. For all use cases, we are focused on making fast and reliable storage incredibly easy to build with.
+  * Webホスティング & コンテンツマネージメント
+    * 静的コンテンツを大量に管理し、ニーズに合わせて弾力的に拡張できるShadow Driveは、Webコンテンツ、メディア、画像、その他の非構造化データタイプに最適なソリューションです。
+  * ソーシャルメディア
+    * メッセージ履歴や埋め込みメディアを一時的または永続的に保存し、ユーザーがアップロードしたビデオコンテンツをストリーミング配信し、膨大な量の画像やアバターを保存・配信して、アプリのWeb3効果を高めることができます。
+  * アーカイブ & バックアップ
+    * Shadow Driveは、暗号化された記録を分散型ネットワークで3重複製および消去符号化することにより、悪意ある者から貴重な記録を保護することができます。
+  * データセット
+    * 人類にとって、失うにはあまりにも重要な情報があります。科学的な研究プロジェクトから歴史的な文書に至るまで、暗号化された証明はデータセットの完全性と可用性を永遠に保証します。もし、世界で最も重要な図書館が、世界中の何千もの場所に分散された情報のために破壊されることがなかったらと想像してください。
+  * AI 導入
+    * モデルのトレーニングからデータセットのバックアップ、ストレージアカウントの仮想マウントまで、Shadow Driveは、膨大な量のデータを収容するコストを下げ、他の分散型競合製品よりも安価に極めて高い読み取り/書き込みを提供することで、多くのAIデータ処理アプリケーションをサポートする高速で信頼性の高い透明な方法を提供します。
+  * 個人的 & 書き換え可能なストレージスペース
+    * オプションのミュータビリティにより、ファイルの作成と削除を自由に行うことができます。低価格で、多くのフロントエンドユーザーインターフェースを選択できるShadow Driveは、あなただけの拡張ストレージスペースとなることでしょう。
+  * 分散型台帳の実装に特化
+    * Shadow Driveの現在の[design](storage-services/design.md)は、アプリケーションにストレージを埋め込むことを簡単かつ堅牢にし、Solanaブロックチェーンにネイティブに統合しています。Shadow Driveを使って、800GBのモデルウェイト、100TBのトレーニングデータ、そして私たちの[Python](../build/shadow-drive/sdk-python.md)SDKを通じてユーザーが生成するすべての生成画像を保存しましょう。あるいは、過去のgeyserプラグインの出力と状態、関連するプログラムのアカウントとトランザクションを保存したいだけかもしれません。バックエンドストレージ、セカンダリストレージ、またはクライアント向けストレージを必要とするアプリケーションを構築している場合、私たちの堅牢な [Javascript SDK](../build/shadow-drive/sdk-javascript.md) があなたをカバーしています。すべてのユースケースにおいて、私たちは高速で信頼性の高いストレージを非常に簡単に構築できるようにすることに注力しています。
 * Compute
-  * Application Building _(future release)_
-    * Delivery on-chain data to front-end business applications with speed and reliability.
-  * Mobile Development _(future release)_
-    * Power back-end mobile remote procedural calls to enable users to interact with their favorite blockchain or web3 mobile application.
-  * Enterprise VMs _(future release)_
-    * White-glove handling of bare metal and virtual provisioning for specialized distributed ledger technology implementations.
+  * アプリケーションビルディング _(future release)_
+    * オンチェーンデータをフロントエンドのビジネスアプリケーションに、スピードと信頼性をもって配信します。
+  * モバイル開発 _(future release)_
+    * バックエンドのモバイルリモート手続きコールをパワーアップし、ユーザーがお気に入りのブロックチェーンやWeb3モバイルアプリケーションと対話できるようにします。
+  * エンタープライズ VMs _(future release)_
+    * 分散型台帳技術の実装に特化したベアメタルや仮想プロビジョニングに最高の対応。
 
-****[**Start Building on Shadow Drive!**](../build/shadow-drive/)****
+****[**Shadow Drive でビルドを開始する!**](../build/shadow-drive/)****
 
-****[**See what others are building on Shadow Drive!**](../build/shadow-drive/community-mainted-uis.md)****
+****[**Shadow Drive で他の人が何を創っているか見てみましょう！!**](../build/shadow-drive/community-mainted-uis.md)****
 
 ## **Shadow Operators**
 
-**(currently in private alpha)**
+**(現在 private alpha)**
 
-Shadow Operators are the decentralized backbone of the Shadow commodity cloud. Operators lease their high-performance compute, storage, and bandwidth. Businesses, projects, and/or individual developers can trustlessly provision network resources. User payments are sent directly to Shadow Operators. Shadow Operators who ensure their resources are always available and performant earn more. Shadow Operators who are inconsistent earn less.
+Shadow Operatorは、Shadowコモディティクラウドの分散型バックボーンです。オペレーターは、高性能なコンピュート、ストレージ、および帯域幅をリースします。企業、プロジェクト、個人の開発者は、ネットワークリソースを信頼してプロビジョニングすることができます。ユーザーの支払いは、Shadow Operatorに直接送られます。リソースが常に利用可能で、パフォーマンスが高いシャドーオペレーターは、より多くの利益を得ることができます。一貫性のないシャドウオペレーターは、収入が少なくなります。
 
-At the foundation of everything are the Shadow Operators who run the nodes that power the Shadow Platform. Operators can connect new nodes to the network, manage their existing servers, or view the overall status of other Shadow Operators – all through the one easy-to-use portal.
+すべての基盤は、シャドウプラットフォームを動かすノードを運営するシャドウオペレーターにあります。オペレーターは、新しいノードをネットワークに接続したり、既存のサーバーを管理したり、他のシャドーオペレーターの全体的なステータスを確認したりすることができますが、これらはすべて使いやすい1つのポータルを通じて行います。
 
-Currently in development are a series of Shadow Operator node roles including resolvers, ingestors, storers, cachers. These roles work together under the orchestration of DAGGER to form a permissionless distributed platform that support both Shadow Cloud services and mobile storage being developed.
+現在開発中のシャドーオペレーターノードは、リゾルバー、インジェスター、ストアラー、キャッシャーといった一連の役割を担っています。これらの役割は、DAGGERのオーケストレーションの下で連携し、シャドウクラウドサービスと開発中のモバイルストレージの両方をサポートするパーミッションレスの分散プラットフォームを形成します。
 
 ## **Our Team**
 
-We have a talented team of senior professionals across multiple fields including software sciences, distributed ledger specialists, product development, systems and cloud engineering, business and finance. We are focused on product quality, reliable, and speed to production.
+私たちは、ソフトウェア科学、分散型台帳の専門家、製品開発、システムおよびクラウドエンジニアリング、ビジネスおよびファイナンスなど、複数の分野にまたがるシニアプロフェッショナルからなる才能あるチームを擁しています。私たちは、製品の品質、信頼性、生産までのスピードに重点を置いています。
 
-We are eagerly pushing forward our goals with excitement and focus. As we look forward and execute on our agenda, continuing to support the ecosystem of Shadow builders is a top priority. With great community engagement and feedback we frequently push versions and fixes. See how we continually improve quality, function, and security of the Shadow codebase here: [**Review change logs**](../reference/change-logs.md)
+私たちは、興奮と集中力をもって、熱心に目標を推し進めています。私たちは、シャドウビルダーたちのエコシステムをサポートし続けることを最優先課題としています。コミュニティへの参加とフィードバックにより、私たちは頻繁にバージョンアップと修正を行っています。Shadowのコードベースの品質、機能、セキュリティを継続的に改善する方法は、こちらでご覧ください： [**Review change logs**](../reference/change-logs.md)

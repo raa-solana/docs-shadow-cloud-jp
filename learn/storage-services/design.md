@@ -1,113 +1,113 @@
 ---
-description: A deeper dive into the design of Shadow Drive and the problems it solves.
+description: シャドードライブの設計とその問題点を深堀りする。
 ---
 
 # Design
 
 ## **Developer Tools**
 
-Builders can interact directly with Shadow Drive using the [API](../../build/shadow-drive/the-api.md), the [CLI](../../build/shadow-drive/the-cli.md) with optional [Rust CLI](../../build/shadow-drive/the-cli.md) or the Shadow Drive [SDK](../../build/shadow-drive/the-sdk.md) to build front-end applications directly on top of the drive.&#x20;
+ビルダーは、[API](../../build/shadow-drive/the-api.md)、[CLI](../../build/shadow-drive/the-cli.md) とオプション [Rust CLI](../../build/shadow-drive/the-cli.md) を使用して Shadow Drive と直接対話できます。[CLI](../../build/shadow-drive/the-cli.md) または Shadow Drive [SDK](../../build/shadow-drive/the-sdk.md) でドライブの上に直接フロントエンドアプリケーションを構築します。
 
-Providing SDKs in [JavaScript](../../build/shadow-drive/sdk-javascript.md), [Rust](../../build/shadow-drive/sdk-rust.md), and [Python ](../../build/shadow-drive/sdk-python.md)provides a number of benefits and efficiencies to developers. It allows developers to access the full range of features and capabilities of the application, and helps developers to quickly get up to speed on the application, since there’s less of a learning curve when working with a language they’re already familiar with.
+[JavaScript](../../build/shadow-drive/sdk-javascript.md)、[Rust](../../build/shadow-drive/sdk-rust.md)、[Python ](../../build/shadow-drive/sdk-python.md) で SDKを提供することは開発者にとって多くの利点と効率性があります。開発者はアプリケーションの全機能にアクセスすることができ、また、すでに慣れ親しんだ言語で作業すると学習曲線が少なくなるため、開発者がアプリケーションに素早く慣れることができます。
 
 ### S3-Compatibility
 
-S3-compatibility is a widely adopted standard in the cloud storage industry. Many providers now offer S3-compatible APIs and protocols, giving builders greater flexibility in choosing a cloud storage provider. This means developers can easily move data between different services without worrying about compatibility issues. Additionally, they can use their existing knowledge and tools when working with multiple services, eliminating the need to learn new APIs and protocols for each one. S3-compatibility also offers robust APIs that enable fast and reliable query, along with virtual mount capability, making it important for Web2, Web3, and the frontiers of distributed ledger tech and AI.
+S3互換は、クラウドストレージ業界で広く採用されている規格です。現在、多くのプロバイダーがS3互換のAPIとプロトコルを提供しており、構築者はクラウドストレージプロバイダーを選択する際に、より大きな柔軟性を得ることができます。つまり、開発者は互換性の問題を心配することなく、異なるサービス間でデータを簡単に移動させることができます。さらに、複数のサービスを利用する際、既存の知識やツールを利用できるため、サービスごとに新しいAPIやプロトコルを習得する必要がありません。また、S3互換は、仮想マウント機能とともに、高速で信頼性の高いクエリを可能にする堅牢なAPIを提供し、Web2、Web3、そして分散型台帳技術やAIの最前線にとって重要な存在となっています。
 
-It is our goal to empower developers to integrate Shadow Drive directly into their builds and to support this incredibly talented community of designers who will absolutely come up with better platforms for Shadow Drive than we could possibly come up with on our own!
+私たちの目標は、開発者がShadow Driveを直接ビルドに組み込めるようにすること、そして、Shadow Driveのために、私たちだけでは考えつかないような優れたプラットフォームを生み出してくれる、非常に才能あるデザイナーたちのコミュニティを支援することです！
 
-Release of S3-Compatibility upgrades set for Q2 2023.
+S3-Compatibilityアップグレードのリリースは、2023年第2四半期に設定されています。
 
 ### **Deterministic Naming**
 
-The Shadow Drive platform is designed to support entire ecosystems being built on top of it. Shadow Drive storage is deterministic to allow for ease of use. While other storage protocols require the user to wait for data to be uploaded in order to generate a URI, Shadow Drive has a deterministic scheme:
+Shadow Driveのプラットフォームは、その上に構築されるエコシステム全体をサポートするように設計されています。Shadow Driveのストレージは、使いやすさを考慮した決定論的なものです。他のストレージプロトコルでは、URIを生成するためにデータがアップロードされるのを待つ必要がありますが、Shadow Driveは決定論的なスキームを持っています：
 
 **`https://shdw-drive.genesysgo.net/<storage-account-pubkey>/<file-name>`**
 
-By preparing information for uploads, indexing, and creating custom RPC calls in advance, application developers can benefit from a more streamlined build process. This allows them to plan ahead and create their applications with greater ease and efficiency.
+アップロード、インデックス作成、カスタムRPCコールの作成などの情報を事前に準備することで、アプリケーション開発者は、より合理的な構築プロセスの恩恵を受けることができます。これにより、開発者は事前に計画を立て、より簡単かつ効率的にアプリケーションを作成することができます。
 
 ## **Evolution**
 
-The path to decentralization is a journey through v1.0, v1.5, and the upcoming release v2.0 of Shadow Drive. This section walks through the build progression and rationale behind the engineering approach to Shadow Drive.
+分散化への道のりは、Shadow Driveのv1.0、v1.5、そして近々リリースされるv2.0を通しての旅となります。このセクションでは、ビルドの進行とShadow Driveのエンジニアリングアプローチの根拠を説明します。
 
 ### **Under the Hood of Version 1**
 
-Coordinating between physically distributed object storage devices (OSDs) lives an open source software defined storage program called Ceph that we customized for the Shadow Drive network of nodes for version 1.
+物理的に分散したオブジェクトストレージデバイス（OSD）間の調整には、バージョン1のShadow Driveネットワークノード用にカスタマイズしたCephというオープンソースのソフトウェア定義ストレージプログラムを使用しています。
 
 **Ceph was initially chosen for a number of reasons…**
 
-1. It is VERY open source. Ceph was first presented in 2006 and merged directly into the Linux kernel in 2010. Since then the Ceph GitHub has grown to 179 different repositories. These different repositories have been collectively forked over 10,000 times, have had thousands of PRs submitted, and has seen a community of tens of thousands emerge to provide support. [https://github.com/ceph](https://github.com/ceph)
-2. It is extremely resilient and adaptable. Ceph is designed to not have a singular point of failure that could lead to data loss. As Shadow Drive is being designed to run in a permissionless trustless decentralized environment, having no singular point of failure is very attractive. The resiliency of how Ceph stores data and its open source design mean that Ceph can be forked and modified to be a trustless permissionless decentralized storage layer that can be integrated with smart contracts to protect the stored data against bad actors.
-3. Ceph is very performant and scales exceptionally well both horizontally and vertically. Our decentralized cluster consistently handled 2,000 concurrent connections, each uploading 10,000 individual objects measuring 2mb in size, and sustained an upload speed of 2.7gbps with zero packet loss for extended periods of time. This means that the cluster is so fast that when Solana validators finish block #130188099 we can ingest it, store it, and serve live requests against it **before** block #130188100 is finished and propagated.
-4. Ceph’s CRUSH map algorithm is amazing! CRUSH is a scalable pseudo-random data distribution function designed for distributed object-based storage systems that efficiently maps data objects to storage devices without relying on a central directory. The CRUSH whitepaper ([https://ceph.com/assets/pdfs/weil-crush-sc06.pdf](https://ceph.com/assets/pdfs/weil-crush-sc06.pdf)) dives deep into the algorithm but the TL;DR is that CRUSH allows for the decentralization of location for data on an individual byte level. Ceph utilizes CRUSH to literally break stored objects down into component bytes, shards/erasure codes those bytes, and then decentralizes their location in triplicate across any particular Ceph cluster.
-5. Speaking of decentralization of data… Ceph runs its own consensus mechanism internally to ensure the integrity of your data. Monitor daemons are the custodians of the pieces of the CRUSH map and are responsible for verifying its accuracy and approving/recording changes to the stored data. Ceph monitors use a Paxos consensus mechanism to maintain a quorum and verify the authenticity of the data stored in the cluster. We will revisit the importance of this consensus mechanism later when we discuss Solana integrations.
-6. Finally, Ceph is (theoretically) infinitely scalable without any notable decrease in performance. There is no theoretical max to how large a Ceph cluster can become. This is due to the different software daemons Ceph employs and how well the CRUSH algorithm scales. The largest Ceph cluster ever tested successfully stored 10,000,000,000 unique objects. If we think about each Solana block produced we are currently in the 120 millions (as of the time of this writing). Therefore, Ceph is uniquely positioned to be the best possible solution for a blockchain that produces a new block every 400 milliseconds.
+1. VERYオープンソースです。Cephは2006年に初めて発表され、2010年にLinuxカーネルに直接マージされました。それ以来、CephのGitHubは179の異なるリポジトリに成長しました。これらの異なるリポジトリは、まとめて1万回以上フォークされ、何千ものPRが提出され、サポートを提供するために何万ものコミュニティが出現しています。[https://github.com/ceph](https://github.com/ceph)
+2. 非常に弾力性があり、適応性があります。Cephは、データ損失につながるような特異な障害点を持たないように設計されています。Shadow Driveは、許可なしの信頼できる分散環境で動作するように設計されているため、単一障害点を持たないということは非常に魅力的です。Cephがデータを保存する方法の回復力とオープンソースの設計は、Cephをフォークして、スマートコントラクトと統合して保存データを悪者から保護することができる、信頼できる許可不要の分散型ストレージレイヤーに変更できることを意味しています。
+3. Cephは非常に性能が高く、水平方向にも垂直方向にも非常によくスケールします。私たちの分散型クラスタは、2,000の同時接続を一貫して処理し、それぞれが2MBのサイズの個々のオブジェクトを10,000個アップロードし、パケットロスゼロの2.7gbpsのアップロード速度を長時間維持しました。これは、Solanaバリデーターがブロック#130188099を終了したときに、ブロック#130188100が終了して伝播する**前に**、それを取り込み、保存し、それに対してライブリクエストを提供できるほど、クラスタが高速であることを意味しています。
+4. CephのCRUSHマップアルゴリズムがすごい！CRUSHは、分散オブジェクトベースストレージシステム用に設計されたスケーラブルな疑似ランダムデータ配布機能で、中央ディレクトリに依存せずにデータオブジェクトをストレージデバイスに効率的にマッピングします。CRUSHのホワイトペーパー([https://ceph.com/assets/pdfs/weil-crush-sc06.pdf](https://ceph.com/assets/pdfs/weil-crush-sc06.pdf))では、そのアルゴリズムについて深く掘り下げていますが、要約すると、CRUSHによって個々のバイトレベルでデータの場所を分散化することができるということです。CephはCRUSHを利用して、保存オブジェクトを文字通りコンポーネントバイトに分解し、それらのバイトをシャード/消去コード化し、特定のCephクラスタ全体で3重にその場所を分散化します。
+5. データの分散化といえば...Cephは内部で独自のコンセンサス機構を実行し、データの完全性を保証します。モニターデーモンは、CRUSHマップの断片のカストディアンであり、その正確性を検証し、保存されたデータへの変更を承認/記録する責任を負います。CephモニターはPaxosコンセンサスメカニズムを使用してクォーラムを維持し、クラスタに保存されたデータの信憑性を検証します。このコンセンサスメカニズムの重要性については、後ほどSolanaの統合について説明するときに改めて説明します。
+6. 最後に、Cephは(理論上)無限に拡張可能であり、性能に目立った低下はありません。Cephクラスタの規模に理論的な上限はありません。これは、Cephが採用しているさまざまなソフトウェアデーモンと、CRUSHアルゴリズムがどの程度うまくスケールするかに起因しています。これまでにテストされた最大のCephクラスタは、10,000,000,000のユニークオブジェクトの保存に成功しました。生成されるSolanaブロック1つ1つについて考えると、現在1億2000万個に達しています（この記事を書いている時点では）。したがって、Cephは、400ミリ秒ごとに新しいブロックを生成するブロックチェーンに最適なソリューションとして独自の位置を占めています。
 
 #### **As a fun side note...**
 
-The creator of the Paxos Consensus Mechanism, Leslie Lamport, is also honored as Solana’s biggest technical influence
+パクソス・コンセンサス・メカニズムの生みの親であるレスリー・ランポートも、ソラナに最も大きな技術的影響を与えた人物として表彰されています
 
 ![https://docs.solana.com/introduction](../../.gitbook/assets/leslislamport.png)
 
 ### Achieving Agreement in Distributed Systems
 
-Paxos is a consensus algorithm used in distributed systems to achieve agreement among a set of nodes, even in the presence of failures or delays. It was proposed by Leslie Lamport in 1989 and is named after the Paxos island in Greece. The algorithm is designed to ensure reliability, fault tolerance, and consistency in distributed systems where nodes may fail or communicate unreliably.
+Paxosは、分散システムにおいて、障害や遅延があってもノード間の合意を達成するために用いられる合意アルゴリズムです。1989年にLeslie Lamportによって提案され、ギリシャのPaxos島にちなんで命名されました。このアルゴリズムは、ノードの故障や通信が不安定な分散システムにおいて、信頼性、耐障害性、一貫性を確保するために設計されています。
 
-The Paxos algorithm operates in a message-passing environment and involves several rounds of communication between nodes, called "proposers," "acceptors," and "learners." The algorithm ensures that a single, agreed-upon value is chosen among the proposed values by the nodes.
+Paxosアルゴリズムはメッセージパッシング環境で動作し、"提案者"、"受容者"、"学習者 "と呼ばれるノード間で数ラウンドの通信が行われます。このアルゴリズムは、ノードによって提案された値の中から、合意された1つの値が選ばれることを保証します。
 
-Here is a high-level overview of the Paxos algorithm:
+ここでは、Paxosアルゴリズムのハイレベルな概要を説明します：
 
-1. A proposer node selects a unique proposal number and sends a "prepare" request to a majority of acceptor nodes.
-2. Upon receiving a "prepare" request, an acceptor node checks if the proposal number is higher than any proposal number it has seen so far. If it is, the acceptor promises not to accept any proposals with a lower number and responds with the highest-numbered proposal it has accepted, if any.
-3. The proposer collects responses from a majority of acceptor nodes. If a previously accepted value is reported, the proposer uses that value; otherwise, it chooses a new value. The proposer then sends an "accept" request to a majority of acceptor nodes with the chosen value and its proposal number.
-4. If an acceptor receives an "accept" request with a proposal number that is equal to or higher than the highest proposal number it has seen, it accepts the value and sends an acknowledgment to the proposer.
-5. The proposer considers the value chosen when it receives acknowledgments from a majority of acceptor nodes. At this point, the proposer can inform the learners about the chosen value.
+1. 提案者ノードが一意の提案番号を選択し、過半数の受諾者ノードに「準備」要求を送信します。
+2. prepare要求を受け取ったアクセプタノードは、その提案番号がこれまでに見たどの提案番号よりも大きいかどうかをチェックします。もしそうであれば、アクセプタはそれ以下の番号のプロポーザルを受け入れないことを約束し、受け入れたことのある最高番号のプロポーザルがあれば、それを応答します。
+3. 提案者は、過半数のアクセプタノードから応答を収集します。以前に受け入れた値が報告された場合、提案者はその値を使用し、そうでない場合は新しい値を選択します。提案者は次に、選択した値と提案番号を添えて、大多数のアクセプタノードに「accept」要求を送信します。
+4. アクセプタは、自分が見た中で最も高いプロポーザル番号と同じかそれ以上のプロポーザル番号を持つaccept要求を受け取った場合、その値を受け入れ、提案者に謝辞を送ります。
+5. 提案者は、過半数のアクセプタノードから確認応答を受信すると、選択された値を考慮します。この時点で、提案者は学習者に選択された値について知らせることができます。
 
-The Paxos algorithm guarantees that only a single value is chosen, even in the presence of failures, as long as a majority of acceptor nodes can communicate reliably. It is a fundamental building block for many distributed systems and has inspired the development of other consensus algorithms, **such as DAGGER which is replacing PAXOS!**
+Paxosアルゴリズムは、アクセプターノードの大多数が確実に通信できる限り、障害があっても単一の値のみが選択されることを保証します。多くの分散システムの基本的な構成要素であり、**PAXOSを置き換えるDAGGERなど、**他のコンセンサスアルゴリズムの開発にも影響を与えています。
 
-Also, we’re using the same database technology as the CERN team is! [https://indico.cern.ch/event/649159/contributions/2761965/attachments/1544385/2423339/hroussea-storage-at-CERN.pdf](https://indico.cern.ch/event/649159/contributions/2761965/attachments/1544385/2423339/hroussea-storage-at-CERN.pdf)
+また、CERNチームと同じデータベース技術を使っています！[https://indico.cern.ch/event/649159/contributions/2761965/attachments/1544385/2423339/hroussea-storage-at-CERN.pdf](https://indico.cern.ch/event/649159/contributions/2761965/attachments/1544385/2423339/hroussea-storage-at-CERN.pdf)
 
-In fact, the CERN team submitted PRs to the main Ceph branch to have their homegrown improvements included in the main branch. This is further evidence to the extent at which Ceph can be customized as a distributed system, which has proven itself over the past year as we have evolved it.
+実際、CERNチームはCephのメインブランチにPRを提出し、自作の改良をメインブランチに取り込んでもらいました。これは、Cephが分散システムとしてどの程度カスタマイズできるかを示すさらなる証拠であり、この1年間、私たちがCephを進化させたことで証明されました。
 
-Of course, none of this is to suggest that Ceph is some kind of perfect solution that has no flaws and can do no wrong. However, for our use case and pathway to decentralization, Ceph checked all the boxes for an initial underlay to coordinate OSDs and provide us a foundation to begin customizing. The performance, reliability, durability, scalability, and its functionality can be adapted to provide the decentralized trustless data storage that Solana needs. It was this strong foundation that allowed us to channel energy into blockchain-based puzzles first (V1.5), soon followed by permissionless, decentralized network puzzles (DAGGER).
+もちろん、Cephが欠点がなく、間違いのない完璧なソリューションであることを示唆するものではありません。しかし、私たちの使用例と分散化への道筋にとって、CephはOSDを調整する最初の下敷きとしてすべての条件を満たし、カスタマイズを始めるための土台を提供してくれました。パフォーマンス、信頼性、耐久性、スケーラビリティ、そしてその機能は、Solanaが必要とする分散型の信頼できるデータストレージを提供するために適応することができます。この強力な基盤があったからこそ、私たちはまずブロックチェーンベースのパズル（V1.5）にエネルギーを注ぎ、すぐにパーミッションレスの分散型ネットワークパズル（DAGGER）を作ることができました。
 
 ### **Building the overlay and Solana-PDA compatibility**
 
-At the core of any system engineering problem is the decision of which problems to tackle first. When we began our work on Shadow Drive v1.0, we knew that one of the most important questions we needed to answer was whether or not Solana was fast and cheap enough to handle on-chain proofs of storage for an enterprise-level database. This was a critical decision that required us to approach the problem from the very top of the network stack, where we interface with notoriously "experimental" layer-1 chains.
+システムエンジニアリングの問題の核心は、どの問題に最初に取り組むかという決断にあります。Shadow Drive v1.0の開発を始めたとき、私たちが答えるべき最も重要な問題の1つは、Solanaがエンタープライズレベルのデータベースのオンチェーンストレージ証明を処理できるほど高速で安価かどうかということだと分かっていました。これは、悪名高い「実験的」なレイヤー1チェーンと接するネットワークスタックの最上位から問題にアプローチする必要がある重要な決定でした。
 
-Rather than spending months designing new erasure coding methods over a QUIC peer-to-peer protocol, which is something we have already accomplished at the bottom of the stack, we decided to focus on the higher-level issues first. This allowed us to more quickly discover how to best use Solana prior to investing significant resources in the bottom-up design of the Shadow Storage network.
+QUICのピアツーピアプロトコル上で新しい消去符号化方式を設計するのに何ヶ月も費やすよりも、スタックの一番下ですでに達成していることですが、まず上位の問題に集中することにしました。これにより、シャドーストレージ・ネットワークのボトムアップ設計に多大なリソースを投入する前に、Solanaの最適な使用方法をより迅速に発見することができました。
 
-By starting at the top of the network stack, we were able to quickly evaluate Solana's suitability for our use case, and determine if it was fast and cheap enough to power on-chain proofs of storage for an enterprise-level database. This decision allowed us to move forward with confidence, knowing that we had made the right choice and could begin designing the rest of the system with an eye towards efficiency and scalability. What exactly is a Solana-PDA?
+ネットワークスタックの最上位から始めることで、Solanaのユースケースへの適合性を迅速に評価することができ、エンタープライズレベルのデータベースのオンチェーンプルーフオブストレージを動かすのに十分な速度とコストであるかどうかを判断することができました。この決定により、私たちは正しい選択をしたと確信し、効率性と拡張性を考慮したシステムの残りの部分の設計に着手することができました。Solana-PDAとはどのようなものですか？
 
 #### **Defining a Solana-PDA:**
 
-Solana PDA stands for Solana Program Derived Address. It is a unique public key address generated by a Solana program that can be used to store or retrieve data on the Solana blockchain. In Solana, programs are run on-chain as part of the transaction processing flow. PDAs allow programs to store data without having to use a specific account, making it easier and more efficient to manage data on the Solana blockchain.
+Solana PDAとは、Solana Program Derived Addressの略です。Solanaプログラムによって生成されるユニークな公開鍵アドレスで、Solanaブロックチェーン上のデータを保存または取得するために使用することができます。Solanaでは、プログラムは取引処理フローの一部としてオンチェーンで実行されます。PDAを利用することで、特定のアカウントを利用することなくプログラムがデータを保存できるようになり、Solanaブロックチェーン上のデータ管理がより簡単かつ効率的になります。
 
-PDAs are derived from a combination of the program ID and a specific seed value chosen by the program. The seed value is typically a hash of some piece of data related to the program or the data being stored. This creates a unique PDA that is tied to the program and the data being stored. They allow for more efficient and flexible data management on the Solana blockchain, improving the scalability and usability of the network.
+PDAは、プログラムIDとプログラムによって選択された特定のシード値の組み合わせから導き出されます。シード値は、通常、プログラムまたは保存されているデータに関連する何らかのデータのハッシュです。これにより、プログラムと保存されているデータに結びついたユニークなPDAが作成されます。これらは、Solanaブロックチェーン上でより効率的で柔軟なデータ管理を可能にし、ネットワークのスケーラビリティとユーザビリティを向上させます。
 
-Shadow Drive v1 delivered a working Solana PDA, a rudimentary single file upload, and a basic SDK enabling early adopters and those seeking faster on-chain proofs for off-chain data a way to start building. It also brought significant opportunities for our engineers to test theories regarding scaling, speed, reliability on the front end. Shadow Drive V1.5 was conceived and scoped for front-end enhancements.
+Shadow Drive v1では、Solana PDA、初歩的な単一ファイルのアップロード、基本的なSDKを提供し、アーリーアダプターやオフチェーンデータに対するオンチェーン証明の高速化を求める人々が構築を開始する方法を提供しました。また、フロントエンドのスケーリング、スピード、信頼性に関する理論をテストするために、エンジニアに重要な機会を提供しました。Shadow Drive V1.5は、フロントエンドの強化のために考案され、スコープが設定されました。
 
 ### **Shadow Drive v1.5 is Born: Building Tools and Listening to Developer Feedback**
 
-Our work on DAGGER began at the bottom of the stack, but we quickly realized that we needed a more data-driven process and deeper knowledge to nail down the DAGGER specification. To approach the DAGGER systems-level design requirements, we began by building overlay gateways, file servers, smart contracts, Solana PDAs, the CLI, APIs, and SDKs that together made Shadow Drive v1.5 a reality.
+DAGGERへの取り組みはスタックの一番下から始まりましたが、DAGGERの仕様に釘付けにするためには、よりデータドリブンなプロセスと深い知識が必要だとすぐに気づきました。DAGGERのシステムレベルの設計要件に近づくために、私たちはオーバーレイゲートウェイ、ファイルサーバー、スマートコントラクト、Solana PDA、CLI、API、SDKの構築から始めて、Shadow Drive v1.5 を一緒に実現しました。
 
-With Shadow Drive v1.5, we made it possible for off-chain data to live on Solana as on-chain proofs of storage that are fast, reliable, and scalable. This design allowed us to streamline Solana as a transaction payment layer and a ledger of all Shadow Drive operations, from storage used and payments made to files uploaded and more, all on-chain. This approach enabled us to onboard Web3 developers and identify performance and instability issues stemming from ledger interoperability, rather than battling ghosts from systems-level experimentation.
+Shadow Drive v1.5では、オフチェーンのデータを、高速で信頼性が高く、スケーラブルなオンチェーンのストレージ証明としてSolana上に住まわせることができるようになりました。この設計により、Solanaをトランザクションの支払いレイヤーとして、また、使用されたストレージや支払いからアップロードされたファイルなど、すべてのShadow Driveの操作の台帳として、すべてオンチェーンで効率化することができました。このアプローチにより、Web3の開発者を迎え入れ、システムレベルの実験によるゴーストと戦うのではなく、台帳の相互運用性に起因するパフォーマンスと不安定性の問題を特定することができました。
 
-By building out these foundational components first, we were able to gain a deeper understanding of the underlying systems and identify areas where we could optimize for efficiency and scalability. This data-driven approach allowed us to make informed decisions about the DAGGER specification, ensuring that it was tailored to our specific needs and capable of supporting the demands of an enterprise-level database.
+このような基礎的なコンポーネントを最初に構築することで、基礎となるシステムを深く理解し、効率性と拡張性のために最適化できる領域を特定することができたのです。このデータ駆動型のアプローチにより、DAGGERの仕様について十分な情報に基づいた決定を下すことができ、私たちの特定のニーズに合わせて、エンタープライズレベルのデータベースの要求をサポートすることができるようになりました。
 
-Overall, our approach to the DAGGER systems-level design requirements was focused on building a solid foundation that would allow us to scale efficiently and effectively. This approach enabled us to streamline Solana as a transaction payment layer and a ledger of all Shadow Drive operations, while also providing the flexibility and scalability needed to support future growth and development.
+DAGGERのシステムレベルの設計要件に対する私たちのアプローチは、全体として、効率的かつ効果的に拡張することができる強固な基盤を構築することに重点を置いていました。このアプローチにより、Solanaをトランザクション決済レイヤーおよびShadow Driveの全業務の台帳として合理化することができ、同時に将来の成長と開発をサポートするために必要な柔軟性とスケーラビリティも提供することができました。
 
 ## **Present Design Considerations: Advancing towards v2.0**
 
-Our team is immensely grateful for the invaluable insights and contributions from the dedicated Shadow Ecosystem builders. We've experienced a surge in pull requests, builder bounties, innovative ideas, and novel app use cases, all of which have significantly contributed to driving front-end enhancements to the cutting-edge Shadow Drive v1.5.
+私たちのチームは、熱心なShadowエコシステムビルダーからの貴重な洞察と貢献に対して、非常に感謝しています。プルリクエスト、ビルダー賞、革新的なアイデア、斬新なアプリの使用例などが急増し、最先端のShadow Drive v1.5のフロントエンド強化に大きく貢献しました。
 
-These enhancements feature advanced parallel processing techniques for bulk multi-file uploads, enabling increased file size limits and an optimized regional footprint of the storage cluster. Furthermore, the enhanced API offers improved performance and permits external apps to virtually mount their Shadow Drive accounts, paving the way for substantial advancements in CDN capabilities for builders and streaming data-processing. This support extends to a diverse range of use cases, from social media platforms to next-generation AI applications.
+これらの機能強化は、マルチファイルの一括アップロードのための高度な並列処理技術を特徴とし、ファイルサイズの制限を拡大し、ストレージクラスタの地域フットプリントを最適化することが可能です。さらに、強化されたAPIはパフォーマンスを向上させ、外部アプリがShadow Driveアカウントを仮想的にマウントすることを可能にし、ビルダーやストリーミングデータ処理のためのCDN機能の大幅な進歩に道を開きます。これにより、ソーシャルメディアプラットフォームから次世代AIアプリケーションまで、多様なユースケースへの対応が可能となります。
 
-Though this overview does not encompass all the improvements in the pipeline, it showcases the advanced optimization stage that the Shadow Drive front-end has reached. Our swift progress and overwhelmingly positive feedback have positioned us to efficiently transition into the intermediate stages of the fully decentralized Shadow Drive v2.
+この概要は、パイプラインのすべての改善を網羅しているわけではありませんが、Shadow Driveのフロントエンドが高度な最適化段階に達していることを示すものです。迅速な進捗と圧倒的なポジティブなフィードバックにより、完全分散型Shadow Drive v2の中間段階へ効率的に移行することができました。
 
 **Our current design endeavors are primarily focused on the following objectives:**
 
-1. Refining the acclaimed v1.5 developer environment by extending the SDK and APIs to mobile platforms, thereby ensuring a solid mobile brand presence. This expansion facilitates greater developer engagement, fostering rapid growth and increased market penetration.
-2. Finalizing the deployment of the Shadow Drive implementation of DAGGER for seamless intra-network communication and consensus. This process includes closed alpha-pool testing with Shadow Operators as we perfect low-level communication improvements, canonical chunk shredding, 7:3 Reed-Solomon erasure coding, and numerous other components of decentralized storage DLT. Implementing these advanced features sets the stage for future scalability, robustness, and adaptability, further solidifying our position in the market.
+1. SDKとAPIをモバイルプラットフォームに拡張することで、定評のあるv1.5の開発者環境を洗練させ、モバイルブランドとしての存在感を確かなものにします。この拡張により、開発者のエンゲージメントを高め、急速な成長と市場への浸透を促進します。
+2. ネットワーク内のシームレスなコミュニケーションとコンセンサスを実現するDAGGERのシャドードライブ実装を最終的に完了させる。このプロセスでは、シャドウオペレーターによるクローズドアルファプールテストを実施し、低レベル通信の改善、正規チャンクシュレッダー、7：3リードソロモン消去コード、その他分散型ストレージDLTの多数のコンポーネントを完成させます。これらの高度な機能を実装することで、将来のスケーラビリティ、堅牢性、適応性を実現し、市場における当社の地位をより強固なものにします。
 
-Stay tuned for updates on our cutting-edge design efforts, which will be published in the [Change Log](../../reference/change-logs.md). We're planning more frequent document revisions and expanding the wealth of content in the ever-growing Shadow Drive resources. As a result, we anticipate accelerated growth and market capture, driven by our commitment to innovation and technological excellence.
+私たちの最先端のデザインへの取り組みについては、[change Log](../../reference/change-logs.md)で公開されますので、ご期待ください。私たちは、より頻繁にドキュメントを改訂し、増え続けるShadow Driveのリソースの豊富なコンテンツを拡大することを計画しています。その結果、イノベーションと卓越した技術へのコミットメントを原動力に、加速度的な成長と市場獲得が期待されます。

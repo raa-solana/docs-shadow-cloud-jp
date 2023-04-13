@@ -1,235 +1,235 @@
 ---
 description: >-
-  D.A.G.G.E.R. stands for Directed acyclic gossiping graph enabling replication,
-  and this section explains the architecture on a high level.
+  D.A.G.G.E.R.は、Directed acyclic gossiping graph enabling replicationの略です、
+  本項ではアーキテクチャをハイレベルに解説しています。
 ---
 
 # D.A.G.G.E.R
 
 ## **Introduction**
 
-DAGGER is a distributed system with a graph based consensus mechanism. There are four components that make up the protocol specification. This article will explain on a high level each of these four components and how they would interact with an incoming request. For simplicity, the use-case of the transaction can be considered a request to store a file on Shadow Drive.&#x20;
+DAGGERは、グラフベースのコンセンサス機構を持つ分散システムです。プロトコル仕様を構成する4つのコンポーネントがあります。この記事では、これら4つのコンポーネントのそれぞれを高レベルで説明し、それらが受信したリクエストとどのように相互作用するのかを説明します。シンプルにするため、トランザクションのユースケースは、Shadow Driveにファイルを保存する要求と考えることができます。
 
-There are many possible and planned implementations of the GenesysGo's D.A.G.G.E.R., however the flagship implementation will be Shadow Drive v2 - a soon to be released enhancement on the current Shadow Drive v1.5. This is why we regard a "transactions" as simply a write request submitted by a user. This section wraps by explaining how speed, stability, and scalability are why we chose to build a brand new cutting edge acyclic-graph-style consensus technology.
+GenesysGoのD.A.G.G.E.R.は、多くの実装が可能であり、計画されていますが、フラッグシップ実装はShadow Drive v2（現在のShadow Drive v1.5 を近々リリース予定の拡張版）であることが予定されています。このため、「トランザクション」とは、ユーザーから提出された書き込み要求のことだと考えています。このセクションでは、スピード、安定性、スケーラビリティが、私たちが最先端の非循環グラフ型コンセンサス技術の構築を選択した理由であることを説明し、締めくくりとします。
 
-_Please note: this section adheres to high level explanations and general concepts suitable for all readers. This is not to be considered a whitepaper, however as DAGGER continues to mature we are planning the release of a more technical documentation._&#x20;
+_注意：このセクションでは、すべての読者に適したハイレベルな説明と一般的な概念に準拠しています。しかし、DAGGERが成熟していくにつれて、より技術的なドキュメントのリリースを計画しています。_
 
 ## **Overview**
 
-The components, in the order an incoming transaction (a user write request) would see them throughout its lifecycle are illustrated the figure below:
+これらのコンポーネントは、トランザクション（ユーザーからの書き込み要求）のライフサイクルを通して見ることができる順番で、下図に示されています：
 
 <figure><img src="../.gitbook/assets/Dagger_Lifecycle2.png" alt=""><figcaption></figcaption></figure>
 
 ### **Key Terms**
 
-For introductory help, many technical terms in this document have links to their definitions. The following list defines a few terms commonly used throughout this document:
+本書では、入門者向けのヘルプとして、多くの専門用語にその定義へのリンクを付けています。以下のリストでは、この文書でよく使われるいくつかの用語を定義しています：
 
-* Transaction: A write request submitted by a user. A transaction can contain [raw bytes](dagger.md#raw-bytes-binary-data-that-is-made-up-of-0s-and-1s-usually-representing-a-string-of-text-a-file-or-an-image), membership management requests, and Shadow transactions (\[Shadow Drive/Cloud actions e.g. store file, instantiate VM).
-* Block: A set of transactions that are packed into a [Merkle Tree](dagger.md#merkle-tree-a-data-structure-used-in-cryptography-to-verify-the-integrity-of-data-a-merkle-tree-allows-large-datasets-to-be-checked-for-consistency-and-completeness-without-having-to-download-the-entire-dataset) whose root hash is included in a node in the [DAG](dagger.md#directed-acyclic-graph-a-graph-that-consists-of-directed-edges-with-no-cycles-used-to-represent-relationships-between-distributed-ledger-transactions).
-* Event: A node in the DAG, which contains the [hashes](dagger.md#cryptographic-hashes-a-one-way-function-used-to-map-data-of-any-size-to-a-fixed-length-value-used-to-create-digital-fingerprints-to-verify-data-integrity) of its parents, a timestamp, a Block payload, and the creator’s signature of the aforementioned.
+* トランザクション: ユーザーによって提出された書き込み要求。トランザクションには [raw bytes](dagger.md#raw-bytes-binary-data-that-is-made-up-of-0s-and-1s-usually-representing-a-string-of-text-a-file-or-an-image) 会員管理要求、シャドートランザクション（Shadow Drive/cloud 動作、例えばファイルの保存、VMをインスタンスする）などがあります。
+* ブロック：root hashが [DAG](dagger.md#directed-acyclic-graph-a-graph-that-consists-of-directed-edges-with-no-cycles-used-to-represent-relationships-between-distributed-ledger-transactions) のノードに含まれる  [Merkle Tree](dagger.md#merkle-tree-a-data-structure-used-in-cryptography-to-verify-the-integrity-of-data-a-merkle-tree-allows-large-datasets-to-be-checked-for-consistency-and-completeness-without-having-to-download-the-entire-dataset) のノードにルートハッシュが含まれています。
+* イベント: DAG内のノードで、親の[ハッシュ](dagger.md#cryptographic-hashes-a-one-way-function-used-to-map-data-of-any-size-to-a-fixed-length-value-used-to-create-digital-fingerprints-to-verify-data-integrity) 、タイムスタンプ、ブロックペイロード、前述の作成者の署名が含まれています。
 
-### Understanding DAGGER's Asynchronous Consensus
+### DAGGERの非同期型コンセンサスを理解する
 
-The DAGGER system achieves consensus on the ordering of Events through asynchronous computations on a local graph, ensuring efficient and secure distributed processing. This consensus mechanism is crucial for maintaining the integrity and consistency of data within the network.
+DAGGERシステムは、ローカルグラフ上の非同期計算によってイベントの順序に関する合意を達成し、効率的で安全な分散処理を保証します。このコンセンサスメカニズムは、ネットワーク内のデータの整合性と一貫性を維持するために極めて重要です。
 
-In the DAGGER system, each node maintains a local graph, representing a partial view of the overall network state. The local graph consists of vertices, which represent Events, and edges that indicate dependencies between Events. As new Events are generated, they are integrated into the local graph following specific rules.
+DAGGERシステムでは、各ノードがネットワーク全体の状態の一部を表すローカルグラフを保持しています。ローカルグラフは、イベントを表す頂点と、イベント間の依存関係を示すエッジで構成されています。新しいイベントが生成されると、特定のルールに従ってローカルグラフに統合されます。
 
-Asynchronous computations are employed to continuously update and process the local graphs. This approach allows nodes to work independently without waiting for a global synchronization signal, thus improving overall system performance and scalability. The asynchronous nature of DAGGER's consensus mechanism enables nodes to adapt to varying network conditions and maintain a high degree of fault tolerance.
+ローカルグラフを継続的に更新・処理するために、非同期計算が採用されています。このアプローチにより、ノードはグローバルな同期信号を待つことなく独立して動作することができ、システム全体のパフォーマンスとスケーラビリティを向上させることができます。DAGGERのコンセンサスメカニズムの非同期性により、ノードは変化するネットワーク条件に適応し、高度な耐障害性を維持することができます。
 
-The DAGGER consensus algorithm utilizes various techniques to ensure the correct ordering of Events within the local graph. These techniques may include voting mechanisms, reputation systems, and probabilistic approaches. By leveraging these methods, the system can effectively resolve conflicts and reach consensus on the global ordering of Events.
+DAGGERコンセンサスアルゴリズムは、ローカルグラフ内のイベントの正しい順序付けを保証するために様々な技術を利用します。これらの技術には、投票メカニズム、評価システム、確率的アプローチなどが含まれます。これらの手法を活用することで、システムは効果的に競合を解決し、イベントのグローバルな順序付けに関するコンセンサスに達することができます。
 
 ## **Components**
 
-### **Communication Module: The Network's Incoming & Outgoing Data**
+### **Communicationsモジュール： ネットワークの受信・送信データについて**
 
-The communications module initializes outgoing [sync](dagger.md#synchronization-requests-in-peer-to-peer-network-requests-sent-between-nodes-in-a-peer-to-peer-network-to-ensure-that-the-nodes-have-the-same-data) requests with [peers](dagger.md#peer-to-peer-a-type-of-network-architecture-in-which-each-node-in-the-network-can-act-as-both-a-client-and-a-server-in-a-peer-to-peer-network-nodes-communicate-directly-with-each-other-rather-than-through-a-central-server) and forwards sync responses from peers to the processor, handles incoming sync requests from peers, forwards transactions to the processor, forwards RPC requests to the controller, and maintains a peer IP database.
+Communicationsモジュールは、[ピア](dagger.md#peer-to-peer-a-type-of-network-architecture-in-which-each-node-in-the-network-can-act-as-both-a-client-and-a-server-in-a-peer-to-peer-network-nodes-communicate-directly-with-each-other-rather-than-through-a-central-server)との発信[同期](dagger.md#synchronization-requests-in-peer-to-peer-network-requests-sent-between-nodes-in-a-peer-to-peer-network-to-ensure-that-the-nodes-have-the-same-data)要求を初期化し、ピアからの同期応答をProcesserに転送し、ピアからの受信同期要求を処理し、トランザクションをProcesserに転送し、RPC要求をControllerに転送し、ピアIPデータベースを維持します。
 
 * **Outgoing Sync Requests**
-  * To initialize a sync request, we begin by selecting a random active peer which has not recently been synced with.
-  * Since we need the most up-to-date peer list along with a summary of our current graph’s state, the communications module sends a request to the graph module to summarize the current graph’s state and choose a peer 1.
-  * The communications receives the state summary and a chosen peer, sends it to the peer and awaits a sync response, which is forwarded to the graph module to be digested.
+  * 同期リクエストを初期化するために、最近同期していないアクティブなピアをランダムに選択することから始めます。
+  * 現在のグラフの状態の要約とともに最新のピアリストが必要なので、CommunicationsモジュールはGraphモジュールにリクエストを送り、現在のグラフの状態を要約してピア1を選択します。
+  * Communicationsは状態の要約と選択されたピアを受信し、ピアに送信して同期応答を待ち、Graphモジュールに転送されて消化されます。
 * **Incoming Sync Requests**
-  * An incoming sync request is immediately forward to the graph module. We await a packaged sync response containing all [events](dagger.md#events-an-occurrence-that-is-detected-by-a-distributed-ledger) that we have which the peer does not have, which is sent back to the peer.
+  * 受信した同期リクエストは直ちにGraphモジュールに転送されます。私たちが持っていて相手が持っていないすべての[イベント](dagger.md#events-an-occurrence-that-is-detected-by-a-distributed-ledger) を含むパッケージされた同期応答を待ち、それが相手に送り返されます。
 * **Incoming Transactions**
-  * When a user submits a transaction, the communications module receiving the transaction then forwards it to the processor. After verification, the transaction makes it way through the forester and the graph module which, upon inclusion in a block, sends back the signature for the event which contains the block in which the transaction was included. The communications module forwards this signature back to the user. Note that this does not mean the block has been [finalized](dagger.md#finalized-block-a-block-that-has-been-accepted-by-the-consensus-protocol-and-will-not-be-changed).
+  * ユーザーがトランザクションを送信すると、トランザクションを受信したCommunicationsモジュールはそれをProcesserに転送します。検証後、トランザクションはForesterとGraphモジュールを通過し、ブロックに含まれると、トランザクションが含まれるブロックを含むイベントの署名を送り返します。Communicationsモジュールは、この署名をユーザーに送り返します。これはブロックが[finalized](dagger.md#finalized-block-a-block-that-has-been-accepted-by-the-consensus-protocol-and-will-not-be-changed)されたことを意味しないことに注意してください。
 
 <figure><img src="../.gitbook/assets/Docs_MindMap_4.png" alt=""><figcaption></figcaption></figure>
 
 * **Incoming RPC Requests**
-  * When a user submits one of several possible [RPC](dagger.md#rpc-request) requests, whether it be to read a file or inquire about a block or transaction, it is forwarded to the controller. The controller sends back the result of the ledger query to the communications module, which forwards it to the user. This RPC API is native to DAGGER and confirm to JSON standards.
+  * ユーザが、ファイルの読み取り、ブロックやトランザクションの問い合わせなど、いくつかの[RPC](dagger.md#rpc-request)リクエストのいずれかを送信すると、そのリクエストはControllerへ転送されます。Controllerは元帳の問い合わせ結果をCommunicationsモジュールに送り返し、Communicationsモジュールはそれをユーザーに転送します。このRPC APIは、DAGGERのネイティブであり、JSON標準に準拠しています。
 
 <figure><img src="../.gitbook/assets/RPC_Request_Graphic_Docs_Transparent.png" alt=""><figcaption></figcaption></figure>
 
-### **Processor Module: Verification**
+### **Processerモジュール： 検証**
 
-The verifier and forester are [sibling modules](dagger.md#sibling-modules) responsible for verification of events, blocks, and transactions. The verification happens for events made by peers, as well as for incoming transactions made by users. There are several forms of verification: signature verification for transactions, signature verification for blocks, and [root hash](dagger.md#root-hash) verification for blocks. When processing peer events, the verifier is responsible for the first two of these forms of verification, while the forester is responsible for verification of the root hash of the transaction Merkle trees that form the blocks. When processing incoming user transactions, the forester gathers transactions to pack into a block and produces the Merkle root hash which represents the block.\
-\
-In the case of filesystem applications like Shadow Drive, the controller module would perform reads and writes to the ledger using the DAGGER protocol. This would include operations like shredding and erasure coding to ensure the files are secure and resilient. When a user submits a request to store a file on Shadow Drive, the forester module would gather the transactions and pack them into a block. The verifier module would then verify the signatures on the transactions and validate the root hash of the transaction Merkle tree in the block. Once the block is verified, it would be added to the DAGGER ledger, which maintains a secure and tamper-proof record of all transactions.
+VerifierとForesterは、イベント、ブロック、トランザクションの検証を担当する[sibling modules](dagger.md#sibling-modules)です。検証はピアによって行われるイベントと、ユーザーによって行われる受信トランザクションに対して行われます。トランザクションの署名検証、ブロックの署名検証、ブロックの[root hash](dagger.md#root-hash)検証など、検証にはいくつかの形式があります。ピアイベントを処理する場合、Verifierはこれらの検証形式のうち最初の2つを担当し、Foresterはブロックを形成するトランザクションのMerkleツリーのroot hashの検証を担当します。受信したユーザートランザクションを処理する際、Foresterはブロックにまとめるトランザクションを収集し、ブロックを表すMerkle root hashを作成します。
 
-In the case of other use cases like oracles, bridges, and VM orchestration, the controller module would make external calls to other systems and services as needed. For example, if a user wanted to execute a smart contract on Shadow Compute, the controller module would interact with the verifier and forester modules to ensure that the transaction is valid and secure. The verifier would verify the signature on the transaction, while the forester would validate the root hash of the transaction
+Shadow Driveのようなファイルシステムアプリケーションの場合、ControllerモジュールはDAGGERプロトコルを使用して台帳への読み取りと書き込みを実行します。これには、ファイルの安全性と回復力を確保するためのシュレッダーや消去コードなどの操作が含まれます。ユーザーがShadow Driveにファイルを保存するリクエストを提出すると、Foresterモジュールがトランザクションを収集し、ブロックにまとめます。次に、Verifireモジュールがトランザクションの署名を検証し、ブロック内のトランザクションのMerkleツリーのroot hashを検証します。ブロックが検証されると、そのブロックはDAGGER台帳に追加され、すべての取引の安全で改ざん不可能な記録を維持します。
 
-### **Graph Module: Asynchronous Consensus**
+オラクル、ブリッジ、VMオーケストレーションなどの他のユースケースの場合、Controllerモジュールは必要に応じて他のシステムやサービスに外部コールすることになります。例えば、ユーザーがShadow Compute上でスマートコントラクトを実行したい場合、Controllerモジュールは、トランザクションが有効で安全であることを確認するために、VerifierおよびForesterモジュールと対話します。Verifierはトランザクションの署名を検証し、Foresterはトランザクションのroot hashを検証します。
 
-At a high level, the graph has two core responsibilities along with some collaborative duties. The two core responsibilities are:
+### **Graphモジュール： 非同期コンセンサス**
 
-#### 1. Process sync responses to construct the gossip graph
+グラフには、2つの中核的な責務と、いくつかの協力的な責務があります。2つの中核的な責務は以下の通りです：
 
-Directed acyclic Merkle-based gossip graphs are a way to organize and verify information in a secure and efficient manner. Think of it like a tree, where each branch splits into two smaller branches, and so on, until you reach the smallest branches, or "leaves." Each piece of information, or "data block," is stored in one of these leaves.
+#### 1. syncレスポンスを処理してゴシップグラフを構築する
 
-To ensure the tree's integrity, a unique code called a "hash" is created for each data block. These hash codes are then combined in pairs as we move up the tree. This process repeats until we reach the top, or "root," of the tree. The root hash represents the entire tree and can be used to verify that the information within the tree has not been tampered with.
+有向非循環Merkleベースのゴシップグラフは、情報を安全かつ効率的に整理・検証するための方法です。樹木のように、それぞれの枝が2つの小さな枝に分かれていき、最小の枝、つまり "葉"に達するまで続くと考えてください。それぞれの情報、つまり「データブロック」は、この葉の1つに格納されています。
 
-In summary, a Merkle-based gossip graph is a tree structure that securely organizes and verifies information using unique codes called hashes. The tree is built from the bottom up by combining pairs of hashes, ultimately resulting in a single root hash that represents the entire tree.
+ツリーの整合性を確保するため、データブロックごとに「ハッシュ」と呼ばれる固有のコードが作成されます。これらのハッシュコードは、ツリーの上に行くにつれて2つ1組で結合されます。このプロセスは、ツリーの最上位（ルート）に到達するまで繰り返されます。root hashはツリー全体を表すもので、ツリー内の情報が改ざんされていないことを確認するために使用されます。
 
-<figure><img src="../.gitbook/assets/image.png" alt=""><figcaption><p>This is a conceptual graphic.</p></figcaption></figure>
+要約すると、Merkleベースのゴシップグラフは、ハッシュと呼ばれるユニークなコードを用いて情報を安全に整理・検証するツリー構造です。ツリーは、ハッシュのペアを組み合わせて下から上に構築され、最終的にツリー全体を表す単一のroot hashが得られます。
 
-This UML class diagram above consists of four classes: MerkleTree, Node, Data, and Hash.
+<figure><img src="../.gitbook/assets/image.png" alt=""><figcaption><p>これはコンセプトグラフィックです</p></figcaption></figure>
 
-* MerkleTree: Represents the entire Merkle tree structure. It has a `root` property that holds the root hash of the tree and a `computeTree` method that builds the Merkle tree based on an array of Data objects.
-* Node: Represents a node within the Merkle tree. Each node has a `hash` property and references to its `left` and `right` child nodes.
-* Data: Represents the data blocks stored in the leaf nodes of the Merkle tree. Each data block has a value.
-* Hash: Represents the hash values that are calculated for the data blocks and nodes in the Merkle tree. Each hash has a value.
+この上のUMLクラス図は、4つのクラスで構成されています： MerkleTree、Node、Data、Hashです。
 
-The diagram shows the relationships between these classes, including the composition of the MerkleTree and Node classes, as well as the association between the Node, Data, and Hash classes. The purpose of a UML class diagram is to provide an abstract and visual representation of a software system's structure, making it easier to understand, design, and maintain the system. This is for concept purposes only and for helping explain how Merkel data structures work. DAGGER uses a more advanced implementation of this data structure which will be explained in more detail as more technical documents are released.
+* MerkleTree: MerkleTreeの構造全体を表す。ツリーのroot hashを保持する `root` プロパティと、Data オブジェクトの配列に基づいて Merkleツリーを構築する `computeTree` メソッドを持ちます。
+* Node: Merkleツリー内のノードを表現する。各ノードは `hash` プロパティと `left` と `right` の子ノードへのリファレンスを持ちます。
+* Data: Merkleツリーのリーフノードに格納されているデータブロックを表す。各データブロックは値を持っています。
+* Hash: Merkleツリーのデータブロックとノードに対して計算されるハッシュ値を表します。各ハッシュは値を持ちます。
 
-#### 2. Analyze the graph to derive the [consensus](dagger.md#consensus) ordering of events. The collaborative duties are to help the communications module decide which peer to sync with and to inform the communications module.
+この図では、MerkleTree クラスと Node クラスの構成、および Node、Data、Hash クラスの関連付けなど、これらのクラス間の関係を示しています。UML クラス図の目的は、ソフトウェア・システムの構造を抽象的かつ視覚的に表現することで、システムの理解、設計、保守を容易にすることです。これは概念的な目的で、Merkelのデータ構造がどのように機能するかを説明するのに役立つものでしかありません。DAGGERはこのデータ構造のより高度な実装を使用しており、より多くの技術文書が公開されるにつれて、より詳細に説明されるでしょう。
 
-* Consensus based on the ordering of graph events is a key component of protocols like DAGGER. In DAGGER, each node maintains a local copy of the "Shadow Graph," which is essentially an acyclic graph that records all the transactions and events that have occurred in the system. Nodes also communicate with each other using a gossip protocol, which involves sharing information about events and transactions.
-* When a new transaction is submitted to the system, it is first validated by the node that receives it. The node then creates a new event that includes the transaction and adds it to its local copy of the Shadow Graph. The node then gossips about the new event to other nodes in the network.
-* As events are gossiped about, each node updates its local copy of the Shadow Graph to include the new events. Nodes also update their knowledge of other nodes' opinions on the order of events in the Shadow Graph. This is where hashgraph-driven gossip comes in allowing consensus to be derived.
-* Each node maintains a virtual voting weight that is proportional to its weighting in the system. When two conflicting transactions are encountered, nodes use their virtual voting weight to vote on which transaction they believe should come first in the Shadow Graph. This is done by exchanging messages with other nodes to gather their opinions on the order of events. Transactions that have been seen and agreed upon by more than 2/3rd of the network are considered "strongly seen."
+#### 2. グラフを解析して、イベントの[consensus](dagger.md#consensus)順序を導き出す。協調的な任務は、通信モジュールがどのピアと同期するかを決めるのを助けることと、通信モジュールに通知することです。
+
+* グラフイベントの順序に基づくコンセンサスは、DAGGERのようなプロトコルの重要な構成要素です。DAGGERでは、各ノードが「シャドウグラフ」のローカルコピーを保持します。シャドウグラフは、基本的にシステムで発生したすべてのトランザクションとイベントを記録する非循環なグラフです。また、ノードはイベントやトランザクションに関する情報を共有するゴシップ・プロトコルを用いて互いに通信します。
+* 新しいトランザクションがシステムに提出されると、まずそれを受信したノードによって検証されます。その後、ノードはトランザクションを含む新しいイベントを作成し、それをシャドウグラフのローカルコピーに追加します。その後、ノードは新しいイベントをネットワーク内の他のノードにゴシップします。
+* イベントがゴシップされると、各ノードは新しいイベントを含めるためにシャドウグラフのローカルコピーを更新します。ノードはまた、シャドウグラフのイベントの順序に関する他のノードの意見に関する知識も更新します。ここでハッシュグラフ駆動型ゴシップが登場し、コンセンサスを得ることができるようになります。
+* 各ノードは、システム内での重み付けに比例した仮想投票ウェイトを保持します。競合する2つのトランザクションが発生した場合、ノードは仮想投票ウェイトを使用して、シャドウグラフでどちらのトランザクションを優先すべきと考えるかを投票します。これは、他のノードとメッセージを交換して、イベントの順序に関する意見を収集することによって行われます。ネットワークの2/3以上が見て合意した取引は、"強く見られた "とみなされます。
 
 <figure><img src="../.gitbook/assets/Screenshot 2023-03-21 133926.png" alt=""><figcaption><p>A high level concept of comms related to consensus</p></figcaption></figure>
 
-### **Controller Module: Transaction Execution**
+### **Controllerモジュール： トランザクションの実行**
 
-The controller module performs reads and writes to the [ledger](dagger.md#ledger). This is where different use cases of DAGGER will vary the most. For filesystem applications of DAGGER (e.g. Shadow Drive), this includes operations like [shredding](dagger.md#erasure-coding) and [erasure coding](dagger.md#erasure-coding). For other use cases like oracles, bridges, and [VM orchestration](dagger.md#virtual-machine-orchestration) (e.g. Shadow Compute), this is where external calls are made.
+Controllerモジュールは[ledger](dagger.md#ledger)への読み込みと書き込みを実行します。これはDAGGERの使用例によって最も異なる部分です。DAGGERのファイルシステム用途(Shadow Drive など)では、[shredding](dagger.md#erasure-coding)や[erasure coding](dagger.md#erasure-coding)などのオペレーションがあります。オラクル、ブリッジ、[VM orchestration](dagger.md#virtual-machine-orchestration) (Shadow Computeなど)などの他の使用例については、ここで外部呼び出しが行われます。
 
-### **Lifecycle of a Transaction**
+### **トランザクションのライフサイクル**
 
-In conclusion and summary of the DAGGER consensus network, the below sequency diagram revisits the lifecycle of a transaction with greater detail:
+DAGGERコンセンサスネットワークの結論とまとめとして、トランザクションのライフサイクルをより詳細に再確認するために、以下のシーケンス図を示します:
 
 <figure><img src="../.gitbook/assets/dagger_comprehensive.png" alt=""><figcaption></figcaption></figure>
 
-## **Why is D.A.G.G.E.R using acyclic-graphs for consensus?**
+## **D.A.G.G.E.Rはなぜ非循環グラフをコンセンサスに使っているのですか？**
 
-Proof-of-stake (PoS) and [proof-of-work](dagger.md#proof-of-work) (PoW) are two of the most popular consensus mechanisms used in [blockchain ](dagger.md#blockchain)networks. In PoS, validators or nodes are chosen to validate transactions based on the amount of cryptocurrency they hold and are willing to "stake." The more they hold and stake, the higher the probability of being selected as the validator. In PoW, miners compete to solve complex mathematical problems, and the first one to solve it is rewarded with cryptocurrency and the right to validate transactions.
+プルーフオブステーク（PoS）と[proof-of-work](dagger.md#proof-of-work)（PoW）は、[blockchain](dagger.md#blockchain)networks で使われる最も人気のある合意メカニズムのうちの2つです。PoSでは、バリデータまたはノードは、保有する暗号通貨の量と「ステーク」する意思に基づいて、トランザクションを検証するために選ばれます。保有する暗号通貨の量が多ければ多いほど、バリデーターとして選ばれる確率は高くなります。PoWでは、マイナーが複雑な数学的問題を競って解決し、最初に解決した者には暗号通貨とトランザクションを検証する権利が与えられます。
 
-On the other hand, D.A.G.G.E.R. is a [directed acyclic](dagger.md#directed-acyclic-graph) graph-based (DAG) consensus mechanism, where nodes directly communicate with each other and share their transactions, creating a DAG of transactions. In this DAG, every node has its own history of transactions, and consensus is reached by analyzing the entire graph and identifying a single, agreed-upon order of transactions. This process allows for high throughput and fast finality, making it an attractive choice for applications that require high speed and scalability (e.g. Shadow Drive, DAGGER Mobile, AI model training).
+一方、D.A.G.G.E.R.は、[directed acyclic](dagger.md#directed-acyclic-graph)グラフベース（DAG）の合意メカニズムで、ノード同士が直接通信して取引を共有、取引のDAGを形成します。このDAGでは、各ノードが独自の取引履歴を持ち、グラフ全体を分析し、合意された単一の取引順序を特定することで合意形成が行われます。この処理により、高いスループットと高速なファイナリティを実現できるため、高速性と拡張性が求められるアプリケーション（Shadow Drive、DAGGER Mobile、AIモデル学習など）に魅力的な選択肢となっています。
 
-In the case of a decentralized storage network like GenesysGo Shadow Drive, D.A.G.G.E.R. this allows for horizontal scalability, meaning that the network can grow by adding more nodes, increasing storage capacity, and processing power without compromising the speed or security of the network. This is because each node can process and validate transactions independently, and the final consensus is reached by analyzing the entire DAG.
+GenesysGo Shadow Driveのような分散型ストレージネットワークの場合、D.A.G.G.E.R.により、水平スケーラビリティ、つまりネットワークの速度やセキュリティを損なうことなく、ノードを増やし、ストレージ容量や処理能力を増やすことでネットワークを拡大することができます。これは、各ノードが独立してトランザクションを処理・検証し、DAG全体を分析することで最終的なコンセンサスを得ることができるためです。
 
-Proof-of-storage (PoS) consensus mechanisms like [Filecoin ](dagger.md#filecoin)and [IPFS](dagger.md#ipfs), on the other hand, allow for decentralized storage by incentivizing participants to store and retrieve data in exchange for cryptocurrency rewards. PoS systems have the potential to offer greater security than centralized storage solutions, as data is distributed across multiple nodes, making it difficult for any single node to compromise the network. However, PoS systems typically require a significant amount of storage capacity and computational resources to participate, making it less accessible to the general public.
+一方、[Filecoin](dagger.md#filecoin)や[IPFS](dagger.md#ipfs)などのストレージ証明（PoS）合意機構では、暗号通貨の報酬と引き換えにデータの保存と取得を参加者にインセンティブを与えて分散ストレージ化を実現します。PoSシステムは、データが複数のノードに分散されるため、単一のノードがネットワークを侵害することが困難であり、集中型ストレージソリューションよりも高いセキュリティを提供できる可能性がああります。しかし、PoSシステムは通常、参加するために相当量のストレージ容量と計算機資源を必要とするため、一般市民には利用しにくいものとなっています。
 
-In summary, D.A.G.G.E.R. protocol offers a unique consensus mechanism that allows for high throughput, fast finality, and horizontal scalability, making it an attractive choice for decentralized applications like Shadow Drive. PoS, PoW, and PoS consensus mechanisms all offer different benefits and trade-offs, and the choice of which one to use depends on the specific requirements of the application.
+まとめると、D.A.G.G.E.R.プロトコルは、高いスループット、速いファイナリティ、水平スケーラビリティを可能にする独自の合意メカニズムを提供し、Shadow Driveのような分散型アプリケーションにとって魅力的な選択肢となります。PoS、PoW、PoSのコンセンサスメカニズムは、いずれも異なる利点とトレードオフを提供し、どれを使用するかの選択は、アプリケーションの特定の要件に依存します。
 
-[**Start Building on Shadow Drive!**](../build/)
+[**Shadow Drive でビルドを開始する!**](../build/)
 
-#### **Terminology used on this page**
+#### **このページで使用している用語**
 
 #### **Blockchain:**
 
-A type of digital ledger technology that is used to record transactions in a secure, decentralized way. Each transaction is grouped into a "block" that is added to a chain of blocks, creating a permanent record of all transactions that have occurred.
+デジタル台帳技術の一種で、安全で分散化された方法で取引を記録するために使用されます。各取引は「ブロック」にまとめられ、ブロックの連鎖に追加され、発生したすべての取引の永久的な記録が作成されます。
 
-#### **Consensus:**&#x20;
+#### **Consensus:**
 
-A process in which a group of participants agree on a single version of the truth. In a distributed system, achieving consensus is important for ensuring that all nodes in the network have the same view of the system's state.
+参加者のグループが、真実の単一のバージョンに合意するプロセス。分散システムでは、ネットワーク内のすべてのノードがシステムの状態について同じ見解を持つことを保証するために、コンセンサスの達成は重要です。
 
-#### **Cryptographic hashes:**&#x20;
+#### **Cryptographic hashes:**
 
-A one-way function used to map data of any size to a fixed-length value. Used to create digital fingerprints to verify data integrity.
+任意のサイズのデータを固定長の値にマッピングするために使用される一方向性関数です。データの整合性を検証するためのデジタル指紋の作成に使用されます。
 
-#### **Directed acyclic graph:**&#x20;
+#### **Directed acyclic graph:**
 
-A graph that consists of directed edges with no cycles. Used to represent relationships between distributed ledger transactions.
+有向辺で構成され、サイクルのないグラフ。分散型台帳のトランザクション間の関係を表現するために使用されます。
 
-#### **Distributed System:**&#x20;
+#### **Distributed System:**
 
-A network of independent computers that work together to achieve a common goal. In a distributed system, tasks are divided among different nodes, which communicate and coordinate with each other to complete the tasks.
+共通の目標を達成するために協力し合う、独立したコンピュータのネットワーク。分散システムでは、タスクは異なるノードに分割され、ノードは互いに通信・協調してタスクを完了させます。
 
-#### **Distributed system file shredding:**&#x20;
+#### **Distributed system file shredding:**
 
-The process of splitting a file into multiple pieces and storing them on different computers in a distributed system.
+分散システムにおいて、ファイルを複数の断片に分割し、異なるコンピュータに保存する処理です。
 
-#### **Erasure Coding:**&#x20;
+#### **Erasure Coding:**
 
-A technique for breaking up data into smaller pieces and distributing them across a network to provide redundancy and ensure that the data can be recovered even if some of the pieces are lost.
+データを細かく分割してネットワーク上に分散させることで、冗長性を持たせ、一部が消失してもデータを復元できるようにする技術。
 
-#### **Events:**&#x20;
+#### **Events:**
 
-An occurrence that is detected by a distributed ledger.
+分散型台帳で検出される事象のこと。
 
-#### **Finalized block:**&#x20;
+#### **Finalized block:**
 
-A block that has been accepted by the consensus protocol and will not be changed.
+コンセンサスプロトコルによって受け入れられ、変更されることのないブロック。
 
-#### **Hashgraph:**&#x20;
+#### **Hashgraph:**
 
-A type of distributed ledger technology that uses a directed acyclic graph (DAG) to record transactions. Hashgraph is designed to be fast and scalable, making it well-suited for use cases such as decentralized storage networks.
+分散型台帳技術の一種で、取引を記録するために有向非循環グラフ（DAG）を使用しています。Hashgraphは高速かつスケーラブルに設計されており、分散型ストレージネットワークなどのユースケースに適しています。
 
-#### **IPFS:**&#x20;
+#### **IPFS:**
 
-InterPlanetary File System is a protocol and network designed to create a content-addressable, peer-to-peer method of storing and sharing hypermedia in a distributed file system.
+InterPlanetary File Systemは、ハイパーメディアを分散ファイルシステムに格納し、共有するためのコンテンツアドレス可能なピアツーピア方式を実現するために設計されたプロトコルおよびネットワークです。
 
-#### **Filecoin:**&#x20;
+#### **Filecoin:**
 
-Filecoin is a decentralized storage network where anyone can rent out their extra hard drive space to earn money in the form of its native cryptocurrency, FIL. The Filecoin project seeks to combine the advantages of blockchain technology with the existing IPFS protocol to provide a secure, incentive-based storage infrastructure.
+Filecoinは分散型ストレージネットワークで、誰でも余分なハードディスクスペースを貸し出して、ネイティブ暗号通貨であるFILの形でお金を稼ぐことができます。Filecoinプロジェクトは、ブロックチェーン技術の利点と既存のIPFSプロトコルを組み合わせ、安全でインセンティブに基づくストレージインフラを提供しようとしています。
 
-#### **Ledger:**&#x20;
+#### **Ledger:**
 
-A record of all transactions in a system. In a digital system, a ledger can be implemented as a database or other type of data structure.
+あるシステムにおけるすべての取引の記録。デジタルシステムでは、台帳はデータベースや他のタイプのデータ構造として実装することができます。
 
-#### **Merkle Tree:**&#x20;
+#### **Merkle Tree:**
 
-A data structure used in cryptography to verify the integrity of data. A Merkle tree allows large datasets to be checked for consistency and completeness without having to download the entire dataset.
+暗号技術において、データの整合性を検証するために用いられるデータ構造。Merkleツリーにより、大規模なデータセットをダウンロードすることなく、整合性と完全性をチェックすることができます。
 
-#### **Node:**&#x20;
+#### **Node:**
 
-A computer or other device that is connected to a network. In a distributed system, each node performs a specific function and communicates with other nodes in the network to complete tasks.
+ネットワークに接続されているコンピューターやその他のデバイスのこと。分散システムでは、各ノードが特定の機能を実行し、ネットワーク内の他のノードと通信してタスクを完了します。
 
-#### **Orchestration:**&#x20;
+#### **Orchestration:**
 
-The process of coordinating and managing multiple components or services in a distributed system. In a decentralized storage network, orchestration is used to ensure that data is stored and retrieved correctly across the network.
+分散型システムにおいて、複数のコンポーネントやサービスを調整・管理するプロセス。分散型ストレージネットワークでは、ネットワーク上でデータが正しく保存・取得されるようにオーケストレーションが使用されます。
 
-#### **Peer-to-Peer:**&#x20;
+#### **Peer-to-Peer:**
 
-A type of network architecture in which each node in the network can act as both a client and a server. In a peer-to-peer network, nodes communicate directly with each other, rather than through a central server.
+ネットワークアーキテクチャの一種で、ネットワーク内の各ノードがクライアントとサーバーの両方の役割を果たすことができます。ピアツーピアネットワークでは、ノードは中央のサーバーを介さず、互いに直接通信します。
 
-#### **Proof-of-Work:**&#x20;
+#### **Proof-of-Work:**
 
-A consensus algorithm used in some blockchain-based systems to validate transactions and create new blocks. Proof-of-work requires participants to solve complex mathematical problems in order to earn the right to validate a block of transactions.
+一部のブロックチェーンベースのシステムで、取引の検証や新しいブロックの作成に使用されるコンセンサスアルゴリズム。Proof-of-workでは、参加者は取引のブロックを検証する権利を得るために、複雑な数学的問題を解く必要があります。
 
-#### **Protocol:**&#x20;
+#### **Protocol:**
 
-A set of rules and standards that govern how data is transmitted and received over a network. In a distributed system, protocols ensure that all nodes in the network communicate in a standardized way.
+ネットワーク上でのデータの送受信方法を規定する一連の規則と標準。分散システムでは、プロトコルは、ネットワーク内のすべてのノードが標準的な方法で通信することを保証します。
 
-#### **Raw bytes:**&#x20;
+#### **Raw bytes:**
 
-Binary data that is made up of 0s and 1s, usually representing a string of text, a file or an image.
+0と1で構成されるバイナリデータで、通常は文字列、ファイル、画像などを表現します。
 
-#### **Replication:**&#x20;
+#### **Replication:**
 
-The process of copying data from one location to another in a distributed system. Replication is used to ensure that data is available even if one or more nodes in the network fail.
+分散システムにおいて、ある場所から別の場所にデータをコピーするプロセス。レプリケーションは、ネットワーク内の1つまたは複数のノードに障害が発生した場合でも、データが利用できるようにするために使用されます。
 
-#### **Root hash:**&#x20;
+#### **Root hash:**
 
-A single cryptographic hash that represents all of the data of a Merkle tree.
+Merkleツリーの全データを表現する単一の暗号ハッシュ。
 
-#### **RPC request:**&#x20;
+#### **RPC request:**
 
-A remote procedure call, usually over an HTTP connection, used to communicate between distributed ledger nodes.
+分散型台帳ノード間の通信に使用される、通常HTTPコネクションを介したリモートプロシージャコールです。
 
-#### **Sibling modules:**&#x20;
+#### **Sibling modules:**
 
-Separate modules that work together to create a distributed ledger.
+別々のモジュールが連携して、分散型台帳を作成します。
 
-#### **Smart Contract:**&#x20;
+#### **Smart Contract:**
 
-A self-executing contract that is enforced and recorded on a blockchain or other type of digital ledger. Smart contracts automate the enforcement of contract terms and can be used to create decentralized applications.
+ブロックチェーンなどのデジタル台帳に記録され、強制される自己実行型の契約。スマートコントラクトは、契約条件の履行を自動化し、分散型アプリケーションの作成に利用できます。
 
-#### **Synchronization requests in peer-to-peer network:**&#x20;
+#### **Synchronization requests in peer-to-peer network:**
 
-Requests sent between nodes in a peer-to-peer network to ensure that the nodes have the same data.
+ピアツーピアネットワークのノード間で送信されるリクエストで、ノードが同じデータを持つことを保証するためのものです。
 
-#### **Virtual machine orchestration:**&#x20;
+#### **Virtual machine orchestration:**
 
-The process of provisioning and managing virtual machines in a distributed system.
+分散型システムにおいて、仮想マシンをプロビジョニングして管理するプロセス。
