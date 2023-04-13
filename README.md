@@ -1,7 +1,7 @@
 ---
 description: >-
-  This consolidated resource is for anyone exploring and developing on top of
-  the Shadow Cloud platform.
+  この統合されたリソースは、その上に探索し、開発する人のためのものです。
+  Shadow Cloudのプラットフォームです。
 ---
 
 # GET STARTED
