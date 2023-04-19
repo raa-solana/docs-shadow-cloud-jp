@@ -185,9 +185,13 @@ https://shdw-drive.genesysgo.net に POST リクエストを行うことで、�
 
 </details>
 
-Can I use the rust SDK in anchor programs?
+<details>
 
-No, the SDK requires internet access to send http requests. This is not allowed within Solana runtime because arbitrary http responses are not deterministic and may produce different Solana ledger state transitions
+<summary>anchor プログラムでrust SDKを使用することはできますか？</summary>
+
+いいえ、SDKはhttpリクエストを送信するためにインターネットアクセスが必要です。任意のhttp応答は決定論的ではなく、異なるSolana元帳の状態遷移を生成する可能性があるため、これはSolanaランタイム内で許可されていません。
+
+</details>
 
 <details>
 
