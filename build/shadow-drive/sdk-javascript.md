@@ -1,4 +1,4 @@
-# Javascript
+# JavaScript
 
 ## **Contents**
 
@@ -27,7 +27,7 @@
   * [**uploadFile**](sdk-javascript.md#uploadfile)
   * [**uploadMultipleFiles**](sdk-javascript.md#uploadmultiplefiles)
   * [**userInfo**](sdk-javascript.md#userinfo)
-* [**例 - SDKを使用してPOSTリクエストを行う**](#example---post-request-via-sdk-make-immutable)
+* [**例 - SDKを使用してPOSTリクエストを行う**](sdk-javascript.md#example---post-request-via-sdk-make-immutable)
 ### **Getting Started: Javascript SDK**
 
 Reactアプリをscaffoldして、依存関係を追加してみましょう。
@@ -1352,6 +1352,7 @@ console.log(responses);
 userInfo: PublicKey
 
 ### **Example - POST request via SDK (make immutable)**
+
 ```java
 import * as anchor from "@project-serum/anchor";
 import { getStakeAccount, findAssociatedTokenAddress } from "../utils/helpers";

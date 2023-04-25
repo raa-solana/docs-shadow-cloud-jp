@@ -76,7 +76,7 @@ HTMLドキュメントをShadow Driveで提供しながら、mintの機能とウ
 
 {% embed url="https://github.com/ebrightfield/shadow-drive-rust-cli" %}
 
-#### **このリストに載っていない？** [**Submit a PR**](https://github.com/GenesysGo/docs-shadow-cloud/blob/main/build/shadow-drive/community-maintained-uis.md) **または、私たちの** [**Discord**](https://discord.gg/genesysgo) **にご連絡ください。**。
+#### **このリストに載っていない？** [**Submit a PR**](https://github.com/GenesysGo/docs-shadow-cloud) **または、私たちの** [**Discord**](https://discord.gg/genesysgo) **にご連絡ください。**。
 
 
-[1] 免責事項：私たちのウェブサイトに表示される「Shadow Ecosystem」プロジェクトは、独立した第三者機関によって開発・運営されていることをご承知おきください。GenesysGoは、これらのサードパーティプロジェクトが提供するいかなるコンテンツ、製品、サービスについても責任を負いません。エコシステム内のサードパーティプロジェクトの順序や配置は、いかなるランキング、優先順位、優劣を意味するものではありません。あなたが交流することを決めたサードパーティプロジェクトの品質、セキュリティ、合法性、および適合性を評価するのは、あくまでもあなたの責任です。
+\[1] 免責事項：私たちのウェブサイトに表示される「Shadow Ecosystem」プロジェクトは、独立した第三者機関によって開発・運営されていることをご承知おきください。GenesysGoは、これらのサードパーティプロジェクトが提供するいかなるコンテンツ、製品、サービスについても責任を負いません。エコシステム内のサードパーティプロジェクトの順序や配置は、いかなるランキング、優先順位、優劣を意味するものではありません。あなたが交流することを決めたサードパーティプロジェクトの品質、セキュリティ、合法性、および適合性を評価するのは、あくまでもあなたの責任です。
