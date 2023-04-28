@@ -60,6 +60,6 @@ Shadow Driveは、現在市場に出回っているどのストレージプラ�
 
 よくある質問については、FAQの[General](../../build/shadow-drive/support-and-faq.md) セクションを確認してください。
 
-Shadow Platformのエコシステムについては、[Shadow Ecosystem](broken-reference) ページを参照してください。
+Shadow Platformのエコシステムについては、[Shadow Ecosystem](https://docs.shadow.cloud/build/community-maintained-uis) ページを参照してください。
 
 ### [**Shadow Drive でビルドを開始する!**](../../build/shadow-drive/)
