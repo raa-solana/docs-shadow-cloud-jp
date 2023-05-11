@@ -40,7 +40,7 @@ GitHub FAQ: https://github.com/GenesysGo/shadow-drive/issues?q=is%3Aissue+is%3Ac
 
 <summary>予約できるストレージ容量はどのくらいですか？</summary>
 
-CLIに記載されているように、1バケットあたり1GBの上限があります: https://docs.shadow.cloud/build/the-cli#create-a-storage-account
+1バケットあたり1テラバイト（1TB）の上限が設定されています。
 
 現在、この上限を大幅に増やす開発が進められています。
 
