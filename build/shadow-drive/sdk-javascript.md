@@ -19,11 +19,13 @@
   * [**getStorageAccount**](sdk-javascript.md#getstorageaccount)
   * [**getStorageAccounts**](sdk-javascript.md#getstorageaccount)
   * [**listObjects**](sdk-javascript.md#listobjects)
-  * [**makeStorageImmutable**](sdk-javascript.md#makestorageimmutable)
+  * [**makeStorageImmutable**](sdk-javascript.md#makestorageimmutable) **(updated)**
   * [**migrate**](sdk-javascript.md#migrate)
   * [**redeemRent**](sdk-javascript.md#redeemrent)
-  * [**reduceStorage**](sdk-javascript.md#reducestorage)
+  * [**reduceStorage**](sdk-javascript.md#reducestorage) **(updated)**
   * [**storageConfigPDA**](sdk-javascript.md#storageconfigpda)
+  * [**refreshStake**](sdk-javascript.md#refreshstake) **(new)**
+  * [**topUp**](sdk-javascript.md#topup) **(new)**
   * [**uploadFile**](sdk-javascript.md#uploadfile)
   * [**uploadMultipleFiles**](sdk-javascript.md#uploadmultiplefiles)
   * [**userInfo**](sdk-javascript.md#userinfo)
@@ -1196,6 +1198,45 @@ storageConfigPDA: PublicKey;
 {% endcode %}
 {% endtab %}
 {% endtabs %}
+
+### `refreshStake`
+
+#### Definition
+
+このメソッドは、ストレージアカウントのステーキング金額を更新するために使用されます。ステージアカウントを正しく更新するためには、[\`topUp\`](sdk-javascript.md#topup)メソッドを呼び出した後に、このメソッドを呼び出すことが必要です。
+
+#### Parameters
+
+* `key`: `PublicKey` - ストレージアカウントの公開鍵
+* `version`: `v1` か `v2` のどちらか. 注意 - `v1` は完全に非推奨であるため、今後は `v2` のみを使用する必要があります。
+
+#### Returns
+
+```json
+{
+    txid: string
+}
+```
+
+### `topUp`
+
+#### Definition
+
+This method is used to top up a storage account's $SHDW balance to cover any necessary fees, like mutable storage fees which are collected every epoch. It is necessary to call the \`[refreshStake](sdk-javascript.md#refreshstake)\` method after this.
+このメソッドは、ストレージアカウントの $SHDW 残高を、エポックごとに徴収される可変ストレージ料金などの必要な料金に充当するために使用されます。この後 \`[refreshStake](sdk-javascript.md#refreshstake)\`メソッドを呼び出す必要があります。
+
+#### Parameters
+
+* `key`: `PublicKey` - ストレージアカウントの公開鍵
+* `amount`: `Number` - ステークアカウントに送金する$SHDWの金額
+
+#### Returns
+
+```json
+{
+    txid: string;
+}
+```
 
 ### **`uploadFile`**
 

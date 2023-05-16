@@ -287,7 +287,7 @@ Shadow Driveネットワークによって部分的に署名されたシリア�
 {% endswagger-response %}
 {% endswagger %}
 
-{% swagger method="post" path="" baseUrl="https://shadow-storage.genesysgo.net" summary="reduce-storage" %}
+{% swagger method="post" path="" baseUrl="https://shadow-storage.genesysgo.net" summary="reduce-storage (updated)" %}
 {% swagger-description %}
 ストレージの削減
 
@@ -309,7 +309,7 @@ Serialized reduce storage transaction that is partially signed by the shadow dri
 {% endswagger-response %}
 {% endswagger %}
 
-{% swagger method="post" path="" baseUrl="https://shadow-storage.genesysgo.net" summary="make-immutable" %}
+{% swagger method="post" path="" baseUrl="https://shadow-storage.genesysgo.net" summary="make-immutable (updated)" %}
 {% swagger-description %}
 ファイルを不変にする
 

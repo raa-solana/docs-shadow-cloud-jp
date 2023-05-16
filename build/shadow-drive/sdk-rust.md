@@ -1,43 +1,48 @@
-# **Contents**
-* **[インストール](#install)**
-* **[例](#example)**
-* **[メソッド](#methods)**
-    * **[add_immutable_storage](#add_immutable_storage)**
-    * **[add_storage](#add_storage)**
-    * **[cancel_delete_storage_account](#cancel_delete_storage_account)**
-    * **[claim_stake](#claim_stake)**
-    * **[create_storage_account](#create_storage_account)**
-    * **[delete_file](#delete_file)**
-    * **[delete_storage_account](#delete_storage_account)** 
-    * **[edit_file](#edit_file)**
-    * **[get_object_data](#get_object_data)**
-    * **[get_storage_account](#get_storage_account)**
-    * **[get_storage_accounts](#get_storage_accounts)**
-    * **[list_objects](#list_objects)**
-    * **[make_storage_immutable](#make_storage_immutable)**
-    * **[migrate](#migrate)**
-    * **[migrate_step_1](#migrate_step_1)**
-    * **[migrate_step_2](#migrate_step_2)**
-    * **[new](#new)**
-    * **[new_with_rpc](#new_with_rpc)**
-    * **[redeem_rent](#redeem_rent)**
-    * **[reduce_storage](#reduce_storage)**
-    * **[store_files](#store_files)**
-* **[その他の例](#add_immutable_storage)**
+# Rust
+## **Contents**
 
-## **Install**
+* [**インストール**](sdk-rust.md#install)
+* [**例**](sdk-rust.md#example)
+* [**メソッド**](sdk-rust.md#methods)
+  * [**add\_immutable\_storage**](sdk-rust.md#add\_immutable\_storage)
+  * [**add\_storage**](sdk-rust.md#add\_storage)
+  * [**cancel\_delete\_storage\_account**](sdk-rust.md#cancel\_delete\_storage\_account)
+  * [**claim\_stake**](sdk-rust.md#claim\_stake)
+  * [**create\_storage\_account**](sdk-rust.md#create\_storage\_account)
+  * [**delete\_file**](sdk-rust.md#delete\_file)
+  * [**delete\_storage\_account**](sdk-rust.md#delete\_storage\_account)
+  * [**edit\_file**](sdk-rust.md#edit\_file)
+  * [**get\_object\_data**](sdk-rust.md#get\_object\_data)
+  * [**get\_storage\_account**](sdk-rust.md#get\_storage\_account)
+  * [**get\_storage\_account\_size** ](sdk-rust.md#get\_storage\_account\_size)**(new)**
+  * [**get\_storage\_accounts**](sdk-rust.md#get\_storage\_accounts)
+  * [**list\_objects**](sdk-rust.md#list\_objects)
+  * [**make\_storage\_immutable**](sdk-rust.md#make\_storage\_immutable) **(updated)**
+  * [**migrate**](sdk-rust.md#migrate)
+  * [**migrate\_step\_1**](sdk-rust.md#migrate\_step\_1)
+  * [**migrate\_step\_2**](sdk-rust.md#migrate\_step\_2)
+  * [**new**](sdk-rust.md#new)
+  * [**new\_with\_rpc**](sdk-rust.md#new\_with\_rpc)
+  * [**redeem\_rent**](sdk-rust.md#redeem\_rent)
+  * [**reduce\_storage**](sdk-rust.md#reduce\_storage) **(updated)**
+  * [**refresh\_stake** ](sdk-rust.md#refresh\_stake)**(new)**
+  * [**store\_files**](sdk-rust.md#store\_files)
+  * [**top\_up** ](sdk-rust.md#top\_up)**(new)**
+* [**その他の例**](sdk-rust.md#add\_immutable\_storage)
+
+### **Install**
 
 Rust SDKは[crates.io](https://crates.io/crates/shadow-drive-sdk)、Rust SDK [Github](https://github.com/GenesysGo/shadow-drive-rust)で公開されています。
 
-プロジェクトディレクトリで以下のCargoコマンドを実行します：  
+プロジェクトディレクトリで以下のCargoコマンドを実行します：\
 `cargo add shadow-drive-sdk`
 
-または、Cargo.tomlに以下の行を追加します。 
+または、Cargo.tomlに以下の行を追加します。\ 
 `shadow-drive-sdk = "0.6.1"`
 
-#### **私たちの[Github](https://github.com/GenesysGo/shadow-drive-rust/blob/main/sdk/examples/end_to_end.rs)には、より多くの例が掲載されています。**
+**私たちの[**Github**](https://github.com/GenesysGo/shadow-drive-rust/blob/main/sdk/examples/end\_to\_end.rs)には、より多くの例が掲載されています。**
 
-## **Example**
+### **Example**
 
 ```rust
     //init tracing.rs subscriber
@@ -93,25 +98,28 @@ Rust SDKは[crates.io](https://crates.io/crates/shadow-drive-sdk)、Rust SDK [Gi
     println!("upload results: {:#?}", upload_results);
 ```
 
-# **Methods**
+## **Methods**
 
-## **`add_immutable_storage`**
+### **`add_immutable_storage`**
 
-### **Definition**
-指定された不変の `StorageAccount` にストレージ容量を追加します。StorageAccount` が immutable でない場合は、失敗します。
+#### **Definition**
+指定された不変の `StorageAccount` にストレージ容量を追加します。`StorageAccount` が immutable でない場合は、失敗します。
 
-### **Parameters**
+#### **Parameters**
 * `storage_account_key` - 不変な `StorageAccount` の公開鍵です。
 * `size` - 追加したいストレージの量。例えば、既存の StorageAccount に 1MB のストレージがあり、合計 2MB が必要な場合、size は 1MB となります。サイズを指定する場合、現在サポートされているストレージ単位はKB、MB、GBのみです。
 
-### **Example**
+
+#### **Example**
+
 ```rust
 let add_immutable_storage_response = shdw_drive_client
     .add_immutable_storage(storage_account_key, Byte::from_str("1MB").expect("invalid byte string"))
     .await?;
 ```
 
-### **Response**
+#### **Response**
+
 ```json
 {
     message: String,
@@ -120,24 +128,27 @@ let add_immutable_storage_response = shdw_drive_client
 }
 ```
 
-## **`add_storage`**
+### **`add_storage`**
 
-### **Definition**
+#### **Definition**
+
 指定された StorageAccount にストレージ容量を追加します。
 
-### **Parameters**
+#### **Parameters**
 
 * `storage_account_key` - StorageAccount の公開鍵です。
 * `size` - 追加したいストレージの量です。例：既存の StorageAccount に 1MB のストレージがあり、合計 2MB が必要な場合、size は 1MB となります。サイズを指定する場合、現在サポートされているストレージ単位はKB、MB、GBのみです。
 
-### **Example**
+#### **Example**
+
 ```rust
 let add_immutable_storage_response = shdw_drive_client
     .add_immutable_storage(storage_account_key, Byte::from_str("1MB").expect("invalid byte string"))
     .await?;
 ```
 
-### **Response**
+#### **Response**
+
 ```json
 {
     message: String,
@@ -146,23 +157,24 @@ let add_immutable_storage_response = shdw_drive_client
 }
 ```
 
-## **`cancel_delete_storage_account`**
+### **`cancel_delete_storage_account`**
 
-### **Definition**
+#### **Definition**
 
 Shadow Driveから削除する StorageAccount のマークを解除します。削除を防ぐために、このメソッドは `delete_storage_account` が呼び出された Solana エポックの終了前に呼び出す必要があります。
 
-### **Parameters**
+#### **Parameters**
 * `storage_account_key` - 削除のマークを解除したい `StorageAccount` の公開鍵です。
 
-### **Example**
+#### **Example**
 
 ```rust
 let cancel_delete_storage_account_response = shdw_drive_client
     .cancel_delete_storage_account(&storage_account_key)
     .await?;
 ```
-### **Response**
+
+#### **Response**
 
 ```json
 {
@@ -170,22 +182,23 @@ let cancel_delete_storage_account_response = shdw_drive_client
 }
 ```
 
-## **`claim_stake`**
+### **`claim_stake`**
 
-### **Definition**
+#### **Definition**
 `reduce_storage`コマンド後、利用可能なステークを請求することができます。ストレージを削減した後、ユーザはエポックの終わりまで待たなければ、ステークを正常にクレームすることが出来ません。
 
-### **Parameters**
+#### **Parameters**
 * `storage_account_key` - 超過分のステークをクレームしたい StorageAccount の公開鍵です。
 
-### **Example**
+#### **Example**
+
 ```rust
 let claim_stake_response = shdw_drive_client
     .claim_stake(&storage_account_key)
     .await?;
 ```
 
-### **Response**
+#### **Response**
 
 ```json
 {
@@ -193,19 +206,19 @@ let claim_stake_response = shdw_drive_client
 }
 ```
 
-## **`create_storage_account`**
+### **`create_storage_account`**
 
-### **Definition**
+#### **Definition**
 
 Shadow Drive上に `StorageAccount` を作成します。`StorageAccount`は複数のファイルを保持することができ、SHDWトークンを使用して料金を支払います。
 
-### **Parameters**
+#### **Parameters**
 * `name` - `StorageAccount` の名前。一意である必要はありません。
 * `size` - `StorageAccount` が初期化されるべきストレージの量。サイズを指定する場合、現在は KB、MB、GB のストレージ単位のみがサポートされています。
 
-### **Example**
+#### **Example**
+この方法の使用例は、同じ[githubリポジトリ](https://github.com/phantom-labs/shadow_sdk/blob/master/examples/end\_to\_end.rs)にも掲載されています。
 
-この方法の使用例は、同じ[githubリポジトリ](https://github.com/phantom-labs/shadow_sdk/blob/master/examples/end_to_end.rs)にも掲載されています。
 
 ```rust
 async fn main() {
@@ -232,7 +245,7 @@ async fn main() {
 }
 ```
 
-### **Response**
+#### **Response**
 
 ```json
 {
@@ -243,18 +256,18 @@ async fn main() {
 }
 ```
 
-## **`delete_file`**
+### **`delete_file`**
 
-### **Definition**
+#### **Definition**
 
 Shadow Driveから削除するためにファイルをマークします。削除のためにマークされたファイルは、Solanaのエポックの終了時に削除されます。削除のためにマークされたファイルは、cancel_delete_fileで取り消すことができますが、これはSolanaエポックが終了する前に行う必要があります。
 
-### **Parameters**
+#### **Parameters**
 
 * `storage_account_key` - ファイルが格納されている `StorageAccount` の公開キーです。
 * `url` - 削除マークを付けたいファイルの Shadow Drive の URL です。
 
-### **Example**
+#### **Example**
 
 ```rust
 let delete_file_response = shdw_drive_client
@@ -262,7 +275,7 @@ let delete_file_response = shdw_drive_client
     .await?;
 ```
 
-この方法の使用例は、[githubリポジトリ](https://github.com/phantom-labs/shadow_sdk/blob/master/examples/end_to_end.rs)にも掲載されています。
+この方法の使用例は、[githubリポジトリ](https://github.com/phantom-labs/shadow_sdk/blob/master/examples/end\_to\_end.rs)にも掲載されています。
 
 ```rust
 async fn main() {
@@ -327,42 +340,39 @@ async fn main() {
 }
 ```
 
-## **`delete_storage_account`**
+### **`delete_storage_account`**
 
-### **Definition**
+#### **Definition**
 
 この関数は、シャドウドライブから削除するために StorageAccount をマークします。アカウントに削除マークが付けられると、アカウント内のすべてのファイルも削除されます。StorageAccountに残っているステークは、作成者に返金されます。削除のマークが付けられたアカウントは、solanaエポックの終了時に削除されます。
 
-### **Parameters**
+#### **Parameters**
 * `storage_account_key` - 削除したいStorageAccountの公開鍵です。
-
-### **Response**
-
+#### **Response**
 * このメソッドは、現在のsolanaエポックが終了する前に、アカウントを削除するためのマークしたアカウントに残っているステークを払い戻すことに成功した場合、成功を返します。
 
-### Example
+#### Example
 
 ```rust
 let delete_storage_account_response = shdw_drive_client
     .delete_storage_account(&storage_account_key)
     .await?;
 ```
-この方法の使用例は、[githubリポジトリ](https://github.com/phantom-labs/shadow_sdk/blob/master/examples/end_to_end.rs)の71行目にも掲載されています。
+この方法の使用例は、[githubリポジトリ](https://github.com/phantom-labs/shadow_sdk/blob/master/examples/end\_to\_end.rs)の71行目にも掲載されています。
 
+### **`edit_file`**
 
-## **`edit_file`**
-
-### **Definition**
+#### **Definition**
 
 シャドウドライブ上の既存のファイルを、指定された更新されたファイルに置き換えます。
 
-### **Parameters**
+#### **Parameters**
 
 * `storage_account_key` - ファイルが格納されている `StorageAccount` の公開鍵です。
 * `url` - 置換したいファイルのあるShadow Driveの URL。
 * `data` - 更新された `ShadowFile` です。
 
-### **Example**
+#### **Example**
 
 ```rust
 let edit_file_response = shdw_drive_client
@@ -370,7 +380,7 @@ let edit_file_response = shdw_drive_client
     .await?;
 ```
 
-### **Response**
+#### **Response**
 
 ```json
 {
@@ -379,7 +389,7 @@ let edit_file_response = shdw_drive_client
 }
 ```
 
-[リポジトリ](https://github.com/GenesysGo/shadow-drive-rust/blob/main/sdk/examples/end_to_end.rs)にある例。
+[リポジトリ](https://github.com/GenesysGo/shadow-drive-rust/blob/main/sdk/examples/end\_to\_end.rs)にある例。
 
 ファイル：examples/end_to_end.rs, Line 53
 
@@ -434,21 +444,22 @@ async fn main() {
     }    
 }
 ```
-## **`get_object_data`**
+
+### **`get_object_data`**
 
 オブジェクトのデータを取得します
 
-## **`get_storage_account`**
+### **`get_storage_account`**
 
-### **Definition**
+#### **Definition**
 
 ユーザーが提供したpubkeyに関連付けられた `StorageAccount` を返します。
 
-### **Parameters**
+#### **Parameters**
 
 * `key` - `StorageAccount` の公開鍵です。
 
-### **Example**
+#### **Example**
 
 ```rust
 let storage_account = shdw_drive_client
@@ -457,7 +468,7 @@ let storage_account = shdw_drive_client
     .expect("failed to get storage account");
 ```
 
-### **Response for V1 StorageAccount**
+#### **Response for V1 StorageAccount**
 
 ```json
 {
@@ -476,7 +487,9 @@ let storage_account = shdw_drive_client
     identifier: String,
 }
 ```
-### **Response for V2 StorageAccount**
+
+#### **Response for V2 StorageAccount**
+
 ```json
 {
     storage_account: Pubkey,
@@ -494,17 +507,17 @@ let storage_account = shdw_drive_client
 }
 ```
 
-## **`get_storage_accounts`**
+### **`get_storage_accounts`**
 
-### **Definition**
+#### **Definition**
 
 ユーザーが提供した公開鍵に関連する全ての `StorageAccounts` を返します。
 
-### **Parameters**
+#### **Parameters**
 
 * `owner` - 返されたすべての `StorageAccounts` の所有者である公開鍵です。
 
-### **Example**
+#### **Example**
 
 ```rust
 let storage_accounts = shdw_drive_client
@@ -513,7 +526,7 @@ let storage_accounts = shdw_drive_client
     .expect("failed to get storage account");
 ```
 
-### **Response for V1 StorageAccount**
+#### **Response for V1 StorageAccount**
 
 ```json
 {
@@ -533,7 +546,9 @@ let storage_accounts = shdw_drive_client
     identifier: String,
 }
 ```
-### **Response for V2 StorageAccount**
+
+#### **Response for V2 StorageAccount**
+
 ```json
 {
     storage_account: Pubkey,
@@ -551,16 +566,44 @@ let storage_accounts = shdw_drive_client
 }
 ```
 
-## **`list_objects`**
+### `get_storage_account_size`
 
-### **Definition**
-`StorageAccount`に関連付けられたすべてのファイルのリストを取得します。出力には、すべてのファイル名が文字列として含まれます。
+#### Definition
 
-### **Parameters**
+このメソッドは、指定されたストレージアカウントが現在使用しているストレージの量を取得するために使用されます。
+
+#### Parameters
 
 * `storage_account_key` - ファイルを所有する `StorageAccount` の公開鍵です。
 
-### **Example**
+#### Example
+
+```rust
+let storage_account_size = shdw_drive_client
+    .get_stroage_account_size(&storage_account_key)
+    .await?;
+```
+
+#### Response
+
+```json
+{
+    storage_used: u64;
+    error: Option<String>;
+}
+```
+
+### **`list_objects`**
+
+#### **Definition**
+
+`StorageAccount`に関連付けられたすべてのファイルのリストを取得します。出力には、すべてのファイル名が文字列として含まれます。
+
+#### **Parameters**
+
+* `storage_account_key` - ファイルを所有する `StorageAccount` の公開鍵です。
+
+#### **Example**
 
 ```rust
 let files = shdw_drive_client
@@ -568,20 +611,20 @@ let files = shdw_drive_client
     .await?;
 ```
 
-### **Response**
+#### **Response**
 注：レスポンスは、すべてのファイル名を文字列として含むvectorです。
 
-## **`make_storage_immutable`**
+### **`make_storage_immutable`**
 
-### **Definition**
+#### **Definition**
 
 `StorageAccount`とその中に含まれるすべてのファイルを永久にロックします。ロックされた `StorageAccount` は、ファイルの削除・編集、ストレージ容量の追加・削減、`StorageAccount` の削除ができなくなります。
 
-### **Parameters**
+#### **Parameters**
 
 * `storage_account_key` - 不変にする `StorageAccount` の公開鍵です。
 
-### **Example**
+#### **Example**
 
 ```rust
 let make_immutable_response = shdw_drive_client  
@@ -589,7 +632,7 @@ let make_immutable_response = shdw_drive_client
     .await?;  
 ```
 
-### **Response**
+#### **Response**
 
 ```json
 {
@@ -599,17 +642,17 @@ let make_immutable_response = shdw_drive_client
 }
 ```
 
-## **`migrate`**
+### **`migrate`**
 
-### **Definition**
+#### **Definition**
 
 これは、元のパブキーを再利用するために2つの別々のトランザクションを必要とします。失敗の可能性を最小限にするために、コミットメント・レベルを Finalized にしてこのメソッドを呼び出すことが推奨されます。
 
-### **Parameters**
+#### **Parameters**
 
 * `storage_account_key` - 移行する StorageAccount の公開鍵です。
 
-### **Example**
+#### **Example**
 
 ```rust
 let migrate_response = shdw_drive_client
@@ -617,40 +660,40 @@ let migrate_response = shdw_drive_client
     .await?;
 ```
 
-###  **Result**
+#### **Result**
+
 ```json
 {
     txid: String,
 }
 ```
 
-## **`migrate_step_1`**
+### **`migrate_step_1`**
 
-### **Definition**
+#### **Definition**
 
 v1 の `StorageAccount` を v2 に移行する最初のトランザクションステップ。既存のアカウントのデータを中間アカウントにコピーし、v1 の `StorageAccount` を削除することで構成されます。
 
-## **`migrate_step_2`**
+### **`migrate_step_2`**
 
-### **Definition**
+#### **Definition**
 
 v1 の `StorageAccount` を v2 に移行する 2 番目のトランザクションステップ。元の pubkey を使用して `StorageAccount` を再作成し、中間アカウントを削除することから構成されます。
 
+### **`new`**
 
-## **`new`**
-
-### **Definition**
+#### **Definition**
 
 与えられた `Signer` と URL から新しい ShadowDriveClient を作成します。
 
-### **Parameters**
+#### **Parameters**
 
 * `wallet` - クライアントが生成するすべてのトランザクションに署名するための `Signer` です。一般的に、これはユーザーのキーペアです。
 * `rpc_url` - Solana RPCプロバイダのHTTP URLです。
 
 RpcClientの設定をカスタマイズするには、`new_with_rpc`を参照してください。
 
-### **Example**
+#### **Example**
 
 ```rust
 use solana_sdk::signer::keypair::Keypair;    
@@ -659,7 +702,7 @@ let wallet = Keypair::generate();
 let shdw_drive = ShadowDriveClient::new(wallet, "https://ssc-dao.genesysgo.net");
 ```
 
-[リポジトリ](https://github.com/GenesysGo/shadow-drive-rust/blob/main/sdk/examples/end_to_end.rs)にある例。
+[リポジトリ](https://github.com/GenesysGo/shadow-drive-rust/blob/main/sdk/examples/end\_to\_end.rs)にある例。
 
 `examples/end_to_end.rs` Line 19
 
@@ -679,19 +722,19 @@ async fn main() {
 }
 ```
 
-## **`new_with_rpc`**
+### **`new_with_rpc`**
 
-### **Definition**
+#### **Definition**
 
 与えられた `Signer` と `RpcClient` から新しい ShadowDriveClient を作成します。
 
-### **Parameters**
+#### **Parameters**
 
 * `wallet` - クライアントが生成するすべてのトランザクションに署名するための `Signer` です。一般的に、これはユーザーのキーペアです。
 * トランザクションの送信とブロックチェーンからのアカウントの読み取りを処理する Solana `RpcClient` です。 
     `RpcClient`を提供することで、タイムアウトとコミットメントレベルのカスタマイズが可能になります。
 
-### **Example**
+#### **Example**
 
 ```rust
 use solana_client::rpc_client::RpcClient;
@@ -703,18 +746,18 @@ let solana_rpc = RpcClient::new_with_commitment("https://ssc-dao.genesysgo.net",
 let shdw_drive = ShadowDriveClient::new_with_rpc(wallet, solana_rpc);
 ```
 
-## **`redeem_rent`**
+### **`redeem_rent`**
 
-### **Definition**
+#### **Definition**
 
 オンチェーンファイルのアカウントからsolanaレントをリクレームします。古いバージョンのShadow Driveは、アップロードされたファイルのアカウントを作成するために使用されました。
 
-### **Parameters**
+#### **Parameters**
 
 * `storage_account_key` - 削除されたファイルが格納されていた StorageAccount の公開鍵です。
 * `file_account_key` - 閉鎖されるファイルアカウントの公開鍵です。
 
-### **Example**
+#### **Example**
 
 ```rust
 let redeem_rent_response = shdw_drive_client
@@ -722,7 +765,8 @@ let redeem_rent_response = shdw_drive_client
     .await?;
 ```
 
-### **Response**
+#### **Response**
+
 ```json
 {
   message: String,
@@ -731,18 +775,18 @@ let redeem_rent_response = shdw_drive_client
 }
 ```
 
-## **`reduce_storage`**
+### **`reduce_storage`**
 
-### **Definition**
+#### **Definition**
 
 与えられた `StorageAccount` で利用可能な総ストレージ量を削減します。
 
-### **Parameters**
+#### **Parameters**
 
 * `storage_account_key` - ストレージを削減する `StorageAccount` の公開鍵です。
 * `size` - 削除したいストレージの量。例えば、既存の `StorageAccount` に 3MB のストレージがあり、合計 2MB にしたい場合、size は 1MB となります。サイズを指定する場合、現在サポートされているストレージ単位はKB、MB、GBのみです。
 
-### **Example**
+#### **Example**
 
 ```rust
 let reduce_storage_response = shdw_drive_client
@@ -750,7 +794,7 @@ let reduce_storage_response = shdw_drive_client
     .await?;
 ```
 
-### **Response**
+#### **Response**
 
 ```json
 {
@@ -760,18 +804,44 @@ let reduce_storage_response = shdw_drive_client
 }
 ```
 
-## **`store_files`**
+### `refresh_stake`
 
-### **Definition**
+#### Definition
+
+このメソッドは、ストレージアカウントの賭け金を更新するために使用されます。ステージアカウントを正しく更新するためには、\`[topUp](sdk-rust.md#top_up)\`メソッドを呼び出した後に、このメソッドを呼び出すことが必要です。
+
+#### Parameters
+
+* `storage_account_key`: `PublicKey` - ストレージアカウントの公開鍵です。
+
+#### Example
+
+```rust
+let refresh_stake = shdw_drive_client
+    .refresh_stake(&storage_account_key)
+    .await?;
+```
+
+#### Response
+
+```json
+{
+    txid: string;
+}
+```
+
+### **`store_files`**
+
+#### **Definition**
 
 指定された `StorageAccount` にファイルを保存します。
 
-### **Parameters**
+#### **Parameters**
 
 * `storage_account_key` - `StorageAccount` の公開鍵です。
 * `data` - 格納されるファイルを表す `ShadowFile` オブジェクトのベクトルです。
 
-### **Example**
+#### **Example**
 
 ```rust
 let files: Vec<ShadowFile> = vec![
@@ -786,7 +856,7 @@ let store_files_response = shdw_drive_client
     .await?;
 ```
 
-### **Response**
+#### **Response**
 
 ```json
 {
@@ -796,7 +866,38 @@ let store_files_response = shdw_drive_client
 }
 ```
 
-## **Example - Add Immutable Storage**
+### **`top_up`**
+
+#### Definition
+
+このメソッドは、ストレージアカウントの $SHDW 残高を、エポックごとに収集される可変ストレージ・フィーなどの必要な料金に充当するために使用されます。この後、\`[refresh_stake](sdk-rust.md#refresh_stake)\`メソッドを呼び出す必要があります。
+
+#### Parameters
+
+* `key`: `PublicKey` - ストレージアカウントの公開鍵です。
+* `amount`: `u64`- ステークアカウントに送金する$SHDWの金額です。
+
+#### Example
+
+```rust
+let top_up_amount: u64 = 1000;
+let top_up = shdw_drive_client
+    .top_up(&storage_account_key, top_up_amount)
+    .await?;
+let refresh_stake = shdw_drive_client
+    .refresh_stake(&storage_account_key)
+    .await?;
+```
+
+#### Response
+
+```json
+{
+    txid: string;
+}
+```
+
+### **Example - Add Immutable Storage**
 
 ```rust
 use byte_unit::Byte;
@@ -931,7 +1032,7 @@ async fn add_immutable_storage_test<T: Signer>(
 }
 ```
 
-## **Example - Cancel Delete Storage Accounts**
+### **Example - Cancel Delete Storage Accounts**
 
 ```rust
 use shadow_drive_rust::ShadowDriveClient;
@@ -959,7 +1060,7 @@ async fn main() {
 }
 ```
 
-## **Example - Claim Stake**
+### **Example - Claim Stake**
 
 ```rust
 use shadow_drive_rust::ShadowDriveClient;
@@ -1016,7 +1117,7 @@ async fn main() {
 }
 ```
 
-## **Example - Delete File**
+### **Example - Delete File**
 
 ```rust
 use shadow_drive_rust::{models::ShadowFile, ShadowDriveClient};
@@ -1084,7 +1185,7 @@ async fn main() {
 }
 ```
 
-## **Example - Delete Storage Account**
+### **Example - Delete Storage Account**
 
 ```rust
 use shadow_drive_rust::ShadowDriveClient;
@@ -1112,7 +1213,7 @@ async fn main() {
 }
 ```
 
-## **Example - Tests**
+### **Example - Tests**
 
 ```rust
 use byte_unit::Byte;
@@ -1292,7 +1393,7 @@ async fn upload_file_test<T: Signer>(
 }
 ```
 
-## **Example - Migrate**
+### **Example - Migrate**
 
 ```rust
 use byte_unit::Byte;
@@ -1350,7 +1451,7 @@ async fn main() {
 }
 ```
 
-## **Example - Redeem Rent**
+### **Example - Redeem Rent**
 
 ```rust
 use shadow_drive_rust::ShadowDriveClient;
@@ -1381,7 +1482,7 @@ async fn main() {
 }
 ```
 
-## **Example - Upload Multiple Files**
+### **Example - Upload Multiple Files**
 
 ```rust
 use byte_unit::Byte;
