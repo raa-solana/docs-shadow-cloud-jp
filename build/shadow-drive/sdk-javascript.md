@@ -517,7 +517,8 @@ const shadowDrive = new ShadowDrive(connection, wallet).init();
 {% tab title="Explanations" %}
 {% code overflow="wrap" %}
 ```javascript
-// Shadow Drive クラスの新しいインスタンスを作成し、与えられた接続とウォレットのパラメータで初期化します。
+// Javascript SDK の例では、コンストラクタ・メソッドを使用して
+// ShadowDrive クラスの新しいインスタンスを作成し、与えられた接続とウォレットのパラメータでそれを初期化します。
 const shadowDrive = new ShadowDrive(connection, wallet).init();
 ```
 {% endcode %}
@@ -559,7 +560,8 @@ const addStgResp = await drive.addStorage(acctPubKey, "10MB", "v2");
 {% tab title="Explanations" %}
 {% code overflow="wrap" %}
 ```javascript
-// この行は、`drive` オブジェクトの `getStorageAccounts` メソッドを使用して、バージョン "v2" のストレージアカウントを取得し、`accts` 変数に格納します。
+// addStorage メソッドを使用した Javascript SDK の例
+// この行は、`drive` オブジェクトの `getStorageAccounts` メソッドを使用してバージョン "v2" のストレージアカウントを取得し、`accts` 変数に格納します。
 const accts = await drive.getStorageAccounts("v2")
 
 // この行では、前の行で取得した2番目のストレージアカウントの公開鍵を使用して新しい `PublicKey` オブジェクトを作成し、変数 `acctPubKey` に格納します。
@@ -599,6 +601,7 @@ const cancelDelStg = await drive.cancelDeleteStorageAccount(acctPubKey, "v2");
 {% tab title="Explanations" %}
 {% code overflow="wrap" %}
 ```javascript
+// cancelDeleteStorageAccount メソッドを使用した Javascript SDK の例。
 // Solanaアカウントの公開鍵の文字列表現から、新しい公開鍵オブジェクトを作成します。
 const acctPubKey = new anchor.web3.PublicKey(
     "EY8ZktbRmecPLfopBxJfNBGUPT1LMqZmDFVcWeMTGPcN"
@@ -639,6 +642,7 @@ const claimStake = await drive.claimStake(acctPubKey, "v2");
 {% tab title="Explanations" %}
 {% code overflow="wrap" %}
 ```javascript
+// claimStakeメソッドを使用したJavascript SDKの例
 // 指定された値を持つ新しい公開鍵オブジェクトを作成します。
 const acctPubKey = new anchor.web3.PublicKey(
     "EY8ZktbRmecPLfopBxJfNBGUPT1LMqZmDFVcWeMTGPcN"
@@ -685,6 +689,7 @@ console.log(newAcct);
 {% tab title="Explanations" %}
 {% code overflow="wrap" %}
 ```javascript
+// createStorageAccount メソッドを使用したJavascript SDKの例
 // `drive`オブジェクトに対して "myDemoBucket","10MB","v2"をパラメータとして`createStorageAccount`関数を呼び出し、その完了を待って処理を進めます。関数呼び出しの結果は、'newAcct' に入ります。
 const newAcct = await drive.createStorageAccount("myDemoBucket", "10MB", "v2");
 
@@ -733,6 +738,7 @@ console.log(delFile);
 {% tab title="Explanations" %}
 {% code overflow="wrap" %}
 ```javascript
+// deleteFile メソッドを使用したJavascript SDKの例
 // 変数`url`に削除するファイルのURLを含む文字列値を入れます
 const url =
     "https://shdw-drive.genesysgo.net/4HUkENqjnTAZaUR4QLwff1BvQPCiYkNmu5PPSKGoKf9G/fape.png";
@@ -780,6 +786,7 @@ const delAcct = await drive.deleteStorageAccount(acctPubKey, "v2");
 {% tab title="Explanations" %}
 {% code overflow="wrap" %}
 ```javascript
+// deleteStorageAccount メソッドを使用したJavascript SDKの例
 // 特定の値を持つ新しい公開鍵オブジェクトを作成し、変数 'acctPubKey' に入れます。
 const acctPubKey = new anchor.web3.PublicKey(
     "EY8ZktbRmecPLfopBxJfNBGUPT1LMqZmDFVcWeMTGPcN"
@@ -832,6 +839,7 @@ const editFile = await drive.editFile(acctPubKey, url, "v2", fileToUpload);
 {% tab title="Explanations" %}
 {% code overflow="wrap" %}
 ```javascript
+// editFile メソッドを使用したJavascript SDKの例
 // アップロードするファイルの名前と内容を含むオブジェクトを作成し、変数`fileToUpload`に入れます。
 const fileToUpload: ShadowFile = {
     name: "mytext.txt",
@@ -897,6 +905,7 @@ console.log(acct);
 {% tab title="Explanations" %}
 {% code overflow="wrap" %}
 ```javascript
+// getStorageAccount メソッドを使用したJavascript SDKの例
 // `drive`オブジェクトに対して、アカウントの公開鍵をパラメータとして`getStorageAccount`関数を呼び出し、その完了を待って処理を進めます。関数呼び出しの結果は、変数`acct`に入ります。
 const acct = await drive.getStorageAccount(
     "EY8ZktbRmecPLfopBxJfNBGUPT1LMqZmDFVcWeMTGPcN"
@@ -942,6 +951,7 @@ ShadowDrive.getStorageAccounts(shadowDriveVersion)
 {% tab title="Explanations" %}
 {% code overflow="wrap" %}
 ```javascript
+// getStorageAccounts メソッドを使用したJavascript SDKの例
 // `drive`オブジェクトの`getStorageAccounts`関数をバージョンパラメーター "v2" で呼び出し、その完了を待って処理を進めます。関数呼び出しの結果は、変数`accts`に入ります。
 const accts = await drive.getStorageAccounts("v2");
 
@@ -985,6 +995,7 @@ console.log(listItems);
 {% tab title="Explanations" %}
 {% code overflow="wrap" %}
 ```javascript
+// listObjects メソッドを使用したJavascript SDKの例
 // 特定の公開鍵文字列を使用して新しい`PublicKey`オブジェクトを作成し、それを`acctPubKey`変数に代入します。
 const acctPubKey = new anchor.web3.PublicKey(
     "EY8ZktbRmecPLfopBxJfNBGUPT1LMqZmDFVcWeMTGPcN"
@@ -1034,6 +1045,7 @@ console.log(result);
 {% tab title="Explanations" %}
 {% code overflow="wrap" %}
 ```javascript
+// makeStorageImmutable メソッドを使用したJavascript SDKの例
 // 公開鍵文字列を使用して、新しいPublicKeyオブジェクトを作成します。
 const key = new anchor.web3.PublicKey(
     "EY8ZktbRmecPLfopBxJfNBGUPT1LMqZmDFVcWeMTGPcN"
@@ -1073,6 +1085,7 @@ const result = await drive.migrate(key);
 {% tab title="Explanations" %}
 {% code overflow="wrap" %}
 ```javascript
+// migrate メソッドを使用したJavascript SDKの例
 // `drive`オブジェクトの`migrate`関数を呼び出し、PublicKeyオブジェクトをパラメータとして渡します。
 const result = await drive.migrate(key);
 ```
@@ -1108,6 +1121,7 @@ const result = await drive.redeemRent(key, fileAccount);
 {% tab title="Explanations" %}
 {% code overflow="wrap" %}
 ```javascript
+// redeemRent メソッドを使用したJavascript SDKの例
 // ファイルアカウントの公開鍵文字列を使用して、新しいPublicKeyオブジェクトを作成します。
 const fileAccount = new anchor.web3.PublicKey(
     "3p6U9s1sGLpnpkMMwW8o4hr4RhQaQFV7MkyLuW8ycvG9"
@@ -1154,6 +1168,7 @@ const shrinkAcct = await drive.reduceStorage(acctPubKey, "10MB", "v2");
 {% tab title="Explanations" %}
 {% code overflow="wrap" %}
 ```javascript
+// reduceStorage メソッドを使用したJavascript SDKの例
 // 与えられた文字列で、新しい公開鍵オブジェクトを作成します。
 const acctPubKey = new anchor.web3.PublicKey(
     "EY8ZktbRmecPLfopBxJfNBGUPT1LMqZmDFVcWeMTGPcN"
@@ -1269,6 +1284,7 @@ const uploadFile = await drive.uploadFile(acctPubKey, fileToUpload);
 {% tab title="Explanations" %}
 {% code overflow="wrap" %}
 ```javascript
+// uploadFile メソッドを使用したJavascript SDKの例
 // この行では`drive`オブジェクトの`uploadFile`メソッドを呼び出し、2つのパラメータを渡しています：
 // 1. acctPubKey： ファイルがアップロードされるストレージアカウントの公開鍵を表す PublicKey オブジェクト。
 // 2. fileToUpload： アップロードされるファイル名とファイルバッファを含む ShadowFile オブジェクトです。
@@ -1339,6 +1355,7 @@ console.log(responses);
 {% tab title="Explanations" %}
 {% code overflow="wrap" %}
 ```javascript
+// uploadMultipleFiles メソッドを使用したJavascript SDKの例
 // Shadow Drive クライアントのインスタンスを作成します。
 const drive = new ShadowDrive();
 
@@ -1392,9 +1409,10 @@ console.log(responses);
 
 userInfo: PublicKey
 
-### **Example - POST request via SDK (make immutable)**
+### **Example - Using POST API requests via the Javascript SDK to make an account immutable with solana transaction signing**
 
-```java
+```javascript
+// 必要なモジュールや定数をインポートします
 import * as anchor from "@project-serum/anchor";
 import { getStakeAccount, findAssociatedTokenAddress } from "../utils/helpers";
 import {
@@ -1410,6 +1428,7 @@ import {
 } from "@solana/spl-token";
 import { ShadowDriveVersion, ShadowDriveResponse } from "../types";
 import fetch from "node-fetch";
+
 /**
  *
  * @param {anchor.web3.PublicKey} key - ストレージアカウントの公開鍵
@@ -1421,6 +1440,8 @@ export default async function makeStorageImmutable(
   version: ShadowDriveVersion
 ): Promise<ShadowDriveResponse> {
   let selectedAccount;
+  
+  // バージョンに基づき、選択したアカウントを取得します
   try {
     switch (version.toLocaleLowerCase()) {
       case "v1":
@@ -1432,13 +1453,19 @@ export default async function makeStorageImmutable(
         );
         break;
     }
+    
+    // 関連するトークンアドレスを検索します
     const ownerAta = await findAssociatedTokenAddress(
       selectedAccount.owner1,
       tokenMint
     );
     const emissionsAta = await findAssociatedTokenAddress(emissions, tokenMint);
+    
+    // ステイクアカウントを取得します
     let stakeAccount = (await getStakeAccount(this.program, key))[0];
     let txn;
+    
+    // バージョンに応じたトランザクションを作成します
     switch (version.toLocaleLowerCase()) {
       case "v1":
         txn = await this.program.methods
@@ -1478,12 +1505,16 @@ export default async function makeStorageImmutable(
           .transaction();
         break;
     }
+    
+    // 最近のブロックハッシュと支払う人を設定します
     txn.recentBlockhash = (
       await this.connection.getLatestBlockhash()
     ).blockhash;
     txn.feePayer = this.wallet.publicKey;
     let signedTx;
     let serializedTxn;
+    
+    // トランザクションに署名し、シリアライズします
     if (!isBrowser) {
       await txn.partialSign(this.wallet.payer);
       serializedTxn = txn.serialize({ requireAllSignatures: false });
@@ -1491,6 +1522,8 @@ export default async function makeStorageImmutable(
       signedTx = await this.wallet.signTransaction(txn);
       serializedTxn = signedTx.serialize({ requireAllSignatures: false });
     }
+    
+    // トランザクションをサーバーに送信します
     const makeImmutableResponse = await fetch(
       `${SHDW_DRIVE_ENDPOINT}/make-immutable`,
       {
@@ -1505,6 +1538,8 @@ export default async function makeStorageImmutable(
         }),
       }
     );
+    
+    // サーバーの応答を処理します
     if (!makeImmutableResponse.ok) {
       return Promise.reject(
         new Error(`Server response status code: ${
@@ -1513,6 +1548,8 @@ export default async function makeStorageImmutable(
 			Server response status message: ${(await makeImmutableResponse.json()).error}`)
       );
     }
+    
+    // レスポンスJSONを返します
     const responseJson = await makeImmutableResponse.json();
     return Promise.resolve(responseJson);
   } catch (e) {

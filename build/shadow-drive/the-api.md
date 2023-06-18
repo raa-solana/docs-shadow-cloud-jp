@@ -331,7 +331,9 @@ Shadow Driveネットワークによって部分的に署名されたシリア�
 {% endswagger-response %}
 {% endswagger %}
 
-### **Example - Sign and upload a file**
+### **Example -** セキュアサインとアップロードファイルをAPIでシャドウドライブに変換します。
+
+この例では、提供された API を使用して、Shadow Drive にファイルを安全にアップロードする方法を示します。ファイル名のハッシュ化、署名付きメッセージの作成、必要な情報とともにファイルを Shadow Drive のエンドポイントに送信するプロセスが含まれています。
 
 ```javascript
 import bs58 from 'bs58'
@@ -378,7 +380,9 @@ const request = await fetch(`${SHDW_DRIVE_ENDPOINT}/upload`, {
 });
 ```
 
-### **Example - Edit a file**
+### **Example -** APIとメッセージ署名検証を利用したシャドウドライブ内のファイルの編集について
+
+この例では、API とメッセージ署名検証を使用して、Shadow Drive 上のファイルを編集する方法を示します。このコードでは、必要なライブラリをインポートし、署名するメッセージを構築し、メッセージをエンコードして署名し、Shadow Drive 上のファイルを編集するための API リクエストを送信しています。
 
 ```javascript
 import bs58 from 'bs58'
@@ -419,7 +423,9 @@ const uploadResponse = await fetch(`${SHDW_DRIVE_ENDPOINT}/edit`, {
 });
 ```
 
-### **Example - Delete a file**
+### **Example -** 署名付きメッセージとAPIを使用してシャドウドライブからファイルを削除します。
+
+この例では、署名付きメッセージと Shadow Drive API を使用して、Shadow Drive からファイルを削除する方法を示します。このコードでは、まず、ストレージアカウントと削除するファイルの URL を含むメッセージを作成します。次に、tweetnaclライブラリを使用してメッセージをエンコードし、署名します。署名されたメッセージは、bs58エンコードされた文字列に変換されます。最後に、Shadow Drive API エンドポイントに POST リクエストを送信してファイルを削除します。
 
 ```javascript
 import bs58 from 'bs58'

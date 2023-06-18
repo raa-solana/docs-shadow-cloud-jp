@@ -294,6 +294,14 @@ Shadow Drive CLI を使用する際に ENOTFOUND エラーが発生した場合�
 
 </details>
 
+<details>
+
+<summary> 良い事例がある場合、PRはどこに送ればよいのでしょうか？技術文書についてフィードバックをする方法はありますか？</summary>
+
+私たちは、あなたが私たちのドキュメントに提供できるフィードバックや事例を歓迎します。技術文書リポジトリ - https://github.com/GenesysGo/docs-shadow-cloud/tree/main - にPRを投稿していただければ、良い場所を探します。
+
+</details>
+
 ### 一般的な質問
 
 <details>

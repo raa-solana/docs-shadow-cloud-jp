@@ -42,53 +42,57 @@ Rust SDKは[crates.io](https://crates.io/crates/shadow-drive-sdk)、Rust SDK [Gi
 
 **私たちの[**Github**](https://github.com/GenesysGo/shadow-drive-rust/blob/main/sdk/examples/end\_to\_end.rs)には、より多くの例が掲載されています。**
 
-### **Example**
+### **Example -** Rustを使ったシャドウドライブへの複数ファイルのアップロード
+
+この Rust コードサンプルでは、`shadow_drive_rust` ライブラリを使用して複数のファイルをシャドウドライブにアップロードする方法を説明します。トレースサブスクライバーの初期化、ファイルからのキーペアの読み取り、シャドウドライブクライアントの作成、ストレージアカウントの公開鍵の導出、ディレクトリからのファイルの読み取り、アップロード用の `ShadowFile` 構造体のベクトルの作成、そして最後にファイルをシャドウドライブにアップロードしています。
 
 ```rust
-    //init tracing.rs subscriber
-    tracing_subscriber::fmt()
-        .with_env_filter("off,shadow_drive_rust=debug")
-        .init();
+// 例 - Rust を使用して複数のファイルを Shadow Drive にアップロードします
+// 環境フィルタを使用して tracing.rs サブスクライバを初期化します。
+tracing_subscriber::fmt()
+    .with_env_filter("off,shadow_drive_rust=debug")
+    .init();
 
-    // ファイルからキーペアを読み込む
+    // 指定されたKEYPAIR_PATHを使用してファイルからキーペアをロードする。
     let keypair = read_keypair_file(KEYPAIR_PATH).expect("failed to load keypair at path");
 
-    // Shadow Drive クライアント作成
+    // 読み込んだキーペアとサーバーの URL で新しい ShadowDriveClient インスタンスを作成。
     let shdw_drive_client = ShadowDriveClient::new(keypair, "https://ssc-dao.genesysgo.net");
 
-    // ストレージアカウントpubkeyを取得する
+    // キーペアの公開鍵を用いて、ストレージアカウントの公開鍵を導出する。
     let pubkey = keypair.pubkey();
     let (storage_account_key, _) =
         shadow_drive_rust::derived_addresses::storage_account(&pubkey, 0);
 
-    // ディレクトリ内のファイルを読み込む
+    // multiple_uploads ディレクトリからファイルを読み込む。
     let dir = tokio::fs::read_dir("multiple_uploads")
     .await
     .expect("failed to read multiple uploads dir");
 
-    // アップロード用のShadowFile構造体Vectorを作成する。
+    // ディレクトリエントリーを繰り返し、アップロード用のShadowFile構造体のVecを作成。
     let mut files = tokio_stream::wrappers::ReadDirStream::new(dir)
-        .filter(Result::is_ok)
-        .and_then(|entry| async move {
-            Ok(ShadowFile::file(
-                entry
-                    .file_name()
-                    .into_string()
-                    .expect("failed to convert os string to regular string"),
-                entry.path(),
-            ))
-        })
-        .collect::<Result<Vec<_>, _>>()
-        .await
-        .expect("failed to create shdw files for dir");
+    .filter(Result::is_ok)
+    .and_then(|entry| async move {
+        Ok(ShadowFile::file(
+            entry
+                .file_name()
+                .into_string()
+                .expect("failed to convert os string to regular string"),
+            entry.path(),
+        ))
+    })
+    .collect::<Result<Vec<_>, _>>()
+    .await
+    .expect("failed to create shdw files for dir");
 
-    // Bytes もサポートしています
+
+    // バイトのコンテンツを持つShadowFileをファイルベクタに追加する。
     files.push(ShadowFile::bytes(
         String::from("buf.txt"),
         &b"this is a buf test"[..],
     ));
 
-    // アップロード開始
+    // storage_account_keyを使用して、シャドウドライブにファイルをアップロードします。
     let upload_results = shdw_drive_client
         .upload_multiple_files(&storage_account_key, files)
         .await
@@ -110,7 +114,7 @@ Rust SDKは[crates.io](https://crates.io/crates/shadow-drive-sdk)、Rust SDK [Gi
 * `size` - 追加したいストレージの量。例えば、既存の StorageAccount に 1MB のストレージがあり、合計 2MB が必要な場合、size は 1MB となります。サイズを指定する場合、現在サポートされているストレージ単位はKB、MB、GBのみです。
 
 
-#### **Example**
+#### **Example of `add_immutable_storage`**
 
 ```rust
 let add_immutable_storage_response = shdw_drive_client
@@ -118,7 +122,7 @@ let add_immutable_storage_response = shdw_drive_client
     .await?;
 ```
 
-#### **Response**
+#### **Response from `add_immutable_storage`**
 
 ```json
 {
@@ -139,7 +143,7 @@ let add_immutable_storage_response = shdw_drive_client
 * `storage_account_key` - StorageAccount の公開鍵です。
 * `size` - 追加したいストレージの量です。例：既存の StorageAccount に 1MB のストレージがあり、合計 2MB が必要な場合、size は 1MB となります。サイズを指定する場合、現在サポートされているストレージ単位はKB、MB、GBのみです。
 
-#### **Example**
+#### **Example of `add_storage`**
 
 ```rust
 let add_immutable_storage_response = shdw_drive_client
@@ -147,7 +151,7 @@ let add_immutable_storage_response = shdw_drive_client
     .await?;
 ```
 
-#### **Response**
+#### **Response from `add_storage`**
 
 ```json
 {
@@ -166,7 +170,7 @@ Shadow Driveから削除する StorageAccount のマークを解除します。�
 #### **Parameters**
 * `storage_account_key` - 削除のマークを解除したい `StorageAccount` の公開鍵です。
 
-#### **Example**
+#### **Example of `cancel_delete_storage_account`**
 
 ```rust
 let cancel_delete_storage_account_response = shdw_drive_client
@@ -174,7 +178,7 @@ let cancel_delete_storage_account_response = shdw_drive_client
     .await?;
 ```
 
-#### **Response**
+#### **Response from `cancel_delete_storage_account`**
 
 ```json
 {
@@ -190,7 +194,7 @@ let cancel_delete_storage_account_response = shdw_drive_client
 #### **Parameters**
 * `storage_account_key` - 超過分のステークをクレームしたい StorageAccount の公開鍵です。
 
-#### **Example**
+#### **Example of `claim_stake`**
 
 ```rust
 let claim_stake_response = shdw_drive_client
@@ -198,7 +202,7 @@ let claim_stake_response = shdw_drive_client
     .await?;
 ```
 
-#### **Response**
+#### **Response from `claim_stake`**
 
 ```json
 {
@@ -216,11 +220,11 @@ Shadow Drive上に `StorageAccount` を作成します。`StorageAccount`は複�
 * `name` - `StorageAccount` の名前。一意である必要はありません。
 * `size` - `StorageAccount` が初期化されるべきストレージの量。サイズを指定する場合、現在は KB、MB、GB のストレージ単位のみがサポートされています。
 
-#### **Example**
-この方法の使用例は、同じ[githubリポジトリ](https://github.com/phantom-labs/shadow_sdk/blob/master/examples/end\_to\_end.rs)にも掲載されています。
+#### **Example of `create_storage_account`**
 
 
 ```rust
+// Rust SDKの例：create_storage_accountを使用してStorageAccountを作成する。
 async fn main() {
     // キーペア取得
     let keypair_file: String = std::env::args()
@@ -245,7 +249,7 @@ async fn main() {
 }
 ```
 
-#### **Response**
+#### **Response from `create_storage_account`**
 
 ```json
 {
@@ -267,7 +271,7 @@ Shadow Driveから削除するためにファイルをマークします。削�
 * `storage_account_key` - ファイルが格納されている `StorageAccount` の公開キーです。
 * `url` - 削除マークを付けたいファイルの Shadow Drive の URL です。
 
-#### **Example**
+#### **Example of `delete_file`**
 
 ```rust
 let delete_file_response = shdw_drive_client
@@ -278,6 +282,7 @@ let delete_file_response = shdw_drive_client
 この方法の使用例は、[githubリポジトリ](https://github.com/phantom-labs/shadow_sdk/blob/master/examples/end\_to\_end.rs)にも掲載されています。
 
 ```rust
+// Rust SDK で delete_file を使ってシャドウドライブからファイルを削除する例。
 async fn main() {
     // キーペア取得
     let keypair_file: String = std::env::args()
@@ -347,11 +352,11 @@ async fn main() {
 この関数は、シャドウドライブから削除するために StorageAccount をマークします。アカウントに削除マークが付けられると、アカウント内のすべてのファイルも削除されます。StorageAccountに残っているステークは、作成者に返金されます。削除のマークが付けられたアカウントは、solanaエポックの終了時に削除されます。
 
 #### **Parameters**
-* `storage_account_key` - 削除したいStorageAccountの公開鍵です。
-#### **Response**
-* このメソッドは、現在のsolanaエポックが終了する前に、アカウントを削除するためのマークしたアカウントに残っているステークを払い戻すことに成功した場合、成功を返します。
+* `storage_account_key` - 削除対象としてマークしたいStorageAccountの公開鍵です
+#### **Response from `delete_storage_account`**
+* このメソッドは、現在のSolanaエポックが終了する前に、アカウントを削除するためのマークとアカウントに残っているステークを払い戻すことに成功した場合に成功を返します。
 
-#### Example
+#### Example of **`delete_storage_account`**
 
 ```rust
 let delete_storage_account_response = shdw_drive_client
@@ -372,7 +377,7 @@ let delete_storage_account_response = shdw_drive_client
 * `url` - 置換したいファイルのあるShadow Driveの URL。
 * `data` - 更新された `ShadowFile` です。
 
-#### **Example**
+#### **Example of `edit_file`**
 
 ```rust
 let edit_file_response = shdw_drive_client
@@ -380,7 +385,7 @@ let edit_file_response = shdw_drive_client
     .await?;
 ```
 
-#### **Response**
+#### **Response from `edit_file`**
 
 ```json
 {
@@ -394,6 +399,8 @@ let edit_file_response = shdw_drive_client
 ファイル：examples/end_to_end.rs, Line 53
 
 ```rust
+// Rust SDKによる鍵ペアの取得、クライアントの初期化、アカウントの作成、
+// ファイルのアップロード、ファイルの編集のエンドツーエンドの例
 async fn main() {
     // Get keypair
     let keypair_file: String = std::env::args()
@@ -459,7 +466,7 @@ async fn main() {
 
 * `key` - `StorageAccount` の公開鍵です。
 
-#### **Example**
+#### **Example of `get_storage_account`**
 
 ```rust
 let storage_account = shdw_drive_client
@@ -468,7 +475,7 @@ let storage_account = shdw_drive_client
     .expect("failed to get storage account");
 ```
 
-#### **Response for V1 StorageAccount**
+#### **Response for V1 StorageAccount from `get_storage_account`**
 
 ```json
 {
@@ -488,7 +495,7 @@ let storage_account = shdw_drive_client
 }
 ```
 
-#### **Response for V2 StorageAccount**
+#### **Response for V2 StorageAccount from `get_storage_account`**
 
 ```json
 {
@@ -517,7 +524,7 @@ let storage_account = shdw_drive_client
 
 * `owner` - 返されたすべての `StorageAccounts` の所有者である公開鍵です。
 
-#### **Example**
+#### **Example of `get_storage_accounts`**
 
 ```rust
 let storage_accounts = shdw_drive_client
@@ -526,7 +533,7 @@ let storage_accounts = shdw_drive_client
     .expect("failed to get storage account");
 ```
 
-#### **Response for V1 StorageAccount**
+#### **Response for V1 StorageAccount from `get_storage_accounts`**
 
 ```json
 {
@@ -547,7 +554,7 @@ let storage_accounts = shdw_drive_client
 }
 ```
 
-#### **Response for V2 StorageAccount**
+#### **Response for V2 StorageAccount from `get_storage_accounts`**
 
 ```json
 {
@@ -576,7 +583,7 @@ let storage_accounts = shdw_drive_client
 
 * `storage_account_key` - ファイルを所有する `StorageAccount` の公開鍵です。
 
-#### Example
+#### Example of `get_storage_account_size`
 
 ```rust
 let storage_account_size = shdw_drive_client
@@ -584,7 +591,7 @@ let storage_account_size = shdw_drive_client
     .await?;
 ```
 
-#### Response
+#### Response from `get_storage_account_size`
 
 ```json
 {
@@ -603,7 +610,7 @@ let storage_account_size = shdw_drive_client
 
 * `storage_account_key` - ファイルを所有する `StorageAccount` の公開鍵です。
 
-#### **Example**
+#### **Example of `list_objects`**
 
 ```rust
 let files = shdw_drive_client
@@ -611,7 +618,7 @@ let files = shdw_drive_client
     .await?;
 ```
 
-#### **Response**
+#### **Response from `list_objects`**
 注：レスポンスは、すべてのファイル名を文字列として含むvectorです。
 
 ### **`make_storage_immutable`**
@@ -624,7 +631,7 @@ let files = shdw_drive_client
 
 * `storage_account_key` - 不変にする `StorageAccount` の公開鍵です。
 
-#### **Example**
+#### **Example of `make_storage_immutable`**
 
 ```rust
 let make_immutable_response = shdw_drive_client  
@@ -632,7 +639,7 @@ let make_immutable_response = shdw_drive_client
     .await?;  
 ```
 
-#### **Response**
+#### **Response from `make_storage_immutable`**
 
 ```json
 {
@@ -652,7 +659,7 @@ let make_immutable_response = shdw_drive_client
 
 * `storage_account_key` - 移行する StorageAccount の公開鍵です。
 
-#### **Example**
+#### **Example of `migrate`**
 
 ```rust
 let migrate_response = shdw_drive_client
@@ -660,7 +667,7 @@ let migrate_response = shdw_drive_client
     .await?;
 ```
 
-#### **Result**
+#### **Response from `migrate`**
 
 ```json
 {
@@ -693,7 +700,7 @@ v1 の `StorageAccount` を v2 に移行する 2 番目のトランザクショ�
 
 RpcClientの設定をカスタマイズするには、`new_with_rpc`を参照してください。
 
-#### **Example**
+#### **Example of `new`**
 
 ```rust
 use solana_sdk::signer::keypair::Keypair;    
@@ -707,6 +714,7 @@ let shdw_drive = ShadowDriveClient::new(wallet, "https://ssc-dao.genesysgo.net")
 `examples/end_to_end.rs` Line 19
 
 ```rust
+// 新しい ShadowDriveClient を作成するために `new` メソッドを使用する Rust SDK の例。
 async fn main() {
     // Get keypair
     let keypair_file: String = std::env::args()
@@ -730,11 +738,11 @@ async fn main() {
 
 #### **Parameters**
 
-* `wallet` - クライアントが生成するすべてのトランザクションに署名するための `Signer` です。一般的に、これはユーザーのキーペアです。
-* トランザクションの送信とブロックチェーンからのアカウントの読み取りを処理する Solana `RpcClient` です。 
-    `RpcClient`を提供することで、タイムアウトとコミットメントレベルのカスタマイズが可能になります。
+* `wallet` - クライアントが生成したすべてのトランザクションに署名するための `Signer` です。通常、これはユーザーのキーペアです。
+* `rpc_client` - トランザクションの送信とブロックチェーンからのアカウントの読み取りを処理する Solana `RpcClient` です。
+  RpcClient`を提供することで、タイムアウトやコミットメントレベルのカスタマイズが可能になります。
 
-#### **Example**
+#### **Example of `new_with_rpc`**
 
 ```rust
 use solana_client::rpc_client::RpcClient;
@@ -757,7 +765,7 @@ let shdw_drive = ShadowDriveClient::new_with_rpc(wallet, solana_rpc);
 * `storage_account_key` - 削除されたファイルが格納されていた StorageAccount の公開鍵です。
 * `file_account_key` - 閉鎖されるファイルアカウントの公開鍵です。
 
-#### **Example**
+#### **Example of `redeem_rent`**
 
 ```rust
 let redeem_rent_response = shdw_drive_client
@@ -765,7 +773,7 @@ let redeem_rent_response = shdw_drive_client
     .await?;
 ```
 
-#### **Response**
+#### **Response from `redeem_rent`**
 
 ```json
 {
@@ -786,7 +794,7 @@ let redeem_rent_response = shdw_drive_client
 * `storage_account_key` - ストレージを削減する `StorageAccount` の公開鍵です。
 * `size` - 削除したいストレージの量。例えば、既存の `StorageAccount` に 3MB のストレージがあり、合計 2MB にしたい場合、size は 1MB となります。サイズを指定する場合、現在サポートされているストレージ単位はKB、MB、GBのみです。
 
-#### **Example**
+#### **Example of `reduce_storage`**
 
 ```rust
 let reduce_storage_response = shdw_drive_client
@@ -794,7 +802,7 @@ let reduce_storage_response = shdw_drive_client
     .await?;
 ```
 
-#### **Response**
+#### **Response from `reduce_storage`**
 
 ```json
 {
@@ -814,7 +822,7 @@ let reduce_storage_response = shdw_drive_client
 
 * `storage_account_key`: `PublicKey` - ストレージアカウントの公開鍵です。
 
-#### Example
+#### Example of `refresh_stake`
 
 ```rust
 let refresh_stake = shdw_drive_client
@@ -822,7 +830,7 @@ let refresh_stake = shdw_drive_client
     .await?;
 ```
 
-#### Response
+#### Response from `refresh_stake`
 
 ```json
 {
@@ -841,7 +849,7 @@ let refresh_stake = shdw_drive_client
 * `storage_account_key` - `StorageAccount` の公開鍵です。
 * `data` - 格納されるファイルを表す `ShadowFile` オブジェクトのベクトルです。
 
-#### **Example**
+#### **Example of `store_files`**
 
 ```rust
 let files: Vec<ShadowFile> = vec![
@@ -856,7 +864,7 @@ let store_files_response = shdw_drive_client
     .await?;
 ```
 
-#### **Response**
+#### **Response from `store_files`**
 
 ```json
 {
@@ -877,7 +885,7 @@ let store_files_response = shdw_drive_client
 * `key`: `PublicKey` - ストレージアカウントの公開鍵です。
 * `amount`: `u64`- ステークアカウントに送金する$SHDWの金額です。
 
-#### Example
+#### Example of **`top_up`**
 
 ```rust
 let top_up_amount: u64 = 1000;
@@ -889,7 +897,7 @@ let refresh_stake = shdw_drive_client
     .await?;
 ```
 
-#### Response
+#### Response from **`top_up`**
 
 ```json
 {
@@ -897,7 +905,7 @@ let refresh_stake = shdw_drive_client
 }
 ```
 
-### **Example - Add Immutable Storage**
+### **Example -** Shadow Drive　Cliant： Rustを使用したストレージアカウントの作成と管理
 
 ```rust
 use byte_unit::Byte;
@@ -912,6 +920,7 @@ use std::str::FromStr;
 
 const KEYPAIR_PATH: &str = "/Users/dboures/.config/solana/id.json";
 
+// Shadow Drive Rustクライアントの使い方を実演する主な機能
 #[tokio::main]
 async fn main() {
     //ファイルからキーペアを読み込む
@@ -935,6 +944,7 @@ async fn main() {
     add_immutable_storage_test(&shdw_drive_client, &v2_pubkey).await;
 }
 
+// バージョンやサイズを指定したストレージアカウントを作成する機能
 async fn create_storage_accounts<T: Signer>(shdw_drive_client: ShadowDriveClient<T>) {
     let result_v1 = shdw_drive_client
         .create_storage_account(
@@ -944,7 +954,8 @@ async fn create_storage_accounts<T: Signer>(shdw_drive_client: ShadowDriveClient
         )
         .await
         .expect("error creating storage account");
-
+        
+    // Create a storage account with version 2
     let result_v2 = shdw_drive_client
         .create_storage_account(
             "shdw-drive-1.5-test-v2",
@@ -958,6 +969,7 @@ async fn create_storage_accounts<T: Signer>(shdw_drive_client: ShadowDriveClient
     println!("v2: {:?}", result_v2);
 }
 
+// ストレージアカウントを不変にする機能
 async fn make_storage_immutable<T: Signer>(
     shdw_drive_client: &ShadowDriveClient<T>,
     storage_account_key: &Pubkey,
@@ -971,6 +983,7 @@ async fn make_storage_immutable<T: Signer>(
         StorageAcct::V2(storage_account) => println!("account: {:?}", storage_account),
     }
 
+    // ストレージアカウントを不変にする
     let make_immutable_response = shdw_drive_client
         .make_storage_immutable(&storage_account_key)
         .await
@@ -988,6 +1001,7 @@ async fn make_storage_immutable<T: Signer>(
     }
 }
 
+// ストレージアカウントに不変ストレージを追加する機能
 async fn add_immutable_storage_test<T: Signer>(
     shdw_drive_client: &ShadowDriveClient<T>,
     storage_account_key: &Pubkey,
@@ -1006,6 +1020,7 @@ async fn add_immutable_storage_test<T: Signer>(
         }
     }
 
+    // アカウントに不変ストレージを追加する
     let add_immutable_storage_response = shdw_drive_client
         .add_immutable_storage(
             storage_account_key,
@@ -1032,15 +1047,18 @@ async fn add_immutable_storage_test<T: Signer>(
 }
 ```
 
-### **Example - Cancel Delete Storage Accounts**
+### **Example -** ストレージのアカウント削除をrustでキャンセルする
 
-```rust
+``` rust
+// 必要なライブラリやモジュールのインポート
 use shadow_drive_rust::ShadowDriveClient;
 use solana_sdk::{pubkey::Pubkey, signer::keypair::read_keypair_file};
 use std::str::FromStr;
 
+// キーペアファイルのパスを定義します。
 const KEYPAIR_PATH: &str = "keypair.json";
 
+// 非同期をサポートするメイン機能
 #[tokio::main]
 async fn main() {
     //ファイルからキーペアを読み込む
@@ -1051,8 +1069,9 @@ async fn main() {
     //shdw drive クライアントを作成する
     let shdw_drive_client = ShadowDriveClient::new(keypair, "https://ssc-dao.genesysgo.net");
 
+    // ストレージアカウントの削除の取り消し依頼を送信する。
     let response = shdw_drive_client
-        .cancel_delete_storage_account(&storage_account_key)
+        .cancel_delete_storage_account(&#x26;storage_account_key)
         .await
         .expect("failed to cancel storage account deletion");
 
@@ -1060,7 +1079,7 @@ async fn main() {
 }
 ```
 
-### **Example - Claim Stake**
+### **Example -** Rustを利用したステークのクレーム
 
 ```rust
 use shadow_drive_rust::ShadowDriveClient;
@@ -1117,15 +1136,17 @@ async fn main() {
 }
 ```
 
-### **Example - Delete File**
+### **Example -** rust SDKでファイルのアップロードと削除
 
 ```rust
+// Import necessary modules and types
 use shadow_drive_rust::{models::ShadowFile, ShadowDriveClient};
 use solana_sdk::{pubkey::Pubkey, signer::keypair::read_keypair_file};
 use std::str::FromStr;
 
 const KEYPAIR_PATH: &str = "keypair.json";
 
+// Main function
 #[tokio::main]
 async fn main() {
     //ファイルからキーペアを読み込む
@@ -1137,7 +1158,7 @@ async fn main() {
     //shdw drive クライアントを作成する
     let shdw_drive_client = ShadowDriveClient::new(keypair, "https://ssc-dao.genesysgo.net");
 
-    //ファイル追加
+    // v1_pubkeyのファイルをアップロードする。
     let v1_upload_reponse = shdw_drive_client
         .store_files(
             &v1_pubkey,
@@ -1150,6 +1171,7 @@ async fn main() {
         .expect("failed to upload v1 file");
     println!("Upload complete {:?}", v1_upload_reponse);
 
+    // v2_pubkeyのファイルをアップロードする。
     let v2_upload_reponse = shdw_drive_client
         .store_files(
             &v2_pubkey,
@@ -1170,13 +1192,15 @@ async fn main() {
         "https://shdw-drive.genesysgo.net/2cvgcqfmMg9ioFtNf57ZqCNbuWDfB8ZSzromLS8Kkb7q/example.png",
     );
 
-    //ファイル削除
+    // ファイル削除
+    // v1_pubkeyのファイルを削除する。
     let v1_delete_file_response = shdw_drive_client
         .delete_file(&v1_pubkey, v1_url)
         .await
         .expect("failed to delete file");
     println!("Delete file complete {:?}", v1_delete_file_response);
 
+    // v2_pubkeyのファイルを削除する。
     let v2_delete_file_response = shdw_drive_client
         .delete_file(&v2_pubkey, v2_url)
         .await
@@ -1185,7 +1209,7 @@ async fn main() {
 }
 ```
 
-### **Example - Delete Storage Account**
+### **Example -** rustを使ってストレージアカウントを削除
 
 ```rust
 use shadow_drive_rust::ShadowDriveClient;
@@ -1204,6 +1228,7 @@ async fn main() {
     //shdw drive クライアントを作成する
     let shdw_drive_client = ShadowDriveClient::new(keypair, "https://ssc-dao.genesysgo.net");
 
+    // ストレージアカウント削除の依頼
     let response = shdw_drive_client
         .delete_storage_account(&storage_account_key)
         .await
@@ -1213,7 +1238,7 @@ async fn main() {
 }
 ```
 
-### **Example - Tests**
+### **Example -** テスト
 
 ```rust
 use byte_unit::Byte;
@@ -1393,7 +1418,7 @@ async fn upload_file_test<T: Signer>(
 }
 ```
 
-### **Example - Migrate**
+### **Example -** RustでShadowDriveClientを使用したストレージアカウントの作成とマイグレーション
 
 ```rust
 use byte_unit::Byte;
@@ -1403,6 +1428,7 @@ use std::str::FromStr;
 
 const KEYPAIR_PATH: &str = "keypair.json";
 
+// ShadowDriveClientを使ったストレージアカウントの作成と移行を実演する主な機能
 #[tokio::main]
 async fn main() {
     //ファイルからキーペアを読み込む
@@ -1451,7 +1477,7 @@ async fn main() {
 }
 ```
 
-### **Example - Redeem Rent**
+### **Example -** Rustを利用したストレージのためのレントを回収
 
 ```rust
 use shadow_drive_rust::ShadowDriveClient;
@@ -1482,7 +1508,7 @@ async fn main() {
 }
 ```
 
-### **Example - Upload Multiple Files**
+### **Example -** rustでストレージアカウントに複数のファイルをアップロードする
 
 ```rust
 use byte_unit::Byte;
@@ -1493,6 +1519,7 @@ use tokio_stream::StreamExt;
 
 const KEYPAIR_PATH: &str = "keypair.json";
 
+// Shadow Driveのストレージアカウントに複数のファイルをアップロードする主な機能
 #[tokio::main]
 async fn main() {
     tracing_subscriber::fmt()
@@ -1505,10 +1532,10 @@ async fn main() {
     let (storage_account_key, _) =
         shadow_drive_rust::derived_addresses::storage_account(&pubkey, 21);
 
-    //shdw drive クライアントを作成する
+    // shdw drive クライアントを作成する
     let shdw_drive_client = ShadowDriveClient::new(keypair, "https://ssc-dao.genesysgo.net");
 
-    //ストレージアカウントを確保する
+    // ストレージアカウントが存在することを確認する
     if let Err(_) = shdw_drive_client
         .get_storage_account(&storage_account_key)
         .await
@@ -1524,10 +1551,12 @@ async fn main() {
             .expect("failed to create storage account");
     }
 
+    // multiple_uploads ディレクトリからファイルを読み込む。
     let dir = tokio::fs::read_dir("multiple_uploads")
         .await
         .expect("failed to read multiple uploads dir");
 
+    // ディレクトリ内の各ファイルに対してShadowFileオブジェクトを作成する。
     let mut files = tokio_stream::wrappers::ReadDirStream::new(dir)
         .filter(Result::is_ok)
         .and_then(|entry| async move {
@@ -1543,11 +1572,13 @@ async fn main() {
         .await
         .expect("failed to create shdw files for dir");
 
+    // バイトコンテンツを持つShadowFileオブジェクトを追加します。
     files.push(ShadowFile::bytes(
         String::from("buf.txt"),
         &b"this is a buf test"[..],
     ));
 
+    // ストレージアカウントにファイルをアップロードする
     let upload_results = shdw_drive_client
         .store_files(&storage_account_key, files)
         .await
