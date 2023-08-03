@@ -40,7 +40,7 @@ GitHub FAQ: https://github.com/GenesysGo/shadow-drive/issues?q=is%3Aissue+is%3Ac
 
 <summary>予約できるストレージ容量はどのくらいですか？</summary>
 
-1バケットあたり1テラバイト（1TB）の上限が設定されています。
+ユーザーが予約できる容量は最低4kバイト。
 
 現在、この上限を大幅に増やす開発が進められています。
 
@@ -48,7 +48,20 @@ GitHub FAQ: https://github.com/GenesysGo/shadow-drive/issues?q=is%3Aissue+is%3Ac
 
 <details>
 
-<summary>ウォレットの導入方法に問題があると思われる場合、または取引がうまくいかない場合はどうすればよいですか？</summary>
+<summary>アップロードできる最小または最大のファイルは？</summary>
+
+現在、以下の制限があります：
+
+* 最低： 最小：4kb。100バイトのファイルをアップロードしても、4kbの容量を占めます。これはレプリケーションのオーバーヘッドが必要なためです。
+* 最大： 最大：1GB。
+
+最大ファイルサイズを増やすための開発が進行中です。
+
+</details>
+
+<details>
+
+<summary>ウォレットの実装方法に問題があると思われる場合、または取引がうまくいかない場合はどうすればよいですか？</summary>
 
 ウォレットの実装方法に問題があると思われる場合、またはトランザクションが機能しない場合は、ウォレットアダプターのアップグレードを試してみてください。アダプタをインポートするプロセスが変更されている可能性があるため、Solanaウォレットアダプタのリポジトリでその例を確認してください。
 
@@ -269,7 +282,7 @@ Shadow Drive CLI を使用する際に ENOTFOUND エラーが発生した場合�
 
 <details>
 
-<summary>ストレージアカウントで可変料金をカバーするための$SHDWがなくなった場合、猶予期間はありますか？</summary>
+<summary>私のストレージアカウントに<a href="https://docs.shadow.cloud/reference/shdw-token">$SHDW</a>がなくなった場合、変更可能な料金をカバーするための猶予期間はありますか？</summary>
 
 はい、あなたのストレージアカウントは6ヶ月間保管されます。その後、ストレージノードは、あなたのストレージアカウントとその中のすべてのデータを削除されます。
 
@@ -277,7 +290,7 @@ Shadow Drive CLI を使用する際に ENOTFOUND エラーが発生した場合�
 
 <details>
 
-<summary>ミュータブル料金のストレージアカウントに、さらに$SHDWを追加するにはどうすればよいですか？</summary>
+<summary>変更可能な料金のストレージ・アカウントに、さらに<a href="https://docs.shadow.cloud/reference/shdw-token">$SHDW</a> を追加するにはどうすればよいですか？</summary>
 
 1. [SDK](the-sdk.md)にある \`topUp\` メソッドを使用するか、ストレージアカウントのトークンアドレスに$SHDWを直接送信します。
 2. SDKのいずれかの\`refreshStake\`メソッドを使用して、ストレージアカウントのステータスをリフレッシュします。これは、あなたのために行われません、あなたは手動でこのステップを行う必要があります。
@@ -298,7 +311,7 @@ Shadow Drive CLI を使用する際に ENOTFOUND エラーが発生した場合�
 
 <summary> 良い事例がある場合、PRはどこに送ればよいのでしょうか？技術文書についてフィードバックをする方法はありますか？</summary>
 
-私たちは、あなたが私たちのドキュメントに提供できるフィードバックや事例を歓迎します。技術文書リポジトリ - https://github.com/GenesysGo/docs-shadow-cloud/tree/main - にPRを投稿していただければ、良い場所を探します。
+私たちは、あなたが私たちのドキュメントに提供できるフィードバックや例を歓迎します。私たちの技術文書リポジトリ - https://github.com/GenesysGo/docs-shadow-cloud/tree/main - にPRを提出してください。
 
 </details>
 
@@ -342,7 +355,7 @@ Shadow Driveのストレージコストは、1GBあたり0.25SHDWの固定レー
 
 <summary>Shadow driveはS3対応ですか？</summary>
 
-はい、Shadow Drive は S3 互換です。S3互換はクラウドストレージ業界で広く採用されている標準であり、多くのプロバイダがS3互換のAPIとプロトコルを提供しているため、ビルダーはクラウドストレージプロバイダをより柔軟に選択できるようになりました。つまり、開発者は互換性の問題を心配することなく、異なるサービス間でデータを容易に移動させることができます。さらに、S3互換は、高速で信頼性の高いクエリを可能にする堅牢なAPIを提供し、仮想マウント機能とともに、Web2、Web3、分散型台帳技術やAIの最前線にとって重要です。Shadow Driveは、開発者が自分のビルドに直接統合できるようにすること、そしてShadow Driveのための革新的なプラットフォームを創造するデザイナーの才能あるコミュニティをサポートすることを目的としています。詳しくはこちらでご覧いただけます： https://docs.shadow.cloud/learn/design#s3-compatibility
+シャドウ・ドライブ・ストレージ・コストは、1GBあたり0.25[SHDW](https://docs.shadow.cloud/reference/shdw-token)の固定レートであるホールセール・ネットワーク・コストによって駆動され、モーメント・イン・タイムの見積もりを取得する様々なフロントエンドUIを通じて見積もることができる。一例として、エコシステムのパートナーによって設計されたフロントエンドがあり、ネットワークに関する詳細な情報も提供している。フロントエンドへのリンクはこちら： https://sdrive.app/stats
 
 </details>
 
@@ -358,7 +371,7 @@ Shadow Driveは、ベアメタルインフラのグローバルネットワー�
 
 <summary>ストレージコストはどのように決定されるのですか？</summary>
 
-価格はフロントエンドによって異なり、単位SHDWあたりのストレージコストの市場価値も異なります。ネットワーク全体でストレージ1GBあたり0.25SHDWの固定があります。https://sdrive.app/stats などのフロントエンドのUIをご覧いただき、コストを判断してください。
+価格はフロントエンドによって異なり、単位[SHDW](https://docs.shadow.cloud/reference/shdw-token)あたりのストレージコストの市場価値も異なります。ネットワーク全体ではストレージ1GBあたり0.25[SHDW](https://docs.shadow.cloud/reference/shdw-token)が固定されています。https://sdrive.app/stats のようなフロントエンドのUIでコストを確認することができます。
 
 </details>
 

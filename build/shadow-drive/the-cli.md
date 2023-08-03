@@ -83,7 +83,7 @@ shdw-drive create-storage-account --help
 
 ### **Create a Storage Account**
 
-これは、SHDWが必要になる数少ないコマンドの1つです。コマンドを実行する前に、ストレージアカウントを予約するために必要なSHDWの量を確認するよう指示があります。必要なオプションは3つあります：
+これは[SHDW](https://docs.shadow.cloud/reference/shdw-token)が必要になる数少ないコマンドの一つです。コマンドを実行する前に、ストレージアカウントを予約するのに必要な[SHDW](https://docs.shadow.cloud/reference/shdw-token)の量を尋ねるプロンプトが表示されます。必要なオプションは3つあります：
 
 `-kp, --keypair`
 
@@ -240,9 +240,9 @@ shdw-drive add-storage -kp ~/shdw-keypair.json -s 100MB
 shdw-drive reduce-storage -kp ~/shdw-keypair.json -s 500MB
 ```
 
-### **Claim Stake (aka Claim Unused SHDW Tokens after Reduction)**
+### **Claim Stake (aka Claim Unused** [**SHDW**](https://docs.shadow.cloud/reference/shdw-token) **Tokens after Reduction)**
 
-前のステップで使用するストレージの量を減らしたので、これで未使用のSHDWトークンを自由に請求できるようになりました。ここで必要なのは、キーペアだけです。
+前のステップでストレージの使用量を減らしたので、未使用の[SHDW](https://docs.shadow.cloud/reference/shdw-token)トークンを自由に請求できます。ここで必要なのはキーペアだけです。
 
 **例:**
 
@@ -252,7 +252,7 @@ shdw-drive claim-stake -kp ~/shdw-keypair.json
 
 ### **Delete a Storage Account**
 
-Shadow Driveからストレージアカウントを完全に削除することができます。完了すると、SHDW トークンがウォレットに戻されます。
+シャドードライブからストレージアカウントを完全に削除することができます。完了すると、[SHDW](https://docs.shadow.cloud/reference/shdw-token) トークンがウォレットに戻されます。
 
 _注：削除の際には、現在のソラナエポックの終わりまで続く猶予期間があります。_ [_こちらをご覧ください_](https://explorer.solana.com/) _現在のソラナエポックの残り時間を知るには、どれくらいの猶予期間があるのか知ることができます。_
 

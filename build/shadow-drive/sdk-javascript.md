@@ -149,7 +149,7 @@ async function main() {
 main();
 ```
 
-**Create a Storage Account**
+#### **Create a Storage Account**
 
 この実装は、WebとNodeの両方の実装で実質的に同じです。ストレージアカウントを作成するために必要なパラメータは3つあります：
 
