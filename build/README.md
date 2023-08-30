@@ -15,21 +15,21 @@ description: Shadow Drive 開発者向けツール
 
 ### **To get started with the Shadow Drive SDKs:**
 
-1. [JavaScript](shadow-drive/sdk-javascript.md), [Rust](shadow-drive/sdk-rust.md), [Python](shadow-drive/sdk-python.md) から選べます.
+1. [JavaScript](shadow-drive/sdk-javascript.md), [Rust](shadow-drive/sdk-rust.md), [Python](shadow-drive/sdk-python.md) から選べます。
 2. [SDK Guide](shadow-drive/the-sdk.md)を参照
    * [API](shadow-drive/the-api.md)の上に直接構築することができます。
-   * コミュニティに公開できるように、私たちの[Discord](https://discord.gg/genesysgo)であなたのプロジェクトについて教えてください。他のプロジェクトは[こちら](shadow-drive/community-mainted-uis.md)をご覧ください。
+   * コミュニティに公開できるように、私たちの[Discord](https://discord.gg/genesysgo)であなたのプロジェクトについて教えてください。他のプロジェクトは[こちら](broken-reference)をご覧ください。
 
 ### **Submitting Bugs & Security Issues**
 
-****[**https://github.com/GenesysGo/shdw-drive-bug-reports**](https://github.com/GenesysGo/shdw-drive-bug-reports)****
+[**https://github.com/GenesysGo/shdw-drive-bug-reports**](https://github.com/GenesysGo/shdw-drive-bug-reports)
 
 当社は、セキュリティ関連の問題に対して、責任ある開示プロセスを遵守しています。セキュリティの脆弱性を責任を持って開示し、対処するために、以下のプロセスに従うことをお願いします。
 
 #### **Bug Reporting Process**
 
 1. セキュリティに関連しないバグについては、新しいバグレポートを [こちら](https://github.com/GenesysGo/shdw-drive-bug-reports/issues/new/choose)に投稿してください。セキュリティ関連の報告については、"**セキュリティ脆弱性報告**"[こちら](https://github.com/GenesysGo/shdw-drive-bug-reports/issues/new/choose)を開いてください；
-2. 問題の明確で簡潔な説明、それを再現するための手順、関連するスクリーンショットやログを提供してください。
+2. 問題の明確で簡潔な説明、再現手順、関連するスクリーンショットやログを提供してください。
 
 **重要**： セキュリティ関連の問題については、再現性とその内容に関する情報をできるだけ多く記載してください。必ず上記のリポジトリにある **セキュリティ脆弱性報告** 機能を使用してください。セキュリティの脆弱性を公開のバグレポートとして提出した場合、私たちはそのレポートを削除し、解決するまですべてのコミュニケーションをプライベートチャンネルに移動する権利を有します。
 

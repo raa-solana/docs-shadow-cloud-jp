@@ -118,7 +118,7 @@ Base58 メッセージの署名
 アップロード先となるストレージアカウントのキー
 {% endswagger-parameter %}
 
-{% swagger-response status="200: OK" description="" %}
+{% swagger-response status="201: Created" description="" %}
 ```json
 {
     "finalized_locations": [String],

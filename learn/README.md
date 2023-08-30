@@ -99,7 +99,7 @@ Shadow Cloud と D.A.G.G.E.R は、Web3におけるコンポーザビリティ�
 
 [**Shadow Drive でビルドを開始する!**](../build/shadow-drive/)
 
-[**Shadow Drive で他の人が何を創っているか見てみましょう！!**](../build/shadow-drive/community-mainted-uis.md)
+[**Shadow Drive で他の人が何を創っているか見てみましょう！!**](broken-reference)
 
 ## **Shadow Operators**
 

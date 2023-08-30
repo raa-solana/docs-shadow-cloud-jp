@@ -22,6 +22,16 @@ GitHub FAQ: https://github.com/GenesysGo/shadow-drive/issues?q=is%3Aissue+is%3Ac
 
 <details>
 
+<summary>CLIを使おうとすると「410 Gone」エラーが出ます。どうすればいいでしょうか？</summary>
+
+このエラーは、CLI で使用している Solana RPC プロバイダが、CLI が機能するために必要な特定の RPC メソッドをサポートしていないことを意味します。これは、\`getProgramAccounts\` または他のメソッドである可能性があります。
+
+[Helius](https://www.helius.dev/)、Hellomoon.io、またはすべてのSolana RPCメソッドを使用できるその他のプレミアムSolana RPCプロバイダーのような、よりプレミアムなRPCプロバイダーを試してみることをお勧めします。
+
+</details>
+
+<details>
+
 <summary>ストレージアカウントの作成が失敗する場合はどうすればよいですか？</summary>
 
 ストレージアカウントの作成に失敗した場合は、ウォレットに適切な量のSOLとSHDWの両方があることを確認してください。ストレージアカウントの作成には、取引手数料を賄うための少量のSOLと、最初のストレージ割り当てを賄うための若干のSHDWが必要です。ウォレットにこれらの要件を満たす十分な資金があることを確認してください。こちらのドキュメントをご覧ください： https://docs.shadow.cloud/build/the-cli#create-a-storage-account
