@@ -4,12 +4,6 @@ description: シャドードライブを活用したプロジェクトを検討�
 
 # Shadow Ecosystem
 
-**SDRIVE**
-
-Shadow Drive上に構築された、使いやすく、信頼性の高い、プライベートで安全なクラウドストレージです。世界中のコンテンツクリエイターをサポートし、促進するために堅牢なツールセットで設計されたSDriveの直感的なプラットフォームで、安全でアクセスしやすい最高のファイルストレージを体験してください。
-
-[![](<../../.gitbook/assets/sdrive-feature (1).png>)](https://sdrive.app/landing)
-
 **SYNX**
 
 Blxckoutチームによって開発されたSynxは、実世界のモバイルおよびデスクトップデータを管理するための優れたUI/UXを提供します。また、包括的なドキュメントが付属しており、ユーザーフレンドリーな製品となっています。Synxは、Shadow Driveを活用したモバイルおよびデスクトップ用アプリでサポートされるプライベートクラウドストレージソリューションです。
@@ -33,6 +27,12 @@ Shadow Driveと対話するための最も広く使用されているGUIの1つ�
 Shadow Drive上に構築されたバックエンドストレージを持つ、シンプルで安全なWeb3ホスティングです。BlokHostは、ユーザーがウェブサイトを迅速に展開し、プラットフォームのノードネットワークを使用して、最適に効率的な方法でコンテンツをグローバルに配布することを可能にします。
 
 [![](../../.gitbook/assets/blockhost.png)](https://blok.host/)
+
+**SDRIVE**
+
+Easy to use, reliable, private, and secure cloud storage built on Shadow Drive. Experience the best in secure, accessible file storage with SDrive's intuitive platform, designed with a robust toolset to support and promote content creators around the world.
+
+[https://sdrive.app/landing](https://sdrive.app/landing)
 
 #### **Shadow Portal**
 

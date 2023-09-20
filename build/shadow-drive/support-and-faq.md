@@ -367,8 +367,6 @@ Shadow Drive のストレージ・コストは、1GBあたり0.25[SHDW](https://
 
 はい、Shadow DriveはS3互換です。S3互換はクラウドストレージ業界で広く採用されている標準であり、多くのプロバイダがS3互換のAPIとプロトコルを提供しています。これは、開発者が互換性の問題を心配することなく、異なるサービス間でデータを簡単に移動できることを意味します。さらに、S3互換性は、仮想マウント機能とともに、高速で信頼性の高いクエリを可能にする堅牢なAPIを提供し、Web2、Web3、分散台帳技術やAIの最前線にとって重要なものとなります。Shadow Driveは、開発者が自分のビルドに直接統合できるようにし、Shadow Driveのための革新的なプラットフォームを創造する才能あるデザイナーのコミュニティをサポートすることを目指しています。詳しくはこちら：https://docs.shadow.cloud/learn/design#s3-compatibility
 
-
-
 </details>
 
 <details>
@@ -376,14 +374,6 @@ Shadow Drive のストレージ・コストは、1GBあたり0.25[SHDW](https://
 <summary>Shadow Driveの動力源となる物理インフラは？</summary>
 
 Shadow Driveは、ベアメタルインフラのグローバルネットワーク上で動作し、すべてのコンピュートとストレージはベアメタル上に存在します。Shadow Driveの運用において、クラウドプロバイダーへの依存はありません。Shadow Driveの設計の詳細については、「Learn」カテゴリの「Design」セクションをご覧ください： https://docs.shadow.cloud/learn/design
-
-</details>
-
-<details>
-
-<summary>ストレージコストはどのように決定されるのですか？</summary>
-
-価格はフロントエンドによって異なり、単位[SHDW](https://docs.shadow.cloud/reference/shdw-token)あたりのストレージコストの市場価値も異なります。ネットワーク全体ではストレージ1GBあたり0.25[SHDW](https://docs.shadow.cloud/reference/shdw-token)が固定されています。https://sdrive.app/stats のようなフロントエンドのUIでコストを確認することができます。
 
 </details>
 
