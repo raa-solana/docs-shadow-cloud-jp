@@ -65,6 +65,8 @@ GitHub FAQ: https://github.com/GenesysGo/shadow-drive/issues?q=is%3Aissue+is%3Ac
 * 最低： 最小：4kb。100バイトのファイルをアップロードしても、4kbの容量を占めます。これはレプリケーションのオーバーヘッドが必要なためです。
 * 最大： 最大：1GB。
 
+[s3-compatible-client-access](../s3-compatible-client-access.md)では、1TiBまでのファイルをアップロードすることができます。
+
 最大ファイルサイズを増やすための開発が進行中です。
 
 </details>

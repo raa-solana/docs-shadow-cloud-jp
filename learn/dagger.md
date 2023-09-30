@@ -1,18 +1,24 @@
 ---
 description: >-
-  D.A.G.G.E.R.は、Directed Acyclic gossiping graph enabling replicationの略です、
+  D.A.G.G.E.R.は、directed acyclic gossip graph enabling replicationの略です、
   本項ではアーキテクチャを高次元で解説しています。
 ---
 
-# D.A.G.G.E.R
+# D.A.G.G.E.R.
 
 ## **Introduction**
 
-DAGGERは、グラフベースのコンセンサス機構を持つ分散システムです。プロトコル仕様を構成する4つのコンポーネントがあります。この記事では、これら4つのコンポーネントのそれぞれを高レベルで説明し、それらが受信したリクエストとどのように相互作用するのかを説明します。シンプルにするために、トランザクションのユースケースは、Shadow Driveにファイルを保存する要求と考えることができます。
+最新のリソースはこちらをご覧ください。:\
+\
+[D.A.G.G.E.R. Litepaper](https://github.com/GenesysGo/dagger-litepaper/blob/main/DAGGER-Litepaper.pdf)
+[テストネット連載記事](https://www.shadow.cloud/blog/dagger-testnet-release)
+[テストネット・デモ](https://dagger-hammer.shadow.cloud/)
+
+_注意：このページは、すべての読者に適したハイレベルな説明と一般的な概念を堅持しています。これはホワイトペーパーとみなされるものではなく、より技術的な文書は、直接上に提供されているリンクを使用して見つけることができます。DAGGERで_ [_SHDW_](https://docs.shadow.cloud/reference/shdw-token) _トークンがどのように利用されるかについての詳細は、_ [_SHDW_](https://docs.shadow.cloud/reference/shdw-token) _トークンのページ_ [_こちら_](https://docs.shadow.cloud/reference/shdw-token)_をご覧ください。このページは、最近リリースされたDAGGERのライトペーパーやブログ記事との整合性を高めるため、現在変更中です_。
+
+DAGGERは、グラフベースのコンセンサスメカニズムを持つ分散システムです。DAGGERは、グラフベースのコンセンサスメカニズムを持つ分散システムです。プロトコル仕様を構成する4つのコンポーネントがあります。DAGGERは、グラフベースのコンセンサスメカニズムを持つ分散システムです。簡単に言うと、トランザクションのユースケースは、Shadow Drive v2にファイルを保存するリクエストと考えることができます。
 
 GenesysGoのD.A.G.G.E.R.は、多くの実装が可能であり、計画されていますが、フラッグシップ実装はShadow Drive v2（現在のShadow Drive v1.5をまもなくリリース予定の拡張版）です。このため、「トランザクション」とは、ユーザーから提出された書き込み要求のことだと考えています。このセクションでは、スピード、安定性、スケーラビリティが、私たちが最先端の非循環グラフ型コンセンサス技術の構築を選択した理由であることを説明し、締めくくりとします。
-
-_注意：このセクションは、すべての読者に適したハイレベルな説明と一般的な概念に準拠しています。しかし、DAGGERが成熟し続けるにつれて、より技術的なドキュメントのリリースを計画しています。DAGGERで_ [_SHDW_](https://docs.shadow.cloud/reference/shdw-token) _トークンがどのように利用されるかについての詳細は、_ [_SHDW_](https://docs.shadow.cloud/reference/shdw-token) _トークンのページ_ [_こちら_](https://docs.shadow.cloud/reference/shdw-token)_をご覧ください_
 
 ## **Overview**
 
