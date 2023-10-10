@@ -4,7 +4,7 @@ description: Shadow Cloud とその実装の紹介
 
 # Learn
 
-<table data-view="cards"><thead><tr><th></th><th align="center"></th><th align="center"></th><th data-hidden data-card-target data-type="content-ref"></th><th data-hidden data-card-cover data-type="files"></th></tr></thead><tbody><tr><td></td><td align="center"><strong>Design</strong></td><td align="center">v1.5</td><td><a href="storage-services/design.md#shadow-drive-v1.5-is-born-building-tools-and-listening-to-developer-feedback">#shadow-drive-v1.5-is-born-building-tools-and-listening-to-developer-feedback</a></td><td><a href="../.gitbook/assets/Design1.png">Design1.png</a></td></tr><tr><td></td><td align="center"><strong>D.A.G.G.E.R</strong></td><td align="center">分散型台帳技術</td><td><a href="dagger.md#introduction">#introduction</a></td><td><a href="../.gitbook/assets/Dagger2.png">Dagger2.png</a></td></tr><tr><td></td><td align="center"><strong>Use Cases</strong></td><td align="center">Shadow Drive の機能</td><td><a href="./#shadow-cloud-use-cases">#shadow-cloud-use-cases</a></td><td><a href="../.gitbook/assets/Usecases.png">Usecases.png</a></td></tr></tbody></table>
+<table data-view="cards"><thead><tr><th></th><th align="center"></th><th align="center"></th><th data-hidden data-card-target data-type="content-ref"></th><th data-hidden data-card-cover data-type="files"></th></tr></thead><tbody><tr><td></td><td align="center"><strong>Design</strong></td><td align="center">v1.5</td><td><a href="storage-services/design.md#shadow-drive-v1.5-is-born-building-tools-and-listening-to-developer-feedback">#shadow-drive-v1.5-is-born-building-tools-and-listening-to-developer-feedback</a></td><td><a href="../.gitbook/assets/Design1.png">Design1.png</a></td></tr><tr><td></td><td align="center"><strong>D.A.G.G.E.R.</strong></td><td align="center">分散型台帳技術</td><td><a href="dagger.md#introduction">#introduction</a></td><td><a href="../.gitbook/assets/Dagger2.png">Dagger2.png</a></td></tr><tr><td></td><td align="center"><strong>Use Cases</strong></td><td align="center">Shadow Drive の機能</td><td><a href="./#shadow-cloud-use-cases">#shadow-cloud-use-cases</a></td><td><a href="../.gitbook/assets/Usecases.png">Usecases.png</a></td></tr></tbody></table>
 
 ## **Mission**
 
@@ -50,25 +50,25 @@ Shadow Driveの現在の[design](storage-services/design.md#present-design-consi
 
 ## **Compute**
 
-DAGGERをオーケストレーション/オラクルプロトコルとして利用することで、仮想マシンのプロビジョニングを効果的に分散化するフロントエンドUI/UX体験のもと、分散型コモディティクラウド（Shadow Operator仮想マシン）をネットワーク化することが可能です。これは、Amazon EC2インスタンスやDigital Ocean Dropletsと同様のコンセプトですが、バックエンドリソースと「ネットワークスタック」がShadow Operatorである個人/エンティティによって信頼できる形で所有・運用されることが特徴です！これは現在、概念実証中であり、将来に向けて開発中です。私たちは、この技術を「Solana Breakpoint 2022」のイベントで公開しました。2,000人以上の参加者を集め、マイクロクラウドの分散型グループによるトラストレス仮想マシンのプロビジョニングのライブデモを公開しました。開発者は、カンファレンス期間中、これらの仮想マシン上でビルドすることができ、私たちのプラットフォームが向かうエキサイティングな方向性を直接体験することができました。
+_D.A.G.G.E.R._ をオーケストレーション/オラクルプロトコルとして利用することで、仮想マシンのプロビジョニングを効果的に分散化するフロントエンドUI/UX体験のもと、分散型コモディティクラウド（Shadow Operator仮想マシン）をネットワーク化することが可能です。これは、Amazon EC2インスタンスやDigital Ocean Dropletsと同様のコンセプトですが、バックエンドリソースと「ネットワークスタック」がShadow Operatorである個人/エンティティによって信頼できる形で所有・運用されることが特徴です！これは現在、概念実証中であり、将来に向けて開発中です。私たちは、この技術を「Solana Breakpoint 2022」のイベントで公開しました。2,000人以上の参加者を集め、マイクロクラウドの分散型グループによるトラストレス仮想マシンのプロビジョニングのライブデモを公開しました。開発者は、カンファレンス期間中、これらの仮想マシン上でビルドすることができ、私たちのプラットフォームが向かうエキサイティングな方向性を直接体験することができました。
 
 [**BreakpointのShadow VMs Demoをチェック**](../reference/breakpoint-2022-demo.md)
 
-モバイルの計算能力とデータ速度が急増する中、私たちは初期段階のSolana Saga Mobileを通じて、DAGGERのパーミッションレスモバイルコンピュートとストレージを開発しています。この強化は、モバイルアプリでShadow Driveを使用するビルダーの既存のエコシステムをサポートします。DAGGER Mobileは、AIやゲームの需要が高まる中、コンピューティングとストレージのための分散型台帳技術をスマートフォンにもたらすでしょう。私たちは、Shadow Driveとモバイルの実装を含むDAGGERを、当社のロードマップに沿った、モバイルおよびエッジAIソリューションの実用的な選択肢とすることを目指しています。
+モバイルの計算能力とデータ速度が急増する中、私たちは初期段階のSolana Saga Mobileを通じて、_D.A.G.G.E.R._ のパーミッションレスモバイルコンピュートとストレージを開発しています。この強化は、モバイルアプリでShadow Driveを使用するビルダーの既存のエコシステムをサポートします。_D.A.G.G.E.R._ Mobileは、AIやゲームの需要が高まる中、コンピューティングとストレージのための分散型台帳技術をスマートフォンにもたらすでしょう。私たちは、Shadow Driveとモバイルの実装を含む _D.A.G.G.E.R._ を、当社のロードマップに沿った、モバイルおよびエッジAIソリューションの実用的な選択肢とすることを目指しています。
 
 ## **Roadmap**
 
 私たちが開発に力を入れている分野は3つあります:
 
-* DAGGER の Shadow Drive 実装について
-* DAGGER と Shadow Drive のモバイル実装について
+* _D.A.G.G.E.R._ の Shadow Drive 実装について
+* _D.A.G.G.E.R._ と Shadow Drive のモバイル実装について
 * 上記2つの組み合わせでAIの進化を支える
 
 ## **まとめ**
 
 "オンチェーン"と "オフチェーン"は、Web3技術がユーザーの採用を有意義に獲得するために進化すべき概念です。ブロックチェーンは分散型台帳技術（DLT）の一種ですが、もはやそれだけがDLTではありません。"On-DLT"と "Off-DLT"、それが重要なのです。これは、ブロックチェーンの意義や世界に与える影響を否定するものではありません。ブロックチェーンが登場してから14年、DLTの傘下に入る技術のサブセットは広がったというだけのことです。適材適所のツールは重要です。
 
-Shadow Cloud と D.A.G.G.E.R は、Web3におけるコンポーザビリティを実現するための第一歩となることを願っています。 あるブロックチェーンと別のブロックチェーンの間のコンポーザビリティだけでなく、拡大して、DLT傘下のすべての異なるシステム間のコンポーザビリティについて考えてみて下さい。SolanaとDAGGERの相互運用性を実現することで、スピード、安定性、セキュリティを犠牲にすることなく、トラストレス、分散化、パーミッションレス、検閲への抵抗力を獲得する、真のWeb3クラウドプラットフォームを実現します。
+Shadow Cloud と D.A.G.G.E.R. は、Web3におけるコンポーザビリティを実現するための第一歩となることを願っています。 あるブロックチェーンと別のブロックチェーンの間のコンポーザビリティだけでなく、拡大して、DLT傘下のすべての異なるシステム間のコンポーザビリティについて考えてみて下さい。Solanaと _D.A.G.G.E.R._ の相互運用性を実現することで、スピード、安定性、セキュリティを犠牲にすることなく、トラストレス、分散化、パーミッションレス、検閲への抵抗力を獲得する、真のWeb3クラウドプラットフォームを実現します。
 
 分散型台帳技術は、特定のユーザーの要求を満たすために様々な組み合わせで選択し、組み立てることができる技術のスーパーセットと考えるべきでしょう。では、そのようなユーザー要件にはどのようなものがあるのでしょうか。ここでは、まず現実のユースケースをいくつか紹介します：
 
@@ -109,7 +109,7 @@ Shadow Operatorは、Shadowコモディティクラウドの分散型バック�
 
 すべての基盤は、シャドウプラットフォームを動かすノードを運営するシャドウオペレーターにあります。オペレーターは、新しいノードをネットワークに接続したり、既存のサーバーを管理したり、他のシャドーオペレーターの全体的なステータスを確認したりすることができますが、これらはすべて使いやすい1つのポータルを通じて行います。
 
-現在開発中のシャドーオペレーターノードは、リゾルバー、インジェスター、ストアラー、キャッシャーといった一連の役割を担っています。これらの役割は、DAGGERのオーケストレーションの下で連携し、シャドウクラウドサービスと開発中のモバイルストレージの両方をサポートするパーミッションレスの分散プラットフォームを形成します。
+現在開発中のシャドーオペレーターノードは、リゾルバー、インジェスター、ストアラー、キャッシャーといった一連の役割を担っています。これらの役割は、_D.A.G.G.E.R._ のオーケストレーションの下で連携し、シャドウクラウドサービスと開発中のモバイルストレージの両方をサポートするパーミッションレスの分散プラットフォームを形成します。
 
 ## **Our Team**
 

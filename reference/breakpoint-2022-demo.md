@@ -1,8 +1,8 @@
 ---
-description: DAGGERを使用して、Shadow Cloudポータルを通じてトラストレスなVMをデプロイする方法をご覧ください。
+description: D.A.G.G.E.R.を使用して、Shadow Cloudポータルを通じてトラストレスなVMをデプロイする方法をご覧ください。
 ---
 
-# Breakpoint 2022 Demo
+# Solana Breakpoint 2022 Demo
 
 <figure><img src="https://media.tenor.com/r-mBXs5HH2EAAAAM/thumbs-up-keanu-reeves.gif" alt=""><figcaption></figcaption></figure>
 
@@ -62,7 +62,6 @@ BreakPoint でデプロイ中のDemo
 
 <figure><img src="../.gitbook/assets/Screenshot 2022-11-01 at 1.40.43 PM.png" alt=""><figcaption></figcaption></figure>
 
-ゴータイムです。ソラナペイで支払うボタンをクリックすると、プロビジョニングが開始されます。デプロイに数分かかりますが、その後、分散型インフラ上で本格的なVMが稼働することになります。数分後、"ready fren? "というダイアログボックスが表示され、実際に準備が整ったことがわかります。ランディングページに戻ると、ダッシュボードにVMの詳細が表示されます。
+時間です。Solana Payで支払うボタンをクリックすると、プロビジョニングが始まります。デプロイには数分かかりますが、その後、分散型インフラ上で本格的なVMが稼働するようになります。数分後、"ready fren? "というダイアログボックスが表示され、準備が整ったことがわかります。ランディング・ページに戻り、ダッシュボードにVMの詳細が表示されます。
 
 <figure><img src="../.gitbook/assets/vm.png" alt=""><figcaption></figcaption></figure>
-

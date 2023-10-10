@@ -351,15 +351,7 @@ Shadow Driveは、データを暗号化および消去符号化し、その断�
 
 はい、Shadow Drive は、モバイルでの開発を積極的に行っているエコシステム・パートナーを通じてモバイルでサポートされています。詳しくはシャドウエコシステムページをご覧ください。https://docs.shadow.cloud/build/community-mainted-uis
 
-さらに将来的には、当社の分散型台帳技術「DAGGER」により、低コストの分散型モバイルクラウドを求める方々のために、Solana Sagaを搭載したストレージソリューションが実現する予定です。詳細については、「Learn」セクションをご覧ください。詳しくはこちらでご覧いただけます： https://docs.shadow.cloud/learn#compute
-
-</details>
-
-<details>
-
-<summary>Shadow Driveにデータを保存する場合、費用はどのくらいかかるのでしょうか？</summary>
-
-Shadow Drive のストレージ・コストは、1GBあたり0.25[SHDW](https://docs.shadow.cloud/reference/shdw-token)の固定レートであるホールセール・ネットワーク・コストによって駆動され、モーメント・イン・タイムの見積もりを取得する様々なフロントエンドUIを通じて見積もることができます。一例として、エコシステムのパートナーによって設計されたフロントエンドがあり、ネットワークに関する詳細な情報も提供しています。フロントエンドへのリンクはこちら： https://sdrive.app/stats
+さらに将来的には、当社の分散型台帳技術「_D.A.G.G.E.R._」により、低コストの分散型モバイルクラウドを求める方々のために、Solana Sagaを搭載したストレージソリューションが実現する予定です。詳細については、「Learn」セクションをご覧ください。詳しくはこちらでご覧いただけます： https://docs.shadow.cloud/learn#compute
 
 </details>
 
@@ -389,9 +381,9 @@ GenesysGo（GG）は、2021年4月にSolanaのバリデーターとして設立�
 
 <details>
 
-<summary>DAGGER/Shadow Driveを利用した場合、プロジェクトの宣伝は可能ですか？</summary>
+<summary>D.A.G.G.E.R./Shadow Driveを利用した場合、プロジェクトの宣伝は可能ですか？</summary>
 
-はい、Shadow Driveチームは、Driveの上に構築している場合やDAGGERを使用している場合、あなたのプロジェクトについてぜひ聞きたいと思っています。可視性を得るための最良の方法は、docs-shadow-cloudレポに直接PRを提出し、あなたのプロジェクト/ビジネス、詳細、画像をシャドウエコシステムリストに追加することです： https://github.com/GenesysGo/docs-shadow-cloud
+はい、Shadow Driveチームは、Driveの上に構築している場合や _D.A.G.G.E.R._ を使用している場合、あなたのプロジェクトについてぜひ聞きたいと思っています。可視性を得るための最良の方法は、docs-shadow-cloudレポに直接PRを提出し、あなたのプロジェクト/ビジネス、詳細、画像をシャドウエコシステムリストに追加することです： https://github.com/GenesysGo/docs-shadow-cloud
 
 ここにあるファイルを編集するためにPRを提出する: https://github.com/GenesysGo/docs-shadow-cloud/blob/main/build/shadow-drive/community-mainted-uis.md
 
