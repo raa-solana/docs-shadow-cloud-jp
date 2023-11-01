@@ -1,5 +1,5 @@
 ---
-description: D.A.G.G.E.R.を使用して、Shadow Cloudポータルを通じてトラストレスなVMをデプロイする方法をご覧ください。
+description: D.A.G.G.E.R.を使用して、Shdw Cloudポータルを通じてトラストレスなVMをデプロイする方法をご覧ください。
 ---
 
 # Solana Breakpoint 2022 Demo
@@ -22,7 +22,7 @@ DevnetのアカウントにSOLやUSDCがなくても、心配しないでくだ�
 BreakPoint でデプロイ中のDemo
 {% endhint %}
 
-ウォレットを接続すると、Shadow Cloudのダッシュボードページに着地します。右上にある2つのボタンが見えますか？これをクリックすると、DevnetウォレットにSOLとUSDCがエアドロップされます。今はあまり夢中にならず、私たちのために少し取っておいてください。必要な分だけを取ってください。
+ウォレットを接続すると、Shdw Cloudのダッシュボードページに着地します。右上にある2つのボタンが見えますか？これをクリックすると、DevnetウォレットにSOLとUSDCがエアドロップされます。今はあまり夢中にならず、私たちのために少し取っておいてください。必要な分だけを取ってください。
 
 <figure><img src="../.gitbook/assets/Screenshot 2022-11-01 at 1.13.12 PM.png" alt=""><figcaption></figcaption></figure>
 

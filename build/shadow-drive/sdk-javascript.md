@@ -50,7 +50,7 @@ yarn add @shadow-drive/sdk @project-serum/anchor \
 
 #### **Instantiate the Wallet and Connection**
 
-助けが必要な場合は、[Solana docs と 例 ](https://github.com/solana-labs/wallet-adapter)を参照してください。本ドキュメントではShadow Drive SDKに焦点を当てますので、SolanaでReactサイトを構築する方法について入門が必要な場合は、他のリソースを紹介します。
+助けが必要な場合は、[Solana docs と 例 ](https://github.com/solana-labs/wallet-adapter)を参照してください。本ドキュメントではShdwDrive SDKに焦点を当てますので、SolanaでReactサイトを構築する方法について入門が必要な場合は、他のリソースを紹介します。
 
 Solana example code:
 
@@ -101,11 +101,11 @@ return (
 
 </details>
 
-#### **Building components for various Shadow Drive operations**
+#### **Building components for various ShdwDrive operations**
 
-まず、Shadow Drive 接続クラスオブジェクトをインスタンス化することから始めましょう。これはすべてのShadow Driveメソッドを持ち、すべてのトランザクションのためにクラス内の署名ウォレットを実装します。
+まず、ShdwDrive 接続クラスオブジェクトをインスタンス化することから始めましょう。これはすべてのShdwDriveメソッドを持ち、すべてのトランザクションのためにクラス内の署名ウォレットを実装します。
 
-最も単純なレベルでは、Reactアプリがウォレット接続時にユーザーのShadow Driveへの接続を直ちにロードしようとすることが推奨されます。これは `useEffect` という React フックを使って行うことができます。
+最も単純なレベルでは、Reactアプリがウォレット接続時にユーザーのShdwDriveへの接続を直ちにロードしようとすることが推奨されます。これは `useEffect` という React フックを使って行うことができます。
 
 ```javascript
 import React, { useEffect } from "react";
@@ -262,7 +262,7 @@ Full Response:
 
 `uploadFile`メソッドは、2つのパラメータを必要とします：
 
-* `key`: シャドウストレージアカウントの公開鍵を表す PublicKey オブジェクト。
+* `key`: Shdwストレージアカウントの公開鍵を表す PublicKey オブジェクト。
 * `data`: `File` オブジェクトタイプまたは `ShadowFile` オブジェクトタイプのファイル。
 
 メソッドにカーソルを合わせると、以下のようなインテリセンスのポップアップが表示されるので確認してください。
@@ -310,7 +310,7 @@ export default function Upload() {
                     setTxnSig(upload.transaction_signature);
                 }}
             >
-                <h1>Shadow Drive File Upload</h1>
+                <h1>ShdwDrive File Upload</h1>
                 <input
                     type="file"
                     onChange={(e) => setFile(e.target.files[0])}
@@ -496,7 +496,7 @@ const cancelDelStg = await drive.cancelDeleteStorageAccount(acctPubKey, "v2");
 
 #### **Definition**
 
-このメソッドは、ShadowDrive クラスの新しいインスタンスを作成するために使用されます。web3 接続オブジェクトと web3 ウォレットを受け取ります。これは、ShadowDrive クラスのインスタンスを返します。
+このメソッドは、ShdwDrive クラスの新しいインスタンスを作成するために使用されます。web3 接続オブジェクトと web3 ウォレットを受け取ります。これは、ShdwDrive クラスのインスタンスを返します。
 
 #### **Parameters**
 
@@ -505,7 +505,7 @@ const cancelDelStg = await drive.cancelDeleteStorageAccount(acctPubKey, "v2");
 
 #### **Returns**
 
-ShadowDriveクラスのインスタンスを返します。
+ShdwDriveクラスのインスタンスを返します。
 
 {% tabs %}
 {% tab title="Example" %}
@@ -578,7 +578,7 @@ const addStgResp = await drive.addStorage(acctPubKey,"10MB","v2"ca
 
 #### **Definition**
 
-index.ts:135 で定義されている ShadowDrive.cancelDeleteStorageAccount の実装。このメソッドは、Shadow Drive 上のストレージアカウントの削除要求をキャンセルするために使用されます。ストレージアカウントの公開鍵とシャドウドライブのバージョン (v1 または v2) を受け取ります。このメソッドは、削除解除要求の確認済みトランザクション ID を含む Promise<{ txid: string }> を返します。
+index.ts:135 で定義されている ShdwDriveのcancelDeleteStorageAccount の実装。このメソッドは、ShdwDrive 上のストレージアカウントの削除要求をキャンセルするために使用されます。ストレージアカウントの公開鍵とShdwドライブのバージョン (v1 または v2) を受け取ります。このメソッドは、削除解除要求の確認済みトランザクション ID を含む Promise<{ txid: string }> を返します。
 
 #### **Parameters**
 
@@ -607,7 +607,7 @@ const acctPubKey = new anchor.web3.PublicKey(
     "EY8ZktbRmecPLfopBxJfNBGUPT1LMqZmDFVcWeMTGPcN"
 );
 
-// アカウント公開鍵オブジェクトと、削除を取り消すストレージアカウントのバージョンを示す文字列を渡して、Shadow Drive API の "cancelDeleteStorageAccount" 関数を呼び出します。
+// アカウント公開鍵オブジェクトと、削除を取り消すストレージアカウントのバージョンを示す文字列を渡して、ShdwDrive API の "cancelDeleteStorageAccount" 関数を呼び出します。
 const cancelDelStg = await drive.cancelDeleteStorageAccount(acctPubKey, "v2");
 ```
 {% endcode %}
@@ -618,7 +618,7 @@ const cancelDelStg = await drive.cancelDeleteStorageAccount(acctPubKey, "v2");
 
 #### **Definition**
 
-このメソッドは、ShadowDrive 上の Stake を要求するために使用されます。ストレージアカウントの PublicKey と ShadowDrive のバージョン (v1 または v2) を受け取ります。このメソッドは、claimStake 要求の確認済みトランザクション ID を含む Promise<{ txid: string }> を返します。
+このメソッドは、ShdwDrive 上の Stake を要求するために使用されます。ストレージアカウントの PublicKey と ShdwDrive のバージョン (v1 または v2) を受け取ります。このメソッドは、claimStake 要求の確認済みトランザクション ID を含む Promise<{ txid: string }> を返します。
 
 #### **Parameters**
 
@@ -659,13 +659,13 @@ const claimStake = await drive.claimStake(acctPubKey, "v2");
 
 #### **Definition**
 
-index.ts:120 で定義されている ShadowDrive.createStorageAccount の実装 このメソッドは、Shadow Drive で新しいストレージアカウントを作成するために使用されます。このメソッドは、ストレージアカウントの名前、要求されたストレージアカウントのサイズ、および ShadowDrive のバージョン (v1 または v2) を受け付けます。また、ストレージアカウントのオプションのセカンダリーオーナーを受け付けます。作成されたストレージアカウントとトランザクション署名を含む Promise を返します。
+index.ts:120 で定義されている ShdwDriveのcreateStorageAccount の実装 このメソッドは、ShdwDrive で新しいストレージアカウントを作成するために使用されます。このメソッドは、ストレージアカウントの名前、要求されたストレージアカウントのサイズ、および ShdwDrive のバージョン (v1 または v2) を受け付けます。また、ストレージアカウントのオプションのセカンダリーオーナーを受け付けます。作成されたストレージアカウントとトランザクション署名を含む Promise を返します。
 
 #### **Parameters**
 
 * `name`: `string` - ストレージアカウントに付けたい名前です。(一意である必要はありません)
 * `size`: `string` - 作成を要求しているストレージの量。1KB', '1MB', '1GB'のような文字列であるべきです。現在、KB、MB、GB のストレージ区切りのみがサポートされています。
-* `version`: `ShadowDriveVersion` - ShadowDrive のバージョン（v1 または v2）。
+* `version`: `ShadowDriveVersion` - ShdwDrive のバージョン（v1 または v2）。
 * `owner2` (オプション): `PublicKey` - オプションで、ストレージアカウントのセカンダリーオーナーを指定します。
 
 #### **Returns**
@@ -704,14 +704,14 @@ console.log(newAcct);
 
 #### **Definition**
 
-このメソッドは、Shadow Drive 上のファイルを削除するために使用されます。ストレージアカウントの公開鍵、削除を要求するファイルの Shadow Drive URL、および Shadow Drive のバージョン (v1 または v2) を受け付けます。削除要求の確認済みトランザクション ID を含む Promise を返します。
+このメソッドは、ShdwDrive 上のファイルを削除するために使用されます。ストレージアカウントの公開鍵、削除を要求するファイルの ShdwDrive URL、および ShdwDrive のバージョン (v1 または v2) を受け付けます。削除要求の確認済みトランザクション ID を含む Promise を返します。
 
 #### **Parameters**
 
 * `key`: `PublicKey` - ストレージアカウントの公開鍵
 * `url`: `string` - 削除を要求しているファイルのシャドウドライブの URL
-* `version`： \`Shadow Drive
-* Version\` - Shadow Drive のバージョン（v1 または v2）．
+* `version`： \`ShdwDrive
+* Version\` - ShdwDrive のバージョン（v1 または v2）．
 
 #### **Returns**
 
@@ -762,12 +762,12 @@ console.log(delFile);
 
 #### **Definition**
 
-index.ts:124 で定義されている ShadowDrive.deleteStorageAccount の実装 このメソッドは、Shadow Drive 上のストレージアカウントを削除するために使用されます。ストレージアカウントの公開鍵とShadow Driveのバージョン（v1 または v2）を受け取ります。このメソッドは、削除要求の確認済みトランザクション ID を含む Promise<{ txid: string }> を返します。
+index.ts:124 で定義されている ShdwDriveのdeleteStorageAccount の実装 このメソッドは、ShdwDrive 上のストレージアカウントを削除するために使用されます。ストレージアカウントの公開鍵とShdwDriveのバージョン（v1 または v2）を受け取ります。このメソッドは、削除要求の確認済みトランザクション ID を含む Promise<{ txid: string }> を返します。
 
 #### **Parameters**
 
 * `key`: `PublicKey` - ストレージアカウントの公開鍵。
-* `version`: `ShadowDriveVersion` - Shadow Drive のバージョン（v1 または v2）.
+* `version`: `ShadowDriveVersion` - ShdwDrive のバージョン（v1 または v2）.
 
 #### **Returns**
 
@@ -803,14 +803,14 @@ const delAcct = await drive.deleteStorageAccount(acctPubKey, "v2");
 
 #### **Definition**
 
-このメソッドは、Shadow Drive 上のファイルを編集するために使用されます。ストレージアカウントの公開鍵、既存のファイルの URL、File または ShadowFile オブジェクト、および ShadowDrive のバージョン (v1 または v2) を受け入れます。ファイルの場所とトランザクション署名を含む Promise を返します。
+このメソッドは、ShdwDrive 上のファイルを編集するために使用されます。ストレージアカウントの公開鍵、既存のファイルの URL、File または ShadowFile オブジェクト、および ShdwDrive のバージョン (v1 または v2) を受け入れます。ファイルの場所とトランザクション署名を含む Promise を返します。
 
 #### **Parameters**
 
 * `key`: `PublicKey` - ストレージアカウントの公開鍵
 * `url`: `string` - 既存のファイルの URL
 * `data`: `File | ShadowFile` - ファイルまたは ShadowFile オブジェクト、ファイル拡張子は ShadowFiles の名前プロパティに含める必要があります。
-* `version`: `ShadowDriveVersion` - ShadowDrive のバージョン（v1 または v2）。
+* `version`: `ShadowDriveVersion` - ShdwDrive のバージョン（v1 または v2）。
 
 #### **Returns**
 
@@ -866,7 +866,7 @@ const editFile = await drive.editFile(acctPubKey, url, "v2", fileToUpload);
 
 #### **Definition**
 
-このメソッドは、Shadow Drive 上のストレージアカウントの詳細を取得するために使用されます。このメソッドはストレージアカウントの公開鍵を受け取り、ストレージアカウントの詳細を含む Promise を返します。
+このメソッドは、ShdwDrive 上のストレージアカウントの詳細を取得するために使用されます。このメソッドはストレージアカウントの公開鍵を受け取り、ストレージアカウントの詳細を含む Promise を返します。
 
 #### **Parameters**
 
@@ -922,11 +922,11 @@ console.log(acct);
 
 #### **Definition**
 
-このメソッドは、現在のユーザーに関連するすべてのストレージアカウントのリストを取得するために使用されます。Shadow Drive のバージョン (v1 または v2) を受け付けます。ストレージアカウントのリストを含む Promise\<StorageAccountResponse\[]> を返します。
+このメソッドは、現在のユーザーに関連するすべてのストレージアカウントのリストを取得するために使用されます。ShdwDrive のバージョン (v1 または v2) を受け付けます。ストレージアカウントのリストを含む Promise\<StorageAccountResponse\[]> を返します。
 
 #### **Parameters**
 
-* `version`: `ShadowDriveVersion` - ShadowDrive のバージョン（v1 または v2）
+* `version`: `ShadowDriveVersion` - ShdwDrive のバージョン（v1 または v2）
 
 #### **Returns**
 
@@ -967,7 +967,7 @@ console.log(acctPubKey.toBase58());
 
 #### **Definition**
 
-このメソッドは、Shadow Drive 上のストレージアカウントにあるオブジェクトをリストアップするために使用されます。ストレージアカウントの公開鍵を受け取り、ストレージアカウント内のオブジェクトのリストを含む Promise を返します。
+このメソッドは、ShdwDrive 上のストレージアカウントにあるオブジェクトをリストアップするために使用されます。ストレージアカウントの公開鍵を受け取り、ストレージアカウント内のオブジェクトのリストを含む Promise を返します。
 
 #### **Parameters**
 
@@ -1015,12 +1015,12 @@ console.log(listItems);
 
 #### **Definition**
 
-このメソッドは、ShadowDrive 上でストレージアカウントを不変にするために使用されます。ストレージアカウントの公開鍵とシャドウドライブのバージョン（v1 または v2）を受け取ります。makeStorageImmutable 要求の確認済みトランザクション ID を含む Promise を返します。
+このメソッドは、ShdwDrive 上でストレージアカウントを不変にするために使用されます。ストレージアカウントの公開鍵とシャドウドライブのバージョン（v1 または v2）を受け取ります。makeStorageImmutable 要求の確認済みトランザクション ID を含む Promise を返します。
 
 #### **Parameters**
 
 * `key`: `PublicKey` - ストレージアカウントの公開鍵
-* `version`: `ShadowDriveVersion` - Shadow Drive のバージョン（v1 または v2）
+* `version`: `ShadowDriveVersion` - ShdwDrive のバージョン（v1 または v2）
 
 #### **Returns**
 
@@ -1065,7 +1065,7 @@ console.log(result);
 
 #### **Definition**
 
-このメソッドは、Shadow Drive 上の Storage Account を移行するために使用します。ストレージアカウントの PublicKey を受け取ります。移行要求の確認済みトランザクション ID を含む Promise<{ txid: string }> を返します。
+このメソッドは、ShdwDrive 上の Storage Account を移行するために使用します。ストレージアカウントの PublicKey を受け取ります。移行要求の確認済みトランザクション ID を含む Promise<{ txid: string }> を返します。
 
 #### **Parameters**
 
@@ -1097,7 +1097,7 @@ const result = await drive.migrate(key);
 
 #### **Definition**
 
-このメソッドは、Shadow Drive 上の Rent を償還するために使用されます。ストレージアカウントの公開鍵と、クローズするファイルアカウントの公開鍵を受け取ります。redeemRent リクエストの確認済みトランザクション ID を含む Promise<{ txid: string }> を返します。
+このメソッドは、ShdwDrive 上の Rent を償還するために使用されます。ストレージアカウントの公開鍵と、クローズするファイルアカウントの公開鍵を受け取ります。redeemRent リクエストの確認済みトランザクション ID を含む Promise<{ txid: string }> を返します。
 
 #### **Parameters**
 
@@ -1138,13 +1138,13 @@ const result = await drive.redeemRent(key, fileAccount);
 
 #### **Definition**
 
-このメソッドは、Shadow Drive 上のストレージアカウントのストレージを削減するために使用されます。ストレージアカウントの公開鍵、ストレージアカウントから削減を要求するストレージの量、およびシャドウドライブのバージョン（v1 または v2）を受け付けます。ストレージ削減要求の確認済みトランザクション ID を含む Promise を返します。
+このメソッドは、ShdwDrive 上のストレージアカウントのストレージを削減するために使用されます。ストレージアカウントの公開鍵、ストレージアカウントから削減を要求するストレージの量、およびShdwDriveのバージョン（v1 または v2）を受け付けます。ストレージ削減要求の確認済みトランザクション ID を含む Promise を返します。
 
 #### **Parameters**
 
 * `key`: `PublicKey` - ストレージアカウントの公開鍵
 * `size`: `string` - ストレージアカウントから削減することを要求するストレージの量。1KB'、'1MB'、'1GB'のような文字列である必要があります。現在、KB、MB、GB のストレージ区切りのみがサポートされています。
-* `version`: `ShadowDriveVersion` - ShadowDrive のバージョン（v1 または v2）
+* `version`: `ShadowDriveVersion` - ShdwDrive のバージョン（v1 または v2）
 
 #### **Returns**
 
@@ -1207,7 +1207,7 @@ storageConfigPDA: PublicKey;
 {% tab title="Explanations" %}
 {% code overflow="wrap" %}
 ```javascript
-// storageConfigPDA は、Shadow SDK のメソッドで、Shadow ストレージプログラムのコンフィグのプログラム派生アカウント (PDA) の公開鍵を返します。プログラム派生アカウントとは、プログラムの公開鍵と特定のシードから派生するsolanaブロックチェーン上の特別なアカウントです。この方法の目的は、ShadowストレージプログラムのconfigのPDAを取得するための便利な方法を提供することです。この config には、現在のストレージrent免除の閾値やストレージアカウントのデータサイズ制限など、重要な情報が含まれています。この公開鍵は、シャドウストレージプログラムのconfigアカウントと対話するために使用され、ユーザーはプログラムのグローバル構成設定を取得および変更することができます。
+// storageConfigPDA は、Shdw SDK のメソッドで、Shdwストレージプログラムのコンフィグのプログラム派生アカウント (PDA) の公開鍵を返します。プログラム派生アカウントとは、プログラムの公開鍵と特定のシードから派生するsolanaブロックチェーン上の特別なアカウントです。この方法の目的は、ShdwストレージプログラムのconfigのPDAを取得するための便利な方法を提供することです。この config には、現在のストレージrent免除の閾値やストレージアカウントのデータサイズ制限など、重要な情報が含まれています。この公開鍵は、Shdwストレージプログラムのconfigアカウントと対話するために使用され、ユーザーはプログラムのグローバル構成設定を取得および変更することができます。
 storageConfigPDA: PublicKey;
 ```
 {% endcode %}
@@ -1257,7 +1257,7 @@ This method is used to top up a storage account's $SHDW balance to cover any nec
 
 #### **Definition**
 
-このメソッドは、Shadow Drive にファイルをアップロードするために使用されます。ストレージアカウントの公開鍵、およびファイルまたは ShadowFile オブジェクトを受け取ります。ファイル拡張子は、ShadowFiles の name プロパティに含める必要があります。このメソッドは、ファイルの場所とトランザクション署名を含む Promise を返します。
+このメソッドは、ShdwDrive にファイルをアップロードするために使用されます。ストレージアカウントの公開鍵、およびファイルまたは ShadowFile オブジェクトを受け取ります。ファイル拡張子は、ShadowFiles の name プロパティに含める必要があります。このメソッドは、ファイルの場所とトランザクション署名を含む Promise を返します。
 
 #### **Parameters**
 
@@ -1298,7 +1298,7 @@ const uploadFile = await drive.uploadFile(acctPubKey, fileToUpload);
 
 #### **Definition**
 
-このメソッドは、Shadow Drive 上のストレージアカウントに複数のファイルをアップロードするために使用されます。ストレージアカウントの PublicKey、アップロードするファイルの FileList または ShadowFile 配列を含むデータオブジェクト、同時にアップロードするファイル数を表すオプションの concurrent number、アップロードされたファイルのバッチごとに指定するオプションのコールバック関数を受け取ります。アップロードされたファイルのファイル名、場所、トランザクション署名を含む Promise\<ShadowBatchUploadResponse\[]> を返します。
+このメソッドは、ShdwDrive 上のストレージアカウントに複数のファイルをアップロードするために使用されます。ストレージアカウントの PublicKey、アップロードするファイルの FileList または ShadowFile 配列を含むデータオブジェクト、同時にアップロードするファイル数を表すオプションの concurrent number、アップロードされたファイルのバッチごとに指定するオプションのコールバック関数を受け取ります。アップロードされたファイルのファイル名、場所、トランザクション署名を含む Promise\<ShadowBatchUploadResponse\[]> を返します。
 
 #### **Parameters**
 
@@ -1356,7 +1356,7 @@ console.log(responses);
 {% code overflow="wrap" %}
 ```javascript
 // uploadMultipleFiles メソッドを使用したJavascript SDKの例
-// Shadow Drive クライアントのインスタンスを作成します。
+// ShdwDrive クライアントのインスタンスを作成します。
 const drive = new ShadowDrive();
 
 // ファイルをアップロードするストレージアカウントの公開鍵を定義します。

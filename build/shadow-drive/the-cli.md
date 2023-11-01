@@ -2,7 +2,7 @@
 
 ## **Contents**
 
-* [**Shadow Drive CLIのインストール**](the-cli.md#install-the-shadow-drive-cli)
+* [**ShdwDrive CLIのインストール**](the-cli.md#install-the-shadow-drive-cli)
   * [**ビデオガイドとチュートリアル**](the-cli.md#video-guide-and-walkthrough)
   * [**Solana CLIのインストール**](the-cli.md#install-the-solana-cli)
   * [**ストレージアカウントの作成**](the-cli.md#create-a-storage-account)
@@ -17,9 +17,9 @@
 
 ## **Introduction**
 
-CLIは、Shadow Driveと対話する最も簡単な方法です。好きなシェルスクリプト言語を使用したり、単一のコマンドをタイプしたりすることができます。Shadow Driveをテストドライブするには、これが最適な方法です。
+CLIは、ShdwDriveと対話する最も簡単な方法です。好きなシェルスクリプト言語を使用したり、単一のコマンドをタイプしたりすることができます。ShdwDriveをテストドライブするには、これが最適な方法です。
 
-## **Install the Shadow Drive CLI**
+## **Install the ShdwDrive CLI**
 
 前提条件：任意のOSに[NodeJS LTS 16.17.1](https://nodejs.org/en/download/)をインストールしてください。
 
@@ -33,9 +33,9 @@ npm install -g @shadow-drive/cli
 
 ### **Install the Solana CLI**
 
-Shadow Driveと対話するためには、SolanaウォレットとSolanaブロックチェーンと対話するためのCLIが必要です。
+ShdwDriveと対話するためには、SolanaウォレットとSolanaブロックチェーンと対話するためのCLIが必要です。
 
-_注：Shadow Drive CLI は、独自の RPC 設定を使用します。Solana 環境の構成は使用しません。_
+_注：ShdwDrive CLI は、独自の RPC 設定を使用します。Solana 環境の構成は使用しません。_
 
 [最新バージョンを確認してください](https://docs.solana.com/cli/install-solana-cli-tools).
 
@@ -51,7 +51,7 @@ export PATH="/home/sol/.local/share/solana/install/active_release/bin:$PATH"
 
 ### **Create a Keypair file**
 
-Shadow Drive CLIを使用するには、.json形式のキーペアを用意する必要があります。これは、ストレージアカウントを所有するウォレットになる予定です。必要であれば、秘密鍵をエクスポートすることで、ブラウザのウォレットを .json ファイルに変換できます。Solflareはデフォルトで.json形式でエクスポートします（標準的な整数の配列のように見えます[1,2,3,4...]）。しかし、Phantomは、いくつかの助けを必要とし、[私たちは、ちょうどツールを持っています](https://gist.github.com/tracy-codes/f17e7ed8acfdd1be442f632f5b80763c)。
+ShdwDrive CLIを使用するには、.json形式のキーペアを用意する必要があります。これは、ストレージアカウントを所有するウォレットになる予定です。必要であれば、秘密鍵をエクスポートすることで、ブラウザのウォレットを .json ファイルに変換できます。Solflareはデフォルトで.json形式でエクスポートします（標準的な整数の配列のように見えます[1,2,3,4...]）。しかし、Phantomは、いくつかの助けを必要とし、[私たちは、ちょうどツールを持っています](https://gist.github.com/tracy-codes/f17e7ed8acfdd1be442f632f5b80763c)。
 
 新しいウォレットを作成する場合は、そのまま
 
@@ -65,7 +65,7 @@ solana-keygen new -o ~/shdw-keypair.json
 
 #### **Context-Sensitive Help**
 
-Shadow Drive CLI には、統合されたヘルプが付属しています。すべてのシャドウドライブコマンドは `shdw-drive` で始まります。
+ShdwDrive CLI には、統合されたヘルプが付属しています。すべてのShdwDriveコマンドは `shdw-drive` で始まります。
 
 ```
 shdw-drive help
@@ -103,7 +103,7 @@ shdw-drive create-storage-account --help
 shdw-drive create-storage-account -kp ~/shdw-keypair.json -n "pony storage drive" -s 1GB
 ```
 
-### **Upload File to Shadow Drive**
+### **Upload File to ShdwDrive**
 
 このコマンドに必要なオプションは2つだけです:
 
@@ -127,7 +127,7 @@ shdw-drive create-storage-account -kp ~/shdw-keypair.json -n "pony storage drive
 shdw-drive upload-file -kp ~/shdw-keypair.json -f ~/AccountHolders.csv
 ```
 
-### **Upload Multiple Files to Shadow Drive**
+### **Upload Multiple Files to ShdwDrive**
 
 より現実的なユースケースは、例えばNFTの画像とメタデータのディレクトリ全体をアップロードすることです。コマンドにディレクトリを指定する以外は、基本的に同じことです。
 
@@ -171,7 +171,7 @@ shdw-drive upload-multiple-files -kp ~/shdw-keypair.json -d ~/ponyNFT/assets/
 
 `-u, --url`
 
-* 削除を依頼するファイルのシャドウドライブURL
+* 削除を依頼するファイルのShdwDrive URL
 
 **例:**
 
@@ -190,7 +190,7 @@ shdw-drive edit-file --keypair ~/shdw-keypair.json --file ~/ponyNFT/01.json --ur
 * ストレージアカウントとファイルを所有するウォレットのキーペアファイルへのパス。
 
 `-u, --url`\
-削除を依頼するファイルのシャドウドライブURL
+削除を依頼するファイルのShdwDrive URL
 
 **例:**
 
@@ -252,7 +252,7 @@ shdw-drive claim-stake -kp ~/shdw-keypair.json
 
 ### **Delete a Storage Account**
 
-シャドードライブからストレージアカウントを完全に削除することができます。完了すると、[SHDW](https://docs.shadow.cloud/reference/shdw-token) トークンがウォレットに戻されます。
+ShdwDriveからストレージアカウントを完全に削除することができます。完了すると、[SHDW](https://docs.shadow.cloud/reference/shdw-token) トークンがウォレットに戻されます。
 
 _注：削除の際には、現在のソラナエポックの終わりまで続く猶予期間があります。_ [_こちらをご覧ください_](https://explorer.solana.com/) _現在のソラナエポックの残り時間を知るには、どれくらいの猶予期間があるのか知ることができます。_
 
@@ -274,7 +274,7 @@ shdw-drive undelete-storage-account -kp ~/shdw-keypair.json
 
 ### **Make Storage Account Immutable**
 
-Shadow Driveの最もユニークで便利な機能の1つは、ストレージを真に永久的なものにすることができることです。不変のストレージでは、アカウントにアップロードされたファイルが削除されたり編集されたりすることは決してありません。それらは、ストレージアカウント自体もそうであるように、強固で永久的なものです。不変アカウントにファイルをアップロードし続けることも、不変アカウントにストレージを追加することも可能です。
+ShdwDriveの最もユニークで便利な機能の1つは、ストレージを真に永久的なものにすることができることです。不変のストレージでは、アカウントにアップロードされたファイルが削除されたり編集されたりすることは決してありません。それらは、ストレージアカウント自体もそうであるように、強固で永久的なものです。不変アカウントにファイルをアップロードし続けることも、不変アカウントにストレージを追加することも可能です。
 
 必要なのはキーペアだけです。コマンドを実行する際にストレージアカウントを選択するよう促されます。
 

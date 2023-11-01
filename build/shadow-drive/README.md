@@ -1,8 +1,8 @@
 ---
-description: このセクションのトピックは、Shadow Driveの使用を開始するのに役立ちます。
+description: このセクションのトピックは、ShdwDriveの使用を開始するのに役立ちます。
 ---
 
-# Install Shadow Drive
+# Install ShdwDrive
 
 ## **Getting Started**
 
@@ -16,16 +16,16 @@ npm install -g @shadow-drive/cli
 
 ## **Next steps**
 
-* Shadow Driveをインストール後[CLI client](the-cli.md)の使用方法を学びます。
+* ShdwDriveをインストール後[CLI client](the-cli.md)の使用方法を学びます。
 * ご希望の方は、こちらでステップバイステップをご確認ください [video walkthrough](https://www.youtube.com/watch?v=MfSuzFDDQ30)
-* [SDK](the-sdk.md)および[API](./)を使用して、Shadow Driveとのインテグレーションをさらに効率化します。
+* [SDK](the-sdk.md)および[API](./)を使用して、ShdwDriveとのインテグレーションをさらに効率化します。
 
 ## **Get Support**
 
 * [FAQ](support-and-faq.md)を参照してください。
 * サポートやフィードバックのために[Discord](https://discord.gg/genesysgo) も参照してください!
-* あなたの素晴らしい作品を紹介するために、あなたのプロジェクトを [Shadow Ecosystem](community-mainted-uis.md) ページに投稿してください！
-* Shadow Driveネットワークの[Network Status](http://184.154.66.109:8080/)を確認します。
+* あなたの素晴らしい作品を紹介するために、あなたのプロジェクトを [Shdw Ecosystem](community-mainted-uis.md) ページに投稿してください！
+* ShdwDriveネットワークの[Network Status](http://184.154.66.109:8080/)を確認します。
 
 ## **Submitting Bugs**
 
@@ -42,6 +42,6 @@ npm install -g @shadow-drive/cli
 
 バグレポートやセキュリティ問題については、このリポジトリの利用を強く推奨しますが、[**Discord**](https://discord.gg/genesysgo)経由で連絡を取ることも可能です。#shdw-drive-technical-support チャンネルに参加し、支援を求めてください。ただし、適切な処理と追跡のために、このGitHubリポジトリを通じてバグレポートを提出するようにリダイレクトすることに注意してください。
 
-## **Shadow Driveのメリットとユースケースをご紹介します:**
+## **ShdwDriveのメリットとユースケースをご紹介します:**
 
-### [**さらに詳しく**](../../learn/storage-services/#why-use-shadow-drive) シャドードライブが急成長している理由と、製品市場との相性の良さについて。
+### [**さらに詳しく**](../../learn/storage-services/#why-use-Shdw-drive) ShdwDriveが急成長している理由と、製品市場との相性の良さについて。

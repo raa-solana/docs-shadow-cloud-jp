@@ -1,7 +1,7 @@
 ---
 description: >-
   この統合されたリソースは、その上に探索し、開発する人のためのものです。
-  Shadow Cloudのプラットフォームです。
+  ShdwDriveのプラットフォームです。
 ---
 
 _訳注：有志による翻訳なので、オフィシャルではありません。最新の情報は必ず https://docs.shadow.cloud を確認してください。またより適切な翻訳がありましたら https://github.com/raa-solana/docs-shadow-cloud-jp にPRを送ってください。_
@@ -11,7 +11,7 @@ _訳注：有志による翻訳なので、オフィシャルではありませ�
 
 <table data-view="cards"><thead><tr><th></th><th align="center"></th><th></th><th data-hidden data-card-target data-type="content-ref"></th><th data-hidden data-card-cover data-type="files"></th></tr></thead><tbody><tr><td></td><td align="center"><strong>Learn</strong></td><td></td><td><a href="learn/">learn</a></td><td><a href=".gitbook/assets/Learn_Icon.png">Learn_Icon.png</a></td></tr><tr><td></td><td align="center"><strong>Build</strong></td><td></td><td><a href="build/">build</a></td><td><a href=".gitbook/assets/Build_Icon.png">Build_Icon.png</a></td></tr><tr><td></td><td align="center"><strong>Reference</strong></td><td></td><td><a href="reference/">reference</a></td><td><a href=".gitbook/assets/Reference_Icon.png">Reference_Icon.png</a></td></tr></tbody></table>
 
-### [Shadow Drive をインストール](build/)
+### [ShdwDrive をインストール](build/)
 
 ## 本資料の構成について
 

@@ -1,6 +1,6 @@
 ---
 description: >-
-    Shadow Driveは、APIを公開しており、そのAPIを使用することなく、直接対話することができます。
+    ShdwDriveは、APIを公開しており、そのAPIを使用することなく、直接対話することができます。
     CLIまたはSDKを使用します。これらのメソッドの上に構築することもできます。
 ---
 
@@ -35,7 +35,7 @@ Request content type: application/json
 
 {% swagger method="post" path="" baseUrl="https://shadow-storage.genesysgo.net" summary="storage-account-info" %}
 {% swagger-description %}
-ストレージアカウントに関するオンチェーンデータとShadow Driveネットワークデータを取得します。
+ストレージアカウントに関するオンチェーンデータとShdwDriveネットワークデータを取得します。
 
 Request content type: application/json
 {% endswagger-description %}
@@ -229,7 +229,7 @@ Request content type: application/json
 
 {% swagger-response status="200: OK" description="" %}
 ```
-Shadow Driveネットワーク内のファイルのメタデータのJSONオブジェクト、またはエラー
+ShdwDriveネットワーク内のファイルのメタデータのJSONオブジェクト、またはエラー
 ```
 {% endswagger-response %}
 {% endswagger %}
@@ -273,7 +273,7 @@ Request content type: application/json
 {% endswagger-description %}
 
 {% swagger-parameter in="body" name="transaction " required="true" %}
-Shadow Driveネットワークによって部分的に署名されたシリアル化されたストレージ追加トランザクション
+ShdwDriveネットワークによって部分的に署名されたシリアル化されたストレージ追加トランザクション
 {% endswagger-parameter %}
 
 {% swagger-response status="200: OK" description="" %}
@@ -295,7 +295,7 @@ Request content type: application/json
 {% endswagger-description %}
 
 {% swagger-parameter in="body" name="transaction " required="true" %}
-Serialized reduce storage transaction that is partially signed by the shadow drive network
+Serialized reduce storage transaction that is partially signed by the ShdwDrive network
 {% endswagger-parameter %}
 
 {% swagger-response status="200: OK" description="" %}
@@ -317,7 +317,7 @@ Request content type: application/json
 {% endswagger-description %}
 
 {% swagger-parameter in="body" name="transaction" required="false" %}
-Shadow Driveネットワークによって部分的に署名されたシリアル化された不変化トランザクション
+ShdwDriveネットワークによって部分的に署名されたシリアル化された不変化トランザクション
 {% endswagger-parameter %}
 
 {% swagger-response status="200: OK" description="" %}
@@ -331,9 +331,9 @@ Shadow Driveネットワークによって部分的に署名されたシリア�
 {% endswagger-response %}
 {% endswagger %}
 
-### **Example -** セキュアサインとアップロードファイルをAPIでシャドウドライブに変換します。
+### **Example -** ShdwDriveのAPIにセキュアサインとファイルアップロード。
 
-この例では、提供された API を使用して、Shadow Drive にファイルを安全にアップロードする方法を示します。ファイル名のハッシュ化、署名付きメッセージの作成、必要な情報とともにファイルを Shadow Drive のエンドポイントに送信するプロセスが含まれています。
+この例では、提供された API を使用して、ShdwDrive にファイルを安全にアップロードする方法を示します。ファイル名のハッシュ化、署名付きメッセージの作成、必要な情報とともにファイルを ShdwDrive のエンドポイントに送信するプロセスが含まれています。
 
 ```javascript
 import bs58 from 'bs58'
@@ -347,7 +347,7 @@ const hashSum = crypto.createHash("sha256")
 const hashedFileNames = hashSum.update(allFileNames.toString())
 const fileNamesHashed = hashSum.digest("hex")
 // `storageAccount` はストレージアカウントのpubkeyの文字列表現です。
-let msg = `Shadow Drive Signed Message:\nStorage Account: ${storageAccount}\nUpload files with hash: ${fileNamesHashed}`;
+let msg = `ShdwDrive Signed Message:\nStorage Account: ${storageAccount}\nUpload files with hash: ${fileNamesHashed}`;
 const fd = new FormData();
 // `files`は、渡された各ファイルの配列です。
 for (let j = 0; j < files.length; j++) {
@@ -357,15 +357,15 @@ for (let j = 0; j < files.length; j++) {
     });
 }
 // 最終的なメッセージ文字列を出力すると、次のようになることが期待されます。
-// Shadow Drive Signed Message:
+// ShdwDrive Signed Message:
 // Storage Acount: ABC123
 // Upload files with hash: hash1
 
 // メッセージが上記のように正確にフォーマットされていない場合
-// Shadow Drive ネットワーク側でメッセージの署名検証に失敗することになります。
+// ShdwDrive ネットワーク側でメッセージの署名検証に失敗することになります。
 const encodedMessage = new TextEncoder().encode(message);
 // メッセージの署名に https://github.com/dchest/tweetnacl-js を使用します。
-// 同じ方法で署名されていない場合、メッセージは Shadow Network 側で署名検証に失敗します。
+// 同じ方法で署名されていない場合、メッセージは Shdwネットワーク側で署名検証に失敗します。
 // 署名の base58 バイト配列が返されます。
 const signedMessage = nacl.sign.detached(encodedMessage, keypair.secretKey);
 // バイト配列をbs58エンコードされた文字列に変換します。
@@ -380,9 +380,9 @@ const request = await fetch(`${SHDW_DRIVE_ENDPOINT}/upload`, {
 });
 ```
 
-### **Example -** APIとメッセージ署名検証を利用したシャドウドライブ内のファイルの編集について
+### **Example -** APIとメッセージ署名検証を利用したShdwDrive内のファイルの編集について
 
-この例では、API とメッセージ署名検証を使用して、Shadow Drive 上のファイルを編集する方法を示します。このコードでは、必要なライブラリをインポートし、署名するメッセージを構築し、メッセージをエンコードして署名し、Shadow Drive 上のファイルを編集するための API リクエストを送信しています。
+この例では、API とメッセージ署名検証を使用して、ShdwDrive 上のファイルを編集する方法を示します。このコードでは、必要なライブラリをインポートし、署名するメッセージを構築し、メッセージをエンコードして署名し、ShdwDrive 上のファイルを編集するための API リクエストを送信しています。
 
 ```javascript
 import bs58 from 'bs58'
@@ -391,9 +391,9 @@ import nacl from 'tweetnacl'
 // `storageAccount` はストレージアカウントのpubkeyの文字列表現です
 // `fileName` は編集するファイルの名前です。
 // `sha256Hash` は、新しいファイルの内容の sha256 ハッシュです。
-const message = `Shadow Drive Signed Message:\n StorageAccount: ${storageAccount}\nFile to edit: ${fileName}\nNew file hash: ${sha256Hash}`
+const message = `ShdwDrive Signed Message:\n StorageAccount: ${storageAccount}\nFile to edit: ${fileName}\nNew file hash: ${sha256Hash}`
 // 最終的なメッセージ文字列を出力すると、以下のようになることを期待します。
-// Shadow Drive Signed Message:
+// ShdwDrive Signed Message:
 // Storage Acount: ABC123
 // File to delete: https://shadow-drive.genesysgo.net/ABC123/file.png
 
@@ -401,7 +401,7 @@ const message = `Shadow Drive Signed Message:\n StorageAccount: ${storageAccount
 // Shadow drive ネットワーク側でメッセージの署名検証に失敗することになります。
 const encodedMessage = new TextEncoder().encode(message);
 // メッセージの署名に https://github.com/dchest/tweetnacl-js を使用します。
-// 同じ方法で署名されていない場合、メッセージは Shadow Network 側で署名検証に失敗します。
+// 同じ方法で署名されていない場合、メッセージは Shdwネットワーク側で署名検証に失敗します。
 // 署名の base58 バイト配列が返されます。
 const signedMessage = nacl.sign.detached(encodedMessage, keypair.secretKey);
 // バイト配列をbs58エンコードされた文字列に変換します。
@@ -423,9 +423,9 @@ const uploadResponse = await fetch(`${SHDW_DRIVE_ENDPOINT}/edit`, {
 });
 ```
 
-### **Example -** 署名付きメッセージとAPIを使用してシャドウドライブからファイルを削除します。
+### **Example -** 署名付きメッセージとAPIを使用してShdwDriveからファイルを削除します。
 
-この例では、署名付きメッセージと Shadow Drive API を使用して、Shadow Drive からファイルを削除する方法を示します。このコードでは、まず、ストレージアカウントと削除するファイルの URL を含むメッセージを作成します。次に、tweetnaclライブラリを使用してメッセージをエンコードし、署名します。署名されたメッセージは、bs58エンコードされた文字列に変換されます。最後に、Shadow Drive API エンドポイントに POST リクエストを送信してファイルを削除します。
+この例では、署名付きメッセージと ShdwDrive API を使用して、ShdwDrive からファイルを削除する方法を示します。このコードでは、まず、ストレージアカウントと削除するファイルの URL を含むメッセージを作成します。次に、tweetnaclライブラリを使用してメッセージをエンコードし、署名します。署名されたメッセージは、bs58エンコードされた文字列に変換されます。最後に、ShdwDrive API エンドポイントに POST リクエストを送信してファイルを削除します。
 
 ```javascript
 import bs58 from 'bs58'
@@ -433,17 +433,17 @@ import nacl from 'tweetnacl'
 
 // `storageAccount` はストレージアカウントのpubkeyの文字列表現です。
 // `url` はシャドウドライブファイルへのリンクで、以前の実装ではurl入力が必要だったのと同じです。
-const message = `Shadow Drive Signed Message:\nStorageAccount: ${storageAccount}\nFile to delete: ${url}`
+const message = `ShdwDrive Signed Message:\nStorageAccount: ${storageAccount}\nFile to delete: ${url}`
 // 最終的なメッセージ文字列を出力すると、以下のようになることを期待します。
-// Shadow Drive Signed Message:
+// ShdwDrive Signed Message:
 // Storage Acount: ABC123
 // File to delete: https://shadow-drive.genesysgo.net/ABC123/file.png
 
 // メッセージが上記のように正確にフォーマットされていない場合
-// Shadow drive ネットワーク側でメッセージの署名検証に失敗することになります。
+// ShdwDrive ネットワーク側でメッセージの署名検証に失敗することになります。
 const encodedMessage = new TextEncoder().encode(message);
 // メッセージの署名に https://github.com/dchest/tweetnacl-js を使用します。
-// 同じ方法で署名されていない場合、メッセージは Shadow Network 側で署名検証に失敗します。
+// 同じ方法で署名されていない場合、メッセージは Shdwネットワーク側で署名検証に失敗します。
 // 署名の base58 バイト配列が返されます。
 const signedMessage = nacl.sign.detached(encodedMessage, keypair.secretKey);
 // バイト配列をbs58エンコードされた文字列に変換します。
