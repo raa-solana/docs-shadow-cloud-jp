@@ -14,7 +14,13 @@ description: >-
 [テストネット連載記事](https://www.shadow.cloud/blog/dagger-testnet-release)
 [テストネット・デモ](https://dagger-hammer.shadow.cloud/)
 
-_注意：このページは、すべての読者に適したハイレベルな説明と一般的な概念を堅持しています。これはホワイトペーパーとみなされるものではなく、より技術的な文書は、直接上に提供されているリンクを使用して見つけることができます。D.A.G.G.E.R.で_ [_SHDW_](https://docs.shadow.cloud/reference/shdw-token) _トークンがどのように利用されるかについての詳細は、_ [_SHDW_](https://docs.shadow.cloud/reference/shdw-token) _トークンのページ_ [_こちら_](https://docs.shadow.cloud/reference/shdw-token)_をご覧ください。このページは、最近リリースされたD.A.G.G.E.R.のライトペーパーやブログ記事との整合性を高めるため、現在変更中です_。
+更新：現在、D.A.G.G.E.R.のテストネット・フェーズ1に入っており、Wield Nodeのオペレーターとして、トラストレスで許可なく参加できる機能をリリースしました。
+
+[Run a Wield Node ](https://docs.shdwdrive.com/wield)で参加できる!
+
+### Introduction
+
+_注意：このページは、すべての読者に適したハイレベルな説明と一般的な概念に準拠しています。このページはホワイトペーパーではありません。D.A.G.G.E.R.で_ [_SHDW_](https://docs.shadow.cloud/reference/shdw-token) _トークンがどのように利用されているかについての詳細は、_ [_SHDW_](https://docs.shadow.cloud/reference/shdw-token) _トークンのページ_ [_こちら_](https://docs.shadow.cloud/reference/shdw-token)_をご覧ください。このページは、最近発表されたD.A.G.G.E.R.のライトペーパーおよびブログ記事との整合性を高めるため、現在変更中です。_
 
 _D.A.G.G.E.R._ は、グラフベースのコンセンサスメカニズムを持つ分散システムです。プロトコル仕様を構成する5つのコンポーネントがあります。この記事では、これら5つのコンポーネントのそれぞれと、それらがどのように入ってくるリクエストと相互作用するかを、高レベルで説明します。簡単に言うと、トランザクションのユースケースは、ShdwDrive v2にファイルを保存するリクエストと考えることができます。
 

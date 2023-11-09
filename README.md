@@ -9,9 +9,11 @@ _訳注：有志による翻訳なので、オフィシャルではありませ�
 
 # GET STARTED
 
-<table data-view="cards"><thead><tr><th></th><th align="center"></th><th></th><th data-hidden data-card-target data-type="content-ref"></th><th data-hidden data-card-cover data-type="files"></th></tr></thead><tbody><tr><td></td><td align="center"><strong>Learn</strong></td><td></td><td><a href="learn/">learn</a></td><td><a href=".gitbook/assets/Learn_Icon.png">Learn_Icon.png</a></td></tr><tr><td></td><td align="center"><strong>Build</strong></td><td></td><td><a href="build/">build</a></td><td><a href=".gitbook/assets/Build_Icon.png">Build_Icon.png</a></td></tr><tr><td></td><td align="center"><strong>Reference</strong></td><td></td><td><a href="reference/">reference</a></td><td><a href=".gitbook/assets/Reference_Icon.png">Reference_Icon.png</a></td></tr></tbody></table>
+<table data-view="cards"><thead><tr><th></th><th align="center"></th><th></th><th data-hidden data-card-target data-type="content-ref"></th><th data-hidden data-card-cover data-type="files"></th></tr></thead><tbody><tr><td></td><td align="center"><strong>Learn</strong></td><td></td><td><a href="learn/">learn</a></td><td><a href=".gitbook/assets/Learn_Icon.png">Learn_Icon.png</a></td></tr><tr><td></td><td align="center"><strong>Build</strong></td><td></td><td><a href="build/">build</a></td><td><a href=".gitbook/assets/Build_Icon.png">Build_Icon.png</a></td></tr><tr><td></td><td align="center"><strong>Reference</strong></td><td></td><td><a href="reference/">reference</a></td><td><a href=".gitbook/assets/Reference_Icon.png">Reference_Icon.png</a></td></tr><tr><td></td><td align="center"><strong>Wield Node</strong></td><td></td><td><a href="wield/">wield</a></td><td><a href=".gitbook/assets/SHDW-4.png">SHDW-4.png</a></td></tr></tbody></table>
 
 ### [ShdwDrive をインストール](build/)
+
+### [テストネットに参加](https://docs.shdwdrive.com/wield)
 
 ## 本資料の構成について
 
@@ -27,5 +29,8 @@ _訳注：有志による翻訳なので、オフィシャルではありませ�
 
 リファレンスセクションは、付録のように、主要なリソースを素早くナビゲートするハブとなっています。メディアキット、ソーシャルメディア、その他はこちらでご覧いただけます。
 
-このリソースは頻繁に更新され、開発者コミュニティは、見たい編集やプラットフォーム強化のアイデアを[submit Issues](https://github.com/GenesysGo/shadow-drive/issues) として提出する権限を与えられていると感じるはずです。 また[Bug submissions](https://github.com/GenesysGo/shdw-drive-bug-reports)のプロセスも用意しています。
+### [Wield Node を実行](https://docs.shdwdrive.com/wield)
 
+Wieldノードを運営することで、[こちら](https://dagger-hammer.shdwdrive.com/)にあるD.A.G.G.E.R. Hammerインターフェイスを動かす分散型D.A.G.E.R. フェーズ1テストネットに参加することができます。Wield Nodeのオペレーターは、何千ものライブ・ユーザー・テスト・トランザクションを処理し、ユーザー・ファイル・アップロードのデータを信頼できる形で保存します
+
+このリソースは頻繁に更新され、開発者コミュニティは、見たい編集やプラットフォーム強化のアイデアを[submit Issues](https://github.com/GenesysGo/shadow-drive/issues) として提出する権限を与えられていると感じるはずです。 また[Bug submissions](https://github.com/GenesysGo/shdw-drive-bug-reports)のプロセスも用意しています。

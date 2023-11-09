@@ -5,8 +5,6 @@
   * [D.A.G.G.E.R.](learn/dagger.md)
   * [Storage](learn/storage-services/README.md)
   * [Design](learn/storage-services/design.md)
-  * [On-Chain Proofs](learn/storage-services/on-chain-proofs.md)
-  * [Smart Contracts](learn/storage-services/smart-contracts.md)
 * [Build](build/README.md)
   * [Install ShdwDrive](build/shadow-drive/README.md)
   * [CLI](build/shadow-drive/the-cli.md)
@@ -24,3 +22,4 @@
   * [Solana Breakpoint 2022 Demo](reference/breakpoint-2022-demo.md)
   * [SHDW Token](reference/shdw-token.md)
   * [Shdw Glossary](reference/shadow-glossary.md)
+* [Run a D.A.G.G.E.R. Wield Node](wield/README.md)
