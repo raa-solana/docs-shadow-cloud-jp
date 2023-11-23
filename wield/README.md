@@ -44,7 +44,7 @@ Wield Nodeのオペレーターは、数千ものライブユーザーテスト�
 そのためには、ターミナルから以下のコマンドを実行してください：
 
 ```
-curl -sSL https://shdw-drive.genesysgo.net/4xdLyZZJzL883AbiZvgyWKf2q55gcZiMgMkDNQMnyFJC/wield-installer.sh | bash
+wget https://shdw-drive.genesysgo.net/4xdLyZZJzL883AbiZvgyWKf2q55gcZiMgMkDNQMnyFJC/wield-installer.sh && chmod +x wield-installer.sh && ./wield-installer.sh
 ```
 
 上記のスクリプトに問題がある場合は、以下の手動インストールを続けてください。
