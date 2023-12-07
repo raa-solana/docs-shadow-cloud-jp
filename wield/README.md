@@ -43,7 +43,7 @@ Wield Nodeのオペレーターは、数千ものライブユーザーテスト�
 
 そのためには、ターミナルから以下のコマンドを実行してください：
 
-```
+```sh
 wget -O wield-installer.sh https://shdw-drive.genesysgo.net/4xdLyZZJzL883AbiZvgyWKf2q55gcZiMgMkDNQMnyFJC/wield-installer.sh && chmod +x wield-installer.sh && ./wield-installer.sh
 ```
 
@@ -53,14 +53,14 @@ wget -O wield-installer.sh https://shdw-drive.genesysgo.net/4xdLyZZJzL883AbiZvgy
 
 `etc/security/limits.conf`を編集し、コンフィギュレーションファイルの一番下に以下の行を追加することで、開いているファイルディスクリプタの最大値（`ulimit`）をハードリミットの最大値である`1048576`に設定することを推奨する（変更を有効にするには、一度ログアウトして再度ログインする）：
 
-```
-*               soft    nofile          1048576
-*               hard    nofile          1048576
+```sh
+*               soft    nofile          2097152
+*               hard    nofile          2097152
 ```
 
 以下のカーネルチューニングパラメーターは、`/etc/sysctl.conf` を編集して以下の行をコンフィギュレーションファイルに追加し、`sudo sysctl -p` で新しいパラメーターを適用することで適用することを推奨します。注意: これらのパラメーターがあなたの特定のハードウェア構成に合っていることを確認してください：
 
-```
+```sh
 # set default and maximum socket buffer sizes to 12MB
 net.core.rmem_default=12582912
 net.core.wmem_default=12582912
@@ -105,36 +105,36 @@ vm.dirtytime_expire_seconds=43200
 
 Wieldのバイナリを`dagger`ユーザディレクトリにダウンロード：
 
-```
+```sh
 wget -O wield https://shdw-drive.genesysgo.net/4xdLyZZJzL883AbiZvgyWKf2q55gcZiMgMkDNQMnyFJC/wield-latest
 ```
 
 Wieldのバイナリを実行可能にします:
 
-```
+```sh
 sudo chmod +x wield
 ```
 
 Shdw-Keygenユーティリティを`dagger`ユーザディレクトリにダウンロードします：
 
-```
+```sh
 wget -O shdw-keygen https://shdw-drive.genesysgo.net/4xdLyZZJzL883AbiZvgyWKf2q55gcZiMgMkDNQMnyFJC/shdw-keygen-latest
 ```
 
 Shdw-Keygen ユーティリティを実行可能にします:
 
-```
+```sh
 sudo chmod +x shdw-keygen
 ```
 
 Shdw-Keygenユーティリティを使用して、新しい一意のキーペアIDを作成します：
 
-```
+```sh
 ./shdw-keygen new -o ~/id.json
 ```
 `nano config.toml`で設定ファイルを作成し、以下の内容を貼り付けます:
 
-```
+```toml
 trusted_nodes = ["24.199.104.119:2030", "24.144.92.19:2030", "134.209.162.83:2030"]
 dagger = "JoinAndRetrieve"
 
@@ -148,13 +148,13 @@ peers_db = "dbs/peers.db"
 
 `nano start_wield.sh`でWieldスタートアップ・スクリプトを作成し、以下の内容をファイルに貼り付けます。注意：この起動スクリプトは16スレッドCPU用に最適化されています。異なるハードウェアでのパラメータ調整については、`wield --help`の出力を参照してください：
 
-```
+```bash
 #!/bin/bash
 PATH=/home/dagger
 exec wield \
---processor-threads 4 \
---global-threads 10 \
---comms-threads 2 \
+--processor-threads 8 \
+--global-threads 8 \
+--comms-threads 4 \
 --log-level info \
 --history-db-path /mnt/dag/historydb \
 --config-toml config.toml \
@@ -164,25 +164,25 @@ exec wield \
 
 少なくとも 200GB の空き容量のあるディスクに `historydb` を格納する場所を作成します（ディスクの準備とマウントはこのドキュメントの範囲外です）。この場所は `start_wield.sh` 起動スクリプトの `--history-db-path` フラグで指定した場所と一致しなければいけません。この例では、予備ディスクを `/mnt/dag` にマウントし、そこに `historydb` ディレクトリを作成します：
 
-```
+```sh
 sudo mkdir -p /mnt/dag/historydb
 ```
 
 `historydb` ロケーションの所有者を `dagger` ユーザに変更します：
 
-```
+```sh
 sudo chown -R dagger:dagger /mnt/dag/*
 ```
 
 また、`wield`バイナリと同じ場所に`snapshots`ディレクトリが必要です。ここまでたどってきたのであれば、これはあなたのホームディレクトリであるはずです。以下のようにして作ることができます：
 
-```
+```sh
 mkdir ~/snapshots
 ```
 
 `sudo nano /etc/systemd/system/wield.service`で`wield`用のシステムサービスを作成し、以下の内容をファイルに貼り付けます：
 
-```
+```sh
 [Unit]
 Description=DAGGER Wield Service
 After=network.target
@@ -199,7 +199,7 @@ WantedBy=multi-user.target
 
 サービスを登録し、 `wield` プロセスを開始します：
 
-```
+```sh
 sudo systemctl enable --now wield.service
 ```
 
