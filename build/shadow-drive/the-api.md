@@ -331,7 +331,7 @@ ShdwDriveネットワークによって部分的に署名されたシリアル�
 {% endswagger-response %}
 {% endswagger %}
 
-### **Example -** ShdwDriveのAPIにセキュアサインとファイルアップロード。
+### **Example -** ShdwDriveのAPIを使ってセキュアサインとファイルアップロード。
 
 この例では、提供された API を使用して、ShdwDrive にファイルを安全にアップロードする方法を示します。ファイル名のハッシュ化、署名付きメッセージの作成、必要な情報とともにファイルを ShdwDrive のエンドポイントに送信するプロセスが含まれています。
 

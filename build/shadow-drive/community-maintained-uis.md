@@ -40,6 +40,13 @@ ShdwDrive上に構築されたバックエンドストレージを持つ、シ�
 
 [![](<../../.gitbook/assets/blockhost (1).png>)](https://blok.host/)
 
+#### **Coach's Coin Clicker**
+
+ShdwDriveの不変ストレージ上で不滅化された完全分散型オンチェーンゲームの例。Coin ClickerはShdwDriveの素晴らしいCDNパフォーマンスだけでなく、perma-dAppsを作成する能力を示しています。
+
+[![](<../../.gitbook/assets/coach-coin-clicker.png>)](https://shdw-drive.genesysgo.net/5WRCJEgy7c1Wy3ewWdfJcAePMCaUq4asyuP8sRgTQZYq/index.html)
+
+
 #### **AlphaBatem's Shdw UI**
 
 このツールは、SOLからSHDWへのスワップ処理など、ShdwDriveのストレージアカウントとのやり取りをスピーディーに行うためのものです。
