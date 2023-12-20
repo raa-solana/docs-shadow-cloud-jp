@@ -43,7 +43,7 @@ curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o 
 APTソースにDockerリポジトリを追加します:
 
 ```bash
-echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null"
+echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
 ```
 
 これでパッケージ・データベースも、新しく追加されたリポジトリのDockerパッケージで更新されます。
@@ -51,13 +51,13 @@ echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docke
 デフォルトのUbuntu repoではなく、Docker repoからインストールしようとしていることを確認してください:
 
 ```basic
-apt-cache policy docker-ce
+sudo apt update && sudo apt install docker-ce
 ```
 
 最後にDockerをインストールします:
 
 ```bash
-sudo apt install docker-ce
+sudo apt-cache policy docker-ce 
 ```
 
 これでDockerがインストールされ、デーモンが起動し、起動時にプロセスが開始できるようになったはずです。起動していることを確認します:
@@ -137,13 +137,13 @@ mkdir -p ~/.docker/cli-plugins/
 ```
 
 ```sh
-curl -SL https://github.com/docker/compose/releases/download/v2.3.3/docker-compose-linux-x86_64 -o ~/.docker/cli-plugins/docker-compose
+curl -SL https://github.com/docker/compose/releases/download/v2.23.3/docker-compose-linux-x86_64 -o ~/.docker/cli-plugins/docker-compose
 ```
 
 次に、docker-composeコマンドが実行可能になるように、正しい権限を設定します：
 
 ```sh
-chmod +x ~/.docker/cli-plugins/docker-compose// Some codechmod +x ~/.docker/cli-plugins/docker-compose
+chmod +x ~/.docker/cli-plugins/docker-compose
 ```
 
 インストールが成功したことを確認するには、次のコマンドを実行します:
