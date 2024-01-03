@@ -24,17 +24,21 @@ Wield Nodeのオペレーターは、数千ものライブユーザーテスト�
 
 **Testnet Phase 1のD.A.G.E.R. Wield Nodeを動作させるための最小ハードウェア要件は以下のとおりです。**
 
-* **16 CPUコア**
+* **16 CPU threads**
 * **32 GB RAM**
 * **データ・ストレージと高速I/O操作用の250GB SSD**
 * **上下100mbpsのネットワーク接続が最低限必要です**
 
 ## 1.1. ガイド付きインストール ＋ スタートアップ
 
+{% hint style="info" %}
+どのように進めるかを決める前に、少なくとも以下の手動インストールの手順を確認することを強くお勧めします。基本的なLinuxコマンドに慣れており、ノードの設定に関与したい場合は、以下の「オプション2 - 手動インストール」で説明されている手順に従ってください。
+{% endhint %}
+
 よりガイド付きの体験をお望みなら、特別なインストーラー・スクリプトを作成しました：
 
-* システムのハードウェアをチェックし、指定された最低ハードウェアを満たしていることを確認する。
-* tcp でのトラフィックフローを改善するためのカーネルチューンを適用する。
+* システムのハードウェアをチェックし、指定された最小ハードウェアを満たしていることを確認する。
+* tcp/udp でのトラフィックフローを改善するためにカーネルをチューンを適用する。
 * `wield`と`shdw-keygen`のバイナリをダウンロードする。
 * 鍵ペアファイルを生成する。
 * マシンスペックに基づいた設定ファイルとスタートアップスクリプトを生成する。
@@ -47,18 +51,11 @@ Wield Nodeのオペレーターは、数千ものライブユーザーテスト�
 wget -O wield-installer.sh https://shdw-drive.genesysgo.net/4xdLyZZJzL883AbiZvgyWKf2q55gcZiMgMkDNQMnyFJC/wield-installer.sh && chmod +x wield-installer.sh && ./wield-installer.sh
 ```
 
-上記のスクリプトに問題がある場合は、以下の手動インストールを続けてください。
+上記のスクリプトに問題がある場合は、以下のオプション2をお試しください。
 
 ## 2. Operating system configuration:
 
-`etc/security/limits.conf`を編集し、コンフィギュレーションファイルの一番下に以下の行を追加することで、開いているファイルディスクリプタの最大値（`ulimit`）をハードリミットの最大値である`1048576`に設定することを推奨する（変更を有効にするには、一度ログアウトして再度ログインする）：
-
-```sh
-*               soft    nofile          2097152
-*               hard    nofile          2097152
-```
-
-以下のカーネルチューニングパラメーターは、`/etc/sysctl.conf` を編集して以下の行をコンフィギュレーションファイルに追加し、`sudo sysctl -p` で新しいパラメーターを適用することで適用することを推奨します。注意: これらのパラメーターがあなたの特定のハードウェア構成に合っていることを確認してください：
+以下のカーネルチューニングパラメーターは、`/etc/sysctl.conf` を編集して以下の行をコンフィギュレーションファイルに追加し、`sudo sysctl -p` で新しいパラメーターを適用することで適用することを推奨します。注意: これらのパラメーターがあなたの特定のハードウェア構成に合っているか確認してください。
 
 ```sh
 # set default and maximum socket buffer sizes to 12MB
@@ -66,6 +63,9 @@ net.core.rmem_default=12582912
 net.core.wmem_default=12582912
 net.core.rmem_max=12582912
 net.core.wmem_max=12582912
+
+# make changes for ulimit
+fs.nr_open = 2097152
 
 # set minimum, default, and maximum tcp buffer sizes (10k, 87.38k (linux default), 12M resp)
 net.ipv4.tcp_rmem=10240 87380 12582912
@@ -85,7 +85,7 @@ net.ipv4.tcp_moderate_rcvbuf = 1
 kernel.timer_migration=0
 kernel.hung_task_timeout_secs=30
 # A suggested value for pid_max is 1024 * <# of cpu cores/threads in system>
-kernel.pid_max=65536
+kernel.pid_max=16384
 
 # vm.tuning
 vm.swappiness=30
@@ -102,26 +102,33 @@ vm.dirtytime_expire_seconds=43200
 fs.nr_open = 2097152
 ```
 
-## 3. ノードの構成:
+`/etc/security/limits.conf`を編集し、コンフィギュレーションファイルの一番下に以下の行を追加することで、最大オープンファイルディスクリプター数（`ulimit`）をハードリミットの最大値である`2097152`より増やすことを推奨します（変更を有効にするには、一度ログアウトし、再度ログインする必要があります）。
+
+```sh
+*               soft    nofile          2097152
+*               hard    nofile          2097152
+```
+
+## 3. ノードの初期設定:
 
 まだ実行していない場合は、アプリケーションを実行する専用のユーザを作成することをお勧めします。この場合、 `sudo adduser dagger` で `dagger` ユーザを作成し（任意のパスワードを作成）、 `sudo usermod -aG sudo dagger` で `dagger` ユーザを `sudo` ユーザグループに追加します。sudo su - dagger` で `dagger` ユーザに切り替えます。残りのタスクはすべて `dagger` ユーザーとして実行します。
 
 Wieldのバイナリを`dagger`ユーザディレクトリにダウンロード：
 
 ```sh
-wget -O wield https://shdw-drive.genesysgo.net/4xdLyZZJzL883AbiZvgyWKf2q55gcZiMgMkDNQMnyFJC/wield-latest
+wget -O ~/wield https://shdw-drive.genesysgo.net/4xdLyZZJzL883AbiZvgyWKf2q55gcZiMgMkDNQMnyFJC/wield-latest
 ```
 
 Wieldのバイナリを実行可能にします:
 
 ```sh
-sudo chmod +x wield
+sudo chmod +x ~/wield
 ```
 
 Shdw-Keygenユーティリティを`dagger`ユーザディレクトリにダウンロードします：
 
 ```sh
-wget -O shdw-keygen https://shdw-drive.genesysgo.net/4xdLyZZJzL883AbiZvgyWKf2q55gcZiMgMkDNQMnyFJC/shdw-keygen-latest
+wget -O ~/shdw-keygen https://shdw-drive.genesysgo.net/4xdLyZZJzL883AbiZvgyWKf2q55gcZiMgMkDNQMnyFJC/shdw-keygen-latest
 ```
 
 Shdw-Keygen ユーティリティを実行可能にします:
@@ -130,12 +137,22 @@ Shdw-Keygen ユーティリティを実行可能にします:
 sudo chmod +x shdw-keygen
 ```
 
-Shdw-Keygenユーティリティを使用して、新しい一意のキーペアIDを作成します：
+Shdw-Keygenユーティリティを使用して新しい一意のキーペアIDを作成し、一意のシードフレーズを書き留め、id.jsonファイルを別の場所にバックアップします：
 
 ```sh
 ./shdw-keygen new -o ~/id.json
 ```
-`nano config.toml`で設定ファイルを作成し、以下の内容を貼り付けます:
+**重要：シードフレーズとid.jsonキーペアファイルを自分のノード以外の安全な場所にバックアップする必要があります！ノードのパフォーマンスと報酬はこのIDに関連しています。ノードを再インストールする必要がある場合は、このバックアップから復元することで、ノードIDの継続性を維持することができます。キーペアを紛失した場合、復旧のお手伝いはできません。**
+
+**ノードを再インストールまたは更新する必要がある場合は、新しいキーペアを作成しないでください。**
+
+pubkey を表示するには、以下のコマンドを実行します：
+
+```sh
+./shdw-keygen pubkey ~/id.json
+```
+
+`nano config.toml` で設定ファイルを作成し、以下の内容を貼り付けます。
 
 ```toml
 trusted_nodes = ["165.232.137.22:2030", "64.23.136.217:2030", "157.245.220.233:2030"]
@@ -149,7 +166,7 @@ keypair_file = "id.json"
 peers_db = "dbs/peers.db"
 ```
 
-`nano start_wield.sh`でWieldスタートアップ・スクリプトを作成し、以下の内容をファイルに貼り付けます。注意：この起動スクリプトは16スレッドCPU用に最適化されています。異なるハードウェアでのパラメータ調整については、`wield --help`の出力を参照してください：
+`nano start_wield.sh`でWield起動スクリプトを作成し、以下の内容をファイルに貼り付けます。注意：これらのパラメータは16スレッドプロセッサーに基づいています。`processor-threads`と`--global-threads`はマシンの総スレッド数と同じに設定し、`--comms-threads`は`2`に設定することを推奨します。また、`--comms-threads` は `2` に設定しておくことを推奨します。異なるハードウェアでのパラメータの調整については、`wield --help` の出力を参照してください：
 
 ```bash
 #!/bin/bash
@@ -165,7 +182,7 @@ exec wield \
 
 スクリプトを `sudo chmod +x start_wield.sh` で実行可能にします。
 
-少なくとも 200GB の空き容量のあるディスクに `historydb` を格納する場所を作成します（ディスクの準備とマウントはこのドキュメントの範囲外です）。この場所は `start_wield.sh` 起動スクリプトの `--history-db-path` フラグで指定した場所と一致しなければいけません。この例では、予備ディスクを `/mnt/dag` にマウントし、そこに `historydb` ディレクトリを作成します：
+少なくとも 200GB の空き容量があるディスクに `historydb` を保存する場所を作成します（ディスクの準備とマウントは、ハードウェアの構成によって多くの変数があるため、このドキュメントの範囲を超えていますが、Google や ChatGPT でソートできるはずです）。この場所は `start_wield.sh` 起動スクリプトの `--history-db-path` フラグで指定された場所と一致しなければなりません。我々の場合、予備ディスクが `/mnt/dag` にマウントされ、そこに `historydb` ディレクトリが作成されます：
 
 ```sh
 sudo mkdir -p /mnt/dag/historydb
@@ -206,7 +223,75 @@ WantedBy=multi-user.target
 sudo systemctl enable --now wield.service
 ```
 
-`tail -f config.log`でログのtailingを行い、適切な動作を確認しましょう。
+`tail -f config.log`でログをtailingして、適切な動作を確認してください。ソフトウェアが初期化される前に様々なスタートアップタスクがバックグラウンドで実行されるため、Wieldがログファイルに書き込みを開始するまでに時間がかかる場合があります。`tail -f config.log | grep "finalized"`でバンドルがファイナライズされているかログファイルをチェックすることで適切なノードの動作を確認できます。
+
+ログファイルが大きくなりすぎないように、`sudo nano /etc/logrotate.d/wield.conf`で`wield`用の`logrotate`エントリを追加し、以下の内容をファイルに貼り付けることを推奨します。
+
+```/home/dagger/config.log
+/home/dagger/config.log {
+    su dagger dagger
+    daily
+    rotate 5
+    size 10M
+    missingok
+    copytruncate
+    delaycompress
+    compress
+}
+```
+
+`sudo systemctl restart logrotate` で `logrotate` サービスを再起動し、`sudo logrotate -d /etc/logrotate.d/wield.conf` で `wield.conf` 設定が正しく機能していることを確認し、エラーがないかチェックします。
+
+`sudo logrotate -d /etc/logrotate.d/rsyslog`を実行し、エラーがないかチェックして修正することで、`syslog`ログファイルが適切にローテーションするように設定されていることを確認することもできます。例として、`/etc/logrotate.d/rsyslog`に使用した設定は以下の通りです。
+
+```
+/var/log/syslog
+/var/log/mail.info
+/var/log/mail.warn
+/var/log/mail.err
+/var/log/mail.log
+/var/log/daemon.log
+/var/log/kern.log
+/var/log/auth.log
+/var/log/user.log
+/var/log/lpr.log
+/var/log/cron.log
+/var/log/debug
+/var/log/messages
+{
+        su syslog syslog
+	rotate 4
+	weekly
+	missingok
+	notifempty
+	compress
+	delaycompress
+	sharedscripts
+	postrotate
+		/usr/lib/rsyslog/rsyslog-rotate
+	endscript
+}
+```
+
+**4. ノード メンテナンス**
+
+通常のネットワーク運用中にノードのメンテナンスを行う必要がある場合は、D.A.G.G.E.R.エポックを5回分待ってからネットワークに再参加してください。D.A.G.G.E.R.の進行状況はこちらで確認できます：[https://dagger-hammer.shdwdrive.com/explorer](https://dagger-hammer.shdwdrive.com/explorer)
+
+ノードを停止するには、`sudo systemctl stop wield`を使用すします。この時点で、現在のバイナリをダウンロードするだけで `wield` を最新バージョンにアップグレードするなど、必要なメンテナンスを行うことができます：
+
+```
+wget -O ~/wield https://shdw-drive.genesysgo.net/4xdLyZZJzL883AbiZvgyWKf2q55gcZiMgMkDNQMnyFJC/wield-latest
+```
+
+厳密には必要ではありませんが、最新の `shdw-keygen` ユーティリティにもアップグレードすることをお勧めします。
+
+```
+wget -O ~/shdw-keygen https://shdw-drive.genesysgo.net/4xdLyZZJzL883AbiZvgyWKf2q55gcZiMgMkDNQMnyFJC/shdw-keygen-latest
+```
+
+`wield` のアップグレードが必要なだけであれば、5エポック後に `sudo systemctl start wield` でノードを再起動できます。
+
+クラスタの完全な再起動が必要な場合は、適切な Discord チャンネルの指示に従うことをお勧めします。
 
 \*免責事項：GenesysGoのD.A.G.G.E.R. Testnet Phase 1でWield Nodeを操作することにより、利用者は自発的かつ自己責任でこれを行うことを認めます。GenesysGoはTestnetソフトウェアを「現状のまま」無保証で提供し、お客様が被る可能性のある直接的、間接的、偶発的、結果的損害について一切の責任を負いません。お客様は、ご自身のシステムおよびデータのセキュリティに責任を負うものとします。GenesysGoは、お客様がTestnetに参加した結果生じたいかなる損失や損害についても責任を負いません。本ソフトウェアを使用することにより、お客様は、お客様のノード操作に関連するいかなるクレームや紛争からもGenesysGoを免責することに同意するものとします。本契約は、Wieldノードをダウンロードし、操作した時点で拘束力を持ちます。GenesysGoは予告なくTestnetを変更または中止することがあります。これにはTestnetフェーズ1のD.A.G.G.E.R. Wield Nodeを操作するためのハードウェア要件が含まれますが、これに限定されるものではありません。これらの条件に同意できない場合は、Testnetに参加しないでください。
 
@@ -264,11 +349,11 @@ A: ログファイルは通常`/home/dagger/config.log`にあります。
 
 A: `shdw-keygen`プログラムをダウンロードしたと仮定して、`home/dagger`ディレクトリで`./shdw-keygen pubkey id.json`を実行してください。
 
-## **Q: ノードのバージョンを確認し、必要に応じてアップグレードするにはどうすればよいですか?
+## **Q: ノードのバージョンを確認し、必要に応じてアップグレードするにはどうすればよいですか?**
 
 A: ノードのバージョンは `./wield --version` で確認できます。アップグレードするには、対話型インストーラースクリプトを使います。
 
-## **Q: どうすれば最新版にアップデートできますか？
+## **Q: どうすれば最新版にアップデートできますか？**
 
 A: ノードのサービスを停止し、最新のバイナリをダウンロードした後、 サービスを再起動することでアップデートできます。詳しいコマンドはユーザがチャットで教えてくれます。
 
@@ -286,7 +371,7 @@ A: ログファイルは `cat`、`less`、`tail`、`grep` などのコマンド�
 
 ## **Q: 1エポックの長さはどれくらいですか？**
 
-A: エポックは現在200バンドルです。
+A: エポックは現在64バンドルです。
 
 ## **Q: VPS上でノードを起動した後、ターミナルウィンドウを閉じることはできますか？**
 
@@ -348,6 +433,6 @@ A: 採算性は報酬体系、運用コスト、ネットワーク・パフォ�
 
 A: Discordのサポート・チャンネルで説明や支援を求めることをためらわないでください。コミュニティとコア・エンジニアリング・チームがあなたをサポートします。
 
-## Q: サーバーのログファイルを共有するにはどうすればいいですか？
+## **Q: サーバーのログファイルを共有するにはどうすればいいですか？**
 
 A: `scp` コマンドなどを使ってサーバーからログファイルをダウンロードし、共有サービスにアップロードすることができます。
