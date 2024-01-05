@@ -15,12 +15,12 @@ description: >-
 
 [D.A.G.G.E.R. Hammer](https://dagger-hammer.shdwdrive.com/)
 
-Wield Nodeを運用することで、D.A.G.G.E.R.のフェーズ1テストネットにトラストレスに参加することができます。このテストネットは、[こちら](https://dagger-hammer.shdwdrive.com/)にあるD.A.G.G.E.R. Hammerインターフェースを動かすために使用されます。Wield Nodeのオペレーターには、Wield Nodeの役割とD.A.G.G.E.R. Hammerの目的について完全に理解するために、私たちのブログ記事を確認することをお勧めします。
+Wield Nodeを実行することで、[ここ](https://dagger-hammer.shdwdrive.com/)にあるshdwDrive用のHammerインターフェイスを動かすテストネットに信頼して参加することができます。Wieldノードの役割とD.A.G.G.E.R. Hammerの目的については、ノードオペレータの皆様には、当社のブログ記事をご覧いただくことをお勧めします。
 
-Wield Nodeのオペレーターは、数千ものライブユーザーテストトランザクションを扱い、D.A.G.G.E.R.内で要求されるすべてのモジュールをトラストレスに実行します。これには、Hammerテストインターフェースにアップロードされたファイルを消去コード化し、保存する作業が含まれます。
+Wield Node のオペレーターは、何千ものライブ・ユーザー・テスト・トランザクションを処理し、D.A.G.G.E.R. 内のすべてのモジュールのうち、shdwDrive テスト・インターフェイスにアップロードされたファイルを消去符号化し、保存するために必要なモジュールをトラストレスに実行します。
 
-## 1. ノードの必要条件:
-**動作環境はUbuntu 22.04 LTS kernel 5.15.0です。他のLinux x86ディストリビューションも動作する可能性がありますが、現時点ではサポートされていません。**
+
+## ノードの必要条件:
 
 **Testnet Phase 1のD.A.G.E.R. Wield Nodeを動作させるための最小ハードウェア要件は以下のとおりです。**
 
@@ -29,7 +29,8 @@ Wield Nodeのオペレーターは、数千ものライブユーザーテスト�
 * **データ・ストレージと高速I/O操作用の250GB SSD**
 * **上下100mbpsのネットワーク接続が最低限必要です**
 
-## 1.1. ガイド付きインストール ＋ スタートアップ
+## Option 1 - ガイド付きインストール + スタートアップスクリプト
+
 
 {% hint style="info" %}
 どのように進めるかを決める前に、少なくとも以下の手動インストールの手順を確認することを強くお勧めします。基本的なLinuxコマンドに慣れており、ノードの設定に関与したい場合は、以下の「オプション2 - 手動インストール」で説明されている手順に従ってください。
@@ -53,7 +54,19 @@ wget -O wield-installer.sh https://shdw-drive.genesysgo.net/4xdLyZZJzL883AbiZvgy
 
 上記のスクリプトに問題がある場合は、以下のオプション2をお試しください。
 
-## 2. Operating system configuration:
+## Option 2 - Manual Install
+
+### 1. Node Requirements - 16 CPU threads, 32 GB of RAM, 250 GB of SSD storage, 100 Mbps up/down network. Operating system requirements are Ubuntu 22.04 LTS kernel 5.15.0. Other Linux x86 distributions may work but are not officially supported at this time.
+
+### 2. Operating system configuration.
+
+Begin by ensuring your operating system is up to date:
+
+```sh
+sudo apt update && sudo apt upgrade -y
+```
+
+If necessary, reboot your system to ensure the kernel is up to date.
 
 以下のカーネルチューニングパラメーターは、`/etc/sysctl.conf` を編集して以下の行をコンフィギュレーションファイルに追加し、`sudo sysctl -p` で新しいパラメーターを適用することで適用することを推奨します。注意: これらのパラメーターがあなたの特定のハードウェア構成に合っているか確認してください。
 
@@ -66,7 +79,6 @@ net.core.wmem_max=12582912
 
 # make changes for ulimit
 fs.nr_open = 2097152
-
 # set minimum, default, and maximum tcp buffer sizes (10k, 87.38k (linux default), 12M resp)
 net.ipv4.tcp_rmem=10240 87380 12582912
 net.ipv4.tcp_wmem=10240 87380 12582912
@@ -97,9 +109,6 @@ vm.min_free_kbytes = 3000000
 vm.dirty_expire_centisecs=36000
 vm.dirty_writeback_centisecs=3000
 vm.dirtytime_expire_seconds=43200
-
-# open files limit
-fs.nr_open = 2097152
 ```
 
 `/etc/security/limits.conf`を編集し、コンフィギュレーションファイルの一番下に以下の行を追加することで、最大オープンファイルディスクリプター数（`ulimit`）をハードリミットの最大値である`2097152`より増やすことを推奨します（変更を有効にするには、一度ログアウトし、再度ログインする必要があります）。
@@ -109,7 +118,7 @@ fs.nr_open = 2097152
 *               hard    nofile          2097152
 ```
 
-## 3. ノードの初期設定:
+### 3. ノードの初期設定:
 
 まだ実行していない場合は、アプリケーションを実行する専用のユーザを作成することをお勧めします。この場合、 `sudo adduser dagger` で `dagger` ユーザを作成し（任意のパスワードを作成）、 `sudo usermod -aG sudo dagger` で `dagger` ユーザを `sudo` ユーザグループに追加します。sudo su - dagger` で `dagger` ユーザに切り替えます。残りのタスクはすべて `dagger` ユーザーとして実行します。
 
@@ -277,7 +286,7 @@ sudo systemctl enable --now wield.service
 }
 ```
 
-**4. ノード メンテナンス**
+### **4. ノード メンテナンス**
 
 通常のネットワーク運用中にノードのメンテナンスを行う必要がある場合は、D.A.G.G.E.R.エポックを5回分待ってからネットワークに再参加してください。D.A.G.G.E.R.の進行状況はこちらで確認できます：[https://dagger-hammer.shdwdrive.com/explorer](https://dagger-hammer.shdwdrive.com/explorer)
 
