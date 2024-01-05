@@ -17,7 +17,7 @@ description: >-
 
 Wield Nodeを実行することで、[ここ](https://dagger-hammer.shdwdrive.com/)にあるshdwDrive用のHammerインターフェイスを動かすテストネットに信頼して参加することができます。Wieldノードの役割とD.A.G.G.E.R. Hammerの目的については、ノードオペレータの皆様には、当社のブログ記事をご覧いただくことをお勧めします。
 
-Wield Node のオペレーターは、何千ものライブ・ユーザー・テスト・トランザクションを処理し、D.A.G.G.E.R. 内のすべてのモジュールのうち、shdwDrive テスト・インターフェイスにアップロードされたファイルを消去符号化し、保存するために必要なモジュールをトラストレスに実行します。
+Wield Nodeのオペレーターは、何千ものライブ・ユーザー・テスト・トランザクションを処理し、shdwDriveテスト・インターフェースにアップロードされたファイルの消去符号化と保存に必要なD.A.G.G.E.R.内の全モジュールをトラストレスに実行します。
 
 
 ## ノードの必要条件:
@@ -78,7 +78,7 @@ net.core.rmem_max=12582912
 net.core.wmem_max=12582912
 
 # make changes for ulimit
-fs.nr_open = 2097152
+fs.nr_open = 5000000
 # set minimum, default, and maximum tcp buffer sizes (10k, 87.38k (linux default), 12M resp)
 net.ipv4.tcp_rmem=10240 87380 12582912
 net.ipv4.tcp_wmem=10240 87380 12582912
@@ -111,11 +111,11 @@ vm.dirty_writeback_centisecs=3000
 vm.dirtytime_expire_seconds=43200
 ```
 
-`/etc/security/limits.conf`を編集し、コンフィギュレーションファイルの一番下に以下の行を追加することで、最大オープンファイルディスクリプター数（`ulimit`）をハードリミットの最大値である`2097152`より増やすことを推奨します（変更を有効にするには、一度ログアウトし、再度ログインする必要があります）。
+`etc/security/limits.conf`を編集し、コンフィギュレーションファイルの一番下に以下の行を追加することで、開いているファイルディスクリプタの最大値（`ulimit`）をハードリミットの最大値である`5000000`よりも増やすことが推奨します（変更を有効にするには、ログアウトして再度ログインする必要があります）。
 
 ```sh
-*               soft    nofile          2097152
-*               hard    nofile          2097152
+*               soft    nofile          5000000
+*               hard    nofile          5000000
 ```
 
 ### 3. ノードの初期設定:
