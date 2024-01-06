@@ -56,7 +56,7 @@ wget -O wield-installer.sh https://shdw-drive.genesysgo.net/4xdLyZZJzL883AbiZvgy
 
 ## Option 2 - Manual Install
 
-### 1. Node Requirements - 16 CPU threads, 32 GB of RAM, 250 GB of SSD storage, 100 Mbps up/down network. Operating system requirements are Ubuntu 22.04 LTS kernel 5.15.0. Other Linux x86 distributions may work but are not officially supported at this time.
+### 1. ノードの要件 - 16CPUスレッド、32GBのRAM、250GBのSSDストレージ、上下100Mbpsのネットワーク。オペレーティング・システムの要件は Ubuntu 22.04 LTS カーネル 5.15.0 です。その他のLinux x86ディストリビューションも動作する可能性がありますが、現時点では公式にはサポートされていません。
 
 ### 2. Operating system configuration.
 
