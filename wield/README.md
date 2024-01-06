@@ -54,19 +54,19 @@ wget -O wield-installer.sh https://shdw-drive.genesysgo.net/4xdLyZZJzL883AbiZvgy
 
 上記のスクリプトに問題がある場合は、以下のオプション2をお試しください。
 
-## Option 2 - Manual Install
+## Option 2 - マニュアルインストール
 
 ### 1. ノードの要件 - 16CPUスレッド、32GBのRAM、250GBのSSDストレージ、上下100Mbpsのネットワーク。オペレーティング・システムの要件は Ubuntu 22.04 LTS カーネル 5.15.0 です。その他のLinux x86ディストリビューションも動作する可能性がありますが、現時点では公式にはサポートされていません。
 
-### 2. Operating system configuration.
+### 2. オペレーションシステム構成
 
-Begin by ensuring your operating system is up to date:
+オペレーティングシステムが最新であることを確認することから始めましょう：
 
 ```sh
 sudo apt update && sudo apt upgrade -y
 ```
 
-If necessary, reboot your system to ensure the kernel is up to date.
+必要に応じてシステムを再起動し、カーネルが最新であることを確認します。
 
 以下のカーネルチューニングパラメーターは、`/etc/sysctl.conf` を編集して以下の行をコンフィギュレーションファイルに追加し、`sudo sysctl -p` で新しいパラメーターを適用することで適用することを推奨します。注意: これらのパラメーターがあなたの特定のハードウェア構成に合っているか確認してください。
 
