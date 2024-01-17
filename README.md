@@ -7,13 +7,15 @@ description: >-
 _訳注：有志による翻訳なので、オフィシャルではありません。最新の情報は必ず https://docs.shadow.cloud を確認してください。またより適切な翻訳がありましたら https://github.com/raa-solana/docs-shadow-cloud-jp にPRを送ってください。_
 
 
-# GET STARTED
+# Your cloud. Your token.
 
-<table data-view="cards"><thead><tr><th></th><th align="center"></th><th></th><th data-hidden data-card-target data-type="content-ref"></th><th data-hidden data-card-cover data-type="files"></th></tr></thead><tbody><tr><td></td><td align="center"><strong>Learn</strong></td><td></td><td><a href="learn/">learn</a></td><td><a href=".gitbook/assets/Learn_Icon.png">Learn_Icon.png</a></td></tr><tr><td></td><td align="center"><strong>Build</strong></td><td></td><td><a href="build/">build</a></td><td><a href=".gitbook/assets/Build_Icon.png">Build_Icon.png</a></td></tr><tr><td></td><td align="center"><strong>Reference</strong></td><td></td><td><a href="reference/">reference</a></td><td><a href=".gitbook/assets/Reference_Icon.png">Reference_Icon.png</a></td></tr><tr><td></td><td align="center"><strong>Wield Node</strong></td><td></td><td><a href="wield/">wield</a></td><td><a href=".gitbook/assets/SHDW-4.png">SHDW-4.png</a></td></tr></tbody></table>
+<table data-view="cards"><thead><tr><th></th><th align="center"></th><th></th><th data-hidden data-card-target data-type="content-ref"></th><th data-hidden data-card-cover data-type="files"></th></tr></thead><tbody><tr><td></td><td align="center"><strong>Learn</strong></td><td></td><td><a href="learn/">learn</a></td><td><a href=".gitbook/assets/SHDW-29.png">SHDW-29.png</a></td></tr><tr><td></td><td align="center"><strong>Build</strong></td><td></td><td><a href="build/">build</a></td><td><a href=".gitbook/assets/SHDW-33.png">SHDW-33.png</a></td></tr><tr><td></td><td align="center"><strong>Operate</strong></td><td></td><td><a href="operate/">operate</a></td><td><a href=".gitbook/assets/SHDW-31.png">SHDW-31.png</a></td></tr><tr><td></td><td align="center">Token</td><td></td><td><a href="token/">token</a></td><td><a href=".gitbook/assets/SHDW-28.png">SHDW-28.png</a></td></tr><tr><td></td><td align="center">Dashboard</td><td></td><td><a href="https://dashboard.shdwdrive.com/">https://dashboard.shdwdrive.com/</a></td><td><a href=".gitbook/assets/SHDW-24.png">SHDW-24.png</a></td></tr><tr><td></td><td align="center"><strong>Reference</strong></td><td></td><td><a href="reference/">reference</a></td><td><a href=".gitbook/assets/SHDW-32.png">SHDW-32.png</a></td></tr></tbody></table>
 
-### [ShdwDrive をインストール](build/)
+### [Stake](https://testnet.shdwdrive.com/) your SHDW
 
-### [テストネットに参加](https://docs.shdwdrive.com/wield)
+### [Earn](token/rewards.md#key-information-you-need-to-prepare) SHDW Rewards
+
+### [Join](operate/#testnet-information) the Testnet
 
 ## 本資料の構成について
 
@@ -25,12 +27,20 @@ _訳注：有志による翻訳なので、オフィシャルではありませ�
 
 ビルドを素早く開始できるように、簡単で実用的な情報に焦点を当てています。ステップ・バイ・ステップのガイド、CLIによる一行一行の指示は、開発者に作業コンセプトへの最短の道を提供します。私たちは、このセクションを常に改善し、私たちのソリューションをできるだけ簡単に利用できるようにします。
 
+### [**Operate**](operate/)
+
+shdwNodeを運営することで、[ここ](https://dagger-hammer.shdwdrive.com/)にあるshdwDrive v2 Hammerインターフェイスを動かす分散型D.A.G.G.E.R.テストネットに参加することができます。shdwNodeオペレーターは、何百万ものライブユーザーテストトランザクションを処理し、ユーザーファイルアップロードのデータをトラストレスに保存します。
+
+ご自身の目でお確かめください： [ライブネットワークメトリクス](https://dashboard.shdwdrive.com/d/b14b5606-fb9c-4a2a-84fc-80887f144965/dagger-public-data?orgId=1\&refresh=30m)
+
+### [**SHDW Token**](token/)
+
+革命的なプラットフォームshdwDriveの原動力である$SHDWの広大な可能性を発見し、分散型データ・ストレージの領域でアクセス、所有権、報酬をどのように再構築しているかを学びましょう。
+
 ### [**Reference**](reference/)
 
 リファレンスセクションは、付録のように、主要なリソースを素早くナビゲートするハブとなっています。メディアキット、ソーシャルメディア、その他はこちらでご覧いただけます。
 
-### [Wield Node を実行](https://docs.shdwdrive.com/wield)
+### **Bugs and Feedback**
 
-Wieldノードを運営することで、[こちら](https://dagger-hammer.shdwdrive.com/)にあるD.A.G.G.E.R. Hammerインターフェイスを動かす分散型D.A.G.E.R. フェーズ1テストネットに参加することができます。Wield Nodeのオペレーターは、何千ものライブ・ユーザー・テスト・トランザクションを処理し、ユーザー・ファイル・アップロードのデータを信頼できる形で保存します
-
-このリソースは頻繁に更新され、開発者コミュニティは、見たい編集やプラットフォーム強化のアイデアを[submit Issues](https://github.com/GenesysGo/shadow-drive/issues) として提出する権限を与えられていると感じるはずです。 また[Bug submissions](https://github.com/GenesysGo/shdw-drive-bug-reports)のプロセスも用意しています。
+このリソースは頻繁に更新され、開発者コミュニティは、見たい編集やプラットフォーム強化のアイデアについて、[Issuesを提出する](https://github.com/GenesysGo/shadow-drive/issues)権限を与えられていると感じるべきです。また、私たちは [バグの投稿](https://github.com/GenesysGo/shdw-drive-bug-reports) のプロセスも用意しています。

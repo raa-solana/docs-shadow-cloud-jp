@@ -4,7 +4,7 @@ description: Shdw Cloud とその実装の紹介
 
 # Learn
 
-<table data-view="cards"><thead><tr><th></th><th align="center"></th><th align="center"></th><th data-hidden data-card-target data-type="content-ref"></th><th data-hidden data-card-cover data-type="files"></th></tr></thead><tbody><tr><td></td><td align="center"><strong>Design</strong></td><td align="center">ShdwDrive Evolution</td><td><a href="storage-services/design.md#shadow-drive-v1.5-is-born-building-tools-and-listening-to-developer-feedback">#shadow-drive-v1.5-is-born-building-tools-and-listening-to-developer-feedback</a></td><td><a href="../.gitbook/assets/Design1.png">Design1.png</a></td></tr><tr><td></td><td align="center"><strong>D.A.G.G.E.R.</strong></td><td align="center">Distributed Ledger Tech</td><td><a href="dagger.md#introduction">#introduction</a></td><td><a href="../.gitbook/assets/Dagger2.png">Dagger2.png</a></td></tr><tr><td></td><td align="center"><strong>Use Cases</strong></td><td align="center">ShdwDrive Capability</td><td><a href="./#shadow-cloud-use-cases">#shadow-cloud-use-cases</a></td><td><a href="../.gitbook/assets/Usecases.png">Usecases.png</a></td></tr></tbody></table>
+<table data-view="cards"><thead><tr><th></th><th align="center"></th><th align="center"></th><th data-hidden data-card-target data-type="content-ref"></th><th data-hidden data-card-cover data-type="files"></th></tr></thead><tbody><tr><td></td><td align="center"><strong>D.A.G.G.E.R.</strong></td><td align="center">分散型台帳技術</td><td><a href="dagger.md#introduction">#introduction</a></td><td><a href="../.gitbook/assets/Dagger2.png">Dagger2.png</a></td></tr><tr><td></td><td align="center"><strong>使用例</strong></td><td align="center">ShdwDriveの能力</td><td><a href="./#shadow-cloud-use-cases">#shadow-cloud-use-cases</a></td><td><a href="../.gitbook/assets/Usecases.png">Usecases.png</a></td></tr><tr><td></td><td align="center"><strong>デザイン</strong></td><td align="center">ShdwDriveの進化</td><td><a href="design.md#shadow-drive-v1.5-is-born-building-tools-and-listening-to-developer-feedback">#shadow-drive-v1.5-is-born-building-tools-and-listening-to-developer-feedback</a></td><td><a href="../.gitbook/assets/Design1.png">Design1.png</a></td></tr></tbody></table>
 
 ## **Mission**
 
@@ -47,11 +47,11 @@ D.A.G.G.E.R.について学ぶ：
 
 ShdwDriveは、オープンソースのソフトウェア定義オブジェクトストレージとSolanaのProof of Historyコンセンサスメカニズムを統合し、それを分散化することで、驚くべきI/O速度、スケーラビリティ、データの完全性を実現します。ShdwDriveのD.A.G.G.E.R.によるv2実装は、最終的にコミュニティ参加による、許可不要、信頼不要、分散型の分散ストレージネットワークを実現します。
 
-ShdwDriveの現在の[デザイン](storage-services/design.md#present-design-considerations)は、アプリケーションへのストレージの組み込みを簡単に、堅牢にし、Solanaブロックチェーンにネイティブにインターフェースします。SDKは[Javascript](../build/shadow-drive/sdk-javascript.md)、[Rust](../build/shadow-drive/sdk-rust.md)、[Python ](../build/shadow-drive/sdk-python.md)をサポートし、高速で信頼性の高いAPIを提供します。バックエンドストレージ、セカンダリストレージ、またはクライアント向けストレージオプションを必要とするアプリケーションを構築する場合、私達の堅牢な[Javascript SDK](../build/shadow-drive/sdk-javascript.md)でカバーできます。すべての使用ケースにおいて、私達は高速で信頼性の高いストレージを驚くほど簡単に構築できることに重点を置いています。
+ShdwDriveの現在の[デザイン](design.md#present-design-considerations)は、アプリケーションへのストレージの組み込みを簡単に、堅牢にし、Solanaブロックチェーンにネイティブにインターフェースします。SDKは[Javascript](../build/the-sdk/sdk-javascript.md)、[Rust](../build/the-sdk/sdk-rust.md)、[Python ](../build/the-sdk/sdk-python.md)をサポートし、高速で信頼性の高いAPIを提供します。バックエンドストレージ、セカンダリストレージ、またはクライアント向けストレージオプションを必要とするアプリケーションを構築する場合、私達の堅牢な[Javascript SDK](../build/the-sdk/sdk-javascript.md)でカバーできます。すべての使用ケースにおいて、私達は高速で信頼性の高いストレージを驚くほど簡単に構築できることに重点を置いています。
 
 [**ShdwDrive でビルドを開始する!**](../build/)
 
-[**Pricing**](storage-services/#pricing)
+[**価格**](storage-services.md#pricing)
 
 ## **Compute**
 
@@ -88,10 +88,11 @@ ShdwDriveは幅広いストレージニーズに対応しています：
 * AIアプリケーションおよびモデル・ストレージ
 * 個人・編集可能なストレージスペース
 * 専門的な分散型台帳の実装
+* ブロックチェーン・アーカイブ
 
 [**ShdwDrive でビルドを開始する!**](../build/shadow-drive/)
 
-[**ShdwDrive で他の人が何を創っているか見てみましょう！!**](broken-reference)
+[**ShdwDrive で他の人が何を創っているか見てみましょう！!**](https://github.com/GenesysGo/docs-shadow-cloud/blob/main/learn/broken-reference/README.md)
 
 ## **Shdw Operators**
 
@@ -105,10 +106,13 @@ Shdwオペレーターは、ShdwDriveストレージプラットフォームの�
 
 #### Testnet Phase 1:
 
-[Wieldノードを運営する](https://docs.shdwdrive.com/wield) ことで、[こちら](https://dagger-hammer.shdwdrive.com/)にあるD.A.G.G.E.R. Hammerインターフェイスを動かすD.A.G.G.E.R. フェーズ1テストネットにトラストレスに参加することができます。Wieldノードの役割とD.A.G.G.E.R. Hammerの目的については、私たちのブログ記事をご覧ください；
+shdwNodeを[操作](../operate/) することで、D.A.G.G.E.R. Hammerインターフェースの原動力となるD.A.G.G.E.R. フェーズ1テストネットに信頼して参加することができます[ここ](https://dagger-hammer.shdwdrive.com/)。Wieldノードの役割とD.A.G.G.E.R.Hammerの目的については、ノード・オペレーターの皆様には私たちのブログ記事をご覧いただくことをお勧めします。
 
-Wieldノードオペレータは、何千ものライブ・ユーザー・テスト・トランザクションを処理し、D.A.G.G.E.R. 内で、Hammer テスト・インターフェイスにアップロードされたファイルの消去コードと保存に必要なすべてのモジュールをトラストレスに実行します。
+Wield Nodeのオペレーターは、何千ものライブ・ユーザー・テスト・トランザクションを処理し、D.A.G.G.E.R.内のすべてのモジュールのうち、消去符号化に必要なものをトラストレスに実行し、Hammerテスト・インターフェースにアップロードされたファイルを保存します。
 
+#### Testnet Phase 2:
+
+1月16日 ローンチ
 
 ## **Our Team**
 
