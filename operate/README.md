@@ -10,18 +10,18 @@ description: >-
 
 ## shdwNodeを操作するには、次のことが必要です：
 
-1. GenesysGoのDirected Acyclic Gossiping Graph Enabling Replication (D.A.G.G.E.R.)の最新バージョンを[インストール](install.md) 
-2. ウォレットの[作成](wallet.md)
-3. あなたのDiscordユーザーが接続されたshdwNodeウォレットで100 SHDWを取得します。[ノートを読む](node-faq.md#q-how-are-earnings-paid-out-and-how-do-i-claim-my-shdwoperator-earnings)
-4. ネットワークで[認証](./#discord-verification)を行う（リワード獲得に必要）
-5. あなたのshdwNodeを[監視](monitoring-stack.md)し、維持し、アナウンスの最新情報を入手しましょう。[リーダーボードを見る](https://testnet.shdwdrive.com/uptime-leaderboard)
+1. GenesysGoのDirected Acyclic Gossiping Graph Enabling Replication (D.A.G.G.E.R.)の最新バージョンを[インストール](https://docs.shdwdrive.com/operate/install.md) 
+2. ウォレットの[作成](https://docs.shdwdrive.com/operate/wallet.md)
+3. あなたのDiscordユーザーが接続されたshdwNodeウォレットで100 SHDWを取得します。[ノートを読む](https://docs.shdwdrive.com/operate/node-faq.md#q-how-are-earnings-paid-out-and-how-do-i-claim-my-shdwoperator-earnings)
+4. ネットワークで[認証](https://docs.shdwdrive.com/operate#discord-verification)を行う（リワード獲得に必要）
+5. あなたのshdwNodeを[監視](https://docs.shdwdrive.com/operate/monitoring-stack.md)し、維持し、アナウンスの最新情報を入手しましょう。[リーダーボードを見る](https://testnet.shdwdrive.com/uptime-leaderboard)
 6. 現在のテストネットについては[FAQ](node-faq.md#testnet-2)をお読みください
 7. リワードを[獲得](https://testnet.shdwdrive.com/operator-rewards)
 
 {% hint style="warning" %}
 **重要 - あなたのノードが報酬の対象となる前に、あなたのDiscordユーザーにノードIDを追加する必要があります。それが完了すると、報酬があなたのノードに蓄積され始めます。**
 
-**検証されたステータスを維持し、ネットワーク内での地位を維持するためには、Discordの検証システムで検証されたすべてのウォレットで最低でも100 SHDWを持っている必要があります。**
+**Discordの認証システムで認証されたすべてのウォレットで最低100 SHDWを保有する必要があります。**
 {% endhint %}
 
 ## テストネットのご案内:
@@ -39,6 +39,7 @@ ShdwNodesは、何千ものライブ・ユーザー・テスト・トランザ�
 （訳注：[ブログの日本語訳はこちら](https://note.com/raa_solana/)）
 
 ## ハードウェア要件:
+**動作環境はUbuntu 22.04 LTS kernel 5.15.0です。その他のLinux x86ディストリビューションも動作する可能性がありますが、現時点では公式にはサポートされていません。**
 
 **動作環境はUbuntu 22.04 LTS kernel 5.15.0です。他のLinux x86ディストリビューションも動作するかもしれませんが、現時点では \_公式には\_ サポートされていません。**
 
@@ -57,7 +58,7 @@ ShdwNodesは、何千ものライブ・ユーザー・テスト・トランザ�
 
 ノードIDをDiscordユーザーに接続したい場合は、このガイドに従ってください。これにより、GenesysGo DiscordサーバーのshdwOperatorロールとwield operatorsチャンネルのロックが解除されます。
 
-* [このガイド](wallet.md#importing-usdshdw-accounts-into-solana-wallets)に従って、shdwNodeのIDキーペアをSolana UIウォレットにインポートしてください。
+* [このガイド](https://docs.shdwdrive.com/operate/wallet#importing-usdshdw-accounts-into-solana-wallets)に従って、shdwNodeのIDキーペアをSolana UIウォレットにインポートしてください。
 * [https://holders.genesysgo.com/](https://holders.genesysgo.com/) にアクセスしてください。
 * あなたのshdwNode IDを接続したいDiscordユーザーでログインしてください。
 * ウォレットを接続し、"Add wallet"をクリックし、署名してメッセージを送信します。

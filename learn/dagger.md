@@ -14,13 +14,13 @@ description: >-
 [テストネット連載記事](https://www.shadow.cloud/blog/dagger-testnet-release)
 [テストネット・デモ](https://dagger-hammer.shadow.cloud/)
 
-更新：現在、D.A.G.G.E.R.のテストネット・フェーズ1に入っており、Wield Nodeのオペレーターとして、トラストレスで許可なく参加できる機能をリリースしました。
+更新：現在、D.A.G.G.E.R.のテストネット・フェーズ2に入っており、Wield Nodeのオペレーターとしてトラストレスかつパーミッションで参加できる機能をリリースしました。
 
-[Run a Wield Node ](https://docs.shdwdrive.com/wield)で参加できる!
+参加するには[shdwNode](../operate/)を実行してください！
 
-### Introduction
+### はじめに
 
-_注意：このページは、すべての読者に適したハイレベルな説明と一般的な概念に準拠しています。このページはホワイトペーパーではありません。D.A.G.G.E.R.で_ [_SHDW_](https://docs.shadow.cloud/reference/shdw-token) _トークンがどのように利用されているかについての詳細は、_ [_SHDW_](https://docs.shadow.cloud/reference/shdw-token) _トークンのページ_ [_こちら_](https://docs.shadow.cloud/reference/shdw-token)_をご覧ください。このページは、最近発表されたD.A.G.G.E.R.のライトペーパーおよびブログ記事との整合性を高めるため、現在変更中です。_
+_注意：このページは、すべての読者に適した高レベルの説明と一般的な概念に従います。これはホワイトペーパーとはみなされません。D.A.G.G.E.R.で SHDW トークンがどのように利用されるかの詳細については、SHDW トークンのページ [こちら](../token/)をご覧ください。このページは、最近発表されたD.A.G.G.E.R.のライトペーパーおよびブログ記事との整合性を高めるため、現在変更中です_
 
 _D.A.G.G.E.R._ は、グラフベースのコンセンサスメカニズムを持つ分散システムです。プロトコル仕様を構成する5つのコンポーネントがあります。この記事では、これら5つのコンポーネントのそれぞれと、それらがどのように入ってくるリクエストと相互作用するかを、高レベルで説明します。簡単に言うと、トランザクションのユースケースは、ShdwDrive v2にファイルを保存するリクエストと考えることができます。
 
@@ -36,9 +36,9 @@ GenesysGoの _D.A.G.G.E.R._ は、多くの実装が可能であり、計画さ�
 
 本書では、入門者向けのヘルプとして、多くの専門用語にその定義へのリンクを付けています。以下のリストでは、この文書でよく使われるいくつかの用語を定義しています：
 
-* トランザクション: ユーザーによって提出された書き込み要求。トランザクションには [raw bytes](dagger.md#raw-bytes-binary-data-that-is-made-up-of-0s-and-1s-usually-representing-a-string-of-text-a-file-or-an-image) 会員管理要求、シャドートランザクション（ShdwDrive/cloud 動作、例えばファイルの保存、VMをインスタンスする）などがあります。
-* ブロック：root hashが [DAG](dagger.md#directed-acyclic-graph-a-graph-that-consists-of-directed-edges-with-no-cycles-used-to-represent-relationships-between-distributed-ledger-transactions) のノードに含まれる  [Merkle Tree](dagger.md#merkle-tree-a-data-structure-used-in-cryptography-to-verify-the-integrity-of-data-a-merkle-tree-allows-large-datasets-to-be-checked-for-consistency-and-completeness-without-having-to-download-the-entire-dataset) のノードにルートハッシュが含まれています。
-* イベント: DAG内のノードで、親の[ハッシュ](dagger.md#cryptographic-hashes-a-one-way-function-used-to-map-data-of-any-size-to-a-fixed-length-value-used-to-create-digital-fingerprints-to-verify-data-integrity) 、タイムスタンプ、ブロックペイロード、前述の作成者の署名が含まれています。
+* トランザクション: ユーザーによって提出された書き込み要求。トランザクションには、生バイト、メンバー管理要求、およびShdwトランザクション(ファイルの保存、VMのインスタンス化な どのShdwDrive/Cloudアクション)を含めることができます。
+* ブロック： ルートハッシュがDAGのノードに含まれるマークルツリーにパックされたトランザクションのセット。
+* イベント： DAG内のノードで、その親のハッシュ、タイムスタンプ、ブロックのペイロード、および前述の作成者の署名を含みます。
 
 ### _D.A.G.G.E.R._ の非同期型コンセンサスを理解する
 
@@ -54,7 +54,7 @@ _D.A.G.G.E.R._ コンセンサスアルゴリズムは、ローカルグラフ�
 
 ### **Communicationsモジュール： ネットワークの受信・送信データについて**
 
-Communicationsモジュールは、[ピア](dagger.md#peer-to-peer-a-type-of-network-architecture-in-which-each-node-in-the-network-can-act-as-both-a-client-and-a-server-in-a-peer-to-peer-network-nodes-communicate-directly-with-each-other-rather-than-through-a-central-server)との発信[同期](dagger.md#synchronization-requests-in-peer-to-peer-network-requests-sent-between-nodes-in-a-peer-to-peer-network-to-ensure-that-the-nodes-have-the-same-data)要求を初期化し、ピアからの同期応答をProcesserに転送し、ピアからの受信同期要求を処理し、トランザクションをProcesserに転送し、RPC要求をControllerに転送し、ピアIPデータベースを維持します。
+通信モジュールは、ピアとの発信同期要求を初期化し、ピアからの同期応答をプロセッサに転送し、ピアからの着信同期要求を処理し、トランザクションをプロセッサに転送し、RPC要求をコントローラに転送し、ピアIPデータベースを維持します。
 
 * **Outgoing Sync Requests**
   * 同期要求を初期化するために、最近同期されたことのないアクティブなピアをランダムに選択することから始めます。
@@ -62,22 +62,22 @@ Communicationsモジュールは、[ピア](dagger.md#peer-to-peer-a-type-of-net
   * Communicationsは状態の要約と選択されたピアを受信し、ピアに送信して同期応答を待ち、Graphモジュールに転送されて消化されます。
   * Communicationsは状態の要約と選択されたピアを受信し、ピアに送信し、同期応答を待って、消化されるためにGraphモジュールに転送されます。
 * **Incoming Sync Requests**
-  * 受信した同期リクエストは直ちにGraphモジュールに転送されます。私たちが持っていて相手が持っていないすべての[イベント](dagger.md#events-an-occurrence-that-is-detected-by-a-distributed-ledger) を含むパッケージされた同期応答を待ち、それが相手に送り返されます。
+  * 受信した同期リクエストは直ちにグラフモジュールに転送されます。私たちは、相手が持っていない、私たちが持っているすべてのイベントを含むパッケージ化された同期レスポンスを待ち、それは相手に送り返されます。
 * **Incoming Transactions**
-  * ユーザーがトランザクションを送信すると、トランザクションを受信したCommunicationsモジュールは、それをProcesserに転送します。検証後、トランザクションはForesterとGraphモジュールを経由し、ブロックに含まれると、トランザクションが含まれたブロックを含むイベントの署名を送り返します。Communicationsモジュールは、この署名をユーザーに送り返します。これはブロックが[finalized](dagger.md#finalized-block-a-block-that-has-been-accepted-by-the-consensus-protocol-and-will-not-be-changed) したことを意味しないので注意しましょう。
+  * ユーザーがトランザクションを送信すると、トランザクションを受信した通信モジュー ルはそれをプロセッサに転送します。検証後、トランザクションはフォレスターと、ブロックに含まれると、トランザクションが 含まれたブロックを含むイベントの署名を送り返すグラフモジュールを経由します。通信モジュールはこの署名をユーザーに送り返します。これはブロックが確定したことを意味しないことに注意してください。
 
 <figure><img src="../.gitbook/assets/Docs_MindMap_4.png" alt=""><figcaption></figcaption></figure>
 
 * **Incoming RPC Requests**
-  * ユーザが、ファイルの読み取り、ブロックやトランザクションの問い合わせなど、いくつかの[RPC](dagger.md#rpc-request)リクエストを送信すると、そのリクエストはControllerに転送されます。Controllerは、Communicationsモジュールに元帳問い合わせの結果を送り返し、Communicationsモジュールはそれをユーザーに転送します。このRPC APIは _D.A.G.G.E.R._ のネイティブであり、JSON標準に準拠しています。
+  * ユーザが、ファイルの読み取り、ブロックやトランザクションの照会など、いくつかの RPC リクエストのいずれかを送信すると、そのリクエストはコントローラに転送されます。コントローラは、元帳クエリの結果を通信モジュールに送り返し、通信モジュールはそれをユーザーに転送します。このRPC APIは _D.A.G.G.E.R._ のネイティブであり、JSON標準に準拠しています。
 
 <figure><img src="../.gitbook/assets/RPC_Request_Graphic_Docs_Transparent.png" alt=""><figcaption></figcaption></figure>
 
 ### **Processerモジュール： 検証**
 
-VerifierとForesterは、イベント、ブロック、トランザクションの検証を担当する[sibling modules](dagger.md#sibling-modules)です。検証はピアによって行われるイベントと、ユーザーによって行われる受信トランザクションに対して行われます。トランザクションの署名検証、ブロックの署名検証、ブロックの[root hash](dagger.md#root-hash)検証など、検証にはいくつかの形式があります。ピアイベントを処理する場合、Verifierはこれらの検証形式のうち最初の2つを担当し、Foresterはブロックを形成するトランザクションのMerkleツリーのroot hashの検証を担当します。受信したユーザートランザクションを処理する際、Foresterはブロックにまとめるトランザクションを収集し、ブロックを表すMerkle root hashを作成します。
+verifierとforesterは、イベント、ブロック、トランザクションの検証を担当する兄弟モジュールです。検証はピアによって行われるイベントと、ユーザーによって行われるトランザクションに対して行われます。トランザクションの署名検証、ブロックの署名検証、ブロックのルートハッシュ検証などです。ピアイベントを処理する場合、ベリファイアはこれら最初の2つの検証形式を担当し、フォレスターはブロックを形成するトランザクション・メルクルツリーのルートハッシュの検証を担当します。受信したユーザー・トランザクションを処理する際、フォレスターはブロックにパックするトランザクションを収集し、ブロックを表すマークルルート・ハッシュを生成します。
 
-ShdwDriveのようなファイルシステムアプリケーションの場合、Controllerモジュールは _D.A.G.G.E.R._ プロトコルを使用して台帳への読み取りと書き込みを実行します。これには、ファイルの安全性と回復力を確保するためのシュレッダーや消去コードなどの操作が含まれます。ユーザーがShdwDriveにファイルを保存するリクエストを提出すると、Foresterモジュールがトランザクションを収集し、ブロックにまとめます。次に、Verifireモジュールがトランザクションの署名を検証し、ブロック内のトランザクションのMerkleツリーのroot hashを検証します。ブロックが検証されると、そのブロックは _D.A.G.G.E.R._ 台帳に追加され、すべての取引の安全で改ざん不可能な記録を維持します。
+ShdwDriveのようなファイルシステム・アプリケーションの場合、コントローラー・モジュールは、 _D.A.G.G.E.R._ プロトコルを使用して、台帳への読み取りと書き込みを実行します。これには、ファイルの安全性と弾力性を確保するためのシュレッダーや消去コーディングなどの操作が含まれます。ユーザーがShdwDriveにファイルを保存するリクエストを提出すると、フォレスター・モジュールがトランザクションを収集し、ブロックにまとめます。次に検証モジュールがトランザクションの署名を検証し、ブロック内のトランザクション・マークルツリーのルートハッシュを検証します。ブロックが検証されると、そのブロックは _D.A.G.G.E.R._ 台帳に追加されます。
 
 オラクル、ブリッジ、VMオーケストレーションなどの他のユースケースの場合、Controllerモジュールは必要に応じて他のシステムやサービスに外部コールすることになります。例えば、ユーザーがShdw Compute上でスマートコントラクトを実行したい場合、Controllerモジュールは、トランザクションが有効で安全であることを確認するために、VerifierおよびForesterモジュールと対話します。Verifierはトランザクションの署名を検証し、Foresterはトランザクションのroot hashを検証します。
 
@@ -102,9 +102,7 @@ ShdwDriveのようなファイルシステムアプリケーションの場合�
 * Data: Merkleツリーのリーフノードに格納されているデータブロックを表す。各データブロックは値を持っています。
 * Hash: Merkleツリーのデータブロックとノードに対して計算されるハッシュ値を表します。各ハッシュは値を持ちます。
 
-この図では、MerkleTree クラスと Node クラスの構成、および Node、Data、Hash クラスの関連付けなど、これらのクラス間の関係を示しています。UML クラス図の目的は、ソフトウェア・システムの構造を抽象的かつ視覚的に表現することで、システムの理解、設計、保守を容易にすることです。これは概念的な目的で、Merkelのデータ構造がどのように機能するかを説明するのに役立つものでしかありません。_D.A.G.G.E.R._ はこのデータ構造のより高度な実装を使用しており、より多くの技術文書が公開されるにつれて、より詳細に説明されるでしょう。
-
-#### 2. グラフを解析して、イベントの[consensus](dagger.md#consensus)順序を導き出す。協調的な任務は、通信モジュールがどのピアと同期するかを決めるのを助けることと、通信モジュールに通知することです。
+#### 2. グラフを分析して、イベントのコンセンサス順序を導き出します。協調的な任務は、通信モジュールがどのピアと同期するかを決定するのを助け、通信モジュールに通知することです。
 
 * グラフイベントの順序に基づくコンセンサスは、_D.A.G.G.E.R._ のようなプロトコルの重要な構成要素です。DAGGERでは、各ノードが「Shdwグラフ」のローカルコピーを保持します。Shdwグラフは、基本的にシステムで発生したすべてのトランザクションとイベントを記録する非循環なグラフです。また、ノードはイベントやトランザクションに関する情報を共有するゴシップ・プロトコルを用いて互いに通信します。
 * 新しいトランザクションがシステムに提出されると、まずそれを受信したノードによって検証されます。その後、ノードはトランザクションを含む新しいイベントを作成し、それをShdwグラフのローカルコピーに追加します。その後、ノードは新しいイベントをネットワーク内の他のノードにゴシップします。

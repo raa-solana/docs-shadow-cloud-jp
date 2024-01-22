@@ -3,7 +3,9 @@
 ### Option 1 - ガイド付きインストール + startup script
 
 {% hint style="info" %}
-どのように進めるかを決める前に、少なくとも以下の手動インストールの手順を確認することを強くお勧めします。基本的なLinuxコマンドに慣れており、ノードの設定に関与したい場合は、以下の「オプション2 - 手動インストール」で説明されている手順に従ってください。
+インストールの前に、[最低ハードウェア要件](./#hardware-requirements)を必ず確認してください。
+
+どのように進めるかを決める前に、少なくとも以下の手動インストール手順を確認することを強くお勧めします。基本的なLinuxコマンドに慣れていて、ノードの設定に関与したい場合は、以下の「オプション2 - 手動インストール」で説明されている手順に従ってください。
 {% endhint %}
 
 よりガイド付きの体験をお望みなら、特別なインストーラー・スクリプトを作成しました。
@@ -278,6 +280,6 @@ wget -O ~/shdw-keygen https://shdw-drive.genesysgo.net/4xdLyZZJzL883AbiZvgyWKf2q
 
 #### shdwNodeをセットアップした後はどうすればいいですか？
 
-さて、ノードを立ち上げて稼動させたら、[wallet verification](./#discord-verification)を確認し、[monitoring guide](monitoring-stack.md)でノードのパフォーマンスを表示・監視するための監視スタックの設定方法を確認してください。
+さて、ノードを立ち上げて稼動させたら、[verification](https://docs.shdwdrive.com/operate#discord-verification)でウォレットを確認し、[monitoring](https://docs.shdwdrive.com/operate/monitoring-stack)ガイドでノードのパフォーマンスを表示・監視するための監視スタックの設定方法を確認してください。
 
 \*免責事項：GenesysGoのD.A.G.G.E.R. Testnet Phase 1でWield Nodeを操作することにより、利用者は自発的かつ自己責任でこれを行うことを認めます。GenesysGoはTestnetソフトウェアを「現状のまま」無保証で提供し、お客様が被る可能性のある直接的、間接的、偶発的、結果的損害について一切の責任を負いません。お客様は、ご自身のシステムおよびデータのセキュリティに責任を負うものとします。GenesysGoは、お客様がTestnetに参加した結果生じたいかなる損失や損害についても責任を負いません。本ソフトウェアを使用することにより、お客様は、お客様のノード操作に関連するいかなるクレームや紛争からもGenesysGoを免責することに同意するものとします。本契約は、Wieldノードをダウンロードし、操作した時点で拘束力を持ちます。GenesysGoは予告なくTestnetを変更または中止することがあります。これにはTestnetフェーズ1のD.A.G.G.E.R. Wield Nodeを操作するためのハードウェア要件が含まれますが、これに限定されるものではありません。これらの条件に同意できない場合は、Testnetに参加しないでください。
