@@ -1,6 +1,6 @@
 # SHDW Token
 
-[ステーキングサイト](https://testnet.shdwdrive.com)でステーキング報酬を請求し、テストネットの[リーダーボード](https://testnet.shdwdrive.com/uptime-leaderboard)をご覧ください。SHDWトークンは[Jupiter.](https://jup.ag/swap/USDC-SHDW)で購入できます。
+[ステーキングサイト](https://testnet.shdwdrive.com)でステーキング報酬を請求し、テストネットの[リーダーボード](https://testnet.shdwdrive.com/status-dashboard)をご覧ください。SHDWトークンは[Jupiter.](https://jup.ag/swap/USDC-SHDW)で購入できます。
 
 <table data-view="cards"><thead><tr><th></th><th align="center"></th><th align="center"></th><th data-hidden data-card-target data-type="content-ref"></th><th data-hidden data-card-cover data-type="files"></th></tr></thead><tbody><tr><td></td><td align="center"><strong>リワード</strong></td><td align="center"></td><td><a href="rewards.md">rewards.md</a></td><td><a href="../.gitbook/assets/SHDW-20 (1).png">SHDW-20 (1).png</a></td></tr><tr><td></td><td align="center"><strong>ユーティリティ</strong></td><td align="center"></td><td><a href="utility.md">utility.md</a></td><td><a href="../.gitbook/assets/SHDW-21 (1).png">SHDW-21 (1).png</a></td></tr><tr><td></td><td align="center">ロードマップ</td><td align="center"></td><td><a href="roadmap.md">roadmap.md</a></td><td><a href="../.gitbook/assets/SHDW-23 (1).png">SHDW-23 (1).png</a></td></tr></tbody></table>
 

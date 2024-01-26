@@ -10,11 +10,11 @@ description: >-
 
 ## shdwNodeを操作するには、次のことが必要です：
 
-1. GenesysGoのDirected Acyclic Gossiping Graph Enabling Replication (D.A.G.G.E.R.)の最新バージョンを[インストール](https://docs.shdwdrive.com/operate/install.md) 
-2. ウォレットの[作成](https://docs.shdwdrive.com/operate/wallet.md)
-3. あなたのDiscordユーザーが接続されたshdwNodeウォレットで100 SHDWを取得します。[ノートを読む](https://docs.shdwdrive.com/operate/node-faq.md#q-how-are-earnings-paid-out-and-how-do-i-claim-my-shdwoperator-earnings)
+1. GenesysGoのDirected Acyclic Gossiping Graph Enabling Replication (D.A.G.G.E.R.)の最新バージョンを[インストール](https://docs.shdwdrive.com/operate/install) 
+2. ウォレットの[作成](https://docs.shdwdrive.com/operate/wallet)
+3. あなたのDiscordユーザーが接続されたshdwNodeウォレットで100 SHDWを取得します。[ノートを読む](https://docs.shdwdrive.com/operate/node-faq#q-how-are-earnings-paid-out-and-how-do-i-claim-my-shdwoperator-earnings)
 4. ネットワークで[認証](https://docs.shdwdrive.com/operate#discord-verification)を行う（リワード獲得に必要）
-5. あなたのshdwNodeを[監視](https://docs.shdwdrive.com/operate/monitoring-stack.md)し、維持し、アナウンスの最新情報を入手しましょう。[リーダーボードを見る](https://testnet.shdwdrive.com/uptime-leaderboard)
+5. あなたのshdwNodeを[監視](https://docs.shdwdrive.com/operate/monitoring-stack.md)し、維持し、アナウンスの最新情報を入手しましょう。[リーダーボードを見る](https://testnet.shdwdrive.com/status-dashboard)
 6. 現在のテストネットについては[FAQ](node-faq.md#testnet-2)をお読みください
 7. リワードを[獲得](https://testnet.shdwdrive.com/operator-rewards)
 

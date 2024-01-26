@@ -25,14 +25,14 @@
 ## Operators
 
 * **最大オペレーター**： 無制限。すべてのネットワーク参加者がネットワークで活躍し、参加者に制限はありません。
-* **稼ぐことができる合計**： 150のshwdNodesは稼働時間と優先度に基づいています。この150はパフォーマンスの変化に応じて変更されます。
-* **お財布**： 各shdwNodeはユニークなSPLウォレットにリンクされ、最低100SHDWを保持する必要があります。
-* **非アクティブルール**： 非アクティブルール**：2エポック(平均エポック～30分)非アクティブのノードは、収益の対象となるトップ150グループから除外されます。
-* **収益**： 稼動時間に応じて最大2,000ドルSHDW、2,096時間以上の稼動時間（Testnet2の約95%）に追加報酬あり。
-* **コスト**： shdwNodeの稼動は$100-300/月と見積もられる。
-* **稼働時間のトラッキング**： https://dashboard.shdwdrive.com の shdwOperator [leaderboard](https://testnet.shdwdrive.com/uptime-leaderboard) 経由。このダッシュボードに記載されている以上の詳細については、あなたのアップタイムが上位150位以内にどのようなプラスまたはマイナスの影響を与えたかについて、このテストネット2の範囲を超えています。
+* **稼ぐことができる合計**： 150のshwdNodesは稼働時間と優先度に基づいています。これらの150は、パフォーマンスの変化に応じて変化し、適格なshdwOperatorsのキューによって置き換えられます。
+* **ウォレット**： 各shdwNodeはユニークなSPLウォレットにリンクされ、最低100ドルのSHDWを保持する必要があります。
+* **非アクティブルール**：30分間アクティブでなかったノードは、収益の対象となるトップ150グループから除外され、キューの後ろに置かれます。
+* **収益**： 稼動時間に応じて最大2,000SHDW、稼動時間>=2,096時間(Testnet2の約95%)で追加報酬。
+* **コスト**： shdwNodeの稼動は$100-300/月と見積もられています。
+* **稼働時間の追跡**： https://dashboard.shdwdrive.com の shdwOperator [leaderboard](https://testnet.shdwdrive.com/status-dashboard) を通して追跡されます。このダッシュボードで提供されるものを超えて、アップタイムがトップ150にどのようにプラスまたはマイナスに影響したかについての詳細は、このテストネット2の範囲を超えています。
 * **収益要件**： shdwNodeの運営から報酬を得るには、discordの検証システムで検証されたウォレット全体で最低100 $SHDWが必要です。資格に影響を与えることなく、このSHDWを[stake](https://testnet.shdwdrive.com)することができます！SHDWトークンは[Jupiter.](https://jup.ag/swap/USDC-SHDW)で購入できます。
-* **リワードの請求**： shdwOperators の請求は [https://testnet.shdwdrive.com/operator-rewards](https://testnet.shdwdrive.com/operator-rewards)
+* 報酬の請求: ** shdwOperators の請求は [https://testnet.shdwdrive.com/operator-rewards](https://testnet.shdwdrive.com/operator-rewards)
 
 ## Staking
 
