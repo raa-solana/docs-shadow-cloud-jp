@@ -8,7 +8,7 @@ description: ShdwDriveを活用したプロジェクトを検討する
 
 ShdwDriveと対話するための最も広く使われているGUIの1つです。ファイル管理、転送と共有、不変のストレージ、プライベートメモ、リアルタイムのコラボレーションなど、チームや個人が暗号と分散化を通してWeb3の力を解き放つことができるユニークなユーザーエクスペリエンスです。
 
-[![](../.gitbook/assets/shadow\_storage.png)](https://www.shadow.storage/#features)
+[![](../.gitbook/assets/shadow\_storage.png)](https://shadow.storage/)
 
 **SYNX**
 
@@ -20,7 +20,7 @@ Blxckoutチームによって開発されたSynxは、実世界のモバイル�
 
 オンチェーンソーシャルメディアプラットフォームの構築を支援するソーシャルプロトコルです。ブロックチェーンの予備知識は不要で、開発者に優しい。Web3ソーシャルアプリを簡単に構築し、ユーザーが喜ぶ新しい暗号体験の扉を開けましょう。
 
-[![](../.gitbook/assets/spling-feature.png)](https://www.splinglabs.com/)
+[![](../.gitbook/assets/spling-feature.png)](https://twitter.com/Spling\_Labs)
 
 **Firethree**
 
