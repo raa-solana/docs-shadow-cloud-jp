@@ -60,29 +60,3 @@ shdwWallet から別の Solana ウォレットに shdwAccount をインポート
 6. ネットワークとしてSolanaが選択されていることを確認し、好きな名前を付けて、[#アカウントの秘密鍵をshdwNodeから取得しましょう](wallet.md#get-your-accounts-private-key-from-your-shdwnode "mention")の出力から秘密鍵を貼り付けます。
 7. あなたのshdwNodeのIDがSolana Walletにあるはずです！[https://holders.genesysgo.com/](https://holders.genesysgo.com/) にアクセスし、Discordアカウントでサインインしてください。あなたのノードがネットワークで識別されると、Discordで自動的に`shdwOperator`ロールを受け取ることができます。
 
-### シード・フレーズを使う方法
-
-{% hint style="info" %}
-シードフレーズを使って鍵を生成する場合、サードパーティのSolanaウォレットによって結果が異なるため、上記の`privkey`メソッドを使用して、他のウォレットにノードIDをインポートすることをお勧めします。シードフレーズによる検証に問題がある場合は、代わりに `privkey` メソッドを使用してください；
-
-この方法を使用できるのは、ノードの ID キーペアを生成した後にシードフレーズを書き留めた場合のみです。書き留めていない場合は、上記の秘密鍵メソッドを使用してください。
-{endhint %}。
-
-この派生パスは完全な互換性のためにSolanaです。一般的な派生パスは `44'/501'/n'/0'` です。これにより、[#seed-phrase-method](wallet.md#seed-phrase-method "mention")を使用することができ、任意のSolana UIウォレット内でウォレットを再生成することができます。
-
-シードフレーズはバックアップとリカバリーのために最も頻繁に使用され、保持し、安全に保管する必要があります。
-
-1. ファントムウォレットを開きます。
-2. 以下のようなハンバーガーメニューアイコンをクリックします。
-   ![](<../.gitbook/assets/image (5).png>)
-3. サイドメニューが開いたら、「Add / Connect Wallet」の「+」アイコンをクリックします。
-   ![](<../.gitbook/assets/image (6).png>)
-4. 以下のような画面が表示されます。
-   ![](<../.gitbook/assets/image (7).png>)
-5. 5.秘密の回復フレーズの`Import Secret Recovery Phrase`をクリックしてください。すると次のような画面になります。
-   ![](<../.gitbook/assets/image (8).png>)
-6. ノードのIDキーペアの秘密の回復フレーズを入力し、`Import Wallet`をクリックします。
-7. 成功すると、以下のような画面が表示されます。
-   ![](<../.gitbook/assets/image (9).png>)
-8. `View Accounts`をクリックして、`Solana`ネットワークウォレットアドレスがノードのIDキーペアの公開鍵と一致することを確認します。すべてが正しいことを確認したら、`Continue`をクリックします。
-9. これで shdwNode の ID が Solana ウォレットに入るはずです！次に、[https://holders.genesysgo.com/](https://holders.genesysgo.com/) にアクセスし、Discordアカウントでサインインします。あなたのノードがネットワークで識別されると、Discordで自動的にロールを受け取ります。

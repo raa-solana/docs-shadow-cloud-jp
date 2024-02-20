@@ -51,6 +51,8 @@
 * **取得**：ジュピターエクスチェンジでSHDWを10枚購入するごとに1ポイント。
 * **損失**: ウォレットから1SHDW出るごとに1ポイント差し引かれます。
 * **償還**： Testnet2の終了時に平均取引サイズに基づいて付与されます。ポイントはTestnet2の終了時にSHDWと交換することができます。
+* ポイントリーダーボード: [https://testnet.shdwdrive.com/points-leaderboard](https://testnet.shdwdrive.com/points-leaderboard)
+* ポイント詐欺: [詐欺的なウォレットを報告するフォーム](https://docs.google.com/forms/d/e/1FAIpQLSdztbGTeLSBuYi9nghZsC0rZ\_mnDORf7nB2Oqzml8\_hGIrl4g/viewform)
 
 ## 参加に関する一般的な注意事項
 
