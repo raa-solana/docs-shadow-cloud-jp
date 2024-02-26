@@ -105,7 +105,7 @@ shdw-drive create-storage-account -kp ~/shdw-keypair.json -n "pony storage drive
 
 ### **Upload File to ShdwDrive**
 
-このコマンドに必要なオプションは2つだけです:
+このコマンドのオプション:
 
 `-kp, --keypair`
 
@@ -121,10 +121,20 @@ shdw-drive create-storage-account -kp ~/shdw-keypair.json -n "pony storage drive
 
 * ファイルをアップロードするストレージアカウント。
 
-**例:**
+`--rpc <your-RPC-endpoint>`
+
+* RPC エンドポイントをカスタム・エンドポイントに渡します。これは、デフォルトの無料公開エンドポイントから利用できないメソッドを使用している場合、410エラーを解決することができます。
+
+**例 1:**
 
 ```
 shdw-drive upload-file -kp ~/shdw-keypair.json -f ~/AccountHolders.csv
+```
+
+**例 2 with RPC:**
+
+```
+shdw-drive upload-file -kp ~/shdw-keypair.json -f ~/AccountHolders.csv --rpc <https://some-solana-api.com>
 ```
 
 ### **Upload Multiple Files to ShdwDrive**
@@ -149,10 +159,20 @@ shdw-drive upload-file -kp ~/shdw-keypair.json -f ~/AccountHolders.csv
 
 * バッチアップロードの同時実行数。(デフォルト:"3")
 
-**例:**
+`--rpc <your-RPC-endpoint>`
+
+* RPC エンドポイントをカスタム・エンドポイントに渡します。これは、デフォルトの無料公開エンドポイントから利用できないメソッドを使用している場合、410エラーを解決することができます。
+
+**例 1:**
 
 ```
 shdw-drive upload-multiple-files -kp ~/shdw-keypair.json -d ~/ponyNFT/assets/
+```
+
+**例 2 with RPC:**
+
+```
+shdw-drive upload-multiple-files -kp ~/shdw-keypair.json -d ~/ponyNFT/assets/ --rpc <https://some-solana-api.com>
 ```
 
 ### **Edit a File (aka Overwrite a File aka Replace a File)**
