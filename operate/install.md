@@ -1,5 +1,76 @@
 # Install
 
+### wield to shdw-node naming transition and restart
+{% hint style="info" %}
+これらの指示は、手動設定手順を使用している場合にのみ適用されます。2024年3月7日の調整再起動では、アプリケーションの命名規則が「wield」から「shdw-node」に移行します。
+{% endhint %}
+
+既存の `wield.service` を無効にする：
+
+```sh
+sudo systemctl disable wield.service
+```
+
+`shdw-node`バイナリを`dagger`ユーザディレクトリにダウンロードします：
+
+```sh
+wget -O ~/shdw-node https://shdw-drive.genesysgo.net/4xdLyZZJzL883AbiZvgyWKf2q55gcZiMgMkDNQMnyFJC/shdw-node
+```
+
+必要に応じて `shdw-node` バイナリを実行可能にします：
+
+```sh
+sudo chmod +x ~/shdw-node
+```
+
+あるいは、既存の `wield` バイナリを `shdw-node` にリネームします：
+
+```sh
+mv ~/wield ~/shdw-node
+```
+
+`sudo nano /etc/systemd/system/shdw-node.service`で`shdw-node`用の新しいシステムサービスを作成し、以下の内容をファイルに貼り付けます：
+
+```sh
+[Unit]
+Description=shdw-node service
+After=network.target
+
+[Service]
+User=dagger
+WorkingDirectory=/home/dagger
+ExecStart=/home/dagger/start-shdw-node.sh
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
+```
+
+既存のスタートアップ・スクリプトを `mv start_wield.sh start-shdw-node.sh` で修正し、以下の内容に合わせます：
+
+```bash
+#!/bin/bash
+PATH=/home/dagger
+exec shdw-node \
+--processor-threads 16 \
+--global-threads 16 \
+--comms-threads 2 \
+--log-level info \
+--history-db-path /mnt/dag/historydb \
+--config-toml config.toml \
+```
+
+新しいサービスを登録し、`shdw-node` プロセスを開始します：
+
+```sh
+sudo systemctl enable --now shdw-node.service
+```
+
+`sudo mv /etc/logrotate.d/wield.conf /etc/logrotate.d/shdw-node.conf` で既存の logrotate の設定を更新します。
+
+`sudo systemctl restart logrotate` で `logrotate` サービスを再起動し、`sudo logrotate -d /etc/logrotate.d/shdw-node.conf` で `shdw-node.conf` 設定が正しく動作していることを確認し、エラーがないかチェックします。
+
+
 ### Option 1 - ガイド付きインストール + startup script
 
 {% hint style="info" %}
@@ -12,7 +83,7 @@
 
 * システムのハードウェアをチェックし、指定された最小ハードウェアを満たしていることを確認します
 * tcp/udp でのトラフィックフローを改善するためのカーネルチューンを適用します
-* `wield` と `shdw-keygen` のバイナリをダウンロードします
+* `shdw-node` と `shdw-keygen` のバイナリをダウンロードします
 * 鍵ペアファイルを生成します
 * マシンスペックに基づいた設定ファイルとスタートアップスクリプトを生成します
 * システムサービスの生成と設定します
@@ -21,7 +92,7 @@
 そのために、ターミナルから以下のコマンドを実行します：
 
 ```sh
-wget -O wield-installer.sh https://shdw-drive.genesysgo.net/4xdLyZZJzL883AbiZvgyWKf2q55gcZiMgMkDNQMnyFJC/wield-installer.sh && chmod +x wield-installer.sh && ./wield-installer.sh
+wget -O shdw-node-installer.sh https://shdw-drive.genesysgo.net/4xdLyZZJzL883AbiZvgyWKf2q55gcZiMgMkDNQMnyFJC/shdw-node-installer.sh && chmod +x shdw-node-installer.sh && ./shdw-node-installer.sh
 ```
 
 上記のスクリプトに問題がある場合は、以下のオプション2をお試しください。
@@ -94,31 +165,31 @@ vm.dirtytime_expire_seconds=43200
 
 まだ実行していない場合は、アプリケーションを実行する専用のユーザを作成することをお勧めします。この場合、 `sudo adduser dagger` で `dagger` ユーザを作成し（任意のパスワードを作成）、 `sudo usermod -aG sudo dagger` で `dagger` ユーザを `sudo` ユーザグループに追加します。`sudo su - dagger` で `dagger` ユーザに切り替えます。残りのタスクはすべて `dagger` ユーザーとして実行します。
 
-Wieldのバイナリを`dagger`ユーザディレクトリにダウンロード：
+`shdw-node`バイナリを`dagger`ユーザディレクトリにダウンロードします：
 
 ```sh
-wget -O ~/wield https://shdw-drive.genesysgo.net/4xdLyZZJzL883AbiZvgyWKf2q55gcZiMgMkDNQMnyFJC/wield-latest
+wget -O ~/shdw-node https://shdw-drive.genesysgo.net/4xdLyZZJzL883AbiZvgyWKf2q55gcZiMgMkDNQMnyFJC/shdw-node
 ```
 
-Wieldのバイナリを実行可能にする
+`shdw-node`のバイナリを実行可能にする
 
 ```sh
-sudo chmod +x ~/wield
+sudo chmod +x ~/shdw-node
 ```
 
-Shdw-Keygenユーティリティを`dagger`ユーザディレクトリにダウンロードします：
+`shdw-Keygen`ユーティリティを`dagger`ユーザディレクトリにダウンロードします：
 
 ```sh
 wget -O ~/shdw-keygen https://shdw-drive.genesysgo.net/4xdLyZZJzL883AbiZvgyWKf2q55gcZiMgMkDNQMnyFJC/shdw-keygen-latest
 ```
 
-Shdw-Keygen ユーティリティを実行可能にします:
+`shdw-Keygen` ユーティリティを実行可能にします:
 
 ```sh
 sudo chmod +x shdw-keygen
 ```
 
-Shdw-Keygenユーティリティを使用して新しい一意のキーペアIDを作成し、一意のシードフレーズを書き留め、id.jsonファイルを別の場所にバックアップします：
+`shdw-keygen`ユーティリティを使用して新しい一意のキーペアIDを作成し、一意のシードフレーズを書き留め、id.jsonファイルを別の場所にバックアップします：
 
 ```sh
 ./shdw-keygen new -o ~/id.json
@@ -150,12 +221,12 @@ keypair_file = "id.json"
 peers_db = "dbs/peers.db"
 ```
 
-`nano start_wield.sh`でWield起動スクリプトを作成し、以下の内容をファイルに貼り付けます。注意：これらのパラメータは16スレッドプロセッサーに基づいています。`--processor-threads`と`--global-threads`はマシンの総スレッド数と同じに設定し、`--comms-threads`は`2`に設定することを推奨します。異なるハードウェアでのパラメータの調整については、`wield --help` の出力を参照してください：
+`nano start-shdw-node.sh` で `shdw-node` 起動スクリプトを作成し、以下の内容をファイルに貼り付けます。注意: これらのパラメータは 16 スレッドプロセッサを基準にしています。`processor-threads`と `--global-threads` はマシンの合計スレッド数と同じに設定し、`--comms-threads` は `2` に設定することを推奨します。異なるハードウェアでのパラメータの調整については、`./shdw-node --help`の出力を参照してください：
 
 ```bash
 #!/bin/bash
 PATH=/home/dagger
-exec wield \
+exec shdw-node \
 --processor-threads 16 \
 --global-threads 16 \
 --comms-threads 2 \
@@ -164,9 +235,9 @@ exec wield \
 --config-toml config.toml \
 ```
 
-スクリプトを `sudo chmod +x start_wield.sh` で実行可能にします。
+スクリプトを `sudo chmod +x start-shdw-node.sh` で実行可能にします。
 
-少なくとも 200GB の空き容量があるディスクに `historydb` を保存する場所を作成します（ディスクの準備とマウントは、ハードウェアの構成によって多くの変数があるため、このドキュメントの範囲を超えていますが、Google や ChatGPT でソートできるはずです）。この場所は `start_wield.sh` 起動スクリプトの `--history-db-path` フラグで指定された場所と一致しなければなりません。我々の場合、予備ディスクが `/mnt/dag` にマウントされ、そこに `historydb` ディレクトリが作成されます：
+少なくとも 200GB の空き容量があるディスクに `historydb` を保存する場所を作成します (ディスクの準備とマウントについては、ハードウェアの構成によってさまざまな変数があるため、このドキュメントの範囲を超えていますが、Google や ChatGPT でソートできるはずです)。この場所は `start-shdw-node.sh` 起動スクリプトの `--history-db-path` フラグで指定された場所と一致しなければなりません。この例では、予備ディスクが `/mnt/dag` にマウントされ、そこに `historydb` ディレクトリが作成されます：
 
 ```sh
 sudo mkdir -p /mnt/dag/historydb
@@ -178,38 +249,38 @@ sudo mkdir -p /mnt/dag/historydb
 sudo chown -R dagger:dagger /mnt/dag/*
 ```
 
-また、`wield`バイナリと同じ場所に`snapshots`ディレクトリが必要です。ここまでたどってきたのであれば、これはあなたのホームディレクトリであるはずです。以下のようにして作ることができます：
+また、`shdw-node`バイナリと同じ場所に`snapshots`ディレクトリが必要です。ここまでたどってきたのであれば、これはあなたのホームディレクトリであるはずです。以下のようにして作ることができます：
 
 ```sh
 mkdir ~/snapshots
 ```
 
-`sudo nano /etc/systemd/system/wield.service`で`wield`用のシステムサービスを作成し、以下の内容をファイルに貼り付けます：
+`sudo nano /etc/systemd/system/shdw-node.service`で`shdw-node`用のシステムサービスを作成し、以下の内容をファイルに貼り付けます：
 
 ```sh
 [Unit]
-Description=DAGGER Wield Service
+Description=shdw-node service
 After=network.target
 
 [Service]
 User=dagger
 WorkingDirectory=/home/dagger
-ExecStart=/home/dagger/start_wield.sh
+ExecStart=/home/dagger/start-shdw-node.sh
 Restart=always
 
 [Install]
 WantedBy=multi-user.target
 ```
 
-サービスを登録し、 `wield` プロセスを開始します：
+サービスを登録し、 `shdw-node` プロセスを開始します：
 
 ```sh
-sudo systemctl enable --now wield.service
+sudo systemctl enable --now shdw-node.service
 ```
 
 `tail -f config.log`でログをtailingして、適切な動作を確認してください。ソフトウェアが初期化される前に様々なスタートアップタスクがバックグラウンドで実行されるため、Wieldがログファイルに書き込みを開始するまでに時間がかかる場合があります。`tail -f config.log | grep "finalized"`でバンドルがファイナライズされているかログファイルをチェックすることで適切なノードの動作を確認できます。
 
-ログファイルが大きくなりすぎないように、`sudo nano /etc/logrotate.d/wield.conf`で`wield`用の`logrotate`エントリを追加し、以下の内容をファイルに貼り付けることを推奨します。
+ログファイルが大きくなりすぎないように、`sudo nano /etc/logrotate.d/shdw-node.conf`で`shdw-node`用の`logrotate`エントリを追加し、以下の内容をファイルに貼り付けることを推奨します。
 
 ```/home/dagger/config.log
 /home/dagger/config.log {
@@ -224,7 +295,7 @@ sudo systemctl enable --now wield.service
 }
 ```
 
-`sudo systemctl restart logrotate` で `logrotate` サービスを再起動し、`sudo logrotate -d /etc/logrotate.d/wield.conf` で `wield.conf` 設定が正しく機能していることを確認し、エラーがないかチェックします。
+`sudo systemctl restart logrotate` で `logrotate` サービスを再起動し、`sudo logrotate -d /etc/logrotate.d/shdw-node.conf` で `shdw-node.conf` 設定が正しく機能していることを確認し、エラーがないかチェックします。
 
 `sudo logrotate -d /etc/logrotate.d/rsyslog`を実行し、エラーがないかチェックして修正することで、`syslog`ログファイルが適切にローテーションするように設定されていることを確認することもできます。例として、`/etc/logrotate.d/rsyslog`に使用した設定は以下の通りです。
 
@@ -260,12 +331,10 @@ sudo systemctl enable --now wield.service
 #### **4. ノードメンテナンス**
 
 
-通常のネットワーク運用中にノードのメンテナンスを行う必要がある場合は、D.A.G.G.E.R.エポックを5回待ってからネットワークに再参加する必要があります。D.A.G.G.E.R.の進行状況はこちらで確認できます： [https://dagger-hammer.shdwdrive.com/explorer](https://dagger-hammer.shdwdrive.com/explorer)または公式公開の[ダッシュボード](https://dashboard.shdwdrive.com/)をご覧ください。
-
-ノードを停止するには、`sudo systemctl stop wield`を使用します。この時点で、現在のバイナリをダウンロードするだけで `wield` を最新バージョンにアップグレードするなど、必要なメンテナンスを行うことができます：
+ノードを停止するには、`sudo systemctl stop shdw-node`を使用します。この時点で、現在のバイナリをダウンロードするだけで `shdw-node` を最新バージョンにアップグレードするなど、必要なメンテナンスを行うことができます：
 
 ```
-wget -O ~/wield https://shdw-drive.genesysgo.net/4xdLyZZJzL883AbiZvgyWKf2q55gcZiMgMkDNQMnyFJC/wield-latest
+wget -O ~/shdw-node https://shdw-drive.genesysgo.net/4xdLyZZJzL883AbiZvgyWKf2q55gcZiMgMkDNQMnyFJC/shdw-node
 ```
 
 厳密には必要ではありませんが、最新の `shdw-keygen` ユーティリティにもアップグレードすることをお勧めします。
@@ -274,7 +343,7 @@ wget -O ~/wield https://shdw-drive.genesysgo.net/4xdLyZZJzL883AbiZvgyWKf2q55gcZi
 wget -O ~/shdw-keygen https://shdw-drive.genesysgo.net/4xdLyZZJzL883AbiZvgyWKf2q55gcZiMgMkDNQMnyFJC/shdw-keygen-latest
 ```
 
-`wield` のアップグレードが必要なだけであれば、5エポック後に `sudo systemctl start wield` でノードを再起動できます。
+`shdw-node` のアップグレードが必要なだけであれば、5エポック後に `sudo systemctl start shdw-node` でノードを再起動できます。
 
 クラスタの完全な再起動が必要な場合は、適切な Discord チャンネルの指示に従うことをお勧めします。
 
@@ -282,4 +351,4 @@ wget -O ~/shdw-keygen https://shdw-drive.genesysgo.net/4xdLyZZJzL883AbiZvgyWKf2q
 
 さて、ノードを立ち上げて稼動させたら、[verification](https://docs.shdwdrive.com/operate#discord-verification)でウォレットを確認し、[monitoring](https://docs.shdwdrive.com/operate/monitoring-stack)ガイドでノードのパフォーマンスを表示・監視するための監視スタックの設定方法を確認してください。
 
-\*免責事項：GenesysGoのD.A.G.G.E.R. Testnet Phase 1でWield Nodeを操作することにより、利用者は自発的かつ自己責任でこれを行うことを認めます。GenesysGoはTestnetソフトウェアを「現状のまま」無保証で提供し、お客様が被る可能性のある直接的、間接的、偶発的、結果的損害について一切の責任を負いません。お客様は、ご自身のシステムおよびデータのセキュリティに責任を負うものとします。GenesysGoは、お客様がTestnetに参加した結果生じたいかなる損失や損害についても責任を負いません。本ソフトウェアを使用することにより、お客様は、お客様のノード操作に関連するいかなるクレームや紛争からもGenesysGoを免責することに同意するものとします。本契約は、Wieldノードをダウンロードし、操作した時点で拘束力を持ちます。GenesysGoは予告なくTestnetを変更または中止することがあります。これにはTestnetフェーズ1のD.A.G.G.E.R. Wield Nodeを操作するためのハードウェア要件が含まれますが、これに限定されるものではありません。これらの条件に同意できない場合は、Testnetに参加しないでください。
+\*免責事項：GenesysGoのD.A.G.G.E.R. Testnet Phase 1でshdwNode/shdw-nodeを操作することにより、利用者は自発的かつ自己責任でこれを行うことを認めるものとします。GenesysGoはTestnetソフトウェアを「現状のまま」無保証で提供し、お客様が被る可能性のある直接的、間接的、偶発的、結果的な損害について一切の責任を負いません。お客様は、ご自身のシステムおよびデータのセキュリティに責任を負うものとします。GenesysGoは、お客様がTestnetに参加した結果生じたいかなる損失や損害についても責任を負いません。本ソフトウェアを使用することにより、お客様は、お客様のノード操作に関連するいかなるクレームや紛争からもGenesysGoを免責することに同意するものとします。本契約は、shdwNode/shdw-nodeをダウンロードし、操作した時点で拘束力を持ちます。GenesysGoは予告なくTestnetを変更または中止することがあります。これにはD.A.G.G.E.R. shdwNode/shdw-nodeをTestnetフェーズ1で運用するためのハードウェア要件が含まれますが、これに限定されるものではありません。これらの条件に同意できない場合は、Testnetに参加しないでください。

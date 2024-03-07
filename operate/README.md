@@ -56,7 +56,7 @@ ShdwNodesは、何千ものライブ・ユーザー・テスト・トランザ�
 
 ## Discord認証 
 
-ノードIDをDiscordユーザーに接続したい場合は、このガイドに従ってください。これにより、GenesysGo DiscordサーバーのshdwOperatorロールとwield operatorsチャンネルのロックが解除されます。
+ノードIDをDiscordユーザーに接続したい場合は、このガイドに従ってください。これにより、GenesysGo DiscordサーバーのshdwOperatorロールとshdwNodeオペレータチャンネルがアンロックされます。
 
 * [このガイド](https://docs.shdwdrive.com/operate/wallet#importing-usdshdw-accounts-into-solana-wallets)に従って、shdwNodeのIDキーペアをSolana UIウォレットにインポートしてください。
 * [https://holders.genesysgo.com/](https://holders.genesysgo.com/) にアクセスしてください。

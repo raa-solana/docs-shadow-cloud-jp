@@ -14,7 +14,7 @@ description: >-
 [テストネット連載記事](https://www.shadow.cloud/blog/dagger-testnet-release)
 [テストネット・デモ](https://dagger-hammer.shadow.cloud/)
 
-更新：現在、D.A.G.G.E.R.のテストネット・フェーズ2に入っており、Wield Nodeのオペレーターとしてトラストレスかつパーミッションで参加できる機能をリリースしました。
+更新：現在、D.A.G.G.E.R.のテストネット・フェーズ2に入っており、shdwNodeのオペレーターとしてトラストレスかつパーミッションで参加できる機能をリリースしました。
 
 参加するには[shdwNode](../operate/)を実行してください！
 
