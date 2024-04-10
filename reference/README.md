@@ -52,8 +52,6 @@ description: ShdwDrive の統合リソース
 
 [Shdw Ecosystem](https://docs.shdwdrive.com/build/community-maintained-uis)
 
-[Solana Breakpoint Demo 2022](breakpoint-2022-demo.md)
-
 ## **Media Kit**
 
 [Logos and branding](https://www.shadow.cloud/media-kit)
